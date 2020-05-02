@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8" uuid="ee00b3a8-2d44-4d8b-8ad7-97cb770dd825">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8 [2]" uuid="25d6225c-c062-4fac-a531-289b3b61146d">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8 [3]" uuid="acb5c01c-e0f0-43da-b0ed-a2b0787b952c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8</jdbc-url>
+    </data-source>
+  </component>
+</project>
