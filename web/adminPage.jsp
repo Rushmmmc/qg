@@ -24,7 +24,6 @@
 
 
 <body >
-
 <a href="/login.jsp">返回登录页面</a>
 <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>

@@ -8,6 +8,7 @@ import com.zhangmengcong.www.dao.dao.packagingdao.DeleteOrChangeDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.GetGoodsParametersDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.QueryDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.UpdateDao;
+import com.zhangmengcong.www.dao.dao.printdao.AppealPrintDao;
 import com.zhangmengcong.www.dao.dao.printdao.IndentPrintDao;
 import com.zhangmengcong.www.dao.impl.goodsimpl.SelectGoodsByInterestImpl;
 import com.zhangmengcong.www.dao.impl.indentdaoimpl.IndentDaoImpl;
@@ -15,6 +16,7 @@ import com.zhangmengcong.www.dao.impl.packagingdaoimpl.DeleteOrChangeDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.GetGoodsParametersDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.QueryDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.UpdateDaoImpl;
+import com.zhangmengcong.www.dao.impl.printdaoimpl.AppealPrintDaoImpl;
 import com.zhangmengcong.www.dao.impl.printdaoimpl.GoodsPrintDaoImpl;
 import com.zhangmengcong.www.dao.dao.printdao.GoodsPrintDao;
 import com.zhangmengcong.www.dao.dao.printdao.PrintDao;
@@ -24,6 +26,7 @@ import com.zhangmengcong.www.dao.impl.goodsimpl.GoodsDaoImpl;
 import com.zhangmengcong.www.dao.impl.printdaoimpl.IndentPrintDaoImpl;
 import com.zhangmengcong.www.dao.impl.printdaoimpl.PrintDaoImpl;
 import com.zhangmengcong.www.dao.impl.userdaoimpl.UserDaoImpl;
+import com.zhangmengcong.www.service.impl.PrintAppealServiceImpl;
 import com.zhangmengcong.www.service.impl.changepageserviceimpl.GoToMainpageServiceImpl;
 import com.zhangmengcong.www.service.impl.adminimpl.AdminBanOrUnbanUserServiceImpl;
 import com.zhangmengcong.www.service.impl.generratefileserviceimpl.GenerateFileServiceImpl;
@@ -39,13 +42,13 @@ import com.zhangmengcong.www.service.service.indentservice.IntegralService;
 import com.zhangmengcong.www.service.service.pageservice.GoToMainpageService;
 import com.zhangmengcong.www.service.service.adminservice.AdminBanOrUnbanUserService;
 import com.zhangmengcong.www.service.service.adminservice.BecomeAdminService;
+import com.zhangmengcong.www.service.service.printtableservice.PrintAppealService;
 import com.zhangmengcong.www.service.service.printtableservice.PrintIndentService;
 import com.zhangmengcong.www.service.service.printtableservice.PrintTableService;
 import com.zhangmengcong.www.service.impl.adminimpl.BecomeAdminServiceImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintTableServiceImpl;
 import com.zhangmengcong.www.service.service.userservice.*;
 
-import java.util.List;
 
 /**
  * @author:zmc
@@ -82,7 +85,6 @@ public class Factory {
     }
     public  ForgetPasswordService getForgetPasswordService() {return new ForgetPasswordServiceImpl(); }
     public CheckIfUserBeBanedService getCheckIfUserBeBanedService() {return new CheckIfUserBeBanedServiceImpl();}
-    public AddExpAndIntegralService getAddExpAndIntegralService(){return new AddExpAndIntegralServiceImpl();}
     public IntegralService getIntegralService() {return new IntegralServiceImpl();}
     /**
      * 关于打印表格的服务
@@ -127,7 +129,6 @@ public class Factory {
      */
     public IndentDao getIndentDao(){return new IndentDaoImpl();}
     public IndentService getIndentService(){return new IndentServiceImpl();}
-    //打印订单
     public GeneateFileService getGeneateFileService(){return new GenerateFileServiceImpl();
     }
     /**
@@ -136,5 +137,9 @@ public class Factory {
     public GoToMainpageService getGoToMainpageService(){
         return new GoToMainpageServiceImpl();
     }
-
+    /**
+     *  关于申诉的服务
+     */
+    public AppealPrintDao getAppealPrintDao(){return new AppealPrintDaoImpl();}
+    public PrintAppealService getPrintAppealService(){return new PrintAppealServiceImpl(); }
 }
