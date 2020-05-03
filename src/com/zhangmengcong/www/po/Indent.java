@@ -14,6 +14,7 @@ public class Indent {
     private String status;
     private int amount;
     private int totalPrice;
+    private String reputation;
     private String buyerMessage;
     private String sellerMessage;
 
@@ -97,6 +98,14 @@ public class Indent {
         this.sellerMessage = sellerMessage;
     }
 
+    public String getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(String reputation) {
+        this.reputation = reputation;
+    }
+
     @Override
     public String toString() {
         return "Indent{" +
@@ -108,6 +117,7 @@ public class Indent {
                 ", status='" + status + '\'' +
                 ", amount=" + amount +
                 ", totalPrice=" + totalPrice +
+                ", reputation='" + reputation + '\'' +
                 ", buyerMessage='" + buyerMessage + '\'' +
                 ", sellerMessage='" + sellerMessage + '\'' +
                 '}';

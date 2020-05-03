@@ -59,6 +59,7 @@
             <th>数量</th>
             <th>实际付款</th>
             <th>订单状态</th>
+            <th>评价</th>
             <th>管理</th>
         </tr>
         <!--通过循环 显示信息-->
@@ -76,10 +77,16 @@
             <td><%=indent.getPrice()%></td>
             <td><%=indent.getAmount()%></td>
             <td><%=indent.getTotalPrice()%></td>
+            <td><%=indent.getReputation()%></td>
             <td><%=indent.getStatus()%></td>
             <td>
                 <c:if test='<%=!(indent.getStatus().contains("完成"))%>'>
                     <a href="/ChangeIndentController?method=finishIndent&id=<%=indent.getId()%>">确认收货</a>
+                    <a>/</a>
+                </c:if>
+                <c:if test='<%=(indent.getStatus().contains("完成")) && indent.getReputation().contains("暂无")%>'>
+                    <a href="/GiveReputationController?method=goodReputation&id=<%=indent.getId()%>">给好评</a>
+                    <a href="/GiveReputationController?method=badReputation&id=<%=indent.getId()%>">给差评</a>
                     <a>/</a>
                 </c:if>
 

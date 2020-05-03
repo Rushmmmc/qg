@@ -5,8 +5,9 @@ import com.zhangmengcong.www.service.service.indentservice.IndentService;
 import com.zhangmengcong.www.util.Factory;
 
 
-import static com.zhangmengcong.www.constant.GoodsConstant.GOOD_REPUTATION;
-import static com.zhangmengcong.www.constant.GoodsConstant.IF_DELETE;
+import java.util.List;
+
+import static com.zhangmengcong.www.constant.GoodsConstant.*;
 import static com.zhangmengcong.www.constant.IndentConstant.*;
 import static com.zhangmengcong.www.constant.PageConstant.SELL;
 
@@ -33,8 +34,7 @@ public class IndentServiceImpl implements IndentService {
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"订单已完成","status"
                     ,false,null);
             //完成订单 经验值和积分加一
-            factory.getAddExpAndIntegralService().getAddExpAndIntegralService(username);
-        }
+            factory.getUpdateDao().updateDao("user","exp","exp+1","integral","integral+1","username","\""+username+"\""); }
         //商家发货
         if(SELL.equals(method)){
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"商品在路上","status",false,null);
@@ -69,10 +69,16 @@ public class IndentServiceImpl implements IndentService {
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(indent.getAmount()),"amount",false,null);
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(indent.getAmount()*indent.getPrice()),"totalPrice",false,null);
         }
-//        //用户给好评
-//        if(GOOD_REPUTATION.equals(message)){
-//            factory.getDeleteOrChangeDao().deleteOrChange("user",0,);
-//        }
+        //用户给好评
+        if(GOOD_REPUTATION.equals(message)){
+            String sellerName = factory.getQueryDao().queryDao("indent","seller","id",String.valueOf(id));
+            factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint+1",null,null,"username",sellerName);
+        }
+        //用户给差评
+        if(BAD_REPUTATION.equals(message)){
+            String sellerName = factory.getQueryDao().queryDao("indent","seller","id",String.valueOf(id));
+            factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint-1",null,null,"username",sellerName);
+        }
 
     }
 

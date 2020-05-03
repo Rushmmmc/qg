@@ -29,7 +29,6 @@ public class DeleteOrChangeDaoImpl implements DeleteOrChangeDao {
             }else {
                 sql = "update " + table + " set " +  column  +" = ? where id = ?";
             }
-
             //如果使用复杂修改订单
             if(ifUseComplexChange){
                 sql = "update indent set GoodsName = ?,price = ?,amount = ?,totalPrice = ? where id = ?";

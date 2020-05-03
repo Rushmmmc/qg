@@ -4,9 +4,13 @@ import com.zhangmengcong.www.dao.dao.admindao.AdminDao;
 import com.zhangmengcong.www.dao.dao.goodsdao.GoodsDao;
 import com.zhangmengcong.www.dao.dao.indentdao.IndentDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.DeleteOrChangeDao;
+import com.zhangmengcong.www.dao.dao.packagingdao.QueryDao;
+import com.zhangmengcong.www.dao.dao.packagingdao.UpdateDao;
 import com.zhangmengcong.www.dao.dao.printdao.IndentPrintDao;
 import com.zhangmengcong.www.dao.impl.indentdaoimpl.IndentDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.DeleteOrChangeDaoImpl;
+import com.zhangmengcong.www.dao.impl.packagingdaoimpl.QueryDaoImpl;
+import com.zhangmengcong.www.dao.impl.packagingdaoimpl.UpdateDaoImpl;
 import com.zhangmengcong.www.dao.impl.printdaoimpl.GoodsPrintDaoImpl;
 import com.zhangmengcong.www.dao.dao.printdao.GoodsPrintDao;
 import com.zhangmengcong.www.dao.dao.printdao.PrintDao;
@@ -35,6 +39,8 @@ import com.zhangmengcong.www.service.impl.adminimpl.BecomeAdminServiceImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintTableServiceImpl;
 import com.zhangmengcong.www.service.service.userservice.*;
 
+import java.util.List;
+
 /**
  * @author:zmc
  * @function: 工厂类
@@ -44,7 +50,9 @@ public class Factory {
     /**
      * 关于dao层封装方法
      */
+    public UpdateDao getUpdateDao(){return new UpdateDaoImpl();}
     public DeleteOrChangeDao getDeleteOrChangeDao(){return new DeleteOrChangeDaoImpl(); }
+    public QueryDao getQueryDao(){return new QueryDaoImpl(); }
     /**
      * 关于用户服务
      */

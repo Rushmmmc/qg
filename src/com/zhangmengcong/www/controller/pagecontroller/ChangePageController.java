@@ -28,6 +28,7 @@ public class ChangePageController extends HttpServlet {
         //根据method跳转不同页面并存储表格信息
         String method = request.getParameter("method");
 
+        //前往个人中心
         if(CHANGE_MESSAGE.equals(method)) {
             request.setAttribute("emps", factory.getPrintTableService().selectPersonalMessage(username));
             try {
@@ -36,7 +37,7 @@ public class ChangePageController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
+        //前往管理员审核商品页面
         if(MANAGE_SYSTEM.equals(method)){
             request.setAttribute("goodsList",factory.getGoodsPrintService().goodsPrintService());
             try {
@@ -45,7 +46,7 @@ public class ChangePageController extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
+        //前往商家提交新商品页面
         if(COMMIT.equals(method)){
             try {
                 if(factory.getCheckIfUserBeBanedService().checkIfUserBeBanedService(username)){
