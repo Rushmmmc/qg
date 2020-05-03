@@ -10,5 +10,5 @@ import java.util.List;
  * @date: 2020/5/1 20:21
  */
 public interface PrintIndentService {
-   List<Indent> printIndentService(String username,int ifSeller);
+   List<Indent> printIndentService(String username,int ifSeller,int ifShoppingCar);
 }

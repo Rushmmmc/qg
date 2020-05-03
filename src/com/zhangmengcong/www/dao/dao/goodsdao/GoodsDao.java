@@ -16,21 +16,6 @@ public interface GoodsDao {
      */
     boolean addGoods(Goods goods);
 
-    /** 删除或通过商品
-     *
-     * @param ifDelete 是否使用删除功能 否则即是通过
-     * @param goodsId 对应的商品id
-     */
-    void deleteOrPassGoods(int ifDelete,int goodsId);
 
-    /**修改订单的状态为商品在路上
-     * @param id  订单id
-     */
-    void sellGoodsToBuyer(int id);
 
-    /**用户买商品 生成订单
-     *
-     * @param indent 封装好的订单对象
-     */
-    void buyGoods(Indent indent);
 }

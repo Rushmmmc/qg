@@ -18,9 +18,9 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
-<a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=manageIndent&ifSeller=1">管理订单</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/Quit">注销</a>
 <br><br><br>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel},欢迎您成为卖家</font> </h1>

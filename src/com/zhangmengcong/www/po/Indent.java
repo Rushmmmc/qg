@@ -14,6 +14,8 @@ public class Indent {
     private String status;
     private int amount;
     private int totalPrice;
+    private String buyerMessage;
+    private String sellerMessage;
 
     public int getId() {
         return id;
@@ -79,6 +81,22 @@ public class Indent {
         this.totalPrice = totalPrice;
     }
 
+    public String getBuyerMessage() {
+        return buyerMessage;
+    }
+
+    public void setBuyerMessage(String buyerMessage) {
+        this.buyerMessage = buyerMessage;
+    }
+
+    public String getSellerMessage() {
+        return sellerMessage;
+    }
+
+    public void setSellerMessage(String sellerMessage) {
+        this.sellerMessage = sellerMessage;
+    }
+
     @Override
     public String toString() {
         return "Indent{" +
@@ -90,6 +108,8 @@ public class Indent {
                 ", status='" + status + '\'' +
                 ", amount=" + amount +
                 ", totalPrice=" + totalPrice +
+                ", buyerMessage='" + buyerMessage + '\'' +
+                ", sellerMessage='" + sellerMessage + '\'' +
                 '}';
     }
 }

@@ -33,6 +33,8 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=manageBuyerPersonalIndent">个人订单</a>
 <a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageToShoppingCarController">查看购物车</a>
+<a>&nbsp&nbsp&nbsp</a>
 <a href="/Quit">注销</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>
@@ -102,9 +104,11 @@
         <div class="info">
             <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
-            <a align="center" href="/ChangePageController?method=setAmount&tempGoodsName=<%=goods.getGoodsName()%>&tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>
-        ">购买</a>
-            </div>
+            <a align="center" href="/ChangePageController?method=setAmount&tempGoodsName=<%=goods.getGoodsName()%>
+            &tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>">购买</a>
+            <a>&nbsp&nbsp&nbsp</a>
+        <a href="/BuyGoodsController?ifShoppingCar=1&tempGoodsName=<%=goods.getGoodsName()%>&tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>">加入购物车</a>
+        </div>
         <div style="margin-top:50px ">
             <p> </p>
         </div>
@@ -124,7 +128,7 @@
     <nav  aria-label="Page navigation" >
         <ul class="pagination">
             <li>
-                <a href="/DivedePageController?currentPage=<%if(i!=1) --i;%><%=i%>
+                <a href="/DividePageController?currentPage=<%if(i!=1) --i;%><%=i%>
 &rows=3&goodsNames=${requestScope.textMessage.goodsName}
 &type=${requestScope.textMessage.type}&seller=${requestScope.textMessage.seller}&rangeMin=${requestScope.dp.minPrice}
 &rangeMax=${requestScope.dp.maxPrice}&rank=${requestScope.dp.rank}" aria-label="Next">        <span aria-hidden="true">&laquo;</span>

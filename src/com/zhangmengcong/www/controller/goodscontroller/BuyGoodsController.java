@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static com.zhangmengcong.www.constant.GoodsConstant.BUY_GOODS_SUCCESS;
+import static com.zhangmengcong.www.constant.GoodsConstant.*;
 import static com.zhangmengcong.www.constant.PageConstant.MANAGE_BUYER_PERSONAL_INDENT;
 
 /**
@@ -27,16 +27,25 @@ public class BuyGoodsController extends HttpServlet {
         Factory factory = new Factory();
         Indent indent = new Indent();
         HttpSession session = request.getSession();
-        //单价
+        //检测是否使用购物车功能
+        int ifShoppingCar = Integer.parseInt(request.getParameter("ifShoppingCar"));
+        //如果使用购物车功能 把订单状态设为购物车
+        if(ifShoppingCar == IF_SHOPPINGCAR){
+            request.setAttribute("message",SHOPPING_CAR_MESSAGE);
+            indent.setAmount(1);
+        }else {
+                 indent.setAmount(Integer.parseInt(request.getParameter("tempAmount")));
+                 request.setAttribute("message", BUY_GOODS_SUCCESS);
+             }
+            //单价
             indent.setPrice(Integer.parseInt(request.getParameter("tempPrice")));
             indent.setBuyer((String) session.getAttribute("username"));
             indent.setGoodsName(request.getParameter("tempGoodsName"));
             indent.setSeller(request.getParameter("tempSeller"));
-            indent.setAmount(Integer.parseInt(request.getParameter("tempAmount")));
-            factory.getBuyGoodsService().sellGoodsService(indent);
-            request.setAttribute("message",BUY_GOODS_SUCCESS);
+
+            factory.getBuyGoodsService().sellGoodsService(indent,ifShoppingCar);
         try {
-            request.getRequestDispatcher("/ChangePageController?method="+MANAGE_BUYER_PERSONAL_INDENT).forward(request,response);
+            request.getRequestDispatcher("/DividePageController").forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         }

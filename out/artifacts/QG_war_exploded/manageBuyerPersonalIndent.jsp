@@ -11,9 +11,19 @@
 
 <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <html>
 <head>
-    <title>Title</title>
+    <title>用户订单中心</title>
+    <script>
+
+        $(function(){
+            $(".check").click(function(){
+                $(".text").show();
+            })
+        })
+
+    </script>
 </head>
 <body>
 <body >
@@ -21,10 +31,22 @@
 <a href="/DividePageController">返回主页面</a>
 
 
+<FORM align="center"  action="/IndentSendMessageController?method=buyerSendMessage" method="post" >
+    <input type="button" value="给商家留言" class="check" />
+    <br>
+    <a class="text"  style="display:none;" >订单id:</a>
+    <input type="text"  class="text"  name="id" pattern="^\d{1,10}$" required style="display:none;" />
+    <br>
+    <a class="text" style="display:none;">内容:</a>
+    <input type="text" class="text"  name="message" required style="display:none;" />
+    <br>
+    <input type="submit" value="提交"  class="text" style="display:none;">
+</FORM>
+
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading" align="center" ></div>
-    <STRONG><p align="center">个人订单</p></STRONG>
+    <STRONG><p align="center">用户购买订单</p></STRONG>
 </div>
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
@@ -55,10 +77,20 @@
             <td><%=indent.getAmount()%></td>
             <td><%=indent.getTotalPrice()%></td>
             <td><%=indent.getStatus()%></td>
-            <td><a href="#">确认收货</a>
-            <a>/</a>
-            <a href="#">取消订单</a></td>
-          <tr>
+            <td>
+                <c:if test='<%=!(indent.getStatus().contains("完成"))%>'>
+                    <a href="/ChangeIndentController?method=finishIndent&id=<%=indent.getId()%>">确认收货</a>
+                    <a>/</a>
+                </c:if>
+
+            <a href="/ChangeIndentController?method=deleteIndent&id=<%=indent.getId()%>">取消(删除)订单</a>
+                <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
+                    <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a href="/ChangePageController?method=messageBoard&ifSeller=0">商家给您留言啦,请打开留言板</a>
+                </c:if>
+
+            </td>
+        <tr>
                 <%
         }
     %>

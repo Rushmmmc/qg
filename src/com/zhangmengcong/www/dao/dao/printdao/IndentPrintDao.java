@@ -11,10 +11,10 @@ import java.util.List;
  */
 public interface IndentPrintDao {
     /**打印个人订单
-     *
+     * @param ifShoppiingCar 是否使用加入购物车功能
      * @param ifSeller 是否筛选出售者的订单 否则筛选购买者自己的
      * @param username 用户名
      * @return 个人订单
      */
-    List<Indent> selectPersonalIndent(String username,int ifSeller);
+    List<Indent> selectPersonalIndent(String username,int ifSeller,boolean ifShoppingCar);
 }

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/AdminDaoImpl/AdminDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/UserDaoImpl/UserDaoImpl.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/admindaoimpl/AdminDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/GoodsDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/indentdaoimpl/IndentDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/DeleteOrChangeDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/GoodsPrintDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/IndentPrintDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/PrintDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/userdaoimpl/UserDaoImpl.java" dialect="MySQL" />
   </component>
 </project>

@@ -19,9 +19,9 @@
 
 
 
-<form   action="/BuyGoodsController?tempGoodsName=${requestScope.tempGoodsName}&tempPrice=${requestScope.tempPrice}&tempSeller=${requestScope.tempSeller}" method="post" align="center">
+<form   action="/BuyGoodsController?ifShoppingCar=0&tempGoodsName=${requestScope.tempGoodsName}&tempPrice=${requestScope.tempPrice}&tempSeller=${requestScope.tempSeller}" method="post" align="center">
     <h1 >感谢使用QG闲鱼</h1>
-    <font color="green">您购买的商品为<p>商家${requestScope.tempSeller}</p><p>的${requestScope.tempGoodsName}</p></font>
+    <font color="green">您购买的商品为<p>商家<font color="purple">${requestScope.tempSeller}</font>的</p><p><font color="#00bfff">${requestScope.tempGoodsName}</font></p></font>
     购买数量:<input type="text"  name="tempAmount" pattern="^\d{1,10}$" required/>
     <br>
     <input type="submit"  value="立刻下单" style="width:140px; height:30px;"/>

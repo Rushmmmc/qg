@@ -16,4 +16,6 @@ public class PageConstant {
     public static final String SET_AMOUNT = "setAmount";
     public static final String MANAGE_BUYER_PERSONAL_INDENT = "manageBuyerPersonalIndent";
     public static final int IF_BUYER = 0;
+    public static final String MESSAGE_BORAD = "messageBoard";
+    public static final String SHOPPING_CAR = "shoppingCar";
 }

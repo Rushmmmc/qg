@@ -9,8 +9,8 @@ import com.zhangmengcong.www.po.Indent;
  */
 public interface BuyGoodsService {
     /** 用户购买商品 生成订单
-     *
+     * @param ifShoppingCar  是否使用添加购物车功能
      * @param indent 封装好的订单对象
      */
-    void sellGoodsService(Indent indent);
+    void sellGoodsService(Indent indent,int ifShoppingCar);
 }

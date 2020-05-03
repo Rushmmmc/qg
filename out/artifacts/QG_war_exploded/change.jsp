@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
 <html>
 <head>
-    <title>龙之谷之重写</title>
+    <title>个人中心</title>
 
 
 
@@ -54,11 +54,31 @@
         <td><%=user.getPassword()%></td>
         <td><%=user.getMailAddress()%></td>
         <td><%=user.getIntegral()%></td>
-        <td><%=user.getExp()%></td>
+        <td><%=user.getExp()%>
+            <c:if test="<%=user.getExp()<10%>">
+                <a><font color="#ff1493">(一级会员)</font></a>
+            </c:if>
+            <c:if test="<%=user.getExp() >= 10 && user.getExp() < 20 %>">
+                <a><font color="blue">(二级会员)</font></a>
+            </c:if>
+            <c:if test="<%=user.getExp() >= 20 && user.getExp() < 50 %>">
+                <a><font color="#00ced1">(三级会员)</font></a>
+            </c:if>
+            <c:if test="<%=user.getExp() >= 50 && user.getExp() < 100 %>">
+                <a><font color="red">(四级会员)</font></a>
+            </c:if>
+
+
+
+
+
+
+        </td>
         <td><%=user.getReputationPoint()%></td>
         <td><%=user.getRegisterDate()%></td>
         <td><%=user.getStatus()%></td>
     <tr>
+
             <%
         }
     %>
@@ -106,6 +126,17 @@
 
 </form>
 </div>
+
+
+<form align="center">
+    等级说明<br>
+    <font color="#ff1493">(一级会员) exp < 10<br>
+        <font color="blue">(二级会员) 10 <= exp < 20<br>
+            <font color="#00ced1">(三级会员) 20 <= exp < 50<br>
+                <font color="red">(四级会员)</font> exp >= 50
+                <font color="#00ff7f"> <h2>后续会有许多会员活动哦( •̀ ω •́ )y请多多积攒积分和会员经验</h2></font>
+</form>
+
 
 </body>
 </html>

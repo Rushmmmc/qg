@@ -1,5 +1,6 @@
 package com.zhangmengcong.www.controller.usercontroller;
 
+
 import com.zhangmengcong.www.util.Factory;
 
 import javax.servlet.ServletException;
@@ -8,7 +9,6 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 import static com.zhangmengcong.www.constant.UserConstant.*;
-
 
 /**
  * @author:zmc
@@ -43,7 +43,6 @@ public class LoginController extends HttpServlet {
         //从另一个Servlet中接受验证码图片中的字符
         String captchar = (String) session.getAttribute("captcha");
         //获取区域
-
         //获取cookie
         boolean ifCookieExist =false;
         Cookie[] cookies = request.getCookies();

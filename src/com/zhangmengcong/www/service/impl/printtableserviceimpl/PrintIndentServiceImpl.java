@@ -6,6 +6,8 @@ import com.zhangmengcong.www.util.Factory;
 
 import java.util.List;
 
+import static com.zhangmengcong.www.constant.IndentConstant.IF_SHOPPING_CAR;
+
 /**
  * @author:zmc
  * @function:
@@ -13,8 +15,12 @@ import java.util.List;
  */
 public class PrintIndentServiceImpl implements PrintIndentService {
     @Override
-    public List<Indent> printIndentService(String username,int ifSeller) {
+    public List<Indent> printIndentService(String username,int ifSeller,int ifShoppingCar) {
         Factory factory = new Factory();
-        return factory.getIndentPrintDao().selectPersonalIndent(username,ifSeller);
+        boolean tempIfShoppingCar = false;
+        if(ifShoppingCar == IF_SHOPPING_CAR){
+            tempIfShoppingCar = true;
+        }
+        return factory.getIndentPrintDao().selectPersonalIndent(username,ifSeller,tempIfShoppingCar);
     }
 }
