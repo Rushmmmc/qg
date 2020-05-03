@@ -2,6 +2,7 @@ package com.zhangmengcong.www.dao.impl.printdaoimpl;
 
 import com.zhangmengcong.www.dao.dao.printdao.GoodsPrintDao;
 import com.zhangmengcong.www.po.Goods;
+import com.zhangmengcong.www.util.Factory;
 import com.zhangmengcong.www.util.JdbcUtil;
 
 import java.sql.Connection;
@@ -18,30 +19,18 @@ import java.util.List;
 public class GoodsPrintDaoImpl implements GoodsPrintDao {
     @Override
     public List<Goods> selectAllGoods(){
+        Factory factory = new Factory();
         List<Goods> emps =new ArrayList<>();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        Goods goods;
         try {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnetction();
             String sql = "select * from goods";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
-            while(rs.next()){
-                goods = new Goods();
-                goods.setAmount(rs.getInt("amount"));
-                goods.setPrice(rs.getInt("price"));
-                goods.setImformation(rs.getString("imformation"));
-                goods.setGoodsName(rs.getString("goodsName"));
-                goods.setSellerReputation(rs.getInt("sellerReputation"));
-                goods.setType(rs.getString("type"));
-                goods.setSeller(rs.getString("seller"));
-                goods.setId(rs.getInt("id"));
-                goods.setStatus(rs.getString("status"));
-                emps.add(goods);
-            }
+            emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
         }catch(Exception e){
             e.printStackTrace();
         }finally {

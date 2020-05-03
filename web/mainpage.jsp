@@ -105,9 +105,9 @@
             <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
             <a align="center" href="/ChangePageController?method=setAmount&tempGoodsName=<%=goods.getGoodsName()%>
-            &tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>">购买</a>
+            &tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>&goodsType=<%=goods.getType()%>">购买</a>
             <a>&nbsp&nbsp&nbsp</a>
-        <a href="/BuyGoodsController?ifShoppingCar=1&tempGoodsName=<%=goods.getGoodsName()%>&tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>">加入购物车</a>
+        <a href="/AddGoodsToShoppingCarController?tempGoodsName=<%=goods.getGoodsName()%>&tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>&goodsType=<%=goods.getType()%>">加入购物车</a>
         </div>
         <div style="margin-top:50px ">
             <p> </p>

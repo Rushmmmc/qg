@@ -15,5 +15,5 @@ public interface QueryDao {
      * @param actualCondition 实际条件
      * @return 查询到的装有信息
      */
-    String queryDao(String table,String column,String condition,String  actualCondition);
+    String queryDao(String column,String table,String condition,String  actualCondition);
 }

@@ -90,7 +90,10 @@
             <th>单价</th>
             <th>数量</th>
             <th>订单总价</th>
+            <th>使用积分</th>
+            <th>实际付款</th>
             <th>订单状态</th>
+            <th>评价</th>
             <th>操作</th>
         </tr>
         <!--通过循环 显示信息-->
@@ -108,7 +111,10 @@
             <td><%=indent.getPrice()%></td>
             <td><%=indent.getAmount()%></td>
             <td><%=indent.getTotalPrice()%></td>
+            <td><%=indent.getUseIntegral()%></td>
+            <td><%=indent.getActuallyPrice()%></td>
             <td><%=indent.getStatus()%></td>
+            <td><%=indent.getReputation()%></td>
             <td><a href="/ChangeIndentController?method=sell&id=<%=indent.getId()%>">发货</a>
                 <c:if test='<%=!(indent.getBuyerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>

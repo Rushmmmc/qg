@@ -63,23 +63,27 @@ public class IndentServiceImpl implements IndentService {
         if(DELETE_SHOPPING_CAR_INDENT.equals(method)){
             factory.getDeleteOrChangeDao().deleteOrChange("indent",IF_DELETE,id,null,null,false,null);
         }
-        //用户在购物车购买商品 修改购物车商品的购买数量 以及总价
+        //用户在购物车购买商品 修改购物车商品的购买数量 以及总价 使用积分的数量 实际付款
         if(BUY_GOODS_FROM_SHOPPING_CAR.equals(method)){
+            int totalPrice = indent.getAmount()*indent.getPrice();
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"商家未接单","status",false,null);
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(indent.getAmount()),"amount",false,null);
-            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(indent.getAmount()*indent.getPrice()),"totalPrice",false,null);
+            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(totalPrice),"totalPrice",false,null);
+            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(indent.getUseIntegral()),"useIntegral",false,null);
+            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(totalPrice - indent.getUseIntegral()),"actuallyPrice",false,null);
         }
         //用户给好评
-        if(GOOD_REPUTATION.equals(message)){
-            String sellerName = factory.getQueryDao().queryDao("indent","seller","id",String.valueOf(id));
-            factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint+1",null,null,"username",sellerName);
+        if(GOOD_REPUTATION.equals(method)){
+            String sellerName = factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(id));
+            factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint+1",null,null,"username","\""+sellerName+"\"");
+            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"好评","reputation",false,null);
         }
         //用户给差评
-        if(BAD_REPUTATION.equals(message)){
+        if(BAD_REPUTATION.equals(method)){
             String sellerName = factory.getQueryDao().queryDao("indent","seller","id",String.valueOf(id));
-            factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint-1",null,null,"username",sellerName);
+            factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint-1",null,null,"username","\""+sellerName+"\"");
+            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"差评","reputation",false,null);
         }
-
     }
 
 

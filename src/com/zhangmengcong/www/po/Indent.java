@@ -9,6 +9,7 @@ public class Indent {
     private int id;
     private String buyer;
     private String goodsName;
+    private String goodsType;
     private int price;
     private String seller;
     private String status;
@@ -17,7 +18,8 @@ public class Indent {
     private String reputation;
     private String buyerMessage;
     private String sellerMessage;
-
+    private int useIntegral;
+    private int actuallyPrice;
     public int getId() {
         return id;
     }
@@ -106,12 +108,37 @@ public class Indent {
         this.reputation = reputation;
     }
 
+    public int getUseIntegral() {
+        return useIntegral;
+    }
+
+    public void setUseIntegral(int useIntegral) {
+        this.useIntegral = useIntegral;
+    }
+
+    public int getActuallyPrice() {
+        return actuallyPrice;
+    }
+
+    public void setActuallyPrice(int actuallyPrice) {
+        this.actuallyPrice = actuallyPrice;
+    }
+
+    public String getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
+    }
+
     @Override
     public String toString() {
         return "Indent{" +
                 "id=" + id +
                 ", buyer='" + buyer + '\'' +
                 ", goodsName='" + goodsName + '\'' +
+                ", goodsType='" + goodsType + '\'' +
                 ", price=" + price +
                 ", seller='" + seller + '\'' +
                 ", status='" + status + '\'' +
@@ -120,6 +147,8 @@ public class Indent {
                 ", reputation='" + reputation + '\'' +
                 ", buyerMessage='" + buyerMessage + '\'' +
                 ", sellerMessage='" + sellerMessage + '\'' +
+                ", useIntegral=" + useIntegral +
+                ", actuallyPrice=" + actuallyPrice +
                 '}';
     }
 }

@@ -57,6 +57,8 @@
             <th>出售者</th>
             <th>单价</th>
             <th>数量</th>
+            <th>总价</th>
+            <th>使用积分</th>
             <th>实际付款</th>
             <th>订单状态</th>
             <th>评价</th>
@@ -77,8 +79,10 @@
             <td><%=indent.getPrice()%></td>
             <td><%=indent.getAmount()%></td>
             <td><%=indent.getTotalPrice()%></td>
-            <td><%=indent.getReputation()%></td>
+            <td><%=indent.getUseIntegral()%></td>
+            <td><%=indent.getActuallyPrice()%></td>
             <td><%=indent.getStatus()%></td>
+            <td><%=indent.getReputation()%></td>
             <td>
                 <c:if test='<%=!(indent.getStatus().contains("完成"))%>'>
                     <a href="/ChangeIndentController?method=finishIndent&id=<%=indent.getId()%>">确认收货</a>

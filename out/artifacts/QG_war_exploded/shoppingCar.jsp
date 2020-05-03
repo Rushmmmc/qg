@@ -46,6 +46,7 @@
             <th>出售者</th>
             <th>单价</th>
             <th>数量</th>
+            <th>使用积分</th>
             <th>实际付款</th>
             <th>订单状态</th>
             <th>管理</th>
@@ -65,6 +66,7 @@
             <td><%=indent.getPrice()%></td>
             <form method="post" action="/BuyGoodsFromShoppingCarController?method=buyGoodsFromShoppingCar&id=<%=indent.getId()%>&price=<%=indent.getPrice()%>">
             <td><input type="text" name="amount" required value="1"></td>
+                <td><input type="text" name="integral" required value="0"></td>
             <td><%=indent.getTotalPrice()%></td>
             <td><%=indent.getStatus()%></td>
             <td><a href="/ChangeIndentController?method=deleteShoppingCarIndent&id=<%=indent.getId()%>">从购物车删除</a>

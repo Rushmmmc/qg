@@ -22,6 +22,7 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
             indent.setStatus("商家未接单");
         }
         indent.setTotalPrice(indent.getPrice()*indent.getAmount());
+        indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());
         factory.getIndentDao().buyGoods(indent);
     }
 }

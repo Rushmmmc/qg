@@ -1,6 +1,7 @@
 package com.zhangmengcong.www.controller.goodscontroller;
 
 import com.zhangmengcong.www.po.Indent;
+import com.zhangmengcong.www.po.PageBean;
 import com.zhangmengcong.www.util.Factory;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.*;
+import static com.zhangmengcong.www.constant.IndentConstant.DONOT_NEED_SO_MUCH_INTEGRAL;
+import static com.zhangmengcong.www.constant.IndentConstant.INTEGRAL_NOT_ENOUGN;
 import static com.zhangmengcong.www.constant.PageConstant.MANAGE_BUYER_PERSONAL_INDENT;
 
 /**
@@ -27,25 +30,44 @@ public class BuyGoodsController extends HttpServlet {
         Factory factory = new Factory();
         Indent indent = new Indent();
         HttpSession session = request.getSession();
-        //检测是否使用购物车功能
-        int ifShoppingCar = Integer.parseInt(request.getParameter("ifShoppingCar"));
-        //如果使用购物车功能 把订单状态设为购物车
-        if(ifShoppingCar == IF_SHOPPINGCAR){
-            request.setAttribute("message",SHOPPING_CAR_MESSAGE);
-            indent.setAmount(1);
-        }else {
-                 indent.setAmount(Integer.parseInt(request.getParameter("tempAmount")));
-                 request.setAttribute("message", BUY_GOODS_SUCCESS);
-             }
+        String username = (String)session.getAttribute("username");
+        String seller = (String)request.getParameter("tempSeller");
+        String goodsName = (String)request.getParameter("tempGoodsName");
+        String goodsType = (String) request.getParameter("goodsType");
+        int tempPrice = Integer.parseInt(request.getParameter("tempPrice"));
+        boolean ifSuccess = false;
+        //获取用户希望使用的积分量
+        int integral = Integer.parseInt(request.getParameter("integral"));
+        if(integral > tempPrice){
+            request.setAttribute("message",DONOT_NEED_SO_MUCH_INTEGRAL);
+        }
+        //查询已有积分 若足够 扣除 不够则提示用户并不生成订单
+        else if(factory.getIntegralService().useIntegralService(integral,username)){
+            ifSuccess = true;
+            indent.setAmount(Integer.parseInt(request.getParameter("tempAmount")));
+            request.setAttribute("message", BUY_GOODS_SUCCESS);
             //单价
-            indent.setPrice(Integer.parseInt(request.getParameter("tempPrice")));
-            indent.setBuyer((String) session.getAttribute("username"));
-            indent.setGoodsName(request.getParameter("tempGoodsName"));
-            indent.setSeller(request.getParameter("tempSeller"));
-
-            factory.getBuyGoodsService().sellGoodsService(indent,ifShoppingCar);
+            indent.setGoodsType(goodsType);
+            indent.setUseIntegral(integral);
+            indent.setBuyer(username);
+            indent.setPrice(tempPrice);
+            indent.setGoodsName(goodsName);
+            indent.setSeller(seller);
+            factory.getBuyGoodsService().sellGoodsService(indent,0);
+        }else {
+            request.setAttribute("message",INTEGRAL_NOT_ENOUGN);
+        }
         try {
-            request.getRequestDispatcher("/DividePageController").forward(request,response);
+            if(ifSuccess) {
+                request.getRequestDispatcher("/DividePageController").forward(request, response);
+            }else {
+                //把信息储存回去再跳转
+                request.setAttribute("tempSeller",seller);
+                request.setAttribute("goodsType",goodsType);
+                request.setAttribute("tempGoodsName",goodsName);
+                request.setAttribute("tempPrice",tempPrice);
+                request.getRequestDispatcher("/setAmount.jsp").forward(request,response);
+            }
         } catch (ServletException e) {
             e.printStackTrace();
         }

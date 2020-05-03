@@ -2,13 +2,17 @@ package com.zhangmengcong.www.util;
 
 import com.zhangmengcong.www.dao.dao.admindao.AdminDao;
 import com.zhangmengcong.www.dao.dao.goodsdao.GoodsDao;
+import com.zhangmengcong.www.dao.dao.goodsdao.SelectGoodsByInterest;
 import com.zhangmengcong.www.dao.dao.indentdao.IndentDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.DeleteOrChangeDao;
+import com.zhangmengcong.www.dao.dao.packagingdao.GetGoodsParametersDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.QueryDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.UpdateDao;
 import com.zhangmengcong.www.dao.dao.printdao.IndentPrintDao;
+import com.zhangmengcong.www.dao.impl.goodsimpl.SelectGoodsByInterestImpl;
 import com.zhangmengcong.www.dao.impl.indentdaoimpl.IndentDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.DeleteOrChangeDaoImpl;
+import com.zhangmengcong.www.dao.impl.packagingdaoimpl.GetGoodsParametersDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.QueryDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.UpdateDaoImpl;
 import com.zhangmengcong.www.dao.impl.printdaoimpl.GoodsPrintDaoImpl;
@@ -25,11 +29,13 @@ import com.zhangmengcong.www.service.impl.adminimpl.AdminBanOrUnbanUserServiceIm
 import com.zhangmengcong.www.service.impl.generratefileserviceimpl.GenerateFileServiceImpl;
 import com.zhangmengcong.www.service.impl.goodsserviceimpl.*;
 import com.zhangmengcong.www.service.impl.indentserviceimpl.IndentServiceImpl;
+import com.zhangmengcong.www.service.impl.indentserviceimpl.IntegralServiceImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintIndentServiceImpl;
 import com.zhangmengcong.www.service.impl.userserviceimpl.*;
 import com.zhangmengcong.www.service.service.generatefileservice.GeneateFileService;
 import com.zhangmengcong.www.service.service.goodsservice.*;
 import com.zhangmengcong.www.service.service.indentservice.IndentService;
+import com.zhangmengcong.www.service.service.indentservice.IntegralService;
 import com.zhangmengcong.www.service.service.pageservice.GoToMainpageService;
 import com.zhangmengcong.www.service.service.adminservice.AdminBanOrUnbanUserService;
 import com.zhangmengcong.www.service.service.adminservice.BecomeAdminService;
@@ -77,6 +83,7 @@ public class Factory {
     public  ForgetPasswordService getForgetPasswordService() {return new ForgetPasswordServiceImpl(); }
     public CheckIfUserBeBanedService getCheckIfUserBeBanedService() {return new CheckIfUserBeBanedServiceImpl();}
     public AddExpAndIntegralService getAddExpAndIntegralService(){return new AddExpAndIntegralServiceImpl();}
+    public IntegralService getIntegralService() {return new IntegralServiceImpl();}
     /**
      * 关于打印表格的服务
      */
@@ -113,6 +120,8 @@ public class Factory {
     }
     public DeleteOrPassGoodsService getDeleteOrPassGoodsService(){return new DeleteOrPassGoodsServiceImpl();}
     public BuyGoodsService getBuyGoodsService(){return new BuyGoodsServiceImpl(); }
+    public GetGoodsParametersDao getGoodsParametersDao(){return new GetGoodsParametersDaoImpl(); }
+    public SelectGoodsByInterest getSelectGoodsByInterest(){return new SelectGoodsByInterestImpl(); }
     /**
      *  关于订单的服务
      */

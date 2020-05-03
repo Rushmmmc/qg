@@ -20,7 +20,7 @@ public class UpdateDaoImpl implements UpdateDao {
         PreparedStatement ptst = null;
         try {
             conn = JdbcUtil.getConnetction();
-            String sql = "update " + table + " set " + column1 +" = " + content1 + " where " + condition + " = ?";
+            String sql = "update " + table + " set " + column1 +" = " + content1 + " where " + condition + " = " + actualCondition;
              if(column2 != null && content2 != null) {
                  sql = "update " + table + " set " + column1 + " = " + content1 + "," + column2 + " = " + content2 + " where " + condition + " = " + actualCondition;
              }

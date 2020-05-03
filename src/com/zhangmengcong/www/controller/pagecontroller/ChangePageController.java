@@ -83,9 +83,11 @@ public class ChangePageController extends HttpServlet {
 
         //前往填写购买数量和积分抵现页面
         if(SET_AMOUNT.equals(method)){
+            //传递参数 否则完蛋
             request.setAttribute("tempGoodsName",request.getParameter("tempGoodsName"));
             request.setAttribute("tempPrice", request.getParameter("tempPrice") );
             request.setAttribute("tempSeller", request.getParameter("tempSeller"));
+            request.setAttribute("goodsType",request.getParameter("goodsType"));
             try {
                 request.getRequestDispatcher("/setAmount.jsp").forward(request,response);
             } catch (ServletException e) {

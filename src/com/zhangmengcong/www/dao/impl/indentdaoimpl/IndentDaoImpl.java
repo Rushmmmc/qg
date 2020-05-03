@@ -25,8 +25,8 @@ public class IndentDaoImpl implements IndentDao {
         try {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnetction();
-            sql = "insert into indent (goodsName,buyer,seller,price,amount,totalprice,status)" +
-                    "values (?,?,?,?,?,?,?)";
+            sql = "insert into indent (goodsName,buyer,seller,price,amount,totalprice,status,useIntegral,actuallyPrice,goodsType)" +
+                    "values (?,?,?,?,?,?,?,?,?,?)";
             ptst = conn.prepareStatement(sql);
             //预编译 防注入
             ptst.setString(1, indent.getGoodsName());
@@ -36,6 +36,9 @@ public class IndentDaoImpl implements IndentDao {
             ptst.setInt(5,indent.getAmount());
             ptst.setInt(6,indent.getTotalPrice());
             ptst.setString(7,indent.getStatus());
+            ptst.setInt(8,indent.getUseIntegral());
+            ptst.setInt(9,indent.getActuallyPrice());
+            ptst.setString(10,indent.getGoodsType());
             ptst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

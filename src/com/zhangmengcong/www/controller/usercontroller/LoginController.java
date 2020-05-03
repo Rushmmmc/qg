@@ -80,7 +80,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("level", level);
                 session.setAttribute("sendLevel", factory.getEstimateStatus().estimateStatus(level));
               try {
-                    request.getRequestDispatcher("/DividePageController").forward(request, response);
+                    request.getRequestDispatcher("/SeleteGoodsByInterestController").forward(request, response);
                 } catch (ServletException e) {
                     e.printStackTrace();
                 }

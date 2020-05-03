@@ -36,7 +36,6 @@ public class GoodsDaoImpl implements GoodsDao {
             ptst.setString(5,goods.getImformation());
             ptst.setInt(6,goods.getPrice());
             ptst.setInt(7,goods.getAmount());
-
             count = ptst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

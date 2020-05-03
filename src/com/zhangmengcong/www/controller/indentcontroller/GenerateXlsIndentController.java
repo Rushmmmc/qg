@@ -61,14 +61,6 @@ public class GenerateXlsIndentController extends HttpServlet {
         //关闭资源
         sos.close();
         fis.close();
-
-
-
-        try {
-                request.getRequestDispatcher("/ChangePageController?method=" + MANAGE_INDENT).forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
