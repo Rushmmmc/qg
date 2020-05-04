@@ -68,7 +68,9 @@ public class LoginController extends HttpServlet {
                 ifCookieExist = false;
                 username = request.getParameter("username");
             }
-            if (factory.getRegisterAndLogin().login(username, factory.getEncode().shaEncode(password), captcha, captchar) || ifCookieExist) {
+            //在service进行判空 判断是否包含中文以及特殊符号 并返回提示信息
+            String message = factory.getRegisterAndLogin().login(username, password, captcha, captchar);
+            if ( (message.contains(LOGIN_SUCCESS)) || ifCookieExist) {
                 //用户信息正确并且验证码输入正确 或存在cookie 才能允许登陆
                 Cookie cookie = new Cookie("username", username);
                 cookie.setMaxAge(60 * 60);
@@ -86,7 +88,7 @@ public class LoginController extends HttpServlet {
                 }
             } else {
                 if(NORMAL.equals(way)) {
-                    request.setAttribute("message" , MESSAGE_WRONG);
+                    request.setAttribute("message" ,message);
                 }
                 try {
                     request.getRequestDispatcher("/login.jsp").forward(request, response);

@@ -11,8 +11,9 @@ import java.util.List;
  */
 public interface AppealPrintDao {
    /** 打印所有申诉列表
-    *
+    * @param ifAll 是否使用打印全部申诉表格 仅管理员使用
+    * @param username 打印具体某个用户的申诉信息
     * @return 申诉列表
     */
-   List<Appeal> appealPrintDao();
+   List<Appeal> appealPrintDao(boolean ifAll,String username);
 }

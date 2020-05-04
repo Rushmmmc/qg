@@ -20,13 +20,13 @@ import static com.zhangmengcong.www.constant.UserConstant.*;
 @WebServlet("/Register")
 public class RegisterController extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         //设置编码防止乱码
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         //设置编码防止乱码
         //获取区域 从前端获取各种信息 method的存在使得一个Servlet可以做很多事
-        String mailaddress = request.getParameter("mailaddress");
+        String mailAddress = request.getParameter("mailaddress");
         String password = request.getParameter("password");
         String username = request.getParameter("username");
         String captcha = request.getParameter("captcha");
@@ -35,26 +35,27 @@ public class RegisterController extends HttpServlet {
 
         //创建工厂对象
         Factory factory = new Factory();
-          if(username.length() < NAME_LENGTH || password.length() < PASSWORD_LENGTH || mailaddress.length() < MAIL_LENGTH ||
-                captcha.length() < CAPTCHA_LENGTH ){
-            request.setAttribute("message",MESSAGE_WRONG);
-            request.getRequestDispatcher("/RegisterController.jsp").forward(request,response);
-        }
+
 
         //实现注册功能
-
-        if(!factory.getRegisterAndLogin().register(username,factory.getEncode().shaEncode(password),mailaddress,captchar,captcha)){
-            request.setAttribute("message",MESSAGE_HAVE_BEEN_OCCUPIED);
-            request.getRequestDispatcher("/Register.jsp").forward(request,response);
-        }else {
-            request.setAttribute("message", REGISTER_SUCCESS);
-            request.getRequestDispatcher("/login.jsp").forward(request,response);
-        }
+        //获得注册服务返回的信息 service层进行数据判空 判断是否包含中文与特殊符号
+        String message = factory.getRegisterAndLogin().register(username,password,mailAddress,captchar,captcha);
+            request.setAttribute("message",message);
+                try {
+                    //注册成功
+                    if(message.contains(REGISTER_SUCCESS)){
+                        request.getRequestDispatcher("/login.jsp").forward(request,response);
+                    }else {
+                        request.getRequestDispatcher("/Register.jsp").forward(request,response);
+                    }
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                }
         //实现注册功能
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doPost(request,response);
     }
 }

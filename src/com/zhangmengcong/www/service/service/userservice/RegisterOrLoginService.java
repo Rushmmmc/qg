@@ -13,9 +13,9 @@ public interface RegisterOrLoginService {
      * @param mailAddress 电话
      * @param captchar 实际验证码
      * @param captcha 用户输入的验证码
-     * @return 布尔值
+     * @return 用于提示用户的信息
      */
-     boolean register(String username, String password, String mailAddress, String captchar, String captcha);
+     String register(String username, String password, String mailAddress, String captchar, String captcha);
 
 
     /** 用于用户登录
@@ -24,7 +24,7 @@ public interface RegisterOrLoginService {
      * @param password 密码
      * @param captchar 实际验证码
      * @param captcha 用户输入的验证码
-     * @return 布尔值
+     * @return 提示用户的信息
      */
-     boolean  login(String username, String password, String captcha, String captchar);
+     String  login(String username, String password, String captcha, String captchar);
 }

@@ -73,7 +73,7 @@
     <br>
     <input type="submit"  value="Finish Register" style="width:140px; height:30px;"/>
     <br>
-    <font color="red"> 注意:用户名 为4-10 新密码 长度至少为6 邮箱地址长度为8-20<br> 用户名和密码仅支持数字及字母 </font>
+    <font color="red"> 注意:用户名 为4-10 新密码 长度为6-10 邮箱地址长度为8-20<br> 用户名和密码仅支持数字及字母 </font>
 
 </form>
 <form  method="post" align="center">

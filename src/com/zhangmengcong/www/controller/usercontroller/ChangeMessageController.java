@@ -32,15 +32,14 @@ public class ChangeMessageController extends HttpServlet {
         user.setUsername(newUsername);
         user.setMailAddress(request.getParameter("newaddress"));
 
-        if(factory.getChangeMessageService().getChangeMessageServiceImpl(user,username)){
+        //调用修改方法 检验数据格式 返回提示信息
+        String message = factory.getChangeMessageService().getChangeMessageServiceImpl(user,username);
             //修改cookie和session否则会出错
             session.setAttribute("username",newUsername);
             Cookie cookie = new Cookie("username", newUsername);
             cookie.setMaxAge(60 * 60);
             response.addCookie(cookie);
-            }else {
-                request.setAttribute("message",MESSAGE_HAVE_BEEN_OCCUPIED);
-            }
+            request.setAttribute("message",message);
             request.setAttribute("emps",factory.getPrintTableService().selectPersonalMessage(username));
             request.getRequestDispatcher("/change.jsp").forward(request,response);
         //实现修改个人信息功能

@@ -1,5 +1,6 @@
-package com.zhangmengcong.www.controller.admincontroller;
+package com.zhangmengcong.www.controller.appealcontroller;
 
+import com.zhangmengcong.www.controller.pagecontroller.ChangePageToHelpUser;
 import com.zhangmengcong.www.util.Factory;
 
 import javax.servlet.ServletException;
@@ -14,19 +15,22 @@ import java.io.IOException;
  * @function:
  * @date: 2020/5/3 19:19
  */
-@WebServlet("/HelpUserController")
-public class HelpUserController extends HttpServlet {
+@WebServlet("/AdminManageAppealController")
+public class AdminManageAppealController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
-        request.setAttribute("appealList",factory.getPrintAppealService().printAppealServiceImpl());
+        String type = request.getParameter("type");
+        int id = Integer.parseInt(request.getParameter("id"));
+        //处理申诉并返回信息
+        String message = factory.getManageAppealService().manageAppealService(type,id);
+        request.setAttribute("message",message);
         try {
-            request.getRequestDispatcher("helpUser").forward(request,response);
+            request.getRequestDispatcher("/ChangePageToHelpUser").forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

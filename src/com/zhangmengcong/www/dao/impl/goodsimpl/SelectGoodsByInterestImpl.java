@@ -37,6 +37,10 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
                 price = rs.getInt(1);
                 type = rs.getString(2);
             }
+            if(price == 0 || type == null){
+                price = 1;
+                type = "家用";
+            }
             String sql2 = "SELECT * FROM goods WHERE price >= ? AND price <= ? AND TYPE = ? LIMIT 1,3 ";
             pstmt = conn.prepareStatement(sql2);
             pstmt.setInt(1,price);

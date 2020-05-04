@@ -14,6 +14,9 @@ public class Appeal {
     private Timestamp appealDate;
     private String reason;
     private String status;
+    private int identId;
+    private String seller;
+    private String message;
 
     public int getId() {
         return id;
@@ -63,6 +66,30 @@ public class Appeal {
         this.status = status;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getIdentId() {
+        return identId;
+    }
+
+    public void setIdentId(int identId) {
+        this.identId = identId;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
     @Override
     public String toString() {
         return "Appeal{" +
@@ -72,6 +99,9 @@ public class Appeal {
                 ", appealDate=" + appealDate +
                 ", reason='" + reason + '\'' +
                 ", status='" + status + '\'' +
+                ", identId=" + identId +
+                ", seller='" + seller + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }

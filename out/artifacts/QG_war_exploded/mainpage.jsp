@@ -35,6 +35,8 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageToShoppingCarController">查看购物车</a>
 <a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageToHelpUser">前往申诉中心</a>
+<a>&nbsp&nbsp&nbsp</a>
 <a href="/Quit">注销</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>

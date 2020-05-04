@@ -28,7 +28,7 @@
 <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/HelpUserController">管理申诉系统</a>
+<a href="/ChangePageToHelpUser">管理申诉系统</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/Quit">注销</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
@@ -103,7 +103,7 @@
         </div>
 
         <div style="margin-top:50px ">
-            <p> </p>
+            <p><font color="red">管理员账号无法购买商品</font> </p>
         </div>
 
     </div>

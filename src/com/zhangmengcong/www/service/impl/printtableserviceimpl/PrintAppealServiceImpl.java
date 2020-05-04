@@ -1,4 +1,4 @@
-package com.zhangmengcong.www.service.impl;
+package com.zhangmengcong.www.service.impl.printtableserviceimpl;
 
 import com.zhangmengcong.www.po.Appeal;
 import com.zhangmengcong.www.service.service.printtableservice.PrintAppealService;
@@ -14,8 +14,12 @@ import java.util.List;
 public class PrintAppealServiceImpl implements PrintAppealService {
 
     @Override
-    public List<Appeal> printAppealServiceImpl() {
+    public List<Appeal> printAppealServiceImpl(String username) {
         Factory factory = new Factory();
-        return factory.getAppealPrintDao().appealPrintDao();
-    }
+        if(username == null) {
+            return factory.getAppealPrintDao().appealPrintDao(true, null);
+        }else {
+            return factory.getAppealPrintDao().appealPrintDao(false,username);
+        }
+        }
 }
