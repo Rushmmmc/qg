@@ -47,13 +47,13 @@
     <input type="text" style="display:none;" pattern="^\d{1,10}$" class="text" name="id" required style="display:none;" />
     <br>
     <a style="display:none;margin-top: 0px" class="text">需要修改的订单商品名 :</a>
-    <input type="text" style="display:none;"  class="text" name="goodsName" required style="display:none;" />
+    <input type="text" style="display:none;"  class="text" name="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required style="display:none;" />
     <br>
     <a style="display:none;" class="text">需要修改的订单单价:</a>
-    <input type="text" class="text" pattern="^\d{1,10}$" name="price" required style="display:none;" />
+    <input type="text" class="text" pattern="^\d{1,10}$" name="price"  pattern="^\d{1,8}$"required style="display:none;" />
     <br>
     <a style="display:none;" class="text">修改的订单商品数量:</a>
-    <input type="text" class="text" pattern="^\d{1,10}$" name="amount" required style="display:none;" />
+    <input type="text" class="text" pattern="^\d{1,10}$" name="amount" pattern="^\d{1,8}$" required style="display:none;" />
     <br>
     <input type="submit" value="提交"  class="text" style="display:none;">
 </FORM>
@@ -65,7 +65,7 @@
     <input type="text"  class="text2"  name="id" pattern="^\d{1,10}$" required style="display:none;" />
     <br>
     <a class="text2" style="display:none;">内容:</a>
-    <input type="text" class="text2"  name="message" required style="display:none;" />
+    <input type="text" class="text2"  name="message" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required style="display:none;" />
     <br>
     <input type="submit" value="提交"  class="text2" style="display:none;">
 </FORM>

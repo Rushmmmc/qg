@@ -49,7 +49,7 @@
 
     <br>
     <a style="display:none;margin-top: 0px" class="text">订单Id:</a>
-    <input type="text" style="display:none;" class="text" name="indentId" required style="display:none;" />
+    <input type="text" style="display:none;" class="text" name="indentId" pattern="^\d{1,8}$" required style="display:none;" />
     <br>
     <a style="display:none;" class="text">申诉理由:</a>
     <input type="text" class="text"name="reason" required style="display:none;" />

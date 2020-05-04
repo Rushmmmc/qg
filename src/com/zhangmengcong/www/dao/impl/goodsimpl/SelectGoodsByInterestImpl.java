@@ -48,6 +48,14 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
             pstmt.setString(3,type);
             rs = pstmt.executeQuery();
             emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
+
+            //如果实在啥都没有
+            if(emps.isEmpty()){
+                String sql3 = "SELECT * FROM goods LIMIT 1,3 ";
+                pstmt = conn.prepareStatement(sql3);
+                rs = pstmt.executeQuery();
+                emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
+            }
         }catch(Exception e){
             e.printStackTrace();
         }finally {

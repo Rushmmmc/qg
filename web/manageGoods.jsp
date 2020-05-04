@@ -54,7 +54,7 @@
     <input type="text" style="display:none;" class="text" name="username" required style="display:none;" />
     <br>
     <a style="display:none;" class="text">封禁/解封理由:</a>
-    <input type="text" class="text"value=" " name="reason" required style="display:none;" />
+    <input type="text" class="text" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="reason" required style="display:none;" />
     <br>
     <input type="submit" value="提交"  class="text" style="display:none;">
 </FORM>

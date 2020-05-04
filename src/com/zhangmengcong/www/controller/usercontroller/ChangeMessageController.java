@@ -27,8 +27,7 @@ public class ChangeMessageController extends HttpServlet {
         //从前端接收用户的新信息
         String username = (String)session.getAttribute("username");
         String newUsername = request.getParameter("newusername");
-
-        user.setPassword(factory.getEncode().shaEncode(request.getParameter("newpassword")));
+        user.setPassword(request.getParameter("newpassword"));
         user.setUsername(newUsername);
         user.setMailAddress(request.getParameter("newaddress"));
 

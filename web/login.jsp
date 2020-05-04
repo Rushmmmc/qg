@@ -61,7 +61,7 @@
             <label>Username</label>
         </div>
         <div class="inputBox">
-            <input type="password" name="password" required>
+            <input type="password" name="password" pattern="[\w]{6,10}" required>
             <label>Password</label>
                 <div class="inputBox">
                     <input type="text" name="captcha" pattern="[\w]{4,4}" required>

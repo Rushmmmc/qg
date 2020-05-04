@@ -26,15 +26,15 @@
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel},欢迎您成为卖家</font> </h1>
 
 <form   align="center" action="/GoodsCommitController" method="post" >
-    商品名称:<input type="text"  name="goodsName"  required/>
+    商品名称:<input type="text"  name="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$"  required/>
     <br>
-    商品类型:<input type="text"  name="type"  required/>
+    商品类型:<input type="text"  name="type" pattern="^[\u4e00-\u9fa5]+$" required/>
     <br>
-    商品价格:<input type="text" name="price" pattern=^\d{1,20}$ required/>
+    商品价格:<input type="text" name="price" pattern=^\d{1,8}$ required/>
     </br>
-    商品存量:<input type="text" name="amount" pattern="^\d{1,20}$" required>
+    商品存量:<input type="text" name="amount" pattern="^\d{1,8}$" required>
     <br>
-    商品信息:<input type="text" name="imformation"  required>
+    商品信息:<input type="text" name="imformation" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required>
     <br>
     <input type="submit" value="提交至管理员审核">
 </form>

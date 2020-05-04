@@ -15,6 +15,7 @@ public class UserConstant {
         public static final int MAIL_MIN_LENGTH = 6;
         public static final int CAPTCHA_LENGTH = 4;
         public static final int PASSWORD_MIN_LENGTH = 6;
+        public static final int MINUS_LENGTH = 4;
         public static final String BACKDOOR = "qqqq";
         public static final String COOKIE = "cookie";
         public static final String USER_NAME = "username";

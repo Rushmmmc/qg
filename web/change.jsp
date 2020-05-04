@@ -137,6 +137,12 @@
                 <font color="#00ff7f"> <h2>后续会有许多会员活动哦( •̀ ω •́ )y请多多积攒积分和会员经验</h2></font>
 </form>
 
+<c:if test="${not empty requestScope.message}">
+    <Script Language="JavaScript">
+        alert("${requestScope.message}");
+    </Script>
+</c:if>
+
 
 </body>
 </html>
