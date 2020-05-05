@@ -52,7 +52,7 @@
     <input type="text" style="display:none;" class="text" name="indentId" pattern="^\d{1,8}$" required style="display:none;" />
     <br>
     <a style="display:none;" class="text">申诉理由:</a>
-    <input type="text" class="text"name="reason" required style="display:none;" />
+    <input type="text" class="text"name="reason" required  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$"style="display:none;" />
     <br>
     <input type="submit" value="提交"  class="text" style="display:none;">
 </FORM>

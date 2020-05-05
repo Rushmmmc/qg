@@ -20,13 +20,14 @@ public class AdminBanUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         request.setCharacterEncoding("UTF-8");
         Factory factory = new Factory();
-        //检测是封禁还是
+        //检测是封禁还是解封
         int ifBan = Integer.parseInt(request.getParameter("operate"));
         String banUsername = request.getParameter("username");
         String banReason = request.getParameter("reason");
-        factory.getAdminBanOrUnbanUserService().adminBanOrUnbanUserService(ifBan,banUsername,banReason);
+        String message = factory.getAdminBanOrUnbanUserService().adminBanOrUnbanUserService(ifBan,banUsername,banReason);
         try {
             request.setAttribute("goodsList",factory.getGoodsPrintService().goodsPrintService());
+            request.setAttribute("message",message);
             request.getRequestDispatcher("/manageGoods.jsp").forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();

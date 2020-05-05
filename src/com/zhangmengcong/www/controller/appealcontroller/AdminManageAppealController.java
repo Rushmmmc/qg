@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  * @author:zmc
- * @function:
+ * @function: //处理申诉
  * @date: 2020/5/3 19:19
  */
 @WebServlet("/AdminManageAppealController")

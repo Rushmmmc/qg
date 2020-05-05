@@ -5,7 +5,7 @@ import com.zhangmengcong.www.service.service.indentservice.IndentService;
 import com.zhangmengcong.www.util.Factory;
 
 
-import java.util.List;
+
 
 import static com.zhangmengcong.www.constant.GoodsConstant.*;
 import static com.zhangmengcong.www.constant.IndentConstant.*;
@@ -27,8 +27,15 @@ public class IndentServiceImpl implements IndentService {
         }
         //改变订单商品个数 金额等信息
         if(CHANGE_INDENT.equals(method)){
-            factory.getDeleteOrChangeDao().deleteOrChange(null, 0, 0, null, null, true, indent);
-        }
+            boolean ifIdFormatError = factory.getFormatService().formatService(String.valueOf(indent.getId()));
+            boolean ifNameFormatError = factory.getFormatService().ifIncludeSymbol(indent.getGoodsName());
+            boolean ifPriceFormatError = factory.getFormatService().formatService(String.valueOf(indent.getPrice()));
+            boolean ifAmountFormatError = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
+            boolean ifFormatError = ifAmountFormatError || ifNameFormatError || ifPriceFormatError || ifIdFormatError;
+            if(ifFormatError) {
+                factory.getDeleteOrChangeDao().deleteOrChange(null, 0, 0, null, null, true, indent);
+            }
+            }
         //完成订单
         if(FINISH_INDENT.equals(method)){
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"订单已完成","status"
@@ -65,13 +72,17 @@ public class IndentServiceImpl implements IndentService {
         }
         //用户在购物车购买商品 修改购物车商品的购买数量 以及总价 使用积分的数量 实际付款
         if(BUY_GOODS_FROM_SHOPPING_CAR.equals(method)){
-            int totalPrice = indent.getAmount()*indent.getPrice();
-            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"商家未接单","status",false,null);
-            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(indent.getAmount()),"amount",false,null);
-            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(totalPrice),"totalPrice",false,null);
-            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(indent.getUseIntegral()),"useIntegral",false,null);
-            factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,String.valueOf(totalPrice - indent.getUseIntegral()),"actuallyPrice",false,null);
-        }
+            boolean ifAmountFormatWrong = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
+            boolean ifIntegralFormatWrong = factory.getFormatService().formatService(String.valueOf(indent.getUseIntegral()));
+            if(!ifAmountFormatWrong && !ifIntegralFormatWrong) {
+                int totalPrice = indent.getAmount() * indent.getPrice();
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, "商家未接单", "status", false, null);
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(indent.getAmount()), "amount", false, null);
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(totalPrice), "totalPrice", false, null);
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(indent.getUseIntegral()), "useIntegral", false, null);
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(totalPrice - indent.getUseIntegral()), "actuallyPrice", false, null);
+            }
+            }
         //用户给好评
         if(GOOD_REPUTATION.equals(method)){
             String sellerName = factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(id));
@@ -85,8 +96,4 @@ public class IndentServiceImpl implements IndentService {
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"差评","reputation",false,null);
         }
     }
-
-
-
-
 }

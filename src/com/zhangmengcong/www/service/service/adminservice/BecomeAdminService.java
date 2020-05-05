@@ -10,7 +10,7 @@ public interface BecomeAdminService {
      *
      * @param level 等级
      * @param username 用户名
-     * @return 修改用户等级为管理员 便于测试管理员功能
+     * @return 修改用户等级为管理员 便于测试管理员功能 返回提示信息
      */
-    boolean becomeAdminServiceImpl(int level,String username);
+    String becomeAdminServiceImpl(int level,String username);
 }

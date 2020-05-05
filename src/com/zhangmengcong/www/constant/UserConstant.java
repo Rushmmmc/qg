@@ -8,6 +8,7 @@ package com.zhangmengcong.www.constant;
 public class UserConstant {
         public static final int VISITOR_LEVEL = 1;
         public static final int ADMIN_LEVEL = 3;
+        public static final int USER_LEVEL = 2;
         public static final int NAME_MIN_LENGTH = 4;
         public static final int NAME_MAX_LENGTH = 10;
         public static final int PASSWORD_MAX_LENGTH = 10;
@@ -16,6 +17,7 @@ public class UserConstant {
         public static final int CAPTCHA_LENGTH = 4;
         public static final int PASSWORD_MIN_LENGTH = 6;
         public static final int MINUS_LENGTH = 4;
+        public static final String CHANGE_LEVEL_FAIL = "该等级不存在";
         public static final String BACKDOOR = "qqqq";
         public static final String COOKIE = "cookie";
         public static final String USER_NAME = "username";

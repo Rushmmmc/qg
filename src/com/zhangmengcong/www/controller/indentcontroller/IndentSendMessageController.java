@@ -15,7 +15,7 @@ import static com.zhangmengcong.www.constant.PageConstant.*;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 给商家或用户留言的留言板
  * @date: 2020/5/2 16:09
  */
 @WebServlet("/IndentSendMessageController")
@@ -27,6 +27,7 @@ public class IndentSendMessageController extends HttpServlet {
         String method = request.getParameter("method");
         String message = request.getParameter("message");
         int id = Integer.parseInt(request.getParameter("id"));
+        //传入method 自动分配方法
         factory.getIndentService().indentSelectMethod(method,id,null,message,null);
         request.setAttribute("message",SEND_MESSAGE_SUCCESS);
         try {

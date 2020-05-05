@@ -24,6 +24,11 @@
     <link type="text/css" rel="stylesheet" href="./style.css">
 
 
+
+
+
+
+
     <!--        //点击验证码更新-->
 <script>
     //点击超链接或图片,换一张.
@@ -55,20 +60,25 @@
 
 <div class="box">
     <h2>感谢使用QG闲鱼</h2>
+    <c:if test="${not empty requestScope.message}">
+        <Script Language="JavaScript">
+          $("#eerror").alert("abc")
+        </Script>
+    </c:if>
     <form   action="/login?way=normal" method="post" align="center"  >
         <div class="inputBox">
-            <input type="text" name="username" pattern="[\w]{4,10}" required>
+            <input type="text" name="username"  pattern="[\w]{4,10}" required>
             <label>Username</label>
         </div>
         <div class="inputBox">
-            <input type="password" name="password" pattern="[\w]{6,10}" required>
+            <input type="password" name="password"  pattern="[\w]{6,10}" required>
             <label>Password</label>
                 <div class="inputBox">
                     <input type="text" name="captcha" pattern="[\w]{4,4}" required>
                     <label>验证码</label>
                 </div>
 
-                <input type="submit" name="" value="submit" >
+                <input type="submit" name="" value="submit" onclick="fun4()" >
     </form>
 </div>
 
@@ -87,7 +97,7 @@
             <a href="#" onclick="change();">看不清，换一张</a><br/>
         </form>
     </div>
-
+    <div id="error" ></div>
     <form  method="post" align="center">
         <a   href="/login?way=cookie" ><font color="blue" >使用cookie登录</font></a>
         <a   href="/forget.jsp" ><font color="blue" >忘记密码?</font></a>
@@ -96,20 +106,16 @@
 
 
     <h4 align="center"> <font color="#dc143c" >  您还未登录,请先登录 </font></h4>
-    <c:if test="${not empty requestScope.message}">
+
+
+    <c:if test="${not empty sessionScope.cookiemessage}">
         <Script Language="JavaScript">
-            alert("${requestScope.message}");
+            alert("${sessionScope.cookiemessage}");
+            <%session.setMaxInactiveInterval(0);%>
         </Script>
     </c:if>
 
-    <c:if test="${not empty requestScope.cookiemessage}">
-        <Script Language="JavaScript">
-            alert("${requestScope.cookiemessage}");
-        </Script>
-
-    </c:if>
-
-
+    <span id="message"></span>
 
 </body>
 </html>

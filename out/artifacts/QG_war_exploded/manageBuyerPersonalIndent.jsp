@@ -38,7 +38,7 @@
     <input type="text"  class="text"  name="id" pattern="^\d{1,10}$" required style="display:none;" />
     <br>
     <a class="text" style="display:none;">内容:</a>
-    <input type="text" class="text"  name="message" required style="display:none;" />
+    <input type="text" class="text"  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="message" required style="display:none;" />
     <br>
     <input type="submit" value="提交"  class="text" style="display:none;">
 </FORM>
@@ -96,7 +96,7 @@
 
             <a href="/ChangeIndentController?method=deleteIndent&id=<%=indent.getId()%>">取消(删除)订单</a>
                 <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
-                    <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a>&nbsp&nbsp&nbsp&nbsp</a>
                     <a href="/ChangePageController?method=messageBoard&ifSeller=0">商家给您留言啦,请打开留言板</a>
                 </c:if>
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ page import="com.zhangmengcong.www.po.Goods" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
@@ -54,7 +55,7 @@
     <input type="text" style="display:none;" class="text" name="username" required style="display:none;" />
     <br>
     <a style="display:none;" class="text">封禁/解封理由:</a>
-    <input type="text" class="text"value=" " name="reason" required style="display:none;" />
+    <input type="text" class="text" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="reason" required style="display:none;" />
     <br>
     <input type="submit" value="提交"  class="text" style="display:none;">
 </FORM>
@@ -109,6 +110,10 @@
 
 </table>
 </div>
-
+<c:if test="${not empty requestScope.message}">
+    <Script Language="JavaScript">
+        alert("${requestScope.message}");
+    </Script>
+</c:if>
 </body>
 </html>

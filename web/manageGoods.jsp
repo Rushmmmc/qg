@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
 <%@ page import="com.zhangmengcong.www.po.Goods" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
@@ -109,6 +110,10 @@
 
 </table>
 </div>
-
+<c:if test="${not empty requestScope.message}">
+    <Script Language="JavaScript">
+        alert("${requestScope.message}");
+    </Script>
+</c:if>
 </body>
 </html>

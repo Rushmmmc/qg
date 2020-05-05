@@ -2,6 +2,7 @@ package com.zhangmengcong.www.controller.usercontroller;
 
 
 import com.zhangmengcong.www.util.Factory;
+import netscape.javascript.JSObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,7 +61,7 @@ public class LoginController extends HttpServlet {
             String way = request.getParameter("way");
             if (COOKIE.equals(way)) {
                 if (!ifCookieExist) {
-                    request.setAttribute("cookiemessage", HAVENOT_COOKIE);
+                    session.setAttribute("cookiemessage",HAVENOT_COOKIE);
                 }
             }
             //如果用户不使用cookie并想登录其他账号

@@ -31,25 +31,25 @@
 <form class="form-inline" align="center" action="/DividePageController" method="post">
     <div class="form-group">
         <label>商品名:</label>
-        <input type="text" value="${requestScope.dp.goods.goodsName}" class="form-control" name="goodsName">
+        <input type="text" value="${requestScope.dp.goods.goodsName}" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" class="form-control" name="goodsName">
     </div>
     <div class="form-group">
         <label>商品类型:</label>
-        <input type="text" value="${requestScope.dp.goods.type}" class="form-control" name="type">
+        <input type="text" value="${requestScope.dp.goods.type}" pattern="^[\u4e00-\u9fa5]+$" class="form-control" name="type">
     </div>
     <div class="form-group">
         <label>商品卖家:</label>
-        <input type="text" value="${requestScope.dp.goods.seller}" class="form-control" name="seller">
+        <input type="text" value="${requestScope.dp.goods.seller}" pattern="[\w]{4,10}" class="form-control" name="seller">
     </div>
     <br>
     <div class="form-group">
         <label>价格最小值:</label>
-        <input type="text" value="${requestScope.dp.minPrice}" class="form-control" name="rangemin">
+        <input type="text" value="${requestScope.dp.minPrice}" class="form-control" pattern="^\d{1,8}$" name="rangemin">
     </div>
 
     <div class="form-group">
         <label>价格最大值:</label>
-        <input type="text" value="${requestScope.dp.maxPrice}" class="form-control" name="rangemax">
+        <input type="text" value="${requestScope.dp.maxPrice}" class="form-control"  pattern="^\d{1,8}$"name="rangemax">
     </div>
     <br>
     <strong>价格排序系统:</strong>

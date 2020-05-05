@@ -132,6 +132,7 @@ public class Factory {
     public BuyGoodsService getBuyGoodsService(){return new BuyGoodsServiceImpl(); }
     public GetGoodsParametersDao getGoodsParametersDao(){return new GetGoodsParametersDaoImpl(); }
     public SelectGoodsByInterest getSelectGoodsByInterest(){return new SelectGoodsByInterestImpl(); }
+    public GetPriceAndGoodsNameService getGetPriceAndGoodsNameService() {return new GetPriceAndGoodsNameServiceImpl();}
     /**
      *  关于订单的服务
      */

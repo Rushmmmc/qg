@@ -35,9 +35,7 @@ public class RegisterOrLoginServiceImpl implements RegisterOrLoginService {
                  return "用户名或邮箱已被占用┭┮﹏┭┮";
              }
         }
-
     }
-
 
 
     @Override
@@ -50,14 +48,10 @@ public class RegisterOrLoginServiceImpl implements RegisterOrLoginService {
             return "信息不能包含中文或特殊符号";
         }
         boolean ifMessageCorrect;
-        boolean ifCaptchaCorrect = false;
-        if (captcha.equals(captchar) || BACKDOOR.equals(captcha)) {
-            ifCaptchaCorrect = true;
-        }
         //数据判断长度、格式
         boolean ifMessageLengthError = username.length() < NAME_MIN_LENGTH || password.length() < PASSWORD_MIN_LENGTH ||
                 captcha.length() < CAPTCHA_LENGTH  || username.length()>NAME_MAX_LENGTH || password.length() > PASSWORD_MAX_LENGTH ||
-                !((captcha.equals(captchar) || captcha.equals(BACKDOOR)) );
+                !((captcha.equals(captchar) || captcha.equals(BACKDOOR)));
             if(ifMessageLengthError) {
                 return "信息长度或邮箱格式不正确";
             }
@@ -69,6 +63,5 @@ public class RegisterOrLoginServiceImpl implements RegisterOrLoginService {
                 return "用户名和密码不匹配┭┮﹏┭┮";
             }
         //检查用户的信息是否正确
-
     }
 }

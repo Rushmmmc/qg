@@ -16,21 +16,32 @@ public class FormatServiceImpl implements FormatService {
 
     @Override
     public boolean formatService(String message) {
-        if(message == null){
+        if(message == null || message.length() == 0){
             return true;
         }
         Matcher messageChineseMatcher = IF_INCLUDE_CHINESE_PATTERN.matcher(message);
         Matcher messageSymbolMatcher = IF_INCLUDE_SYMBOL.matcher(message);
-        return messageChineseMatcher.matches() || messageSymbolMatcher.matches();
+        return messageChineseMatcher.matches() || !messageSymbolMatcher.matches();
     }
 
     @Override
     public boolean mailFormatService(String message) {
-        if(message == null){
+        if(message == null || message.length() == 0){
             return true;
         }
         Matcher messageChineseMatcher = IF_INCLUDE_CHINESE_PATTERN.matcher(message);
-        Matcher messageSymbolMatcher = MAIL_IF_INCLUDE_SYMBOL.matcher(message);
-        return messageChineseMatcher.matches() || messageSymbolMatcher.matches();
+        Matcher messageSymbolMatcher = IF_MAIL_FORMAT_CORRECT.matcher(message);
+        return messageChineseMatcher.matches() || !messageSymbolMatcher.matches() || !message.contains(".com")
+                || !message.contains("@");
+    }
+
+    @Override
+    public boolean ifIncludeSymbol(String message){
+        if(message == null || message.length() == 0){
+            return true;
+        }
+
+        Matcher messageSymbolMatcher = IF_INCLUDE_SYMBOL.matcher(message);
+        return !messageSymbolMatcher.matches();
     }
 }

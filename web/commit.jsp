@@ -36,7 +36,8 @@
     <br>
     商品信息:<input type="text" name="imformation" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required>
     <br>
-    <input type="submit" value="提交至管理员审核">
+    <input type="submit" value="提交至管理员审核"><br>
+    <h2 >不支持小数</h2>
 </form>
 
 </body>

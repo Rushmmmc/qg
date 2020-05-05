@@ -96,7 +96,7 @@
 
             <a href="/ChangeIndentController?method=deleteIndent&id=<%=indent.getId()%>">取消(删除)订单</a>
                 <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
-                    <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+                    <a>&nbsp&nbsp&nbsp&nbsp</a>
                     <a href="/ChangePageController?method=messageBoard&ifSeller=0">商家给您留言啦,请打开留言板</a>
                 </c:if>
 

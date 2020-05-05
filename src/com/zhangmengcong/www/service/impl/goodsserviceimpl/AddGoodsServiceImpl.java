@@ -16,10 +16,20 @@ public class AddGoodsServiceImpl implements AddGoodsService {
     @Override
     public String addGoodsService(Goods goods) {
         Factory factory = new Factory();
-        if (factory.getGoodsDao().addGoods(goods)) {
-            return ADD_GOODS_SUCCESS;
-        } else {
-            return ADD_GOODS_FAIL;
+        boolean ifNameFormatError = factory.getFormatService().ifIncludeSymbol(goods.getGoodsName());
+        boolean ifTypeFormatError = factory.getFormatService().formatService(goods.getType());
+        boolean ifPriceFormatError = factory.getFormatService().formatService(String.valueOf(goods.getPrice()));
+        boolean ifAmountFormatError = factory.getFormatService().formatService(String.valueOf(goods.getAmount()));
+        boolean ifMessageFormatError = factory.getFormatService().ifIncludeSymbol(goods.getImformation());
+
+        boolean ifFormatError = ifAmountFormatError || ifNameFormatError || ifPriceFormatError || ifMessageFormatError || ifTypeFormatError;
+        if (!ifFormatError) {
+            if (factory.getGoodsDao().addGoods(goods)) {
+                return ADD_GOODS_SUCCESS;
+            } else {
+                return ADD_GOODS_FAIL;
+            }
         }
+    return "信息格式错误┭┮﹏┭┮";
     }
 }

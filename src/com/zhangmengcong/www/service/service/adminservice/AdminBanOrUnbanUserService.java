@@ -11,7 +11,7 @@ public interface AdminBanOrUnbanUserService {
      * @param ifBan 是否封禁 否 则使用解封
      * @param username 用户名
      * @param banReason 封禁理由
-     * @return 是否成功
+     * @return 提示信息
      */
-    boolean adminBanOrUnbanUserService(int ifBan,String username,String banReason);
+    String adminBanOrUnbanUserService(int ifBan,String username,String banReason);
 }

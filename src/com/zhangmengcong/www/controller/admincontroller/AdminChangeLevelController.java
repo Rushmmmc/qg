@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static com.zhangmengcong.www.constant.UserConstant.CHANGE_LEVEL_FAIL;
+
 /**
  * @author:zmc
  * @function:
@@ -24,9 +26,14 @@ public class AdminChangeLevelController extends HttpServlet {
         HttpSession session = request.getSession();
         int level = Integer.parseInt(request.getParameter("level"));
         String username = (String)session.getAttribute("username");
-        session.setAttribute("level",level);
+
         session.setAttribute("sendLevel", factory.getEstimateStatus().estimateStatus(level));
-        factory.getBecomeAdminService().becomeAdminServiceImpl(level,username);
+        String message = factory.getBecomeAdminService().becomeAdminServiceImpl(level,username);
+        request.setAttribute("message",message);
+        //若用户填写的等级正确才能改
+        if(!message.contains(CHANGE_LEVEL_FAIL)){
+            session.setAttribute("level",level);
+        }
         request.getRequestDispatcher("/DividePageController").forward(request,response);
     }
 

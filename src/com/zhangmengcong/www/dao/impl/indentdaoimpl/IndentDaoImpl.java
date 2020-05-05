@@ -46,7 +46,4 @@ public class IndentDaoImpl implements IndentDao {
             JdbcUtil.close(null, ptst, conn);
         }
     }
-
-
-
 }

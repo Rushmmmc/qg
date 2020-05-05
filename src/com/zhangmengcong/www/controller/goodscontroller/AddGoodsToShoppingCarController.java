@@ -1,5 +1,6 @@
 package com.zhangmengcong.www.controller.goodscontroller;
 
+import com.zhangmengcong.www.po.Goods;
 import com.zhangmengcong.www.po.Indent;
 import com.zhangmengcong.www.util.Factory;
 
@@ -25,15 +26,20 @@ public class AddGoodsToShoppingCarController extends HttpServlet {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
+        int id = Integer.parseInt(request.getParameter("id"));
+        Goods goods = factory.getGetPriceAndGoodsNameService().getPriceAndGoodsNameService(id);
         Indent indent = new Indent();
+
         indent.setAmount(1);
         indent.setBuyer((String)session.getAttribute("username"));
-        indent.setPrice(Integer.parseInt(request.getParameter("tempPrice")));
-        indent.setGoodsName(request.getParameter("tempGoodsName"));
-        indent.setSeller(request.getParameter("tempSeller"));
-        indent.setGoodsType(request.getParameter("goodsTypee"));
-        factory.getBuyGoodsService().sellGoodsService(indent,IF_SHOPPINGCAR);
-        request.setAttribute("message",SHOPPING_CAR_MESSAGE);
+        indent.setGoodsName(goods.getGoodsName());
+        indent.setSeller(goods.getSeller());
+        indent.setPrice(goods.getPrice());
+        indent.setGoodsType(goods.getType());
+
+        //验证信息并返回提示
+        String message = factory.getBuyGoodsService().buyGoodsService(indent,IF_SHOPPINGCAR);
+        request.setAttribute("message",message);
         try {
             request.getRequestDispatcher("/DividePageController").forward(request,response);
         } catch (ServletException e) {

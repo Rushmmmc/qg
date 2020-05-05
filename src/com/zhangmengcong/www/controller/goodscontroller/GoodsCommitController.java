@@ -40,7 +40,7 @@ public class GoodsCommitController extends HttpServlet {
         goods.setPrice(Integer.parseInt(request.getParameter("price")));
         goods.setAmount(Integer.parseInt(request.getParameter("amount")));
 
-            //添加商品服务会返回是否成功对应的字符串信息
+            //添加商品服务会返回是否成功对应的字符串信息 在service验证信息
             request.setAttribute("message" ,factory.getAddGoodsService().addGoodsService(goods));
         try {
             request.getRequestDispatcher("/DividePageController").forward(request,response);

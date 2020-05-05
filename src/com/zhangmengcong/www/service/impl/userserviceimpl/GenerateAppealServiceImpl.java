@@ -15,8 +15,16 @@ public class GenerateAppealServiceImpl implements GenerateAppealService {
     @Override
     public String generateAppealService(Appeal appeal) {
         Factory factory = new Factory();
-        appeal.setSeller(factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(appeal.getIdentId())));
-        factory.getGenerateAppealDao().generateAppealDao(appeal);
-        return COMMIT_APPEAl_SUCCESS;
+        boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(appeal.getId()));
+        boolean ifReasonFormatWrong = factory.getFormatService().ifIncludeSymbol(appeal.getReason());
+
+        if(!ifIdFormatWrong || !ifReasonFormatWrong){
+            appeal.setSeller(factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(appeal.getIdentId())));
+            factory.getGenerateAppealDao().generateAppealDao(appeal);
+            return COMMIT_APPEAl_SUCCESS;
+        }else {
+            return "信息格式不正确┭┮﹏┭┮";
+        }
+
     }
 }

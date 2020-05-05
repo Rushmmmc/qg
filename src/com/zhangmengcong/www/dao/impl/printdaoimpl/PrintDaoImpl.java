@@ -3,6 +3,7 @@ package com.zhangmengcong.www.dao.impl.printdaoimpl;
 import com.zhangmengcong.www.dao.dao.printdao.PrintDao;
 import com.zhangmengcong.www.po.Goods;
 import com.zhangmengcong.www.po.User;
+import com.zhangmengcong.www.util.Factory;
 import com.zhangmengcong.www.util.JdbcUtil;
 
 import java.sql.Connection;
@@ -176,19 +177,8 @@ public class PrintDaoImpl implements PrintDao {
             ptst.setInt(++amount, currentPage);
             ptst.setInt(++amount, rows);
             rs = ptst.executeQuery();
-            while (rs.next()) {
-                goods = new Goods();
-                goods.setId(rs.getInt("id"));
-                goods.setGoodsName(rs.getString("goodsName"));
-                goods.setSeller(rs.getString("seller"));
-                goods.setType(rs.getString("type"));
-                goods.setAmount(rs.getInt("amount"));
-                goods.setBoughtAmount(rs.getInt("boughtAmount"));
-                goods.setImformation(rs.getString("imformation"));
-                goods.setSellerReputation(rs.getInt("sellerReputation"));
-                goods.setPrice(rs.getInt("price"));
-                list.add(goods);
-            }
+            Factory factory = new Factory();
+            list = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

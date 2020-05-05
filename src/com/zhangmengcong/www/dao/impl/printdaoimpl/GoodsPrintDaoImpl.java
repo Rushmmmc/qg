@@ -27,7 +27,7 @@ public class GoodsPrintDaoImpl implements GoodsPrintDao {
         try {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnetction();
-            String sql = "select * from goods";
+            String sql = "select * from goods order by id desc ";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
             emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);

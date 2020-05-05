@@ -30,7 +30,7 @@ public class UserCommitAppealController extends HttpServlet {
         appeal.setType(request.getParameter("type"));
         appeal.setReason(request.getParameter("reason"));
 
-        //调用方法生成申诉 并返回提示信息
+        //调用方法生成申诉 验证信息格式 并返回提示信息
         String message = factory.getGenerateAppealService().generateAppealService(appeal);
         request.setAttribute("message",message);
         try {

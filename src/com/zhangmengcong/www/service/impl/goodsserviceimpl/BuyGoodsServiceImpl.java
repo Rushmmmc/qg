@@ -8,21 +8,30 @@ import static com.zhangmengcong.www.constant.IndentConstant.IF_SHOPPING_CAR;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 卖商品
  * @date: 2020/5/1 21:19
  */
 public class BuyGoodsServiceImpl implements BuyGoodsService {
 
     @Override
-    public void sellGoodsService(Indent indent,int ifShoppingCar) {
+    public String buyGoodsService(Indent indent, int ifShoppingCar) {
         Factory factory = new Factory();
-        if(ifShoppingCar == IF_SHOPPING_CAR){
-            indent.setStatus("购物车");
-        }else {
-            indent.setStatus("商家未接单");
+        //用户仅输入这两个 所以仅检验这两个
+        boolean ifAmountWrong = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
+        boolean ifIntegralWrong = factory.getFormatService().formatService(String.valueOf(indent.getUseIntegral()));
+
+        if(!ifAmountWrong && !ifIntegralWrong){
+            indent.setTotalPrice(indent.getPrice()*indent.getAmount());
+            indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());
+            factory.getIndentDao().buyGoods(indent);
+            if(ifShoppingCar == IF_SHOPPING_CAR){
+                indent.setStatus("购物车");
+                return "添加购物车成功！( •̀ ω •́ )y";
+            }else {
+                indent.setStatus("商家未接单");
+                return "商家正在火速处理您的订单( •̀ ω •́ )y";
+            }
         }
-        indent.setTotalPrice(indent.getPrice()*indent.getAmount());
-        indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());
-        factory.getIndentDao().buyGoods(indent);
+        return "数据格式不正确┭┮﹏┭┮";
     }
 }

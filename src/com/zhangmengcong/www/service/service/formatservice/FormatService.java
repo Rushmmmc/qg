@@ -19,4 +19,11 @@ public interface FormatService {
      * @return 邮箱是否包含中文 特殊符号
      */
    boolean mailFormatService(String message);
+
+    /** 仅检测是否存在特殊符号
+     *
+     * @param message 信息
+     * @return 返回是否存在特殊符号
+     */
+    boolean ifIncludeSymbol(String message);
 }
