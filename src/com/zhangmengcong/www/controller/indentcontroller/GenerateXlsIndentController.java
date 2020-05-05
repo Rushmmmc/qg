@@ -2,7 +2,6 @@ package com.zhangmengcong.www.controller.indentcontroller;
 
 import com.zhangmengcong.www.util.Factory;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-import static com.zhangmengcong.www.constant.PageConstant.MANAGE_INDENT;
 
 /**
  * @author:zmc
@@ -47,8 +45,6 @@ public class GenerateXlsIndentController extends HttpServlet {
         FileInputStream fis = new FileInputStream(path+fileName);
         //创建字节输出流
         ServletOutputStream sos = response.getOutputStream();
-        File file1 = new File(path);
-        boolean ifSuccess = file1.delete();
         //告知客户端要下载文件
         response.setHeader("content-disposition","attachment;filename="+fileName);
         response.setHeader("content-type","application/vnd.ms-excel");

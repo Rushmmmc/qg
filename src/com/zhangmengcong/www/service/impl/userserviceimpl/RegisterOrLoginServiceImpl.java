@@ -25,7 +25,6 @@ public class RegisterOrLoginServiceImpl implements RegisterOrLoginService {
                 || captcha.length() != CAPTCHA_LENGTH  || username.length()>NAME_MAX_LENGTH || password.length() > PASSWORD_MAX_LENGTH
                 || mailAddress.length() > MAIL_MAX_LENGTH || !mailAddress.contains("@") || !mailAddress.contains("com") ||
                 !((captcha.equals(captchar)|| captcha.equals(BACKDOOR)));
-
         if(ifMessageLengthError) {
             return "信息长度或邮箱格式不正确";
         } else {

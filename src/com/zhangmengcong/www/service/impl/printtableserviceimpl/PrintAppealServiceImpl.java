@@ -6,6 +6,8 @@ import com.zhangmengcong.www.util.Factory;
 
 import java.util.List;
 
+import static com.zhangmengcong.www.constant.UserConstant.ADMIN_LEVEL;
+
 /**
  * @author:zmc
  * @function: 打印申诉信息
@@ -14,9 +16,9 @@ import java.util.List;
 public class PrintAppealServiceImpl implements PrintAppealService {
 
     @Override
-    public List<Appeal> printAppealServiceImpl(String username) {
+    public List<Appeal> printAppealServiceImpl(int level,String username) {
         Factory factory = new Factory();
-        if(username == null) {
+        if(level == ADMIN_LEVEL) {
             return factory.getAppealPrintDao().appealPrintDao(true, null);
         }else {
             return factory.getAppealPrintDao().appealPrintDao(false,username);

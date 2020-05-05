@@ -108,14 +108,18 @@
     <h4 align="center"> <font color="#dc143c" >  您还未登录,请先登录 </font></h4>
 
 
-    <c:if test="${not empty sessionScope.cookiemessage}">
+    <c:if test="${not empty requestScope.cookiemessage}">
         <Script Language="JavaScript">
-            alert("${sessionScope.cookiemessage}");
-            <%session.setMaxInactiveInterval(0);%>
+            alert("${requestScope.cookiemessage}");
         </Script>
     </c:if>
 
-    <span id="message"></span>
+<c:if test="${not empty requestScope.message}">
+    <Script Language="JavaScript">
+        alert("${requestScope.message}");
+    </Script>
+</c:if>
+
 
 </body>
 </html>

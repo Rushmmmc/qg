@@ -21,7 +21,15 @@ public class ManageAppealServiceImpl implements ManageAppealService {
     @Override
     public String manageAppealService(String type,int id) {
         Factory factory = new Factory();
-        String message = "";
+        //判空 判断格式
+        boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(id));
+        boolean ifTypeFormatWrong = factory.getFormatService().formatService(type);
+
+        if(ifIdFormatWrong || ifTypeFormatWrong){
+            return "信息格式不正确!┭┮﹏┭┮";
+        }
+
+        String message = "信息格式不正确!┭┮﹏┭┮";
         String username = factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(id));
         //处理投诉商家
         if(COMPLAINT_SELLER.equals(type)){

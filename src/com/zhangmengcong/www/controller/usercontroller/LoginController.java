@@ -61,7 +61,7 @@ public class LoginController extends HttpServlet {
             String way = request.getParameter("way");
             if (COOKIE.equals(way)) {
                 if (!ifCookieExist) {
-                    session.setAttribute("cookiemessage",HAVENOT_COOKIE);
+                    request.setAttribute("cookiemessage",HAVENOT_COOKIE);
                 }
             }
             //如果用户不使用cookie并想登录其他账号

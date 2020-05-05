@@ -11,7 +11,7 @@ import java.io.IOException;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 用户忘记密码
  * @date: 2020/5/1 14:00
  */
 @WebServlet("/ForgetPasswordController")

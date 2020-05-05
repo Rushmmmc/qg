@@ -12,7 +12,7 @@ import static com.zhangmengcong.www.constant.GoodsConstant.IF_DELETE;
  */
 public class DeleteOrPassGoodsServiceImpl implements DeleteOrPassGoodsService {
    @Override
-   public void deletGoodsService(int id){
+   public void deleteGoodsService(int id){
        Factory factory = new Factory();
         factory.getDeleteOrChangeDao().deleteOrChange("goods",IF_DELETE,id,null,null,false,null);
    }
@@ -26,7 +26,7 @@ public class DeleteOrPassGoodsServiceImpl implements DeleteOrPassGoodsService {
     @Override
     public void deleteOrPassGoodsService(int id, int ifDelete){
        if(ifDelete == IF_DELETE){
-           deletGoodsService(id);
+           deleteGoodsService(id);
        }else {
            passGoodsService(id);
        }

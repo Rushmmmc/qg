@@ -13,7 +13,7 @@ import java.io.IOException;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 用户提交申诉
  * @date: 2020/5/3 22:57
  */
 @WebServlet("/UserCommitAppealController")
@@ -25,6 +25,7 @@ public class UserCommitAppealController extends HttpServlet {
         Appeal appeal = new Appeal();
 
         HttpSession session = request.getSession();
+        //获取申诉信息
         appeal.setUsername((String)session.getAttribute("username"));
         appeal.setIdentId(Integer.parseInt(request.getParameter("indentId")));
         appeal.setType(request.getParameter("type"));

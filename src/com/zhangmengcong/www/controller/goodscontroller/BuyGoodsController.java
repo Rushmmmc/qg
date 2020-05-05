@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static com.zhangmengcong.www.constant.GoodsConstant.*;
 import static com.zhangmengcong.www.constant.IndentConstant.DONOT_NEED_SO_MUCH_INTEGRAL;
 import static com.zhangmengcong.www.constant.IndentConstant.INTEGRAL_NOT_ENOUGN;
 
@@ -29,6 +28,7 @@ public class BuyGoodsController extends HttpServlet {
         Factory factory = new Factory();
         Indent indent = new Indent();
         HttpSession session = request.getSession();
+        //从session获取用户名及要购买商品的信息
         String username = (String) session.getAttribute("username");
         Goods goods = (Goods)session.getAttribute("goods");
         goods.setAmount(Integer.parseInt(request.getParameter("tempAmount")));
@@ -44,7 +44,7 @@ public class BuyGoodsController extends HttpServlet {
         else if(factory.getIntegralService().useIntegralService(integral,username)){
             ifSuccess = true;
             indent.setAmount(Integer.parseInt(request.getParameter("tempAmount")));
-            //单价
+            //设置订单信息
             indent.setGoodsType(goods.getType());
             indent.setUseIntegral(integral);
             indent.setBuyer(username);
@@ -52,7 +52,7 @@ public class BuyGoodsController extends HttpServlet {
             indent.setGoodsName(goods.getGoodsName());
             indent.setSeller(goods.getSeller());
 
-            //验证数据并返回信息
+            //验证数据格式并返回提示信息
             String message = factory.getBuyGoodsService().buyGoodsService(indent,0);
             request.setAttribute("message", message);
         }else {

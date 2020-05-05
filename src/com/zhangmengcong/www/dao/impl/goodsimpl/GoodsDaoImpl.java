@@ -2,13 +2,11 @@ package com.zhangmengcong.www.dao.impl.goodsimpl;
 
 import com.zhangmengcong.www.dao.dao.goodsdao.GoodsDao;
 import com.zhangmengcong.www.po.Goods;
-import com.zhangmengcong.www.po.Indent;
 import com.zhangmengcong.www.util.JdbcUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import static com.zhangmengcong.www.constant.GoodsConstant.IF_DELETE;
 
 /**
  * @author:zmc

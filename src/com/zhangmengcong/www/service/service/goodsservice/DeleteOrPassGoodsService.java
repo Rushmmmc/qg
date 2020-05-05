@@ -11,7 +11,7 @@ public interface DeleteOrPassGoodsService {
      *
      * @param id 商品id
      */
-    void deletGoodsService(int id);
+    void deleteGoodsService(int id);
 
     /** 管理员审核商品
      *

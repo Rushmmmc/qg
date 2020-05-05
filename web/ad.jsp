@@ -45,15 +45,14 @@
         <img src="./img/1.jpg">
 
         <p class="review"><%=goods.getImformation()%> </p>
-        <div class="appraise">来自用户<%=goods.getSeller()%>的二手商品
+        <div class="appraise">来自用户<font color="#ff1493"><%=goods.getSeller()%></font>的二手商品
             信誉分:<font color="red"><%=goods.getSellerReputation()%></font></div>
         <div class="info">
-            <h4><%=goods.getGoodsName()%></h4>
+            <h4><font color="green"><%=goods.getGoodsName()%></font></h4>
             <span><%=goods.getPrice()%>元</span>
-            <a align="center" href="/ChangePageController?method=setAmount&tempGoodsName=<%=goods.getGoodsName()%>
-            &tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>&goodsType=<%=goods.getType()%>">购买</a>
+            <a align="center" href="/ChangePageController?method=setAmount&id=<%=goods.getId()%>">购买</a>
             <a>&nbsp&nbsp&nbsp</a>
-            <a href="/AddGoodsToShoppingCarController?tempGoodsName=<%=goods.getGoodsName()%>&tempPrice=<%=goods.getPrice()%>&tempSeller=<%=goods.getSeller()%>&goodsType=<%=goods.getType()%>">加入购物车</a>
+            <a href="/AddGoodsToShoppingCarController?&id=<%=goods.getId()%>">加入购物车</a>
         </div>
         <div style="margin-top:50px ">
             <p> </p>

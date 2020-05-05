@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static com.zhangmengcong.www.constant.IndentConstant.SELLER_DELETE_MESSAGE;
-import static com.zhangmengcong.www.constant.IndentConstant.SELLER_SEND_MESSAGE;
 import static com.zhangmengcong.www.constant.PageConstant.*;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 用户或商家删除留言板的信息
  * @date: 2020/5/2 17:43
  */
 @WebServlet("/DeleteMessageController")

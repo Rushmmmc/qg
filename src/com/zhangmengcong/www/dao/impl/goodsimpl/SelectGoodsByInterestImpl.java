@@ -29,6 +29,7 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
         try {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnetction();
+            //根据用户上一次的购买记录进行推荐
             String sql = "select price,goodsType from indent where buyer = ? order by id desc";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,username);
@@ -37,22 +38,18 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
                 price = rs.getInt(1);
                 type = rs.getString(2);
             }
+            //如果用户没有购买记录
             if(price == 0 || type == null){
-                price = 1;
-                type = "家用";
-            }
-            String sql2 = "SELECT * FROM goods WHERE price >= ? AND price <= ? AND TYPE = ? LIMIT 1,3 ";
-            pstmt = conn.prepareStatement(sql2);
-            pstmt.setInt(1,price);
-            pstmt.setInt(2,4*price);
-            pstmt.setString(3,type);
-            rs = pstmt.executeQuery();
-            emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
-
-            //如果实在啥都没有
-            if(emps.isEmpty()){
-                String sql3 = "SELECT * FROM goods LIMIT 1,3 ";
+                String sql2 = "SELECT * FROM goods LIMIT 1,3 ";
+                pstmt = conn.prepareStatement(sql2);
+                rs = pstmt.executeQuery();
+                emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
+            }else {
+                String sql3 = "SELECT * FROM goods WHERE price >= ? AND price <= ? AND TYPE = ? LIMIT 1,3 ";
                 pstmt = conn.prepareStatement(sql3);
+                pstmt.setInt(1,price);
+                pstmt.setInt(2,4*price);
+                pstmt.setString(3,type);
                 rs = pstmt.executeQuery();
                 emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
             }

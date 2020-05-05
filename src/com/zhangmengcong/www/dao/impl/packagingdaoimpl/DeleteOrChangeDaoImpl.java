@@ -11,7 +11,7 @@ import static com.zhangmengcong.www.constant.GoodsConstant.IF_DELETE;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 根据id 进行封装删除或修改方法
  * @date: 2020/5/2 10:58
  */
 public class DeleteOrChangeDaoImpl implements DeleteOrChangeDao {

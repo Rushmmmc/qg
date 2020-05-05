@@ -27,15 +27,11 @@ public class AddGoodsToShoppingCarController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         int id = Integer.parseInt(request.getParameter("id"));
-        Goods goods = factory.getGetPriceAndGoodsNameService().getPriceAndGoodsNameService(id);
-        Indent indent = new Indent();
 
-        indent.setAmount(1);
+        Indent indent = new Indent();
         indent.setBuyer((String)session.getAttribute("username"));
-        indent.setGoodsName(goods.getGoodsName());
-        indent.setSeller(goods.getSeller());
-        indent.setPrice(goods.getPrice());
-        indent.setGoodsType(goods.getType());
+        //将商品id暂存入订单id
+        indent.setId(id);
 
         //验证信息并返回提示
         String message = factory.getBuyGoodsService().buyGoodsService(indent,IF_SHOPPINGCAR);

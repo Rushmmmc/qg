@@ -16,7 +16,6 @@ public class GenerateAppealDaoImpl implements GenerateAppealDao {
 
     @Override
     public void generateAppealDao(Appeal appeal) {
-        int count = 0;
         String sql;
         Connection conn = null;
         PreparedStatement ptst = null;
@@ -32,7 +31,7 @@ public class GenerateAppealDaoImpl implements GenerateAppealDao {
             ptst.setString(3, appeal.getSeller());
             ptst.setString(4,appeal.getUsername());
             ptst.setString(5,appeal.getReason());
-            count = ptst.executeUpdate();
+            ptst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

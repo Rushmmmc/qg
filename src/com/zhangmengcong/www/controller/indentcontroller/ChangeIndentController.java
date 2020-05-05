@@ -17,7 +17,7 @@ import static com.zhangmengcong.www.constant.PageConstant.*;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 商家改变订单信息 用户清除购物车 选择完成订单/取消订单/修改订单的服务
  * @date: 2020/5/2 13:30
  */
 @WebServlet("/ChangeIndentController")
@@ -34,6 +34,7 @@ public class ChangeIndentController extends HttpServlet {
         Indent indent = new Indent();
         //要改订单才获取 防止NPE
         if(CHANGE_INDENT.equals(method)) {
+            //
             indent.setId(id);
             indent.setAmount(Integer.parseInt(request.getParameter("amount")));
             indent.setPrice(Integer.parseInt(request.getParameter("price")));

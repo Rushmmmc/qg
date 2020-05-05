@@ -222,7 +222,6 @@ public class UserDaoImpl implements UserDao {
     public void addExpAndIntegral(String username){
         Connection conn = null;
         PreparedStatement ptst = null;
-        ResultSet rs;
         try {
             //数据库的常规操作
             conn = JdbcUtil.getConnetction();

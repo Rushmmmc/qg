@@ -72,7 +72,7 @@ public class ChangePageController extends HttpServlet {
         //前往买家管理订单页面
         if(MANAGE_BUYER_PERSONAL_INDENT.equals(method)){
             //选择打印买家订单功能
-            request.setAttribute("emps",factory.getPrintIndentService().printIndentService(username,IF_BUYER,0));
+            request.setAttribute("emps",factory.getPrintIndentService().printIndentService(username,BUYER_FUNCTION,0));
             try {
                 request.getRequestDispatcher("/manageBuyerPersonalIndent.jsp").forward(request,response);
             } catch (ServletException e) {

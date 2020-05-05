@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 打印商品信息
  * @date: 2020/4/30 18:01
  */
 public class GoodsPrintDaoImpl implements GoodsPrintDao {

@@ -12,7 +12,7 @@ import static com.zhangmengcong.www.constant.UserConstant.*;
 
 /**
  * @author:zmc
- * @function: 用于页面跳转
+ * @function: 用于用户修改信息
  * @date 2020/4/29 20:31
  */
 @WebServlet("/ChangeMessageController")

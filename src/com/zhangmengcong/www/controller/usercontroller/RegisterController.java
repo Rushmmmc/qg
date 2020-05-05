@@ -25,7 +25,7 @@ public class RegisterController extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         //设置编码防止乱码
-        //获取区域 从前端获取各种信息 method的存在使得一个Servlet可以做很多事
+        //获取区域 从前端获取各种信息
         String mailAddress = request.getParameter("mailaddress");
         String password = request.getParameter("password");
         String username = request.getParameter("username");
@@ -42,7 +42,7 @@ public class RegisterController extends HttpServlet {
         String message = factory.getRegisterAndLogin().register(username,password,mailAddress,captchar,captcha);
             request.setAttribute("message",message);
                 try {
-                    //注册成功
+                    //注册成功跳转至登录页面
                     if(message.contains(REGISTER_SUCCESS)){
                         request.getRequestDispatcher("/login.jsp").forward(request,response);
                     }else {

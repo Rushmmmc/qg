@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.zhangmengcong.www.constant.PageConstant.MANAGE_SYSTEM;
+
 /**
  * @author:zmc
  * @function: 管理员禁止用户出售二手商品
@@ -20,15 +22,17 @@ public class AdminBanUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         request.setCharacterEncoding("UTF-8");
         Factory factory = new Factory();
+
         //检测是封禁还是解封
         int ifBan = Integer.parseInt(request.getParameter("operate"));
         String banUsername = request.getParameter("username");
         String banReason = request.getParameter("reason");
+
+        //检验数据格式 返回提示信息
         String message = factory.getAdminBanOrUnbanUserService().adminBanOrUnbanUserService(ifBan,banUsername,banReason);
         try {
-            request.setAttribute("goodsList",factory.getGoodsPrintService().goodsPrintService());
             request.setAttribute("message",message);
-            request.getRequestDispatcher("/manageGoods.jsp").forward(request,response);
+            request.getRequestDispatcher("/ChangePageController?method="+MANAGE_SYSTEM).forward(request,response);
         } catch (ServletException e) {
             e.printStackTrace();
         }

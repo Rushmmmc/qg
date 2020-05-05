@@ -6,7 +6,7 @@ import com.zhangmengcong.www.util.Factory;
 
 import java.util.List;
 
-import static com.zhangmengcong.www.constant.IndentConstant.IF_SHOPPING_CAR;
+import static com.zhangmengcong.www.constant.IndentConstant.SHOPPING_CAR_FUNCTION;
 
 /**
  * @author:zmc
@@ -18,7 +18,7 @@ public class PrintIndentServiceImpl implements PrintIndentService {
     public List<Indent> printIndentService(String username,int ifSeller,int ifShoppingCar) {
         Factory factory = new Factory();
         boolean tempIfShoppingCar = false;
-        if(ifShoppingCar == IF_SHOPPING_CAR){
+        if(ifShoppingCar == SHOPPING_CAR_FUNCTION){
             tempIfShoppingCar = true;
         }
         return factory.getIndentPrintDao().selectPersonalIndent(username,ifSeller,tempIfShoppingCar);

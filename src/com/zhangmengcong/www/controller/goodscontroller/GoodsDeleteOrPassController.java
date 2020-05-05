@@ -18,6 +18,7 @@ import java.io.IOException;
 public class GoodsDeleteOrPassController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //检测管理员希望审核还是删除商品
         int ifDelete = Integer.parseInt(request.getParameter("ifDelete"));
         int id = Integer.parseInt(request.getParameter("id"));
         Factory factory = new Factory();

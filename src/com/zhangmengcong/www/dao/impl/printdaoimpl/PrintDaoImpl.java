@@ -19,7 +19,7 @@ import static com.zhangmengcong.www.constant.GoodsConstant.POSITIVE_SEQUENCE;
 
 /**
  * @author:zmc
- * @function: 打印各种表格到页面上
+ * @function: 打印各种表格到页面上 进行分页操作
  * @date: 2020/4/29 13:48
  */
 public class PrintDaoImpl implements PrintDao {

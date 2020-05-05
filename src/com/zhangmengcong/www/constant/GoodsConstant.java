@@ -13,7 +13,6 @@ public class GoodsConstant {
     public static final int IF_DELETE = 1;
     public static final String BUY_GOODS_SUCCESS = "商家正在火速处理您的订单( •̀ ω •́ )y";
     public static final int IF_SHOPPINGCAR = 1;
-    public static final String SHOPPING_CAR_MESSAGE = "商品已添加进购物车！( •̀ ω •́ )y";
     public static final String GOOD_REPUTATION = "goodReputation";
     public static final String BAD_REPUTATION = "badReputation";
     public static final String GOOD_REPUTATION_MESSAGE = "您的好评让商家和QG闲鱼非常惊喜╰(*°▽°*)╯";

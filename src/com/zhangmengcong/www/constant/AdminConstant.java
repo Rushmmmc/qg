@@ -2,7 +2,7 @@ package com.zhangmengcong.www.constant;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 关于管理员的常量
  * @date: 2020/5/1 18:17
  */
 public class AdminConstant {

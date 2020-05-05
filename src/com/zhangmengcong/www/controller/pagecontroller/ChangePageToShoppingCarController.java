@@ -2,6 +2,7 @@ package com.zhangmengcong.www.controller.pagecontroller;
 
 import com.zhangmengcong.www.util.Factory;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static com.zhangmengcong.www.constant.IndentConstant.IF_SHOPPING_CAR;
-import static com.zhangmengcong.www.constant.PageConstant.IF_BUYER;
-
+import static com.zhangmengcong.www.constant.IndentConstant.*;
+import static com.zhangmengcong.www.constant.PageConstant.BUYER_FUNCTION;
 /**
  * @author:zmc
  * @function:
@@ -26,7 +26,7 @@ public class ChangePageToShoppingCarController extends HttpServlet {
         String username = (String)session.getAttribute("username");
         Factory factory = new Factory();
         //选择打印买家订单功能
-        request.setAttribute("emps",factory.getPrintIndentService().printIndentService(username,IF_BUYER,IF_SHOPPING_CAR));
+        request.setAttribute("emps",factory.getPrintIndentService().printIndentService(username,BUYER_FUNCTION,SHOPPING_CAR_FUNCTION));
         try {
             request.getRequestDispatcher("/shoppingCar.jsp").forward(request,response);
         } catch (ServletException e) {

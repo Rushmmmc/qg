@@ -29,12 +29,15 @@ public class ChangePageToHelpUser extends HttpServlet {
         HttpSession session = request.getSession();
         int level = (int)session.getAttribute("level");
         String username = (String) session.getAttribute("username");
+
+        //根据用户等级打印申诉信息
+        request.setAttribute("appealList",factory.getPrintAppealService().printAppealServiceImpl(level,username));
         try {
+            //为管理员 去往管理员处理审核页面
             if(level == ADMIN_LEVEL) {
-                request.setAttribute("appealList",factory.getPrintAppealService().printAppealServiceImpl(null));
                 request.getRequestDispatcher("helpUser.jsp").forward(request, response);
             }else {
-                request.setAttribute("appealList",factory.getPrintAppealService().printAppealServiceImpl(username));
+                //为用户 去往用户个人申诉页面
                 request.getRequestDispatcher("/helpMe.jsp").forward(request,response);
             }
         } catch (ServletException e) {

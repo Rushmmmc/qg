@@ -1,6 +1,6 @@
 package com.zhangmengcong.www.controller.appealcontroller;
 
-import com.zhangmengcong.www.controller.pagecontroller.ChangePageToHelpUser;
+
 import com.zhangmengcong.www.util.Factory;
 
 import javax.servlet.ServletException;
@@ -21,9 +21,11 @@ public class AdminManageAppealController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
+
         String type = request.getParameter("type");
         int id = Integer.parseInt(request.getParameter("id"));
-        //处理申诉并返回信息
+
+        //处理申诉 判断数据格式 并返回提示信息
         String message = factory.getManageAppealService().manageAppealService(type,id);
         request.setAttribute("message",message);
         try {

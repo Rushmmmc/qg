@@ -1,7 +1,7 @@
 <%@ page import="com.zhangmengcong.www.po.Goods" %>
 <%@ page import="com.zhangmengcong.www.po.PageBean" %>
 <%@ page import="com.zhangmengcong.www.po.DividePage" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core_1_1" %>--%>
 <%--
   Created by IntelliJ IDEA.
   User: Rush
@@ -9,51 +9,64 @@
   Time: 11:54
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="./beautiful.css">
 
-<html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
 <head>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <title>QG闲鱼</title>
 </head>
-<body>
 
-<a href="/login.jsp">返回登录页面</a>
 
+
+
+<body >
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/login.jsp">登录</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/Register.jsp">注册</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>
 <form action="/Quit" method="post" align="center"  >
-    <input type="submit" name="" value="Quit" >
+    <h1 align="center"><font color="aqua">在QG闲鱼尽情享受高质量购物的快乐吧</font></h1>
+
 </form>
 
-<h1 align="center"><font color="aqua">在QG闲鱼尽情享受高质量购物的快乐吧</font></h1>
+
+
+
+
+<br>
+
 <form class="form-inline" align="center" action="/DividePageController" method="post">
     <div class="form-group">
         <label>商品名:</label>
-        <input type="text" value="${requestScope.dp.goods.goodsName}" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" class="form-control" name="goodsName">
+        <input type="text" value="${requestScope.dp.goods.goodsName}" class="form-control" name="goodsName">
     </div>
     <div class="form-group">
         <label>商品类型:</label>
-        <input type="text" value="${requestScope.dp.goods.type}" pattern="^[\u4e00-\u9fa5]+$" class="form-control" name="type">
+        <input type="text" value="${requestScope.dp.goods.type}" class="form-control" name="type">
     </div>
     <div class="form-group">
         <label>商品卖家:</label>
-        <input type="text" value="${requestScope.dp.goods.seller}" pattern="[\w]{4,10}" class="form-control" name="seller">
+        <input type="text" value="${requestScope.dp.goods.seller}" class="form-control" name="seller">
     </div>
     <br>
     <div class="form-group">
         <label>价格最小值:</label>
-        <input type="text" value="${requestScope.dp.minPrice}" class="form-control" pattern="^\d{1,8}$" name="rangemin">
+        <input type="text" value="${requestScope.dp.minPrice}" class="form-control" name="rangemin">
     </div>
 
     <div class="form-group">
         <label>价格最大值:</label>
-        <input type="text" value="${requestScope.dp.maxPrice}" class="form-control"  pattern="^\d{1,8}$"name="rangemax">
+        <input type="text" value="${requestScope.dp.maxPrice}" class="form-control" name="rangemax">
     </div>
     <br>
     <strong>价格排序系统:</strong>
-    <select name="rank">
+    <select name="rank" >
         <option value="#">不使用排序</option>
         <option value="positiveSequence">价格正序</option>
         <option value="invertedSequence">价格逆序</option>
@@ -64,55 +77,41 @@
 
 </form>
 
+<%
+    DividePage dp = (DividePage)request.getAttribute("dp");
+    PageBean<Goods> pb =  dp.getPb();
+    for(Goods goods :pb.getList()){
+%>
+<div>
 
 
+    <div style="float: left;margin-left: 70px;margin-bottom: 50px;margin-top: 30px;" class="box">
+        <img src="./img/1.jpg">
 
-<table border="1px" width="70%" align="center" cellspacing="0px">
-    <tr>
-        <th>Id</th>
-        <th>商品名</th>
-        <th>商品类型</th>
-        <th>卖家</th>
-        <th>商品信息</th>
-        <th>价格</th>
-        <th>剩余存货</th>
-        <th>本日销量</th>
-        <th>卖家信誉</th>
-        <th>购买</th>
-        <th>加入购物车</th>
-    </tr>
-    <!--通过循环 显示信息-->
+        <p class="review"><%=goods.getImformation()%> </p>
+        <div class="appraise">来自用户<%=goods.getSeller()%>的二手商品
+            信誉分:<font color="red"><%=goods.getSellerReputation()%></font></div>
+        <div class="info">
+            <h4><%=goods.getGoodsName()%></h4>
+            <span><%=goods.getPrice()%>元</span>
+        </div>
 
+        <div style="margin-top:50px ">
+            <p><font color="red">亲爱的游客~~~~(>_<)~~~~请先登录</font> </p>
+        </div>
 
+    </div>
 
-    <%
-        DividePage dp = (DividePage)request.getAttribute("dp");
-        PageBean<Goods> pb =  dp.getPb();
-        for(Goods goods :pb.getList()){
-    %>
-    <tr>
-        <td><%=goods.getId()%></td>
-        <td><%=goods.getGoodsName()%></td>
-        <td><%=goods.getType()%></td>
-        <td><%=goods.getSeller()%></td>
-        <td><%=goods.getImformation()%></td>
-        <td><%=goods.getPrice()%></td>
-        <td><%=goods.getAmount()%></td>
-        <td><%=goods.getBoughtAmount()%></td>
-        <td><%=goods.getSellerReputation()%></td>
-        <td><a href="/ChangePage?method=ReadNote&id=<%=goods.getId()%>">买买买！</a></td>
-        <td><a href="/ChangePage?method=ReadNote&id=<%=goods.getId()%>">加入购物车</a></td>
-    <tr>
-            <%
+</div>
+<%
     }
 %>
 
 
 
-</table>
 
 <% int i = 1;%>
-<form align="center">
+<form align="center" style="margin-top:650px; margin-right: auto ">
     <nav  aria-label="Page navigation" >
         <ul class="pagination">
             <li>
@@ -157,8 +156,8 @@
 
 
 
+<%--</table>--%>
 
-</table>
 
 
 <c:if test="${not empty requestScope.message}">

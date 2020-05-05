@@ -28,8 +28,10 @@ public class AdminChangeLevelController extends HttpServlet {
         String username = (String)session.getAttribute("username");
 
         session.setAttribute("sendLevel", factory.getEstimateStatus().estimateStatus(level));
+        //检验数据格式 判空 长度 返回提示信息
         String message = factory.getBecomeAdminService().becomeAdminServiceImpl(level,username);
         request.setAttribute("message",message);
+
         //若用户填写的等级正确才能改
         if(!message.contains(CHANGE_LEVEL_FAIL)){
             session.setAttribute("level",level);

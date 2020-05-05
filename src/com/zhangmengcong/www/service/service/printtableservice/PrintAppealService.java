@@ -11,8 +11,9 @@ import java.util.List;
  */
 public interface PrintAppealService {
     /** 打印申诉信息
+     * @param level  根据用户等级打印 若为管理员则管理全部信息
      * @param username 筛选出该用户的申诉信息 为null则为管理员打印全部
      * @return 返回list
      */
-    List<Appeal> printAppealServiceImpl(String username);
+    List<Appeal> printAppealServiceImpl(int level,String username);
 }

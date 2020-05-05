@@ -14,7 +14,7 @@ import static com.zhangmengcong.www.constant.IndentConstant.IF_SELLER;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 打印订单信息
  * @date: 2020/5/1 20:12
  */
 public class IndentPrintDaoImpl implements IndentPrintDao {
