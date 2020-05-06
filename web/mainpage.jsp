@@ -81,13 +81,15 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=commit">卖家管理中心</a>
+<a href="/ChangePageController?method=commit">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageBuyerPersonalIndent">个人订单</a>
+<a href="/ChangePageController?method=commit">管理卖出订单</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageToShoppingCarController">查看购物车</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">前往申诉中心</a>
+<a href="/ChangePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/Quit">注销</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
