@@ -46,8 +46,8 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
         if(!ifAmountWrong && !ifIntegralWrong){
             indent.setTotalPrice(indent.getPrice()*indent.getAmount());
             indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());
+            indent.setStatus("商家未接单");
             factory.getIndentDao().buyGoods(indent);
-                indent.setStatus("商家未接单");
                 return "商家正在火速处理您的订单( •̀ ω •́ )y";
 
         }

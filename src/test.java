@@ -14,7 +14,8 @@ public class test {
     public static Pattern IF_HAHAHA = Pattern.compile("[\\u4E00-\\u9FA5+a-zA-Z0-9_-]{4,50}$");
     public static void main(String[] args) {
         Factory factory = new Factory();
-        String phone = "6";
-        System.out.println(factory.getFormatService().formatService(phone));
+        String phone = "abc@qq.com";
+
+       System.out.println(factory.getFormatService().mailFormatService(phone));
     }
 }

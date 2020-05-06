@@ -14,6 +14,46 @@
 <html>
 <head>
     <title>查看留言</title>
+
+
+
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        function fun(event,id) {
+
+
+            var log_id = /^\d{1,8}$/;
+
+            var flag_i = log_imformation.test(id);
+
+            if(!flag_i){
+                alert("id仅支持整数┭┮﹏┭┮");
+                return;
+            }
+            if (flag_i && flag_a && flag_p && flag_g && flag_t) {
+                $.ajax({
+                    url: "/DeleteMessageController?method=sellerDeleteMessage",
+                    type: "POST",
+                    dataType: 'html',
+                    data: "ifSeller=1",
+                    success: function (result) {
+                        alert(result);
+                        location.href = "/ChangePageController?method=messageBoard&ifSeller=1";
+                    },
+                    error: function (msg) {
+                        alert("出错啦")
+                    }
+                });
+            }
+        }
+    </script>
+
+
+
+
+
+
+
 </head>
 <body>
 
@@ -50,7 +90,7 @@
             <td><%=emps.get(i).getGoodsName()%></td>
             <td><%=emps.get(i).getBuyerMessage()%></td>
             <td><%=emps.get(i).getSellerMessage()%></td>
-            <td><a href="/DeleteMessageController?method=sellerDeleteMessage&id=<%=emps.get(i).getId()%>&ifSeller=1">清除留言</a></td>
+            <td><a onclick="fun(event,<%=emps.get(i).getId()%>)" href="#&">清除留言</a></td>
         <tr>
                 <%
         }
@@ -63,12 +103,7 @@
 
 </div>
 
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
 
-</c:if>
 
 
 

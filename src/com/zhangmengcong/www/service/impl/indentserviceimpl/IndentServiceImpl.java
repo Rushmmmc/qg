@@ -19,7 +19,7 @@ import static com.zhangmengcong.www.constant.PageConstant.SELL;
 public class IndentServiceImpl implements IndentService {
 
     @Override
-    public void indentSelectMethod(String method,int id,Indent indent,String message,String username) {
+    public String indentSelectMethod(String method,int id,Indent indent,String message,String username) {
         Factory factory = new Factory();
         //删除订单
         if(DELETE_INDENT.equals(method)){
@@ -28,13 +28,24 @@ public class IndentServiceImpl implements IndentService {
         //改变订单商品个数 金额等信息
         if(CHANGE_INDENT.equals(method)){
             boolean ifIdFormatError = factory.getFormatService().formatService(String.valueOf(indent.getId()));
-            boolean ifNameFormatError = factory.getFormatService().ifIncludeSymbol(indent.getGoodsName());
-            boolean ifPriceFormatError = factory.getFormatService().formatService(String.valueOf(indent.getPrice()));
-            boolean ifAmountFormatError = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
-            boolean ifFormatError = ifAmountFormatError || ifNameFormatError || ifPriceFormatError || ifIdFormatError;
-            if(ifFormatError) {
-                factory.getDeleteOrChangeDao().deleteOrChange(null, 0, 0, null, null, true, indent);
+            if(ifIdFormatError){
+                return "id格式错误┭┮﹏┭┮";
             }
+            boolean ifNameFormatError = factory.getFormatService().ifIncludeSymbol(indent.getGoodsName());
+            if(ifNameFormatError){
+                return "商品名不可包含特殊符号┭┮﹏┭┮";
+            }
+            boolean ifPriceFormatError = factory.getFormatService().formatService(String.valueOf(indent.getPrice()));
+            if(ifPriceFormatError){
+                return "价格仅支持整数";
+            }
+            boolean ifAmountFormatError = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
+            if(ifAmountFormatError){
+                return "商品仅支持整数";
+            }
+
+                factory.getDeleteOrChangeDao().deleteOrChange(null, 0, 0, null, null, true, indent);
+            System.out.println(indent);
             }
         //完成订单
         if(FINISH_INDENT.equals(method)){
@@ -95,5 +106,6 @@ public class IndentServiceImpl implements IndentService {
             factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint-1",null,null,"username","\""+sellerName+"\"");
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"差评","reputation",false,null);
         }
+    return "操作成功！";
     }
 }

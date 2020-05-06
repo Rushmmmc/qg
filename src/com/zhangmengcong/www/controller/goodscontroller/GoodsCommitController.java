@@ -23,8 +23,7 @@ public class GoodsCommitController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         request.setCharacterEncoding("UTF-8");
-        System.out.println(request.getParameter("reason"));
-        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         Factory factory = new Factory();
         Goods goods = new Goods();
         HttpSession session = request.getSession();
@@ -39,14 +38,9 @@ public class GoodsCommitController extends HttpServlet {
         goods.setImformation(request.getParameter("imformation"));
         goods.setPrice(Integer.parseInt(request.getParameter("price")));
         goods.setAmount(Integer.parseInt(request.getParameter("amount")));
-
-            //添加商品服务会返回是否成功对应的字符串信息 在service验证信息
-            request.setAttribute("message" ,factory.getAddGoodsService().addGoodsService(goods));
-        try {
-            request.getRequestDispatcher("/DividePageController").forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
+        //添加商品服务会返回是否成功对应的字符串信息 在service验证信息
+        String message = factory.getAddGoodsService().addGoodsService(goods);
+        response.getWriter().write(message);
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {

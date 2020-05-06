@@ -17,11 +17,10 @@ public class AddGoodsServiceImpl implements AddGoodsService {
     public String addGoodsService(Goods goods) {
         Factory factory = new Factory();
         boolean ifNameFormatError = factory.getFormatService().ifIncludeSymbol(goods.getGoodsName());
-        boolean ifTypeFormatError = factory.getFormatService().formatService(goods.getType());
+        boolean ifTypeFormatError = factory.getFormatService().ifIncludeSymbol(goods.getType());
         boolean ifPriceFormatError = factory.getFormatService().formatService(String.valueOf(goods.getPrice()));
         boolean ifAmountFormatError = factory.getFormatService().formatService(String.valueOf(goods.getAmount()));
         boolean ifMessageFormatError = factory.getFormatService().ifIncludeSymbol(goods.getImformation());
-
         boolean ifFormatError = ifAmountFormatError || ifNameFormatError || ifPriceFormatError || ifMessageFormatError || ifTypeFormatError;
         if (!ifFormatError) {
             if (factory.getGoodsDao().addGoods(goods)) {

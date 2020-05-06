@@ -22,6 +22,7 @@ public class UserCommitAppealController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         Appeal appeal = new Appeal();
 
         HttpSession session = request.getSession();
@@ -33,12 +34,7 @@ public class UserCommitAppealController extends HttpServlet {
 
         //调用方法生成申诉 验证信息格式 并返回提示信息
         String message = factory.getGenerateAppealService().generateAppealService(appeal);
-        request.setAttribute("message",message);
-        try {
-            request.getRequestDispatcher("/ChangePageToHelpUser").forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
+        response.getWriter().write(message);
     }
 
     @Override

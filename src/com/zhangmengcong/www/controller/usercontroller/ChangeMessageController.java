@@ -20,6 +20,7 @@ public class ChangeMessageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         Factory factory = new Factory();
         User user = new User();
         HttpSession session = request.getSession();
@@ -38,9 +39,7 @@ public class ChangeMessageController extends HttpServlet {
             Cookie cookie = new Cookie("username", newUsername);
             cookie.setMaxAge(60 * 60);
             response.addCookie(cookie);
-            request.setAttribute("message",message);
-            request.setAttribute("emps",factory.getPrintTableService().selectPersonalMessage(username));
-            request.getRequestDispatcher("/change.jsp").forward(request,response);
+            response.getWriter().write(message);
         //实现修改个人信息功能
 
     }

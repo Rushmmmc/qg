@@ -24,11 +24,13 @@ public class DeleteOrPassGoodsServiceImpl implements DeleteOrPassGoodsService {
     }
 
     @Override
-    public void deleteOrPassGoodsService(int id, int ifDelete){
+    public String deleteOrPassGoodsService(int id, int ifDelete){
        if(ifDelete == IF_DELETE){
            deleteGoodsService(id);
+           return "删除成功！";
        }else {
            passGoodsService(id);
+           return "商品已通过!";
        }
     }
 

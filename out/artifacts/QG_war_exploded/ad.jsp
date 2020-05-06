@@ -19,6 +19,66 @@
 <head>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <title>推送</title>
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+        <script>
+            function fun1(event,id) {
+                event.preventDefault();
+                var log_id = /^\d{1,8}$/;
+                var flag_i = log_id.test(id);
+                if (!flag_i) {
+                    alert("请注意id格式┭┮﹏┭┮");
+                    return;
+                }
+                if (flag_i) {
+                    $.ajax({
+                        url: "/AddGoodsToShoppingCarController",
+                        type: "POST",
+                        dataType: 'html',
+                        data: "id=" + id,
+                        success: function (result) {
+                            alert(result);
+                            location.href = "/SeleteGoodsByInterestController";
+                        },
+                        error: function (msg) {
+                            alert("出错啦")
+                        }
+                    });
+                }
+            }
+                function fun2(event, id) {
+                    event.preventDefault();
+                    var log_id = /^\d{1,8}$/;
+                    var flag_i = log_id.test(id);
+                    if (!flag_i) {
+                        alert("请注意id格式┭┮﹏┭┮");
+                        return;
+                    }
+                    $.ajax({
+                        url: "/ChangePageController",
+                        type: "POST",
+                        dataType: 'html',
+                        data: "id=" + id + "&method=setAmount",
+                        success: function (result) {
+                            location.href = "/setAmount.jsp";
+                        },
+                        error: function (msg) {
+                            alert("出错啦")
+                        }
+                    });
+            }
+        </script>
+
+
+
+
+
+
+
+
+
+
+
 </head>
 
 
@@ -50,9 +110,9 @@
         <div class="info">
             <h4><font color="green"><%=goods.getGoodsName()%></font></h4>
             <span><%=goods.getPrice()%>元</span>
-            <a align="center" href="/ChangePageController?method=setAmount&id=<%=goods.getId()%>">购买</a>
+            <a align="center" href="#" onclick="fun2(event,<%=goods.getId()%>)">购买</a>
             <a>&nbsp&nbsp&nbsp</a>
-            <a href="/AddGoodsToShoppingCarController?&id=<%=goods.getId()%>">加入购物车</a>
+            <a href="#" onclick="fun1(event,<%=goods.getId()%>)">加入购物车</a>
         </div>
         <div style="margin-top:50px ">
             <p> </p>
@@ -73,18 +133,6 @@
 
 
 
-
-
-<%--</table>--%>
-
-
-
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-
-</c:if>
 
 
 </body>

@@ -31,7 +31,7 @@ public class IndentPrintDaoImpl implements IndentPrintDao {
             conn = JdbcUtil.getConnetction();
             //如果选择打印卖家订单功能
             if(ifSeller == IF_SELLER) {
-                sql = "select * from indent where seller = ?";
+                sql = "select * from indent where seller = ? and status != \"购物车\" ";
             }else{
                 sql = "select * from indent where buyer = ? and status != \"购物车\" ";
                 if(ifShoppingCar){

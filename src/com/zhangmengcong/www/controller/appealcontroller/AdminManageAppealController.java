@@ -21,18 +21,13 @@ public class AdminManageAppealController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
-
+        response.setCharacterEncoding("UTF-8");
         String type = request.getParameter("type");
         int id = Integer.parseInt(request.getParameter("id"));
-
+        System.out.println(type+id);
         //处理申诉 判断数据格式 并返回提示信息
         String message = factory.getManageAppealService().manageAppealService(type,id);
-        request.setAttribute("message",message);
-        try {
-            request.getRequestDispatcher("/ChangePageToHelpUser").forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
+        response.getWriter().write(message);
     }
 
     @Override

@@ -25,6 +25,7 @@ public class AddGoodsToShoppingCarController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         int id = Integer.parseInt(request.getParameter("id"));
 
@@ -35,12 +36,7 @@ public class AddGoodsToShoppingCarController extends HttpServlet {
 
         //验证信息并返回提示
         String message = factory.getBuyGoodsService().buyGoodsService(indent,IF_SHOPPINGCAR);
-        request.setAttribute("message",message);
-        try {
-            request.getRequestDispatcher("/DividePageController").forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
+        response.getWriter().write(message);
     }
 
     @Override

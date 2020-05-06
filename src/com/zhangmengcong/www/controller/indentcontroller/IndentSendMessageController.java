@@ -24,26 +24,13 @@ public class IndentSendMessageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String method = request.getParameter("method");
         String message = request.getParameter("message");
         int id = Integer.parseInt(request.getParameter("id"));
         //传入method 自动分配方法
         factory.getIndentService().indentSelectMethod(method,id,null,message,null);
-        request.setAttribute("message",SEND_MESSAGE_SUCCESS);
-        try {
-            //卖商品则去往商家管理商品页面
-            if(SELLER_SEND_MESSAGE.equals(method)){
-                request.getRequestDispatcher("/ChangePageController?method="+MANAGE_INDENT).forward(
-                        request,response);
-            }
-            //否则去往用户管理个人订单页面
-            else {
-                request.getRequestDispatcher("/ChangePageController?method=" + MANAGE_BUYER_PERSONAL_INDENT).forward(
-                        request, response);
-            }
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
+        response.getWriter().write(SEND_MESSAGE_SUCCESS);
     }
 
     @Override

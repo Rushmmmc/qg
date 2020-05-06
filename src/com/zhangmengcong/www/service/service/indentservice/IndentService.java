@@ -14,7 +14,8 @@ public interface IndentService {
      * @param id 订单的id
      * @param indent 订单对象 修改完整订单时使用
      * @param message 商家用户互相留言时传入
+     * @return 返回提示信息
      */
-    void indentSelectMethod(String method,int id,Indent indent,String message,String username);
+    String indentSelectMethod(String method,int id,Indent indent,String message,String username);
 
 }

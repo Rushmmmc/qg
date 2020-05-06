@@ -13,7 +13,181 @@
 <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <html>
-<head>
+<script>
+
+    function fun2(event) {
+    event.preventDefault();
+    var id = document.getElementById("id2").value;
+    var message = document.getElementById("message").value;
+    var log_id = /^\d{1,8}$/;
+    var log_message = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+
+    var flag_i = log_id.test(id);
+    var flag_m = log_message.test(message);
+
+
+    if (!flag_m) {
+    alert("消息不可为空或包含特殊符号┭┮﹏┭┮");
+    return;
+    }
+
+
+    if (!flag_i) {
+    alert("请注意id格式┭┮﹏┭┮");
+    return;
+    }
+    if (flag_i && flag_m ) {
+    $.ajax({
+    url: "/IndentSendMessageController?method=buyerSendMessage",
+    type: "POST",
+    dataType: 'html',
+    data: "id=" + id+"&message="+message,
+    success: function (result) {
+    alert(result);
+    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+    },
+    error: function (msg) {
+    alert("出错啦")
+    }
+    });
+    }
+    }
+
+    function fun3(event,id) {
+        event.preventDefault();
+
+        var log_id = /^\d{1,8}$/;
+
+        var flag_i = log_id.test(id);
+
+
+
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+        if (flag_i  ) {
+            $.ajax({
+                url: "/ChangeIndentController?method=deleteIndent",
+                type: "POST",
+                dataType: 'html',
+                data: "id=" + id,
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
+
+
+    function fun4(event,id) {
+        event.preventDefault();
+
+        var log_id = /^\d{1,8}$/;
+
+        var flag_i = log_id.test(id);
+
+
+
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+        if (flag_i  ) {
+            $.ajax({
+                url: "ChangeIndentController?method=finishIndent",
+                type: "POST",
+                dataType: 'html',
+                data: "id=" + id,
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
+
+
+
+
+
+    function fun5(event,id) {
+        event.preventDefault();
+
+        var log_id = /^\d{1,8}$/;
+
+        var flag_i = log_id.test(id);
+
+
+
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+        if (flag_i  ) {
+            $.ajax({
+                url: "/GiveReputationController?method=goodReputation",
+                type: "POST",
+                dataType: 'html',
+                data: "id=" + id,
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
+    function fun6(event,id) {
+        event.preventDefault();
+
+        var log_id = /^\d{1,8}$/;
+
+        var flag_i = log_id.test(id);
+
+
+
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+        if (flag_i  ) {
+            $.ajax({
+                url: "/GiveReputationController?method=badReputation",
+                type: "POST",
+                dataType: 'html',
+                data: "id=" + id,
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
     <title>用户订单中心</title>
     <script>
 
@@ -31,16 +205,16 @@
 <a href="/DividePageController">返回主页面</a>
 
 
-<FORM align="center"  action="/IndentSendMessageController?method=buyerSendMessage" method="post" >
+<FORM align="center"   method="post" >
     <input type="button" value="给商家留言" class="check" />
     <br>
     <a class="text"  style="display:none;" >订单id:</a>
-    <input type="text"  class="text"  name="id" pattern="^\d{1,10}$" required style="display:none;" />
+    <input type="text"  class="text" id="id2"  name="id2" pattern="^\d{1,10}$" required style="display:none;" />
     <br>
     <a class="text" style="display:none;">内容:</a>
-    <input type="text" class="text"  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="message" required style="display:none;" />
+    <input type="text" class="text" id="message" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="message" required style="display:none;" />
     <br>
-    <input type="submit" value="提交"  class="text" style="display:none;">
+    <input type="submit" value="提交" onclick="fun2(event)" class="text" style="display:none;">
 </FORM>
 
 <div class="panel panel-default">
@@ -85,16 +259,16 @@
             <td><%=indent.getReputation()%></td>
             <td>
                 <c:if test='<%=!(indent.getStatus().contains("完成"))%>'>
-                    <a href="/ChangeIndentController?method=finishIndent&id=<%=indent.getId()%>">确认收货</a>
+                    <a onclick="fun4(event,<%=indent.getId()%>)" href="#">确认收货</a>
                     <a>/</a>
                 </c:if>
                 <c:if test='<%=(indent.getStatus().contains("完成")) && indent.getReputation().contains("暂无")%>'>
-                    <a href="/GiveReputationController?method=goodReputation&id=<%=indent.getId()%>">给好评</a>
-                    <a href="/GiveReputationController?method=badReputation&id=<%=indent.getId()%>">给差评</a>
+                    <a onclick="fun5(event,<%=indent.getId()%>)" href="#">给好评</a>
+                    <a onclick="fun6(event,<%=indent.getId()%>)" href="#">给差评</a>
                     <a>/</a>
                 </c:if>
 
-            <a href="/ChangeIndentController?method=deleteIndent&id=<%=indent.getId()%>">取消(删除)订单</a>
+            <a onclick="fun3(event,<%=indent.getId()%>)" href="#" >取消(删除)订单</a>
                 <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp</a>
                     <a href="/ChangePageController?method=messageBoard&ifSeller=0">商家给您留言啦,请打开留言板</a>
@@ -113,12 +287,6 @@
 
 </div>
 
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-
-</c:if>
 
 
 

@@ -1,17 +1,13 @@
 package com.zhangmengcong.www.controller.usercontroller;
 
-import com.zhangmengcong.www.controller.pagecontroller.ChangePageController;
+
 import com.zhangmengcong.www.util.Factory;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import static com.zhangmengcong.www.constant.GoodsConstant.*;
-import static com.zhangmengcong.www.constant.PageConstant.MANAGE_BUYER_PERSONAL_INDENT;
 
 /**
  * @author:zmc
@@ -24,19 +20,11 @@ public class GiveReputationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String method = request.getParameter("method");
         int id = Integer.parseInt(request.getParameter("id"));
         factory.getIndentService().indentSelectMethod(method,id,null,null,null);
-        try {
-            if(GOOD_REPUTATION.equals(method)){
-                request.setAttribute("message",GOOD_REPUTATION_MESSAGE);
-            }else {
-                request.setAttribute("message",BAD_REPUTATION_MESSAGE);
-            }
-            request.getRequestDispatcher("/ChangePageController?method="+MANAGE_BUYER_PERSONAL_INDENT).forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
+        response.getWriter().write("感谢您的评价O(∩_∩)O");
     }
 
     @Override

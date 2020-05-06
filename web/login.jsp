@@ -13,17 +13,95 @@
     <br>
 
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
-
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="jquery-3.5.0.min.js"></script>
     <script src="./bootstrap/js/bootstrap.js"></script>
 
 
 
-    <link type="text/css" rel="stylesheet" href="./style.css">
+<script>
+    window.onload = function () {
+        var link = document.getElementById('link');
+        var check = document.getElementById("check");
+        // 表单元素获取
+        var inputTexts = document.querySelectorAll("[type='text']");
+        link.onclick = function () {
+            //取消浏览器默认行为
+            event.preventDefault();
+            return false;
+        }
+    }
+</script>
 
+<script>
 
+    function fun(event) {
+        event.preventDefault();
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var captcha = $("#captcha").val();
+        var log_username = /^\w{4,10}$/;
+        var log_password = /^\w{6,10}$/;
+            var log_captcha = /^\w{4,4}$/;
+        var flag_u = log_username.test(username);
+        var flag_p = log_password.test(password);
+        var flag_c = log_captcha.test(captcha);
+        if(!flag_u){
+            alert("请正确填写用户名┭┮﹏┭┮");
+            return;
+        }
+        if(!flag_p){
+            alert("请正确填写密码┭┮﹏┭┮");
+            return;
+        }
+        if(!flag_c){
+            alert("请正确填写验证码┭┮﹏┭┮");
+            return;
+        }
+
+        if (flag_u && flag_p && flag_c) {
+            $.ajax({
+                url: "login",
+                type: "POST",
+                dataType: 'html',
+                data: "username=" + username + "&password=" + password + "&captcha=" + captcha + "&way=normal",
+                success: function (result) {
+                    if(result === "登录成功"){
+                        location.href ="/SeleteGoodsByInterestController";
+                    } else {
+                        alert(result);
+                    }
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
+
+    function fun2(event) {
+        event.preventDefault();
+            $.ajax({
+                url: "login",
+                type: "POST",
+                dataType: 'html',
+                data: "username=" + username + "&way=cookie",
+                success: function (result) {
+                    if(result === "登录成功"){
+                        location.href ="/SeleteGoodsByInterestController";
+                    } else {
+                        alert(result);
+                    }
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+
+</script>
 
 
 
@@ -60,27 +138,28 @@
 
 <div class="box">
     <h2>感谢使用QG闲鱼</h2>
-    <c:if test="${not empty requestScope.message}">
-        <Script Language="JavaScript">
-          $("#eerror").alert("abc")
-        </Script>
-    </c:if>
-    <form   action="/login?way=normal" method="post" align="center"  >
+
+    <form     align="center"  >
         <div class="inputBox">
-            <input type="text" name="username"  pattern="[\w]{4,10}" required>
+            <input type="text" name="username" id="username" pattern="[\w]{4,10}" required>
             <label>Username</label>
+            <span id="s_username" class="error"></span>
         </div>
         <div class="inputBox">
-            <input type="password" name="password"  pattern="[\w]{6,10}" required>
+            <input type="password" name="password" id="password" pattern="[\w]{6,10}" required>
             <label>Password</label>
+            <span id="s_password" class="error"></span>
                 <div class="inputBox">
-                    <input type="text" name="captcha" pattern="[\w]{4,4}" required>
+                    <input type="text" name="captcha" id="captcha" pattern="[\w]{4,4}" required>
                     <label>验证码</label>
                 </div>
+            <input type="submit" name="" value="submit" onclick="fun(event)" >
 
-                <input type="submit" name="" value="submit" onclick="fun4()" >
+        </div>
     </form>
-</div>
+
+
+
 
 <div id="inline-block">
     <form align="center" method="post" action="/Register.jsp">
@@ -99,7 +178,7 @@
     </div>
     <div id="error" ></div>
     <form  method="post" align="center">
-        <a   href="/login?way=cookie" ><font color="blue" >使用cookie登录</font></a>
+        <a   href="#" onclick="fun2(event)" ><font color="blue" >使用cookie登录</font></a>
         <a   href="/forget.jsp" ><font color="blue" >忘记密码?</font></a>
         <a   href="/login?way=normal&username=visitor&password=visitor&captcha=qqqq" ><font color="blue" >以游客登陆</font></a>
         </form>

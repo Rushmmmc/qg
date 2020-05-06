@@ -2,9 +2,7 @@ package com.zhangmengcong.www.controller.usercontroller;
 
 
 import com.zhangmengcong.www.util.Factory;
-import netscape.javascript.JSObject;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -24,7 +22,6 @@ public class LoginController extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
         //设置编码防止乱码
-
         //获取区域 从前端获取各种信息
         String password = request.getParameter("password");
         String username = request.getParameter("username");
@@ -56,14 +53,9 @@ public class LoginController extends HttpServlet {
             }
         }
         //获取cookie
-
         //实现登录功能
             String way = request.getParameter("way");
-            if (COOKIE.equals(way)) {
-                if (!ifCookieExist) {
-                    request.setAttribute("cookiemessage",HAVENOT_COOKIE);
-                }
-            }
+
             //如果用户不使用cookie并想登录其他账号
             if(NORMAL.equals(way) && !request.getParameter(USER_NAME).equals(username)){
                 ifCookieExist = false;
@@ -82,21 +74,22 @@ public class LoginController extends HttpServlet {
                 //登陆成功,在session储存用户名
                 session.setAttribute("level", level);
                 session.setAttribute("sendLevel", factory.getEstimateStatus().estimateStatus(level));
-              try {
-                    request.getRequestDispatcher("/SeleteGoodsByInterestController").forward(request, response);
-                } catch (ServletException e) {
-                    e.printStackTrace();
+                //cookie登录另外提示
+                if(ifCookieExist){
+                    response.getWriter().write(LOGIN_SUCCESS);
+                }else {
+                    response.getWriter().write(message);
                 }
-            } else {
-                if(NORMAL.equals(way)) {
-                    request.setAttribute("message" ,message);
+            }else {
+                //登录失败 分为两种方式
+                //使用cookie登录 并且不存在cookie
+                if (COOKIE.equals(way)) {
+                        response.getWriter().write("您暂时不存在cookie┭┮﹏┭┮");
+                }else {
+                    //普通登录 用户名与密码不匹配
+                    response.getWriter().write(message);
                 }
-                try {
-                    request.getRequestDispatcher("/login.jsp").forward(request, response);
-                } catch (ServletException e) {
-                    e.printStackTrace();
                 }
-            }
         }
         //实现登录功能
 

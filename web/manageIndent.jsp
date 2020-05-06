@@ -34,40 +34,168 @@
 
     </script>
 
+    <script>
+        function fun(event) {
+            event.preventDefault();
+            var id = document.getElementById("id").value;
+            var goodsName = document.getElementById("goodsName").value;
+            var price = document.getElementById("price").value;
+            var amount = document.getElementById("amount").value;
+
+            var log_id = /^\d{1,8}$/;
+            var log_price = /^\d{1,8}$/;
+            var log_amount = /^\d{1,8}$/;
+            var log_goodsName = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+
+            var flag_i = log_id.test(id);
+            var flag_g = log_goodsName.test(goodsName);
+            var flag_p = log_price.test(price);
+            var flag_a = log_amount.test(amount);
+
+            if (!flag_g) {
+                alert("商品名称不可为空或包含特殊符号┭┮﹏┭┮");
+                return;
+            }
+
+            if (!flag_p) {
+                alert("商品价格不可为空,仅可包含整数┭┮﹏┭┮");
+                return;
+            }
+            if (!flag_a) {
+                alert("商品存货仅可包含整数┭┮﹏┭┮");
+                return;
+            }
+
+            if (!flag_i) {
+                alert("请注意id格式┭┮﹏┭┮");
+                return;
+            }
+            if (flag_i && flag_g && flag_p && flag_a) {
+                $.ajax({
+                    url: "/ChangeIndentController",
+                    type: "POST",
+                    dataType: 'html',
+                    data: "method=changeIndent&id=" + id+"&goodsName="+goodsName+"&price="+price+"&amount="+amount,
+                    success: function (result) {
+                        alert(result);
+                        location.href = "/ChangePageController?method=manageIndent";
+                    },
+                    error: function (msg) {
+                        alert("出错啦")
+                    }
+                });
+            }
+        }
+
+
+        function fun2(event) {
+            event.preventDefault();
+            var id = document.getElementById("id2").value;
+            var message = document.getElementById("message").value;
+
+            var log_id = /^\d{1,8}$/;
+            var log_message = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+
+            var flag_i = log_id.test(id);
+            var flag_m = log_message.test(message);
+
+
+            if (!flag_m) {
+                alert("消息不可为空或包含特殊符号┭┮﹏┭┮");
+                return;
+            }
+
+
+            if (!flag_i) {
+                alert("请注意id格式┭┮﹏┭┮");
+                return;
+            }
+            if (flag_i && flag_m ) {
+                $.ajax({
+                    url: "/IndentSendMessageController?method=sellerSendMessage",
+                    type: "POST",
+                    dataType: 'html',
+                    data: "id=" + id+"&message="+message,
+                    success: function (result) {
+                        alert(result);
+                        location.href = "/ChangePageController?method=manageIndent";
+                    },
+                    error: function (msg) {
+                        alert("出错啦")
+                    }
+                });
+            }
+        }
+
+        function fun3(event,id) {
+            event.preventDefault();
+
+
+            var log_id = /^\d{1,8}$/;
+
+            var flag_i = log_id.test(id);
+
+
+            if (!flag_i) {
+                alert("请注意id格式┭┮﹏┭┮");
+                return;
+            }
+            if (flag_i  ) {
+                $.ajax({
+                    url: "/ChangeIndentController",
+                    type: "POST",
+                    dataType: 'html',
+                    data: "id=" + id+"&method=sell",
+                    success: function (result) {
+                        alert(result);
+                        location.href = "/ChangePageController?method=manageIndent";
+                    },
+                    error: function (msg) {
+                        alert("出错啦")
+                    }
+                });
+            }
+        }
+
+
+    </script>
+
+
+
 </head>
 <body>
 <body >
 <a href="/login.jsp">返回登录页面</a>
 <a href="/DividePageController">返回主页面</a>
 
-<FORM align="center"  action="/ChangeIndentController" method="post" >
+<FORM align="center"  method="post" >
     <input type="button" value="修改订单" class="check" style="margin-bottom: 0"/>
     <br>
     <a style="display:none;margin-top: 0px" class="text">需要修改的订单id :</a>
-    <input type="text" style="display:none;" pattern="^\d{1,10}$" class="text" name="id" required style="display:none;" />
+    <input type="text" style="display:none;" pattern="^\d{1,10}$" id="id" class="text" name="id" required style="display:none;" />
     <br>
     <a style="display:none;margin-top: 0px" class="text">需要修改的订单商品名 :</a>
-    <input type="text" style="display:none;"  class="text" name="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required style="display:none;" />
+    <input type="text" style="display:none;"  class="text" name="goodsName" id="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required style="display:none;" />
     <br>
     <a style="display:none;" class="text">需要修改的订单单价:</a>
-    <input type="text" class="text" pattern="^\d{1,10}$" name="price"  pattern="^\d{1,8}$"required style="display:none;" />
+    <input type="text" class="text" pattern="^\d{1,10}$" name="price" id="price" pattern="^\d{1,8}$"required style="display:none;" />
     <br>
     <a style="display:none;" class="text">修改的订单商品数量:</a>
-    <input type="text" class="text" pattern="^\d{1,10}$" name="amount" pattern="^\d{1,8}$" required style="display:none;" />
+    <input type="text" class="text" pattern="^\d{1,10}$" name="amount" id="amount" pattern="^\d{1,8}$" required style="display:none;" />
     <br>
-    <input type="submit" value="提交"  class="text" style="display:none;">
+    <input type="submit" value="提交" onclick="fun(event)"  class="text" style="display:none;">
 </FORM>
 
-<FORM align="center"  action="/IndentSendMessageController?method=sellerSendMessage" method="post" style="float: top" >
+<FORM align="center"   method="post" style="float: top" >
     <input type="button" value="给用户留言" class="check2" />
     <br>
     <a class="text2"  style="display:none;" >订单id:</a>
-    <input type="text"  class="text2"  name="id" pattern="^\d{1,10}$" required style="display:none;" />
+    <input type="text" id="id2"  class="text2"  name="id" pattern="^\d{1,10}$" required style="display:none;" />
     <br>
-    <a class="text2" style="display:none;">内容:</a>
-    <input type="text" class="text2"  name="message" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required style="display:none;" />
+    <a class="text2"  style="display:none;">内容:</a>
+    <input type="text" class="text2" id="message" name="message" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required style="display:none;" />
     <br>
-    <input type="submit" value="提交"  class="text2" style="display:none;">
+    <input type="submit" value="提交" onclick="fun2(event)" class="text2" style="display:none;">
 </FORM>
 
 
@@ -115,7 +243,7 @@
             <td><%=indent.getActuallyPrice()%></td>
             <td><%=indent.getStatus()%></td>
             <td><%=indent.getReputation()%></td>
-            <td><a href="/ChangeIndentController?method=sell&id=<%=indent.getId()%>">发货</a>
+            <td><a  onclick="fun3(event,<%=indent.getId()%>)" href="#">发货</a>
                 <c:if test='<%=!(indent.getBuyerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     <a href="/ChangePageController?method=messageBoard&ifSeller=1">用户给您留言啦,请打开留言板</a>

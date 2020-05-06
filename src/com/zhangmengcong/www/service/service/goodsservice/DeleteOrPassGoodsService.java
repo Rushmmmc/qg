@@ -23,6 +23,7 @@ public interface DeleteOrPassGoodsService {
      * 选择调用哪个方法
      * @param id 商品id
      * @param ifDelete 是否选择删除 否则商品审核通过
+     * @return 提示信息
      */
-    void deleteOrPassGoodsService(int id,int ifDelete);
+    String deleteOrPassGoodsService(int id,int ifDelete);
 }

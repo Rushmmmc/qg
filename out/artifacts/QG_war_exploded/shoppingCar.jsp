@@ -85,12 +85,6 @@
 
 </div>
 
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-
-</c:if>
 
 
 

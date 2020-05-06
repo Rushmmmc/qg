@@ -13,6 +13,53 @@
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <html>
 <head>
+                    <script>
+                    function fun(event) {
+                        event.preventDefault();
+                        var id = document.getElementById("id").value;
+                        var reason = document.getElementById("reason").value;
+                        var type = document.getElementById("type").value;
+                        var log_reason = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+                        var log_id = /^\d{1,8}$/;
+                        var flag_i = log_id.test(id);
+                        var flag_reason = log_reason.test(reason);
+                        var flag_type = false;
+                        if(type === "投诉商家" || type === "交易维权"){
+                            flag_type = true;
+                        }else {
+                            alert("请注意类型仅支持投诉商家及交易维权");
+                            return;
+                        }
+                        if (!flag_i) {
+                            alert("请注意id格式┭┮﹏┭┮");
+                            return;
+                        }
+                        if (!flag_reason) {
+                            alert("请注意原因格式┭┮﹏┭┮");
+                            return;
+                        }
+                        if (flag_i && flag_reason && flag_type) {
+                            $.ajax({
+                                url: "/UserCommitAppealController",
+                                type: "POST",
+                                dataType: 'html',
+                                data: "indentId=" + id + "&reason="+reason+"&type="+type,
+                                success: function (result) {
+                                    alert(result);
+                                    location.href = "/ChangePageToHelpUser";
+                                },
+                                error: function (msg) {
+                                    alert("出错啦")
+                                }
+                            });
+                        }
+                    }
+
+                    </script>
+
+
+
+
 
     <script>
 
@@ -35,13 +82,13 @@
 
 
 
-<FORM align="center"  action="/UserCommitAppealController" method="post" >
+<FORM align="center"  method="post" >
     <input type="button" value="申诉" class="check" style="
     margin-top:30px;margin-bottom: 0px"/>
     <br>
 
 
-    <select name="type" class="text" style="display:none;" >
+    <select id="type" name="type" class="text" style="display:none;" >
         <option value="投诉商家">投诉商家</option>
         <option value="交易维权">交易维权</option>
     </select>
@@ -49,12 +96,12 @@
 
     <br>
     <a style="display:none;margin-top: 0px" class="text">订单Id:</a>
-    <input type="text" style="display:none;" class="text" name="indentId" pattern="^\d{1,8}$" required style="display:none;" />
+    <input type="text" style="display:none;" class="text" id="id" name="indentId" pattern="^\d{1,8}$" required style="display:none;" />
     <br>
     <a style="display:none;" class="text">申诉理由:</a>
-    <input type="text" class="text"name="reason" required  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$"style="display:none;" />
+    <input type="text" class="text"name="reason" id="reason" required  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$"style="display:none;" />
     <br>
-    <input type="submit" value="提交"  class="text" style="display:none;">
+    <input type="submit" value="提交"  class="text"  onclick="fun(event)" style="display:none;">
 </FORM>
 
 

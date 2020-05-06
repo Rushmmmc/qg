@@ -53,6 +53,13 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
                 rs = pstmt.executeQuery();
                 emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
             }
+            //上一次买的类型还是可能没有其他商品了 这时要检测
+            if(emps.isEmpty()){
+                String sql4 = "select * from goods limit 1,3";
+                pstmt  = conn.prepareStatement(sql4);
+                rs = pstmt.executeQuery();
+                emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
+            }
         }catch(Exception e){
             e.printStackTrace();
         }finally {

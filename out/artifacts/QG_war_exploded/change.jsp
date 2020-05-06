@@ -14,6 +14,51 @@
 <html>
 <head>
     <title>个人中心</title>
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="jquery-3.5.0.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.js"></script>
+    <script>
+        function fun(event) {
+            event.preventDefault();
+            var username = $("#newusername").val();
+            var password = $("#newpassword").val();
+            var mailaddress = $("#newaddress").val();
+            var log_username = /^\w{4,10}$/;
+            var log_password = /^\w{6,10}$/;
+            var log_mailaddress = /^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(?:\.[0-9A-Za-z]+)+$/;
+            var flag_u = log_username.test(username);
+            var flag_p = log_password.test(password);
+            var flag_m = log_mailaddress.test(mailaddress);
+            if(!flag_u){
+                alert("请正确填写用户名┭┮﹏┭┮");
+                return;
+            }
+            if(!flag_p){
+                alert("请正确填写密码┭┮﹏┭┮");
+                return;
+            }
+            if(!flag_m){
+                alert("请正确填写邮箱┭┮﹏┭┮");
+                return;
+            }
+            if (flag_u && flag_p  && flag_m) {
+                $.ajax({
+                    url: "/ChangeMessageController",
+                    type: "POST",
+                    dataType: 'html',
+                    data: "newusername=" + username + "&newpassword=" + password +  "&newaddress=" + mailaddress,
+                    success: function (result) {
+                            alert(result);
+                            location.href ="/ChangePageController?method=changeMessage";
+                    },
+                    error: function (msg) {
+                        alert("出错啦")
+                    }
+                });
+            }
+        }
+    </script>
+
 
 
 
@@ -96,7 +141,7 @@
 
 
 
-<form   action="/ChangeMessageController" method="post" align="center"  >
+<form   method="post" align="center"  >
 
 
 
@@ -109,11 +154,11 @@
         for(User user :emps){
     %>
 
-    新名称:<input type="text" value=<%=user.getUsername()%> name="newusername" pattern="[\w]{4,10}" required/>
+    新名称:<input type="text" id="newusername" value=<%=user.getUsername()%> name="newusername" pattern="[\w]{4,10}" required/>
     <br>
-    新密码:<input type="password"  name="newpassword" pattern="[\w]{4,10}" required/>
+    新密码:<input type="password" id="newpassword" name="newpassword" pattern="[\w]{4,10}" required/>
     <br>
-    新邮箱:<input type="text" value=<%=user.getMailAddress()%> name="newaddress" pattern="^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(?:\.[0-9A-Za-z]+)+$" required/>
+    新邮箱:<input type="text" id="newaddress" value=<%=user.getMailAddress()%> name="newaddress" pattern="^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(?:\.[0-9A-Za-z]+)+$" required/>
     </br>
     注意:如部分信息不需要改,则输入原信息即可,用户名和电话不可与其他用户相同,用户名、密码为4-10 仅支持数字及字母
     <br>
@@ -121,7 +166,7 @@
         }
     %>
     <br>
-    <input type="submit"  value="Change" style="width:70px; height:30px;"/>
+    <input type="submit" onclick="fun(event)" value="Change" style="width:70px; height:30px;"/>
 
 
 </form>

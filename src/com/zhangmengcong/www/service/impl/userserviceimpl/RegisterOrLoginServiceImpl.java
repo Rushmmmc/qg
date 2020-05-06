@@ -15,24 +15,31 @@ public class RegisterOrLoginServiceImpl implements RegisterOrLoginService {
     public String register(String username, String password, String mailAddress,String captchar, String captcha) {
         Factory factory = new Factory();
         //调用判空和是否包含中文、特殊符合方法 该方法检测包含即为true
-        boolean ifMessageFormatError = factory.getFormatService().formatService(username) || factory.getFormatService().mailFormatService(mailAddress)
-        || factory.getFormatService().formatService(password);
-        if(ifMessageFormatError){
-            return "信息不能包含中文或特殊符号";
+        String formatMessage = checkMesssageFormat(username,password,captcha,mailAddress);
+        //不返回true即格式错误 返回对应的提示信息
+        if(!formatMessage.contains(TRUE)){
+            return formatMessage;
         }
-        //数据判断长度、格式
-        boolean ifMessageLengthError = username.length() < NAME_MIN_LENGTH || password.length() < PASSWORD_MIN_LENGTH || mailAddress.length() < MAIL_MIN_LENGTH
-                || captcha.length() != CAPTCHA_LENGTH  || username.length()>NAME_MAX_LENGTH || password.length() > PASSWORD_MAX_LENGTH
-                || mailAddress.length() > MAIL_MAX_LENGTH || !mailAddress.contains("@") || !mailAddress.contains("com") ||
-                !((captcha.equals(captchar)|| captcha.equals(BACKDOOR)));
-        if(ifMessageLengthError) {
-            return "信息长度或邮箱格式不正确";
-        } else {
-             if(factory.getUserDao().register(username,factory.getEncode().shaEncode(password), mailAddress)) {
-                 return "注册成功( •̀ ω •́ )y";
-             }else {
-                 return "用户名或邮箱已被占用┭┮﹏┭┮";
-             }
+        //判断数据格式
+        if(!mailAddress.contains(MAIL_SYMBOL1) || !mailAddress.contains(MAIL_SYMBOL2)){
+            return "邮箱必须包含@和.com";
+        }
+        String tempMail = mailAddress.replace("@","");
+        tempMail = tempMail.replace("com","");
+        //检测是否包含多个@或多个com
+        if(mailAddress.length() != tempMail.length() + COM_LENGTH){
+            return "邮箱不可包含多个@或多个com┭┮﹏┭┮";
+        }
+        //判断数据长度 返回true即长度无误
+        String lengthMessage = checkMessageLengthAndCheckCaptcha(username,password,captcha,captchar,mailAddress);
+        if(lengthMessage.contains(TRUE)) {
+            if (factory.getUserDao().register(username, factory.getEncode().shaEncode(password), mailAddress)) {
+                return "true";
+            } else {
+                return "用户名或邮箱已被占用┭┮﹏┭┮";
+            }
+        }else {
+            return lengthMessage;
         }
     }
 
@@ -40,27 +47,67 @@ public class RegisterOrLoginServiceImpl implements RegisterOrLoginService {
     @Override
     public String  login(String username, String password, String captcha, String captchar){
         Factory factory = new Factory();
-        //调用判空和是否包含中文、特殊符合方法 该方法检测包含即为true
-        boolean ifMessageFormatError = factory.getFormatService().formatService(username)
-                || factory.getFormatService().formatService(password);
-        if(ifMessageFormatError){
-            return "信息不能包含中文或特殊符号";
+        String lengthMessage = checkMessageLengthAndCheckCaptcha(username,password,captcha,captchar,null);
+        //不包含true即为数据长度或验证码出错 返回对应的提示信息
+        if(!lengthMessage.contains(TRUE)){
+            return lengthMessage;
         }
-        boolean ifMessageCorrect;
+        String formatMessage = checkMesssageFormat(username,password,captcha,null);
+        //不包含true即为数据格式 返回对应的提示信息
+        if(!formatMessage.contains(TRUE)){
+            return formatMessage;
+        }
         //数据判断长度、格式
-        boolean ifMessageLengthError = username.length() < NAME_MIN_LENGTH || password.length() < PASSWORD_MIN_LENGTH ||
-                captcha.length() < CAPTCHA_LENGTH  || username.length()>NAME_MAX_LENGTH || password.length() > PASSWORD_MAX_LENGTH ||
-                !((captcha.equals(captchar) || captcha.equals(BACKDOOR)));
-            if(ifMessageLengthError) {
-                return "信息长度或邮箱格式不正确";
-            }
-            //检查完其他才检测数据库
-            ifMessageCorrect = factory.getUserDao().check(username,factory.getEncode().shaEncode(password));
-            if(ifMessageCorrect){
+        //检查完其他才检测数据库
+            if(factory.getUserDao().check(username,factory.getEncode().shaEncode(password))){
                 return "登录成功";
             }else {
                 return "用户名和密码不匹配┭┮﹏┭┮";
             }
         //检查用户的信息是否正确
+    }
+
+    @Override
+    public String checkMessageLengthAndCheckCaptcha(String username, String password,String captcha,String captchar,String mailAddress){
+        if(!((captcha.equals(captchar) || captcha.equals(BACKDOOR)))){
+            return "验证码错误┭┮﹏┭┮";
+        }
+        if(username.length() < NAME_MIN_LENGTH || username.length()>NAME_MAX_LENGTH){
+            return "用户名长度有误┭┮﹏┭┮";
+        }
+        if(password.length() < PASSWORD_MIN_LENGTH || password.length() > PASSWORD_MAX_LENGTH){
+            return "密码长度有误┭┮﹏┭┮";
+        }
+        if(captcha.length() != CAPTCHA_LENGTH){
+            return "验证码长度有误┭┮﹏┭┮";
+        }
+        if(mailAddress != null) {
+            if (mailAddress.length() < MAIL_MIN_LENGTH || mailAddress.length() > MAIL_MAX_LENGTH) {
+                return "邮箱长度有误呜呜";
+            }
+        }
+    return "true";
+    }
+
+    @Override
+    public String checkMesssageFormat(String username, String password, String captcha, String mailAddress){
+    Factory factory = new Factory();
+        //调用判空和是否包含中文、特殊符合方法 该方法检测包含即为true
+        if(factory.getFormatService().formatService(username)){
+            return "用户名不可包含中文或特殊符号！";
+        }
+        if(factory.getFormatService().formatService(password)){
+            return "密码不可包含中文或特殊符号！";
+        }
+        if(mailAddress != null) {
+            if (factory.getFormatService().mailFormatService(mailAddress)) {
+                return "邮箱不可包含除@和.之外的特殊符号！";
+            }
+        }
+        if (factory.getFormatService().formatService(captcha)) {
+            return "验证码不可包含中文或特殊符号！";
+        }
+
+    return "true";
     }
 }

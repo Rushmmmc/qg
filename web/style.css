@@ -76,10 +76,32 @@
     border-radius: 5px;
 
 }
+    .box input[type="button"] {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        background: #03a9f4;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
 
+    }
 
 
     .box input[type="submit"] {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        background: #03a9f4;
+        padding: 10px 5px;
+        cursor: pointer;
+        border-radius: 55px;
+        margin:0 10px;
+    }
+
+    .box input[type="button"] {
         background: transparent;
         border: none;
         outline: none;

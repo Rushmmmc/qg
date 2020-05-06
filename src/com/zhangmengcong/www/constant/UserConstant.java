@@ -27,6 +27,10 @@ public class UserConstant {
          public static final String NORMAL = "normal";
          public static final int BIG_ENOUTH_NUMBER = 300;
          public static final int MESSAGE_LENGTH = 30;
+         public static final String TRUE = "true";
+         public static final String MAIL_SYMBOL1 = "@";
+         public static final String MAIL_SYMBOL2 = "com";
+         public static final int COM_LENGTH = 4;
          public static final String YOU_HAVE_BEEN_BAN = "您已被封禁,无法继续售卖商品,有疑问" +
                  "可前往个人中心查看原因或联系管理员";
          public static final String COMMIT_APPEAl_SUCCESS = "申诉已提交,管理员正在火速为您处理┭┮﹏┭┮";

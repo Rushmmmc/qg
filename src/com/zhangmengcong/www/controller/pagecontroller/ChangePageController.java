@@ -22,6 +22,7 @@ public class ChangePageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         Factory factory = new Factory();
         String username = (String) session.getAttribute("username");
@@ -86,11 +87,6 @@ public class ChangePageController extends HttpServlet {
             //传递参数 否则完蛋
             int id = Integer.parseInt(request.getParameter("id"));
            session.setAttribute("goods",factory.getGetPriceAndGoodsNameService().getPriceAndGoodsNameService(id));
-                try{
-                    request.getRequestDispatcher("/setAmount.jsp").forward(request,response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            }
         }
 
         //前往留言板

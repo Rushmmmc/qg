@@ -14,6 +14,58 @@
 <html>
 <head>
     <title>处理申诉</title>
+
+
+    <script>
+        function fun1(event) {
+            event.preventDefault();
+            var id = document.getElementById("id").innerHTML;
+                $.ajax({
+                    url: "/AdminManageAppealController",
+                    type: "POST",
+                    dataType: 'html',
+                    data:"id="+id+"&type=complaintSeller",
+                    success: function (result) {
+                        alert(result);
+                        location.href="/ChangePageToHelpUser";
+                    },
+                    error: function (msg) {
+                        alert("出错啦")
+                    }
+                });
+        }
+
+        function fun2(event) {
+            event.preventDefault();
+            var id = document.getElementById("id").innerHTML;
+            $.ajax({
+                url: "/AdminManageAppealController",
+                type: "POST",
+                dataType: 'html',
+                data:"id="+id+"&type=defendLegalRight",
+                success: function (result) {
+                    alert(result);
+                    location.href="/ChangePageToHelpUser";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
 
@@ -52,7 +104,7 @@
             <td><%=appeal.getId()%></td>
             <td><%=appeal.getType()%></td>
             <td><%=appeal.getUsername()%></td>
-            <td><%=appeal.getIdentId()%></td>
+            <td id="id"><%=appeal.getIdentId()%></td>
             <td><%=appeal.getSeller()%></td>
             <td><%=appeal.getReason()%></td>
             <td><%=appeal.getStatus()%></td>
@@ -60,10 +112,10 @@
             <td><%=appeal.getMessage()%></td>
             <td>
                 <c:if test='<%=appeal.getType().contains("投诉商家")%>'>
-                    <a href="/AdminManageAppealController?type=complaintSeller&id=<%=appeal.getIdentId()%>"><font color="green">扣商家分</font></a>
+                    <a onclick="fun1(event)" href="#"><font color="green">扣商家分</font></a>
                 </c:if>
                 <c:if test='<%=appeal.getType().contains("交易维权")%>'>
-                    <a href="/AdminManageAppealController?type=defendLegalRight&id=<%=appeal.getIdentId()%>"><font color="green">退款并返还积分</font></a>
+                    <a onclick="fun2(event)" href="#"><font color="green">退款并返还积分</font></a>
                 </c:if>
             </td>
         <tr>
@@ -73,12 +125,6 @@
     %>
     </table>
 
-    <c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-
-    </c:if>
 
 </body>
 </html>

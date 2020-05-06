@@ -40,17 +40,7 @@ public class RegisterController extends HttpServlet {
         //实现注册功能
         //获得注册服务返回的信息 service层进行数据判空 判断是否包含中文与特殊符号
         String message = factory.getRegisterAndLogin().register(username,password,mailAddress,captchar,captcha);
-            request.setAttribute("message",message);
-                try {
-                    //注册成功跳转至登录页面
-                    if(message.contains(REGISTER_SUCCESS)){
-                        request.getRequestDispatcher("/login.jsp").forward(request,response);
-                    }else {
-                        request.getRequestDispatcher("/Register.jsp").forward(request,response);
-                    }
-                } catch (ServletException e) {
-                    e.printStackTrace();
-                }
+            response.getWriter().write(message);
         //实现注册功能
     }
 
