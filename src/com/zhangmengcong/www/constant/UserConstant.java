@@ -34,4 +34,5 @@ public class UserConstant {
          public static final String YOU_HAVE_BEEN_BAN = "您已被封禁,无法继续售卖商品,有疑问" +
                  "可前往个人中心查看原因或联系管理员";
          public static final String COMMIT_APPEAl_SUCCESS = "申诉已提交,管理员正在火速为您处理┭┮﹏┭┮";
+         public static final String LEVEL = "level";
 }

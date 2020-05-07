@@ -96,9 +96,10 @@
             <span><%=goods.getPrice()%>元</span>
         </div>
 
-        <div style="margin-top:50px ">
-            <p><font color="red">亲爱的游客~~~~(>_<)~~~~请先登录</font> </p>
-        </div>
+
+
+            <p><font color="red">亲爱的游客~~~~(>_<)~~~~请先<a href="/login.jsp">登录</a></font> </p>
+
 
     </div>
 
@@ -157,15 +158,6 @@
 
 
 <%--</table>--%>
-
-
-
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-
-</c:if>
 
 
 </body>

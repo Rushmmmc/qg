@@ -101,6 +101,29 @@
             });
         }
 
+
+    function fun3(event) {
+        event.preventDefault();
+
+            $.ajax({
+                url: "login",
+                type: "POST",
+                dataType: 'html',
+                data: "username=visitor"  + "&password=visitor"+ "&captcha=qqqq"+ "&way=normal",
+                success: function (result) {
+                    if(result === "登录成功"){
+                        location.href ="/SeleteGoodsByInterestController";
+                    } else {
+                        alert(result);
+                    }
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+    }
+
+
 </script>
 
 
@@ -180,24 +203,15 @@
     <form  method="post" align="center">
         <a   href="#" onclick="fun2(event)" ><font color="blue" >使用cookie登录</font></a>
         <a   href="/forget.jsp" ><font color="blue" >忘记密码?</font></a>
-        <a   href="/login?way=normal&username=visitor&password=visitor&captcha=qqqq" ><font color="blue" >以游客登陆</font></a>
+        <a  onclick="fun3(event)"  href="#" ><font color="blue" >以游客登陆</font></a>
         </form>
 
 
     <h4 align="center"> <font color="#dc143c" >  您还未登录,请先登录 </font></h4>
 
 
-    <c:if test="${not empty requestScope.cookiemessage}">
-        <Script Language="JavaScript">
-            alert("${requestScope.cookiemessage}");
-        </Script>
-    </c:if>
 
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-</c:if>
+
 
 
 </body>

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import static com.zhangmengcong.www.constant.UserConstant.LEVEL;
+import static com.zhangmengcong.www.constant.UserConstant.VISITOR_LEVEL;
+
 /**
  * @author:zmc
  * @function: 根据用户兴趣推送商品
@@ -28,7 +31,13 @@ public class SeleteGoodsByInterestController extends HttpServlet {
         List<Goods> list= factory.getSelectGoodsByInterest().selectGoodsByInterest(username);
         request.setAttribute("goodsList",list);
         try {
-            request.getRequestDispatcher("/ad.jsp").forward(request,response);
+            //如果是游客
+            if((int)(session.getAttribute(LEVEL)) == VISITOR_LEVEL){
+                request.getRequestDispatcher("/visitorAd.jsp").forward(request,response);
+            }
+            else {
+                request.getRequestDispatcher("/ad.jsp").forward(request, response);
+            }
         } catch (ServletException e) {
             e.printStackTrace();
         }

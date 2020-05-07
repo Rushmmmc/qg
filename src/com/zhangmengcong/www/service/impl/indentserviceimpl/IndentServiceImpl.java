@@ -102,7 +102,7 @@ public class IndentServiceImpl implements IndentService {
         }
         //用户给差评
         if(BAD_REPUTATION.equals(method)){
-            String sellerName = factory.getQueryDao().queryDao("indent","seller","id",String.valueOf(id));
+            String sellerName = factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(id));
             factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint-1",null,null,"username","\""+sellerName+"\"");
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"差评","reputation",false,null);
         }

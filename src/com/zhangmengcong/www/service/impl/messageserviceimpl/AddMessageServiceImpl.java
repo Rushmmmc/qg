@@ -52,7 +52,7 @@ public class AddMessageServiceImpl implements AddMessageService {
             }
         }
         if(factory.getAddMessageDao().addNewMessageDao(message)){
-            factory.getUpdateDao().updateDao("indent","buyerMessage","已留言",null,null,"id",String.valueOf(indent.getId()));
+            factory.getUpdateDao().updateDao("indent","buyerMessage","\"已留言\"",null,null,"id",String.valueOf(indent.getId()));
             return "留言成功！";
         }
         else {
