@@ -36,13 +36,18 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
                 factory.getIndentDao().buyGoods(indent);
                 return "商品已添加入购物车( •̀ ω •́ )y";
             }else {
-                return "数据格式不正确┭┮﹏┭┮";
+                return "订单id格式不正确┭┮﹏┭┮,仅支持整数";
             }
         }
         //用户仅输入这两个 所以仅检验这两个
         boolean ifAmountWrong = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
         boolean ifIntegralWrong = factory.getFormatService().formatService(String.valueOf(indent.getUseIntegral()));
-
+        if(ifAmountWrong){
+            return "数量格式不正确┭┮﹏┭┮,仅支持整数";
+        }
+        if(ifIntegralWrong){
+            return "积分格式不正确┭┮﹏┭┮,仅支持整数";
+        }
         if(!ifAmountWrong && !ifIntegralWrong){
             indent.setTotalPrice(indent.getPrice()*indent.getAmount());
             indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());

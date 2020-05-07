@@ -17,20 +17,13 @@
 <head>
     <title>管理员界面</title>
 
-    <script>
 
-        $(function(){
-            $(".check").click(function(){
-                $(".text").show();
-            })
-        })
 
-    </script>
 <script>
     function fun2(event) {
         event.preventDefault();
         var operate = $("#operate").val();
-        var username = $("#username").val();
+        var username = $("#name123").val();
         var reason = $("#reason").val();
         var log_username = /^\w{4,10}$/;
         var log_reason = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
@@ -44,7 +37,7 @@
             alert("请正确填写用户名┭┮﹏┭┮");
             return;
         }
-        if (!flag_r) {
+        if (!flag_r && operate == 1) {
             alert("原因请不要包含特殊符号┭┮﹏┭┮");
             return;
         }
@@ -127,7 +120,11 @@
     }
 
 
-
+    function fun10(event,name) {
+        event.preventDefault();
+        document.getElementById("6").style.display = "block";
+        document.getElementById("name123").value = name;
+    }
 
 
     </script>
@@ -138,7 +135,9 @@
 <body>
 
 <a href="/login.jsp">返回登录页面</a>
-<a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/DividePageController">返回主页面</a>
+<a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageToHelpUser">管理申诉系统</a>
@@ -148,27 +147,34 @@
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center" style="margin-bottom:0">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>
 
+
+<div id="6" style="display: none">
 <FORM align="center"    method="post" >
-    <input type="button" value="封禁/解封用户"   class="check" style="
-    margin-top:30px;margin-bottom: 0px"/>
+
+
     <br>
 
 
-    <select id="operate" name="operate" class="text" style="display:none;" >
+    <select id="operate" name="operate" class="text" id="2"  >
         <option value="1">封禁</option>
         <option value="0">解封</option>
     </select>
 
 
     <br>
-    <a style="display:none;margin-top: 0px" class="text">卖家用户名:</a><br>
-    <input type="text" style="display:none;" class="text" name="username" id="username" required style="display:none;" />
+    <a style="margin-top: 0px"   class="text" id="3">商家用户名:</a><br>
+    <input type="text"  class="text"  name="username" id="name123" required  />
     <br>
-    <a style="display:none;" class="text">封禁/解封理由:</a><br>
-    <input type="text" class="text" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="reason" id="reason" required style="display:none;" />
+    <a style="margin-top: 0px"   class="text" id="5">封禁/解封理由:</a><br>
+    <input type="text" class="text"  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="reason" id="reason" required />
     <br>
-    <input type="submit" value="提交"  onclick="fun2(event)" class="text" style="display:none;">
+    <input type="submit" value="提交"  onclick="fun2(event)" class="text" >
 </FORM>
+</div>
+
+
+
+
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading" align="center">
@@ -209,8 +215,7 @@
         <td><a href="#" onclick="fun3(event,<%=goods.getId()%>)">通过</a>
             <a>/</a>
             <a href="#" onclick="fun4(event,<%=goods.getId()%>)">删除商品</a>
-
-
+            <a href="#" onclick="fun10(event,'<%=goods.getSeller()%>')">封禁/解封</a>
     <tr>
             <%
         }

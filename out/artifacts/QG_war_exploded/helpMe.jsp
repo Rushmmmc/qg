@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.zhangmengcong.www.po.Appeal" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.zhangmengcong.www.po.Indent" %><%--
   Created by IntelliJ IDEA.
   User: Rush
   Date: 2020/5/3
@@ -63,17 +64,19 @@
 
     <script>
 
-        $(function(){
-            $(".check").click(function(){
-                $(".text").show();
-            })
-        })
+        function fun2(event,id) {
+            event.preventDefault();
+            document.getElementById("1").style.display = "block";
+            document.getElementById("id").value = id;
+        }
+
+
 
     </script>
 
     <title>处理申诉</title>
 </head>
-<body>
+<div>
 
 <a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
@@ -92,29 +95,25 @@
 <h1 align="center" ><font color="#ff1493" >申诉信息将长期留底,消息按时间逆序显示</font></h1>
 
 
-
-<FORM align="center"  method="post" >
-    <input type="button" value="申诉" class="check" style="
-    margin-top:30px;margin-bottom: 0px"/>
-    <br>
+<div id="1" style="display: none">
+<FORM align="center"   method="post" >
 
 
-    <select id="type" name="type" class="text" style="display:none;" >
+    <select id="type" name="type" class="text"  >
         <option value="投诉商家">投诉商家</option>
         <option value="交易维权">交易维权</option>
     </select>
-<h3><a href="/ChangePageController?method=manageBuyerPersonalIndent" target="_blank">查看订单</a></h3>
 
     <br>
     <a style="display:none;margin-top: 0px" class="text">订单Id:</a><br>
-    <input type="text" style="display:none;" class="text" id="id" name="indentId" pattern="^\d{1,8}$" required style="display:none;" />
+    <input type="text"  class="text" id="id" name="indentId" pattern="^\d{1,8}$" required  />
     <br>
-    <a style="display:none;" class="text">申诉理由:</a><br>
-    <input type="text" class="text"name="reason" id="reason" required  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$"style="display:none;" />
+    <a  class="text">申诉理由:</a><br>
+    <input type="text" class="text"name="reason" id="reason" required  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" />
     <br>
-    <input type="submit" value="提交"  class="text"  onclick="fun(event)" style="display:none;">
+    <input type="submit" value="提交"  class="text"  onclick="fun(event)" >
 </FORM>
-
+</div>
 
 
 
@@ -124,6 +123,8 @@
 
 
 </div>
+
+
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
         <tr>
@@ -161,6 +162,58 @@
         }
     %>
     </table>
+</div>
+<br><br><br><br>
+<h2 align="center"><font  color="#8a2be2">您的订单</font></h2>
+    <div class="font">
+        <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
+            <tr>
+                <th>Id</th>
+                <th>商品名称</th>
+                <th>购买者<a>&nbsp</a></th>
+                <th>出售者</th>
+                <th>单价</th>
+                <th>数量<a>&nbsp</a></th>
+                <th>总价</th>
+                <th>使用积分<a>&nbsp</a></th>
+                <th>实际付款<a>&nbsp</a></th>
+                <th>订单状态</th>
+                <th>评价<a>&nbsp</a></th>
+                <th>操作</th>
+            </tr>
+            <!--通过循环 显示信息-->
+
+
+            <%
+                List<Indent> emps2 = (List<Indent>)request.getAttribute("emps");
+                for(Indent indent : emps2){
+            %>
+            <tr>
+                <td><%=indent.getId()%></td>
+                <td><%=indent.getGoodsName()%></td>
+                <td><%=indent.getBuyer()%></td>
+                <td><%=indent.getSeller()%></td>
+                <td><%=indent.getPrice()%></td>
+                <td><%=indent.getAmount()%></td>
+                <td><%=indent.getTotalPrice()%></td>
+                <td><%=indent.getUseIntegral()%></td>
+                <td><%=indent.getActuallyPrice()%></td>
+                <td><%=indent.getStatus()%></td>
+                <td><%=indent.getReputation()%></td>
+                <td><a href="#" onclick="fun2(event,<%=indent.getId()%>)">申诉</a></td>
+            <tr>
+                    <%
+        }
+    %>
+
+
+
+
+        </table>
+
+    </div>
+
+
 
 
 

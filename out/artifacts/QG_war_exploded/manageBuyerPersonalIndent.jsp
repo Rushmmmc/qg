@@ -190,12 +190,6 @@
             return;
         }
         if (flag_i  ) {
-            // $.ajax({
-            //     url: "/ChangePageController?method=manageBuyerPersonalIndent",
-            //     type: "POST",
-            //     dataType: 'html',
-            //     data: "id=" + id+"&ifSeller=0",
-            // });
             location.href = "/ChangePageController?method=manageBuyerPersonalIndent&id="+id+"&ifSeller=0";
         }
     }
@@ -212,15 +206,7 @@
 
 
     <title>用户订单中心</title>
-    <script>
 
-        $(function(){
-            $(".check").click(function(){
-                $(".text").show();
-            })
-        })
-
-    </script>
 </head>
 <body>
 
@@ -292,7 +278,7 @@
             <a onclick="fun3(event,<%=indent.getId()%>)" href="#" >取消(删除)订单</a>
                 <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp</a>
-                    <a href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>">商家给您留言啦,请打开留言板</a>
+                    <a href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>">商家给您留言啦,请打开留言板<a>&nbsp&nbsp</a></a>
                 </c:if>
 
                     <a>&nbsp&nbsp&nbsp&nbsp</a>

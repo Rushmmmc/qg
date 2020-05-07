@@ -26,7 +26,7 @@
 <body>
 <a href="/login.jsp">返回登录页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/adminPage.jsp">返回主页面</a>
+<a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>
 <a>&nbsp&nbsp&nbsp</a>
@@ -98,17 +98,17 @@
     <div style="float: left;margin-left: 70px;margin-bottom: 50px;margin-top: 30px;" class="box">
         <img src="./img/1.jpg">
 
-        <p class="review"><%=goods.getImformation()%> </p>
-        <div class="appraise">来自用户<%=goods.getSeller()%>的二手商品
-            信誉分:<font color="red"><%=goods.getSellerReputation()%></font></div>
+        <p class="review"><font color="#00bfff"><%=goods.getImformation()%></font> </p>
+        <div class="appraise"><font color="blue">来自用户</font><font color="#ff1493"><%=goods.getSeller()%></font><font color="blue">的二手商品</font>
+            <font color="red">信誉分:<%=goods.getSellerReputation()%></font></div>
         <div class="info">
             <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
         </div>
 
-        <div style="margin-top:50px ">
-            <p><font color="red">管理员账号无法购买商品</font> </p>
-        </div>
+
+          <font align="center" style="margin-left: 50px" color="red">管理员账号无法购买商品</font>
+
 
     </div>
 
@@ -160,21 +160,6 @@
     </nav>
 
 </form>
-
-
-
-
-
-<%--</table>--%>
-
-
-
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-
-</c:if>
 
 
 </body>

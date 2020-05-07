@@ -17,38 +17,36 @@
 
 
     <script>
-        function fun1(event) {
+        function fun1(event,id,id2) {
             event.preventDefault();
-            var id = document.getElementById("id").innerHTML;
                 $.ajax({
                     url: "/AdminManageAppealController",
                     type: "POST",
                     dataType: 'html',
-                    data:"id="+id+"&type=complaintSeller",
+                    data:"id="+id+"&type=complaintSeller&appealId="+id2,
                     success: function (result) {
                         alert(result);
                         location.href="/ChangePageToHelpUser";
                     },
                     error: function (msg) {
-                        alert("出错啦")
+                        alert("该订单已被删除！")
                     }
                 });
         }
 
-        function fun2(event) {
+        function fun2(event,id,id2) {
             event.preventDefault();
-            var id = document.getElementById("id").innerHTML;
             $.ajax({
                 url: "/AdminManageAppealController",
                 type: "POST",
                 dataType: 'html',
-                data:"id="+id+"&type=defendLegalRight",
+                data:"id="+id+"&type=defendLegalRight&appealId="+id2,
                 success: function (result) {
                     alert(result);
                     location.href="/ChangePageToHelpUser";
                 },
                 error: function (msg) {
-                    alert("出错啦")
+                    alert("该订单已被删除！")
                 }
             });
         }
@@ -72,7 +70,7 @@
 
 <a href="/login.jsp">返回登录页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/adminPage.jsp">返回主页面</a>
+<a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>
 <a>&nbsp&nbsp&nbsp</a>
@@ -96,7 +94,6 @@
             <th>内容</th>
             <th>申诉状态</th>
             <th>申诉时间</th>
-            <th>管理员留言</th>
             <th>处理</th>
         </tr>
         <!--通过循环 显示信息-->
@@ -107,21 +104,21 @@
             for(Appeal appeal :emps){
         %>
         <tr>
-            <td><%=appeal.getId()%></td>
+            <td ><%=appeal.getId()%></td>
             <td><%=appeal.getType()%></td>
             <td><%=appeal.getUsername()%></td>
-            <td id="id"><%=appeal.getIdentId()%></td>
+            <td ><%=appeal.getIdentId()%></td>
             <td><%=appeal.getSeller()%></td>
             <td><%=appeal.getReason()%></td>
             <td><%=appeal.getStatus()%></td>
             <td><%=appeal.getAppealDate()%></td>
-            <td><%=appeal.getMessage()%></td>
+
             <td>
                 <c:if test='<%=appeal.getType().contains("投诉商家")%>'>
-                    <a onclick="fun1(event)" href="#"><font color="green">扣商家分</font></a>
+                    <a onclick="fun1(event,<%=appeal.getIdentId()%>,<%=appeal.getId()%>)" href="#"><font color="green">扣商家分</font></a>
                 </c:if>
                 <c:if test='<%=appeal.getType().contains("交易维权")%>'>
-                    <a onclick="fun2(event)" href="#"><font color="green">退款并返还积分</font></a>
+                    <a onclick="fun2(event,<%=appeal.getIdentId()%>,<%=appeal.getId()%>)" href="#"><font color="green">退款并返还积分</font></a>
                 </c:if>
             </td>
         <tr>

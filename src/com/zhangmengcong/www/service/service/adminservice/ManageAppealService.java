@@ -14,6 +14,7 @@ public interface ManageAppealService {
 
     /** 处理申诉的方法
      * @param id 订单id
+     * @param appealId 申诉号id
      */
-    String manageAppealService(String type,int id);
+    String manageAppealService(String type,int id,int appealId);
 }

@@ -85,6 +85,18 @@
             }
         }
 
+        function fun3(event,id) {
+            event.preventDefault();
+            document.getElementById("1").style.display = "block";
+            if(id != 0 ){
+                document.getElementById("id").value = id;
+                document.getElementById("operate").value = 1;
+            }else {
+                document.getElementById("id").value = "";
+                document.getElementById("operate").value = 0;
+            }
+
+        }
 
 
 
@@ -167,6 +179,7 @@
 
 
     <h2><STRONG><p  align="center"><font color="#ff1493">关于订单号${sessionScope.emps.get(0).id}的留言板</font></p></STRONG></h2>
+<h3 align="center"> <font color="#8a2be2"><a href="#" onclick="fun3(event,0)">点击留言</a></font></h3>
 </div>
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
@@ -190,7 +203,11 @@
         <tr><td><%=message.getId()%></td>
             <td><%=message.getSellerMessage()%></td>
             <td><%=message.getBuyerMessage()%></td>
-            <td><a href="/DeleteMessageController?method=sellerDeleteMessage&id=<%=message.getId()%>&ifSeller=1">清除留言</a></td>
+
+            <td>
+                <font color="#8a2be2"><a href="#" onclick="fun3(event,<%=message.getId()%>)">回复</a></font>
+                <a>&nbsp&nbsp&nbsp</a><a>&nbsp&nbsp&nbsp</a>
+                <a href="/DeleteMessageController?method=sellerDeleteMessage&id=<%=message.getId()%>&ifSeller=1">清除留言</a></td>
         <tr>
                 <%
         }
@@ -202,6 +219,7 @@
     </table>
 
 </div>
+<div id="1" style="display: none">
 <form method="post" align="center">
     <select id="operate" name="operate" class="text"  >
         <option value="0">留言</option>
@@ -218,7 +236,7 @@
     <br>
     <input type="submit" onclick="fun2(event,${sessionScope.emps.get(0).id})">
 </form>
-
+</div>
 
 
 

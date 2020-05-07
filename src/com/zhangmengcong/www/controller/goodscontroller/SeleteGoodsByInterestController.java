@@ -12,8 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-import static com.zhangmengcong.www.constant.UserConstant.LEVEL;
-import static com.zhangmengcong.www.constant.UserConstant.VISITOR_LEVEL;
+import static com.zhangmengcong.www.constant.UserConstant.*;
 
 /**
  * @author:zmc
@@ -34,6 +33,8 @@ public class SeleteGoodsByInterestController extends HttpServlet {
             //如果是游客
             if((int)(session.getAttribute(LEVEL)) == VISITOR_LEVEL){
                 request.getRequestDispatcher("/visitorAd.jsp").forward(request,response);
+            }else if((int)(session.getAttribute(LEVEL)) == ADMIN_LEVEL){
+                request.getRequestDispatcher("/DividePageController").forward(request,response);
             }
             else {
                 request.getRequestDispatcher("/ad.jsp").forward(request, response);

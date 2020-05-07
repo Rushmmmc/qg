@@ -20,7 +20,7 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 //设置编码防止乱码
         request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
         //设置编码防止乱码
         //获取区域 从前端获取各种信息
         String password = request.getParameter("password");
@@ -69,17 +69,19 @@ public class LoginController extends HttpServlet {
                 cookie.setMaxAge(60 * 60);
                 response.addCookie(cookie);
                 level = factory.getLevelService().getLevelService(username);
+
                 //调用检索等级方法,获取用户的等级
                 session.setAttribute("username", username);
                 //登陆成功,在session储存用户名
                 session.setAttribute("level", level);
                 session.setAttribute("sendLevel", factory.getEstimateStatus().estimateStatus(level));
-                //cookie登录另外提示
-                if(ifCookieExist){
-                    response.getWriter().write(LOGIN_SUCCESS);
-                }else {
-                    response.getWriter().write(message);
-                }
+
+                    //cookie登录另外提示
+                    if (ifCookieExist) {
+                        response.getWriter().write(LOGIN_SUCCESS);
+                    } else {
+                        response.getWriter().write(message);
+                    }
             }else {
                 //登录失败 分为两种方式
                 //使用cookie登录 并且不存在cookie

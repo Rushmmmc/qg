@@ -113,7 +113,8 @@
                 success: function (result) {
                     if(result === "登录成功"){
                         location.href ="/SeleteGoodsByInterestController";
-                    } else {
+                    }
+                    else {
                         alert(result);
                     }
                 },

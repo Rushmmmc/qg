@@ -19,12 +19,42 @@
     <title>用户订单中心</title>
     <script>
 
-        $(function(){
-            $(".check").click(function(){
-                $(".text").show();
-            })
-        })
-
+        function fun(event,id) {
+            event.preventDefault();
+            var tempAmount = document.getElementById("amount").value;
+            var integral = document.getElementById("integral").value;
+            var log_Amount = /^\d{1,10}$/;
+            var log_integral = /^\d{1,10}$/;
+            var flag_a = log_Amount.test(tempAmount);
+            var flag_i = log_integral.test(integral);
+            if (!flag_a) {
+                alert("商品数量有误┭┮﹏┭┮ 仅支持整数");
+                return;
+            }
+            if (!flag_i) {
+                alert("积分数量有误┭┮﹏┭┮ 仅支持整数");
+                return;
+            }
+            if (flag_i && flag_a) {
+                $.ajax({
+                    url: "/BuyGoodsController",
+                    type: "POST",
+                    dataType: 'html',
+                    data: "tempAmount="+tempAmount +"&integral="+integral,
+                    success: function (result) {
+                        if(result === "商家正在火速处理您的订单( •̀ ω •́ )y"){
+                            alert(result);
+                            location.href = "/ChangePageToShoppingCarController";
+                        }else {
+                            alert(result);
+                        }
+                    },
+                    error: function (msg) {
+                        alert("出错啦")
+                    }
+                });
+            }
+        }
     </script>
 </head>
 <body>
@@ -77,12 +107,12 @@
             <td><%=indent.getSeller()%></td>
             <td><%=indent.getPrice()%></td>
             <form method="post" action="/BuyGoodsFromShoppingCarController?method=buyGoodsFromShoppingCar&id=<%=indent.getId()%>&price=<%=indent.getPrice()%>">
-            <td><input type="text" name="amount" required value="1"></td>
-                <td><input type="text" name="integral" required value="0"></td>
+            <td><input type="text" name="amount" id="amount" required value="1"></td>
+                <td><input type="text" name="integral" id="integral"  required value="0"></td>
             <td><%=indent.getTotalPrice()%></td>
             <td><%=indent.getStatus()%></td>
             <td><a href="/ChangeIndentController?method=deleteShoppingCarIndent&id=<%=indent.getId()%>">从购物车删除</a>
-                <input type="submit" value="购买">
+                <input type="submit" onclick="car(event,<%=indent.getId()%>)"  value="购买">
             </form>
             </td>
         <tr>

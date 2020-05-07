@@ -116,21 +116,22 @@
     <div style="float: left;margin-left: 70px;margin-bottom: 50px;margin-top: 30px;" class="box">
         <img src="./img/1.jpg">
 
-        <p class="review"><%=goods.getImformation()%> </p>
-        <div class="appraise">来自用户<font color="#ff1493"><%=goods.getSeller()%></font>的二手商品
-            信誉分:<font color="red"><%=goods.getSellerReputation()%></font></div>
+        <p class="review"><font color="#00bfff"><%=goods.getImformation()%></font> </p>
+        <div class="appraise"><font color="blue">来自用户</font><font color="#ff1493"><%=goods.getSeller()%></font><font color="blue">的二手商品</font>
+            <font color="red">信誉分:<%=goods.getSellerReputation()%></font></div>
         <div class="info">
-            <h4><font color="green"><%=goods.getGoodsName()%></font></h4>
+            <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
-            <a align="center" href="#" onclick="fun2(event,<%=goods.getId()%>)">购买</a>
-            <a>&nbsp&nbsp&nbsp</a>
-            <a href="#" onclick="fun1(event,<%=goods.getId()%>)">加入购物车</a>
         </div>
-        <div style="margin-top:50px ">
-            <p> </p>
-        </div>
-
+        <a align="center" href="#" style="margin-left: 30px" onclick="fun2(event,<%=goods.getId()%>)">购买</a>
+        <a>&nbsp&nbsp&nbsp</a>
+        <a href="#" onclick="fun1(event,<%=goods.getId()%>)">加入购物车</a>
     </div>
+    <div style="margin-top:50px ">
+        <p> </p>
+    </div>
+
+</div>
 
 </div>
 <%

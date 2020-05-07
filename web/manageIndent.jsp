@@ -16,23 +16,9 @@
 <head>
     <title>商家管理订单界面</title>
 
-    <script>
-
-        $(function(){
-            $(".check").click(function(){
-                $(".text").show();
-            })
-        })
 
 
 
-        $(function(){
-            $(".check2").click(function(){
-                $(".text2").show();
-            })
-        })
-
-    </script>
 
     <script>
         function fun(event) {
@@ -179,12 +165,30 @@
     location.href = "/ChangePageController?method=manageIndent&id="+id+"&ifSeller=1";
     }
     }
+
+    function appear(event,id,goodsName,price,amount){
+        event.preventDefault();
+        document.getElementById("1").style.display = "block";
+        document.getElementById("id").value = id;
+        document.getElementById("goodsName").value = goodsName;
+        document.getElementById("price").value = price;
+        document.getElementById("amount").value = amount;
+    }
+
+
+
+
+
+
+
+
+
     </script>
 
 
 </head>
 <body>
-<body >
+
 <a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
@@ -199,25 +203,6 @@
 <a href="/ChangePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/Quit">注销</a>
-<FORM align="center"  method="post" >
-    <input type="button" value="修改订单" class="check" style="margin-bottom: 0"/>
-    <br>
-    <a style="display:none;margin-top: 0px" class="text">需要修改的订单id :</a>
-    <input type="text" style="display:none;" pattern="^\d{1,10}$" id="id" class="text" name="id" required style="display:none;" />
-    <br>
-    <a style="display:none;margin-top: 0px" class="text">需要修改的订单商品名 :</a>
-    <input type="text" style="display:none;"  class="text" name="goodsName" id="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required style="display:none;" />
-    <br>
-    <a style="display:none;" class="text">需要修改的订单单价:</a>
-    <input type="text" class="text" pattern="^\d{1,10}$" name="price" id="price" pattern="^\d{1,8}$"required style="display:none;" />
-    <br>
-    <a style="display:none;" class="text">修改的订单商品数量:</a>
-    <input type="text" class="text" pattern="^\d{1,10}$" name="amount" id="amount" pattern="^\d{1,8}$" required style="display:none;" />
-    <br>
-    <input type="submit" value="提交" onclick="fun(event)"  class="text" style="display:none;">
-</FORM>
-
-
 
 
 
@@ -267,8 +252,11 @@
                     <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     <a href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>">用户给您留言啦,请打开留言板</a>
                 </c:if>
-                <a o href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>">前往留言</a>
-        </td>
+                <a  href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>"><font color="#8a2be2">前往留言</font></a>
+                <a  href="#" onclick="appear(event,<%=indent.getId()%>,'<%=indent.getGoodsName()%>',
+                    <%=indent.getPrice()%>,<%=indent.getAmount()%>)"><font color="#00bfff">修改订单</font></a>
+
+            </td>
         <tr>
                 <%
         }
@@ -280,7 +268,26 @@
     </table>
 </div>
 
-
+<div id="1" style="display: none">
+    <br><br><br><br><br>
+    <FORM align="center"  method="post" >
+        <%--    <input type="button" value="修改订单" class="check" style="margin-bottom: 0"/>--%>
+        <%--    <br>--%>
+        <a  class="text">需要修改的订单id :</a><br>
+        <input type="text"  pattern="^\d{1,10}$" id="id" class="text" name="id" required  />
+        <br>
+        <a  class="text">需要修改的订单商品名 :</a><br>
+        <input type="text"   class="text" name="goodsName" id="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required  />
+        <br>
+        <a  class="text">需要修改的订单单价:</a><br>
+        <input type="text" class="text" pattern="^\d{1,10}$" name="price" id="price" pattern="^\d{1,8}$"required  />
+        <br>
+        <a  class="text">修改的订单商品数量:</a><br>
+        <input type="text" class="text" pattern="^\d{1,10}$" name="amount" id="amount" pattern="^\d{1,8}$" required  />
+        <br>
+        <input type="submit" value="提交" onclick="fun(event)"  class="text" >
+    </FORM>
+</div>
 
 </body>
 </html>

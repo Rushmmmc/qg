@@ -39,15 +39,11 @@
                     dataType: 'html',
                     data: "tempAmount="+tempAmount +"&integral="+integral,
                     success: function (result) {
-                        if(result === "您的积分不够啦┭┮﹏┭┮"){
+                        if(result === "商家正在火速处理您的订单( •̀ ω •́ )y"){
                             alert(result);
-                            location.href = "/setAmount.jsp";
-                        }else if(result === "数据格式不正确┭┮﹏┭┮"){
-                            alert(result);
-                            location.href = "/setAmount.jsp";
+                            location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
                         }else {
-                            alert(result);
-                            location.href = "/DividePageController";
+                            alert(result)
                         }
                     },
                     error: function (msg) {

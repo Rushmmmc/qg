@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.io.IOException;
 
+import static com.zhangmengcong.www.constant.PageConstant.BUYER_FUNCTION;
 import static com.zhangmengcong.www.constant.UserConstant.ADMIN_LEVEL;
 
 
@@ -31,6 +32,7 @@ public class ChangePageToHelpUser extends HttpServlet {
         String username = (String) session.getAttribute("username");
 
         //根据用户等级打印申诉信息
+        request.setAttribute("emps",factory.getPrintIndentService().printIndentService(0,username,BUYER_FUNCTION,0));
         request.setAttribute("appealList",factory.getPrintAppealService().printAppealServiceImpl(level,username));
         try {
             //为管理员 去往管理员处理审核页面

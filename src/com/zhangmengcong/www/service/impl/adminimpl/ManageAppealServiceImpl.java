@@ -19,7 +19,7 @@ public class ManageAppealServiceImpl implements ManageAppealService {
     }
 
     @Override
-    public String manageAppealService(String type,int id) {
+    public String manageAppealService(String type,int id,int appealId) {
         Factory factory = new Factory();
         //判空 判断格式
         boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(id));
@@ -30,17 +30,21 @@ public class ManageAppealServiceImpl implements ManageAppealService {
         }
 
         String message = "信息格式不正确!┭┮﹏┭┮";
-        String username = factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(id));
+        String sellerName = factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(id));
+        String buyerName = factory.getQueryDao().queryDao("buyer","indent","id",String.valueOf(id));
         //处理投诉商家
         if(COMPLAINT_SELLER.equals(type)){
-            minusSellerReputationService(username,id);
+            minusSellerReputationService(sellerName,id);
+            factory.getUpdateDao().updateDao("appeal","status","\"扣除商家信誉分\"","id","\""+appealId+"\"");
             message =   MINUS_SUCCESS_MESSAGE;
         }
         //处理交易维权
         if(DEFEND_LEGAL_RIGHT.equals(type)){
+            System.out.println(id+""+appealId);
             int actuallyPrice = Integer.parseInt(factory.getQueryDao().queryDao("actuallyPrice","indent","id",String.valueOf(id)));
             int integral = 2 * Integer.parseInt(factory.getQueryDao().queryDao("useIntegral","indent","id",String.valueOf(id)));
-            factory.getUpdateDao().updateDao("user","integral","integral + "+ integral,null,null,"username","\""+username+"\"");
+            factory.getUpdateDao().updateDao("appeal","status","\"退款、返还双倍积分并且扣除商家信誉分\"","id","\""+appealId+"\"");
+            factory.getUpdateDao().updateDao("user","integral","integral + "+ integral,null,null,"username","\""+buyerName+"\"");
             message =  "已退款"+actuallyPrice+"元 返还使用的双倍积分共 "+integral +"分";
         }
     return message;
