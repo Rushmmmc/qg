@@ -138,8 +138,12 @@
 <body>
 
 <a href="/login.jsp">返回登录页面</a>
-<a href="/DividePageController">返回主页面</a>
-
+<a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageToHelpUser">管理申诉系统</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/Quit">注销</a>
 
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center" style="margin-bottom:0">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>
@@ -216,10 +220,6 @@
 
 </table>
 </div>
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-</c:if>
+
 </body>
 </html>

@@ -161,13 +161,49 @@
     </script>
 
 
+<script>
+    function fun7(event,id) {
+    event.preventDefault();
+
+    var log_id = /^\d{1,8}$/;
+
+    var flag_i = log_id.test(id);
+
+
+    if (!flag_i) {
+    alert("请注意id格式┭┮﹏┭┮");
+    return;
+    }
+    if (flag_i  ) {
+    // $.ajax({
+    //     url: "/ChangePageController?method=manageBuyerPersonalIndent",
+    //     type: "POST",
+    //     dataType: 'html',
+    //     data: "id=" + id+"&ifSeller=0",
+    // });
+    location.href = "/ChangePageController?method=manageIndent&id="+id+"&ifSeller=1";
+    }
+    }
+    </script>
+
 
 </head>
 <body>
 <body >
 <a href="/login.jsp">返回登录页面</a>
 <a href="/DividePageController">返回主页面</a>
-
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageController?method=commit">申卖商品</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageController?method=manageIndent&ifSeller=1">管理卖出订单</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageToShoppingCarController">查看购物车</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageToHelpUser">进行申诉</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/Quit">注销</a>
 <FORM align="center"  method="post" >
     <input type="button" value="修改订单" class="check" style="margin-bottom: 0"/>
     <br>
@@ -186,17 +222,7 @@
     <input type="submit" value="提交" onclick="fun(event)"  class="text" style="display:none;">
 </FORM>
 
-<FORM align="center"   method="post" style="float: top" >
-    <input type="button" value="给用户留言" class="check2" />
-    <br>
-    <a class="text2"  style="display:none;" >订单id:</a>
-    <input type="text" id="id2"  class="text2"  name="id" pattern="^\d{1,10}$" required style="display:none;" />
-    <br>
-    <a class="text2"  style="display:none;">内容:</a>
-    <input type="text" class="text2" id="message" name="message" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required style="display:none;" />
-    <br>
-    <input type="submit" value="提交" onclick="fun2(event)" class="text2" style="display:none;">
-</FORM>
+
 
 
 
@@ -248,6 +274,7 @@
                     <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     <a href="/ChangePageController?method=messageBoard&ifSeller=1">用户给您留言啦,请打开留言板</a>
                 </c:if>
+                <a o href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>">前往留言</a>
         </td>
         <tr>
                 <%
@@ -260,12 +287,6 @@
     </table>
 </div>
 
-<c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-
-</c:if>
 
 
 </body>

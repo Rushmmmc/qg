@@ -25,18 +25,7 @@ public class DeleteMessageController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String method = request.getParameter("method");
         int id = Integer.parseInt(request.getParameter("id"));
-        factory.getIndentService().indentSelectMethod(method,id,null,null,null);
-//        try {
-//            //商家去往则去往商家留言板
-//            if(SELLER_DELETE_MESSAGE.equals(method)) {
-//                request.getRequestDispatcher("/ChangePageController?method=" + MESSAGE_BORAD + "&ifSeller=1").forward(request, response);
-//            }else {
-//                request.getRequestDispatcher("/ChangePageController?method=" + MESSAGE_BORAD + "&ifSeller=0").forward(request, response);
-//            }
-//            //否则去往用户个人留言板
-//        } catch (ServletException e) {
-//            e.printStackTrace();
-//        }
+
     }
 
     @Override

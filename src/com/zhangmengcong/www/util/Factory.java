@@ -5,30 +5,30 @@ import com.zhangmengcong.www.dao.dao.appealdao.GenerateAppealDao;
 import com.zhangmengcong.www.dao.dao.goodsdao.GoodsDao;
 import com.zhangmengcong.www.dao.dao.goodsdao.SelectGoodsByInterest;
 import com.zhangmengcong.www.dao.dao.indentdao.IndentDao;
+import com.zhangmengcong.www.dao.dao.message.AddMessageDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.DeleteOrChangeDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.GetGoodsParametersDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.QueryDao;
 import com.zhangmengcong.www.dao.dao.packagingdao.UpdateDao;
-import com.zhangmengcong.www.dao.dao.printdao.AppealPrintDao;
-import com.zhangmengcong.www.dao.dao.printdao.IndentPrintDao;
+import com.zhangmengcong.www.dao.dao.printdao.*;
 import com.zhangmengcong.www.dao.impl.appealdao.GenerateAppealDaoImpl;
 import com.zhangmengcong.www.dao.impl.goodsimpl.SelectGoodsByInterestImpl;
 import com.zhangmengcong.www.dao.impl.indentdaoimpl.IndentDaoImpl;
+import com.zhangmengcong.www.dao.impl.messageimpl.AddMessageDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.DeleteOrChangeDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.GetGoodsParametersDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.QueryDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.UpdateDaoImpl;
-import com.zhangmengcong.www.dao.impl.printdaoimpl.AppealPrintDaoImpl;
-import com.zhangmengcong.www.dao.impl.printdaoimpl.GoodsPrintDaoImpl;
-import com.zhangmengcong.www.dao.dao.printdao.GoodsPrintDao;
-import com.zhangmengcong.www.dao.dao.printdao.PrintDao;
+import com.zhangmengcong.www.dao.impl.printdaoimpl.*;
 import com.zhangmengcong.www.dao.dao.userdao.UserDao;
 import com.zhangmengcong.www.dao.impl.admindaoimpl.AdminDaoImpl;
 import com.zhangmengcong.www.dao.impl.goodsimpl.GoodsDaoImpl;
-import com.zhangmengcong.www.dao.impl.printdaoimpl.IndentPrintDaoImpl;
-import com.zhangmengcong.www.dao.impl.printdaoimpl.PrintDaoImpl;
 import com.zhangmengcong.www.dao.impl.userdaoimpl.UserDaoImpl;
+import com.zhangmengcong.www.po.Message;
 import com.zhangmengcong.www.service.impl.formatserviceimpl.FormatServiceImpl;
+import com.zhangmengcong.www.service.impl.messageserviceimpl.AddMessageServiceImpl;
+import com.zhangmengcong.www.service.impl.messageserviceimpl.DeleteMessageServiceImpl;
+import com.zhangmengcong.www.service.impl.messageserviceimpl.ReplyMessageServicImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintAppealServiceImpl;
 import com.zhangmengcong.www.service.impl.adminimpl.ManageAppealServiceImpl;
 import com.zhangmengcong.www.service.impl.changepageserviceimpl.GoToMainpageServiceImpl;
@@ -38,6 +38,7 @@ import com.zhangmengcong.www.service.impl.goodsserviceimpl.*;
 import com.zhangmengcong.www.service.impl.indentserviceimpl.IndentServiceImpl;
 import com.zhangmengcong.www.service.impl.indentserviceimpl.IntegralServiceImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintIndentServiceImpl;
+import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintMessageServiceImpl;
 import com.zhangmengcong.www.service.impl.userserviceimpl.*;
 import com.zhangmengcong.www.service.service.adminservice.ManageAppealService;
 import com.zhangmengcong.www.service.service.formatservice.FormatService;
@@ -45,15 +46,21 @@ import com.zhangmengcong.www.service.service.generatefileservice.GeneateFileServ
 import com.zhangmengcong.www.service.service.goodsservice.*;
 import com.zhangmengcong.www.service.service.indentservice.IndentService;
 import com.zhangmengcong.www.service.service.indentservice.IntegralService;
+import com.zhangmengcong.www.service.service.messageservice.AddMessageService;
+import com.zhangmengcong.www.service.service.messageservice.DeleteMessageService;
+import com.zhangmengcong.www.service.service.messageservice.ReplyMessageService;
 import com.zhangmengcong.www.service.service.pageservice.GoToMainpageService;
 import com.zhangmengcong.www.service.service.adminservice.AdminBanOrUnbanUserService;
 import com.zhangmengcong.www.service.service.adminservice.BecomeAdminService;
 import com.zhangmengcong.www.service.service.printtableservice.PrintAppealService;
 import com.zhangmengcong.www.service.service.printtableservice.PrintIndentService;
+import com.zhangmengcong.www.service.service.printtableservice.PrintMessageService;
 import com.zhangmengcong.www.service.service.printtableservice.PrintTableService;
 import com.zhangmengcong.www.service.impl.adminimpl.BecomeAdminServiceImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintTableServiceImpl;
 import com.zhangmengcong.www.service.service.userservice.*;
+
+import java.util.Objects;
 
 
 /**
@@ -157,4 +164,13 @@ public class Factory {
      *  关于数据检验的服务
      */
     public FormatService getFormatService(){return new FormatServiceImpl();}
+    /**
+     *  关于用户和商家的互相留言的服务
+     */
+    public MessagePrintDao getMessagePrintDao(){return new MessagePrintDaoImpl(); }
+    public PrintMessageService getPrintMessageService(){return new PrintMessageServiceImpl();}
+    public AddMessageDao getAddMessageDao() {return new AddMessageDaoImpl();}
+    public AddMessageService getAddMessageService(){return new AddMessageServiceImpl();}
+    public ReplyMessageService getReplyMessageService(){return new ReplyMessageServicImpl();}
+    public DeleteMessageService getDeleteMessageService(){return  new DeleteMessageServiceImpl();}
 }

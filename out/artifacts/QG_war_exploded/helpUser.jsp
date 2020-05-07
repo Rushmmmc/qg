@@ -70,8 +70,12 @@
 <body>
 
 <a href="/login.jsp">返回登录页面</a>
-<a href="/DividePageController">返回主页面</a>
-
+<a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageToHelpUser">管理申诉系统</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/Quit">注销</a>
 <h1 align="center" ><font color="#ff1493" >申诉信息将长期留底,消息按时间逆序显示</font></h1>
 
 <div class="panel panel-default">

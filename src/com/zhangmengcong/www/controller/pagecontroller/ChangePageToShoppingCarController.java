@@ -26,7 +26,7 @@ public class ChangePageToShoppingCarController extends HttpServlet {
         String username = (String)session.getAttribute("username");
         Factory factory = new Factory();
         //选择打印买家订单功能
-        request.setAttribute("emps",factory.getPrintIndentService().printIndentService(username,BUYER_FUNCTION,SHOPPING_CAR_FUNCTION));
+        request.setAttribute("emps",factory.getPrintIndentService().printIndentService(0,username,BUYER_FUNCTION,SHOPPING_CAR_FUNCTION));
         try {
             request.getRequestDispatcher("/shoppingCar.jsp").forward(request,response);
         } catch (ServletException e) {

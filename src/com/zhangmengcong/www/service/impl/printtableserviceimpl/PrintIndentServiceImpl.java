@@ -15,12 +15,12 @@ import static com.zhangmengcong.www.constant.IndentConstant.SHOPPING_CAR_FUNCTIO
  */
 public class PrintIndentServiceImpl implements PrintIndentService {
     @Override
-    public List<Indent> printIndentService(String username,int ifSeller,int ifShoppingCar) {
+    public List<Indent> printIndentService(int id,String username,int ifSeller,int ifShoppingCar) {
         Factory factory = new Factory();
         boolean tempIfShoppingCar = false;
         if(ifShoppingCar == SHOPPING_CAR_FUNCTION){
             tempIfShoppingCar = true;
         }
-        return factory.getIndentPrintDao().selectPersonalIndent(username,ifSeller,tempIfShoppingCar);
+        return factory.getIndentPrintDao().selectPersonalIndent(id,username,ifSeller,tempIfShoppingCar);
     }
 }

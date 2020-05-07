@@ -19,7 +19,7 @@ import static com.zhangmengcong.www.constant.IndentConstant.IF_SELLER;
  */
 public class IndentPrintDaoImpl implements IndentPrintDao {
     @Override
-    public List<Indent> selectPersonalIndent(String username,int ifSeller,boolean ifShoppingCar){
+    public List<Indent> selectPersonalIndent(int id,String username,int ifSeller,boolean ifShoppingCar){
         List<Indent> emps =new ArrayList<>();
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -32,7 +32,8 @@ public class IndentPrintDaoImpl implements IndentPrintDao {
             //如果选择打印卖家订单功能
             if(ifSeller == IF_SELLER) {
                 sql = "select * from indent where seller = ? and status != \"购物车\" ";
-            }else{
+            }
+            else{
                 sql = "select * from indent where buyer = ? and status != \"购物车\" ";
                 if(ifShoppingCar){
                     sql = "select * from indent where buyer = ? and status = \"购物车\" ";
@@ -40,6 +41,12 @@ public class IndentPrintDaoImpl implements IndentPrintDao {
             }
             pstmt = conn.prepareStatement(sql + " ORDER BY id desc");
             pstmt.setString(1,username);
+            if(id != 0 ){
+                sql = "select * from indent where id = ?";
+                pstmt = conn.prepareStatement(sql + " ORDER BY id desc");
+                pstmt.setInt(1,id);
+            }
+
             rs = pstmt.executeQuery();
             while(rs.next()){
                 indent = new Indent();

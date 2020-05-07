@@ -63,7 +63,7 @@ public class ChangePageController extends HttpServlet {
         //前往卖家管理订单页面
         if(MANAGE_INDENT.equals(method)){
             //选择打印卖家订单功能
-           request.setAttribute("emps",factory.getPrintIndentService().printIndentService(username,IF_SELLER,0));
+           request.setAttribute("emps",factory.getPrintIndentService().printIndentService(0,username,IF_SELLER,0));
             try {
                 request.getRequestDispatcher("/manageIndent.jsp").forward(request,response);
             } catch (ServletException e) {
@@ -73,7 +73,7 @@ public class ChangePageController extends HttpServlet {
         //前往买家管理订单页面
         if(MANAGE_BUYER_PERSONAL_INDENT.equals(method)){
             //选择打印买家订单功能
-            request.setAttribute("emps",factory.getPrintIndentService().printIndentService(username,BUYER_FUNCTION,0));
+            request.setAttribute("emps",factory.getPrintIndentService().printIndentService(0,username,BUYER_FUNCTION,0));
             try {
                 request.getRequestDispatcher("/manageBuyerPersonalIndent.jsp").forward(request,response);
             } catch (ServletException e) {
@@ -92,13 +92,16 @@ public class ChangePageController extends HttpServlet {
         //前往留言板
         if(MESSAGE_BORAD.equals(method)){
             int ifSeller = Integer.parseInt(request.getParameter("ifSeller"));
-            request.setAttribute("emps",factory.getPrintIndentService().printIndentService(username,ifSeller,0));
+            int id = Integer.parseInt(request.getParameter("id"));
+            session.setAttribute("emps",factory.getPrintIndentService().printIndentService(id,username,ifSeller,0));
+            request.setAttribute("emps2",factory.getPrintMessageService().printMessageService(id));
             try {
-                if(ifSeller == IF_SELLER) {
-                    request.getRequestDispatcher("/sellerCheckMessage.jsp").forward(request, response);
-                }else {
-                    request.getRequestDispatcher("/buyerCheckMessage.jsp").forward(request, response);
-                }
+                String way = request.getParameter("way");
+                    if (ifSeller == IF_SELLER) {
+                        request.getRequestDispatcher("/sellerCheckMessage.jsp").forward(request, response);
+                    } else {
+                        request.getRequestDispatcher("/buyerCheckMessage.jsp").forward(request, response);
+                    }
                 } catch (ServletException e) {
                 e.printStackTrace();
             }

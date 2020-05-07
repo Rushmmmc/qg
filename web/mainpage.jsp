@@ -83,7 +83,7 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=commit">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=commit">管理卖出订单</a>
+<a href="/ChangePageController?method=manageIndent&ifSeller=1">管理卖出订单</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>

@@ -26,7 +26,7 @@ public class GenerateFileServiceImpl implements GeneateFileService {
     @Override
     public void geneateFileService(String username,String path) {
         Factory factory = new Factory();
-        List<Indent> list = factory.getPrintIndentService().printIndentService(username,IF_SELLER,0);
+        List<Indent> list = factory.getPrintIndentService().printIndentService(0,username,IF_SELLER,0);
 
         // 创建excel
         HSSFWorkbook wk = new HSSFWorkbook();

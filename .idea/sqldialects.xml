@@ -6,12 +6,14 @@
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/GoodsDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/SelectGoodsByInterestImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/indentdaoimpl/IndentDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/messageimpl/AddMessageDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/DeleteOrChangeDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/QueryDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/UpdateDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/AppealPrintDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/GoodsPrintDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/IndentPrintDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/MessagePrintDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/PrintDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/userdaoimpl/UserDaoImpl.java" dialect="MySQL" />
   </component>

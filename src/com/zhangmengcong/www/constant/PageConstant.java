@@ -17,4 +17,5 @@ public class PageConstant {
     public static final String MANAGE_BUYER_PERSONAL_INDENT = "manageBuyerPersonalIndent";
     public static final int BUYER_FUNCTION = 0;
     public static final String MESSAGE_BORAD = "messageBoard";
+    public static final String JUMP = "jump";
 }
