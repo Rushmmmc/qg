@@ -8,9 +8,11 @@ package com.zhangmengcong.www.service.service.messageservice;
 public interface DeleteMessageService {
     /**
      *
-     * @param id 要删除消息的id
+     * @param messageId 要删除消息的id
+     * @param indentId 要修改的订单的id
+     * @param ifSeller 选择卖家方删除消息或买家方删除消息
      * @return 提示信息
      */
-    String deleteMessageServiceImpl(int id);
+    String deleteMessageServiceImpl(int messageId,int indentId,int ifSeller);
 
 }

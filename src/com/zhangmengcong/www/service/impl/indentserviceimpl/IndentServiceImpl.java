@@ -45,7 +45,6 @@ public class IndentServiceImpl implements IndentService {
             }
 
                 factory.getDeleteOrChangeDao().deleteOrChange(null, 0, 0, null, null, true, indent);
-            System.out.println(indent);
             }
         //完成订单
         if(FINISH_INDENT.equals(method)){

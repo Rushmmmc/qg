@@ -24,6 +24,7 @@ public class MessageController extends HttpServlet {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
         //获取参数
         int ifReply = Integer.parseInt(request.getParameter("ifReply"));
         int ifSeller = Integer.parseInt(request.getParameter("ifSeller"));
@@ -34,11 +35,12 @@ public class MessageController extends HttpServlet {
         if(ifReply == 1){
            int id = Integer.parseInt(request.getParameter("id"));
            //判断数据格式 判空 进行回复并生成提示信息
-           tipMessage =  factory.getReplyMessageService().replyMessageService(ifSeller,message,id);
+            int indentId = (int)session.getAttribute("indentId");
+           tipMessage =  factory.getReplyMessageService().replyMessageService(ifSeller,message,id,indentId);
         }else {
             //使用留言功能
             Message message1 = new Message();
-            HttpSession session = request.getSession();
+
             Indent indent = ((List<Indent>)session.getAttribute("emps")).get(0);
             if(ifSeller == 1) {
                 message1.setSellerMessage(message);

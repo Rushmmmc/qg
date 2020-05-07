@@ -16,6 +16,5 @@ public class test {
         Factory factory = new Factory();
         String phone = "admin";
 
-       System.out.println(factory.getFormatService().formatService(phone));
     }
 }

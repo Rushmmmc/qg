@@ -37,8 +37,10 @@ public class MessagePrintDaoImpl implements MessagePrintDao {
             message.setBuyerName(rs.getString("buyerName"));
             message.setBeginDate(rs.getTimestamp("beginDate"));
             message.setBuyerMessage(rs.getString("buyerMessage"));
+            message.setBuyerDelete(rs.getInt("buyerDelete"));
             message.setSellerName(rs.getString("sellerName"));
             message.setSellerMessage(rs.getString("sellerMessage"));
+            message.setSellerDelete(rs.getInt("sellerDelete"));
             emps.add(message);
             }
         }catch(Exception e){

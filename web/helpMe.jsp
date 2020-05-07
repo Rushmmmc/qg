@@ -75,7 +75,7 @@
 </head>
 <body>
 
-<a href="/login.jsp">返回登录页面</a>
+<a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=commit">申卖商品</a>
@@ -106,10 +106,10 @@
 <h3><a href="/ChangePageController?method=manageBuyerPersonalIndent" target="_blank">查看订单</a></h3>
 
     <br>
-    <a style="display:none;margin-top: 0px" class="text">订单Id:</a>
+    <a style="display:none;margin-top: 0px" class="text">订单Id:</a><br>
     <input type="text" style="display:none;" class="text" id="id" name="indentId" pattern="^\d{1,8}$" required style="display:none;" />
     <br>
-    <a style="display:none;" class="text">申诉理由:</a>
+    <a style="display:none;" class="text">申诉理由:</a><br>
     <input type="text" class="text"name="reason" id="reason" required  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$"style="display:none;" />
     <br>
     <input type="submit" value="提交"  class="text"  onclick="fun(event)" style="display:none;">
@@ -120,9 +120,8 @@
 
 
 
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading" align="center" ></div>
+
+
 
 </div>
 <div class="font">
@@ -163,12 +162,6 @@
     %>
     </table>
 
-    <c:if test="${not empty requestScope.message}">
-    <Script Language="JavaScript">
-        alert("${requestScope.message}");
-    </Script>
-
-    </c:if>
 
 
 </body>

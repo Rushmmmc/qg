@@ -15,7 +15,8 @@ public class Message {
     private String sellerMessage;
     private Timestamp beginDate;
     private int indentId;
-
+    private int buyerDelete;
+    private int sellerDelete;
     public String getBuyerMessage() {
         return buyerMessage;
     }
@@ -68,6 +69,22 @@ public class Message {
         return indentId;
     }
 
+    public int getBuyerDelete() {
+        return buyerDelete;
+    }
+
+    public void setBuyerDelete(int buyerDelete) {
+        this.buyerDelete = buyerDelete;
+    }
+
+    public int getSellerDelete() {
+        return sellerDelete;
+    }
+
+    public void setSellerDelete(int sellerDelete) {
+        this.sellerDelete = sellerDelete;
+    }
+
     public void setIndentId(int indentId) {
         this.indentId = indentId;
     }
@@ -82,6 +99,8 @@ public class Message {
                 ", sellerMessage='" + sellerMessage + '\'' +
                 ", beginDate=" + beginDate +
                 ", indentId=" + indentId +
+                ", buyerDelete=" + buyerDelete +
+                ", sellerDelete=" + sellerDelete +
                 '}';
     }
 }

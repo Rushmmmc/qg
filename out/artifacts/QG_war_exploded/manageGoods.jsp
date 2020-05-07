@@ -161,10 +161,10 @@
 
 
     <br>
-    <a style="display:none;margin-top: 0px" class="text">卖家用户名:</a>
+    <a style="display:none;margin-top: 0px" class="text">卖家用户名:</a><br>
     <input type="text" style="display:none;" class="text" name="username" id="username" required style="display:none;" />
     <br>
-    <a style="display:none;" class="text">封禁/解封理由:</a>
+    <a style="display:none;" class="text">封禁/解封理由:</a><br>
     <input type="text" class="text" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="reason" id="reason" required style="display:none;" />
     <br>
     <input type="submit" value="提交"  onclick="fun2(event)" class="text" style="display:none;">
@@ -208,7 +208,7 @@
         <td><%=goods.getStatus()%></td>
         <td><a href="#" onclick="fun3(event,<%=goods.getId()%>)">通过</a>
             <a>/</a>
-            <a href="#" onclick="fun4(event,<%=goods.getId()%>)">删除</a>
+            <a href="#" onclick="fun4(event,<%=goods.getId()%>)">删除商品</a>
 
 
     <tr>

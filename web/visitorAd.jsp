@@ -83,8 +83,7 @@
 
 
 
-
-<body >
+<body>
 
 <a href="/login.jsp">登录</a>
 <a>&nbsp&nbsp&nbsp</a>
@@ -114,7 +113,7 @@
             <span><%=goods.getPrice()%>元</span>
             <a align="center" href="/login.jsp" >登录后购买</a>
             <a>&nbsp&nbsp&nbsp</a>
-            <a href="/login.jsp">登录后购物车</a>
+            <a href="/login.jsp">登录后加入购物车</a>
         </div>
         <div style="margin-top:50px ">
             <p> </p>

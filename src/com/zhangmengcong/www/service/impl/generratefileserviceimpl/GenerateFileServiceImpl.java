@@ -69,7 +69,6 @@ public class GenerateFileServiceImpl implements GeneateFileService {
             }
         }
 
-        System.out.println();
         File file = new File(path+"/data/");
 
         if (!file.exists()) {

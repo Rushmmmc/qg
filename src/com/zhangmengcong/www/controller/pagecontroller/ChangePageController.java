@@ -93,10 +93,10 @@ public class ChangePageController extends HttpServlet {
         if(MESSAGE_BORAD.equals(method)){
             int ifSeller = Integer.parseInt(request.getParameter("ifSeller"));
             int id = Integer.parseInt(request.getParameter("id"));
+            session.setAttribute("indentId",id);
             session.setAttribute("emps",factory.getPrintIndentService().printIndentService(id,username,ifSeller,0));
             request.setAttribute("emps2",factory.getPrintMessageService().printMessageService(id));
             try {
-                String way = request.getParameter("way");
                     if (ifSeller == IF_SELLER) {
                         request.getRequestDispatcher("/sellerCheckMessage.jsp").forward(request, response);
                     } else {

@@ -32,4 +32,11 @@ public class UpdateDaoImpl implements UpdateDao {
             JdbcUtil.close(ptst, conn);
         }
     }
+
+    @Override
+    public void updateDao(String table, String column1, String content1, String condition, String actualCondition) {
+        updateDao(table,column1,content1,null,null,condition,actualCondition);
+    }
+
+
 }

@@ -30,7 +30,6 @@ public class AddMessageServiceImpl implements AddMessageService {
         message.setBuyerName(indent.getBuyer());
         message.setSellerName(indent.getSeller());
         message.setIndentId(indent.getId());
-        System.out.println(message);
         boolean ifbuyerNameWrong = factory.getFormatService().formatService(message.getBuyerName());
         if(ifbuyerNameWrong){
             return "买家名格式错误┭┮﹏┭┮";
@@ -51,13 +50,20 @@ public class AddMessageServiceImpl implements AddMessageService {
                 return "消息不可包含特殊符号┭┮﹏┭┮";
             }
         }
-        if(factory.getAddMessageDao().addNewMessageDao(message)){
-            factory.getUpdateDao().updateDao("indent","buyerMessage","\"已留言\"",null,null,"id",String.valueOf(indent.getId()));
-            return "留言成功！";
+        if(message.getBuyerMessage() != null ) {
+            if (factory.getAddMessageDao().addNewMessageDao(message)) {
+                factory.getUpdateDao().updateDao("indent", "buyerMessage", "\"已留言\"", null, null, "id", String.valueOf(indent.getId()));
+                return "留言成功！";
+            }
         }
-        else {
+        if(message.getSellerMessage() != null){
+            if (factory.getAddMessageDao().addNewMessageDao(message)) {
+                factory.getUpdateDao().updateDao("indent", "sellerMessage", "\"已留言\"", null, null, "id", String.valueOf(indent.getId()));
+                return "留言成功！";
+            }
+        }
             return "留言失败！";
-        }
+
     }
 
 }

@@ -24,7 +24,6 @@ public class AdminManageAppealController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String type = request.getParameter("type");
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(type+id);
         //处理申诉 判断数据格式 并返回提示信息
         String message = factory.getManageAppealService().manageAppealService(type,id);
         response.getWriter().write(message);

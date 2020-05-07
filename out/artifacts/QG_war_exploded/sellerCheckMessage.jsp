@@ -98,7 +98,7 @@
 </head>
 <body>
 
-<a href="/login.jsp">返回登录页面</a>
+<a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=commit">申卖商品</a>
@@ -113,15 +113,16 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/Quit">注销</a>
 
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading" align="center" ></div>
+
+<h2><STRONG><p  align="center"><font color="#ff1493">商家面板</font></p></STRONG></h2>
     <h2><STRONG><p  align="center"><font color="#ff1493">订单信息</font></p></STRONG></h2>
 </div>
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
         <tr>
             <th>订单id</th>
+            <th>买家</th>
+            <th>卖家</th>
             <th>商品名称</th>
             <th>商品单价</th>
             <th>买入数量</th>
@@ -139,6 +140,8 @@
             for (Indent indent :emps){
         %>
         <tr><td><%=indent.getId()%></td>
+            <td><%=indent.getBuyer()%></td>
+            <td><%=indent.getSeller()%></td>
             <td><%=indent.getGoodsName()%></td>
             <td><%=indent.getPrice()%></td>
             <td><%=indent.getAmount()%></td>
@@ -146,7 +149,7 @@
             <td><%=indent.getUseIntegral()%></td>
             <td><%=indent.getActuallyPrice()%></td>
             <td><%=indent.getReputation()%></td>
-            <td><a href="/ChangePageController?method=manageBuyerPersonalIndent">返回总订单</a></td>
+            <td><a href="/ChangePageController?method=manageIndent">返回总订单</a></td>
         <tr>
                 <%
         }
@@ -161,25 +164,8 @@
 
 
 
-<form method="post" align="center">
-    <select id="operate" name="operate" class="text"  >
-        <option value="0">留言</option>
-        <option value="1">回复</option>
-    </select>
-    <br>
-    回复信息id(新增留言则可不填)
-    <br>
-    <input type="text" id="id">
-    <br>
-    文本信息
-    <br>
-    <input type="text" id="message">
-    <br>
-    <input type="submit" onclick="fun2(event,${sessionScope.emps.get(0).id})">
-</form>
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading" align="center" ></div>
+
+
     <h2><STRONG><p  align="center"><font color="#ff1493">关于订单号${sessionScope.emps.get(0).id}的留言板</font></p></STRONG></h2>
 </div>
 <div class="font">
@@ -196,11 +182,15 @@
         <%
             List<Message> emps2 = (List<Message>)request.getAttribute("emps2");
             for(Message message : emps2){
+                if(message.getSellerDelete() == 1)
+                {
+                    continue;
+                }
         %>
         <tr><td><%=message.getId()%></td>
             <td><%=message.getSellerMessage()%></td>
             <td><%=message.getBuyerMessage()%></td>
-            <td><a href="/DeleteMessageController?method=buyerDeleteMessage&id=<%=message.getId()%>&ifSeller=0">清除留言</a></td>
+            <td><a href="/DeleteMessageController?method=sellerDeleteMessage&id=<%=message.getId()%>&ifSeller=1">清除留言</a></td>
         <tr>
                 <%
         }
@@ -212,6 +202,22 @@
     </table>
 
 </div>
+<form method="post" align="center">
+    <select id="operate" name="operate" class="text"  >
+        <option value="0">留言</option>
+        <option value="1">回复</option>
+    </select>
+    <br>
+    回复信息id(新增留言则可不填)
+    <br>
+    <input type="text" id="id">
+    <br>
+    文本信息
+    <br>
+    <input type="text" id="message">
+    <br>
+    <input type="submit" onclick="fun2(event,${sessionScope.emps.get(0).id})">
+</form>
 
 
 

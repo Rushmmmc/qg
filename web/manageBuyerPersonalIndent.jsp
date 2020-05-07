@@ -223,8 +223,8 @@
     </script>
 </head>
 <body>
-<body >
-<a href="/login.jsp">返回登录页面</a>
+
+<a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=commit">申卖商品</a>
@@ -238,25 +238,25 @@
 <a href="/ChangePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/Quit">注销</a>
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading" align="center" ></div>
-    <STRONG><p align="center">用户购买订单</p></STRONG>
+
+<br><br><br>
+    <h1 align="center"><font color="purple">用户购买订单</font></h1>
+<br><br><br>
 </div>
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
         <tr>
             <th>Id</th>
             <th>商品名称</th>
-            <th>购买者</th>
+            <th>购买者<a>&nbsp</a></th>
             <th>出售者</th>
             <th>单价</th>
-            <th>数量</th>
+            <th>数量<a>&nbsp</a></th>
             <th>总价</th>
-            <th>使用积分</th>
-            <th>实际付款</th>
+            <th>使用积分<a>&nbsp</a></th>
+            <th>实际付款<a>&nbsp</a></th>
             <th>订单状态</th>
-            <th>评价</th>
+            <th>评价<a>&nbsp</a></th>
             <th>管理</th>
         </tr>
         <!--通过循环 显示信息-->
@@ -292,11 +292,11 @@
             <a onclick="fun3(event,<%=indent.getId()%>)" href="#" >取消(删除)订单</a>
                 <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp</a>
-                    <a href="/ChangePageController?method=messageBoard&ifSeller=0">商家给您留言啦,请打开留言板</a>
+                    <a href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>">商家给您留言啦,请打开留言板</a>
                 </c:if>
 
                     <a>&nbsp&nbsp&nbsp&nbsp</a>
-                    <a o href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>">前往留言</a>
+                    <a  href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>">前往留言</a>
 
 
             </td>

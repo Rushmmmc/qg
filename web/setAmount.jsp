@@ -9,6 +9,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
 <html>
 <head>
     <title>购买</title>
@@ -60,8 +62,8 @@
 
 
 </head>
-<body>
-<a href="/login.jsp">返回登录页面</a>
+<body style="background-color: plum">
+<a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=commit">申卖商品</a>
@@ -79,9 +81,9 @@
 
 <form    method="post" align="center">
     <h1 >感谢使用QG闲鱼</h1>
-    <font color="green">您购买的商品为<p>商家<font color="purple">${sessionScope.goods.seller}
+    <h2><font color="green">您购买的商品为<p>商家<font color="purple">${sessionScope.goods.seller}
     </font>的</p><p><font color="#00bfff">${sessionScope.goods.goodsName}</font></p></font>
-    <p>单价为<font color="#8a2be2">${sessionScope.goods.price}元</font></p>
+    <p>单价为<font color="#8a2be2">${sessionScope.goods.price}元</font></p></h2>
     购买数量:<input type="text"  id="tempAmount" name="tempAmount" value="1" pattern="^\d{1,10}$" required/>
     <br>
     使用积分:<input type="text"  id="integral" name="integral" value="0" pattern="^\d{1,10}$" required/>

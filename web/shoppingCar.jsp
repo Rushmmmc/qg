@@ -7,6 +7,8 @@
   Time: 20:06
   To change this template use File | Settings | File Templates.
 --%>
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
@@ -26,8 +28,8 @@
     </script>
 </head>
 <body>
-<body >
-<a href="/login.jsp">返回登录页面</a>
+
+<a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=commit">申卖商品</a>
@@ -43,9 +45,8 @@
 <a href="/Quit">注销</a>
 
 
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading" align="center" ></div>
+
+
     <STRONG><p align="center">用户购物车</p></STRONG>
 </div>
 <div class="font">

@@ -23,7 +23,7 @@
 
 
 
-<body >
+<body>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/login.jsp">登录</a>
 <a>&nbsp&nbsp&nbsp</a>
@@ -111,32 +111,31 @@
 
 
 
-<% int i = 1;%>
-<form align="center" style="margin-top:650px; margin-right: auto ">
+<% int i = 1;
+
+%>
+<form align="center" style="margin-top:650px; ">
     <nav  aria-label="Page navigation" >
         <ul class="pagination">
             <li>
-                <a href="/DivedePageController?currentPage=<%if(i!=1) --i;%><%=i%>
+                <a href="/DividePageController?currentPage=<%if(i!=1) --i;%><%=i%>
 &rows=3&goodsNames=${requestScope.textMessage.goodsName}
 &type=${requestScope.textMessage.type}&seller=${requestScope.textMessage.seller}&rangeMin=${requestScope.dp.minPrice}
 &rangeMax=${requestScope.dp.maxPrice}&rank=${requestScope.dp.rank}" aria-label="Next">        <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li><a href="/DividePageController?currentPage=1&rows=3&goodsNames=${requestScope.textMessage.goodsName}
+            <%
+                int j=1;
+                for( ;j <= dp.getPb().getTotalPage();j++)
+                {
+            %>
+            <li><a href="/DividePageController?currentPage=<%=j%>&rows=3&goodsNames=${requestScope.textMessage.goodsName}
 &type=${requestScope.textMessage.type}&seller=${requestScope.textMessage.seller}&rangeMin=${requestScope.dp.minPrice}
-&rangeMax=${requestScope.dp.maxPrice}&rank=${requestScope.dp.rank}">1</a></li>
-            <li><a href="/DividePageController?currentPage=2&rows=3&goodsNames=${requestScope.textMessage.goodsName}
-&type=${requestScope.textMessage.type}&seller=${requestScope.textMessage.seller}&rangeMin=${requestScope.dp.minPrice}
-&rangeMax=${requestScope.dp.maxPrice}&rank=${requestScope.dp.rank}">2</a></li>
-            <li><a href="/DividePageController?currentPage=3&rows=3&goodsNames=${requestScope.textMessage.goodsName}
-&type=${requestScope.textMessage.type}&seller=${requestScope.textMessage.seller}&rangeMin=${requestScope.dp.minPrice}
-&rangeMax=${requestScope.dp.maxPrice}&rank=${requestScope.dp.rank}">3</a></li>
-            <li><a href="/DividePageController?currentPage=4&rows=3&goodsNames=${requestScope.textMessage.goodsName}
-&type=${requestScope.textMessage.type}&seller=${requestScope.textMessage.seller}&rangeMin=${requestScope.dp.minPrice}
-&rangeMax=${requestScope.dp.maxPrice}&rank=${requestScope.dp.rank}">4</a></li>
-            <li><a href="/DividePageController?currentPage=5&rows=3&goodsNames=${requestScope.textMessage.goodsName}
-&type=${requestScope.textMessage.type}&seller=${requestScope.textMessage.seller}&rangeMin=${requestScope.dp.minPrice}
-&rangeMax=${requestScope.dp.maxPrice}&rank=${requestScope.dp.rank}">5</a></li>
+&rangeMax=${requestScope.dp.maxPrice}&rank=${requestScope.dp.rank}"><%=j%></a></li>
+
+            <%
+                }
+            %>
             <li>
                 <a href="/DividePageController?currentPage=<%if(i!=pb.getTotalPage()) ++i;%><%=i%>
 &rows=3&goodsNames=${requestScope.textMessage.goodsName}
@@ -145,7 +144,7 @@
 
                     <span aria-hidden="true">&raquo;</span>
                 </a>
-            </li>
+            </li><br>
             <h2><font color="aqua">共<%=pb.getTotalCount()%>条信息,共<%=pb.getTotalPage()%>页</font></h2>
 
         </ul>
@@ -156,8 +155,6 @@
 
 
 
-
-<%--</table>--%>
 
 
 </body>

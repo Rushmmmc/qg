@@ -6,12 +6,14 @@
   Time: 23:54
   To change this template use File | Settings | File Templates.
 --%>
+<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>mc的救赎系统</title>
 </head>
-<body bgcolor="#00bfff">
+<body>
 <a href="/login.jsp">返回登录页面</a>
 <form   action="/ForgetPasswordController" method="post" align="center"  >
 

@@ -175,12 +175,7 @@
     return;
     }
     if (flag_i  ) {
-    // $.ajax({
-    //     url: "/ChangePageController?method=manageBuyerPersonalIndent",
-    //     type: "POST",
-    //     dataType: 'html',
-    //     data: "id=" + id+"&ifSeller=0",
-    // });
+
     location.href = "/ChangePageController?method=manageIndent&id="+id+"&ifSeller=1";
     }
     }
@@ -190,7 +185,7 @@
 </head>
 <body>
 <body >
-<a href="/login.jsp">返回登录页面</a>
+<a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=commit">申卖商品</a>
@@ -226,13 +221,11 @@
 
 
 
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading" align="center" >
-        <a  href="/GenerateXlsIndentController"><font><p>一键生成订单xls文件并下载</p></font></a>
 
-    </div>
-    <STRONG><p align="center">商家管理商品订单</p></STRONG>
+
+       <h3> <a align="center" href="/GenerateXlsIndentController"><font><p>一键生成订单xls文件并下载</p></font></a> </h3>
+
+    <h1 align="center"><font color="purple">商家管理商品订单</font></h1>
     </div>
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
@@ -272,7 +265,7 @@
             <td><a  onclick="fun3(event,<%=indent.getId()%>)" href="#">发货</a>
                 <c:if test='<%=!(indent.getBuyerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                    <a href="/ChangePageController?method=messageBoard&ifSeller=1">用户给您留言啦,请打开留言板</a>
+                    <a href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>">用户给您留言啦,请打开留言板</a>
                 </c:if>
                 <a o href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>">前往留言</a>
         </td>

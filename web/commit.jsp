@@ -11,6 +11,8 @@
 <html>
 <head>
     <title>用户提交商品页面</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script>
         function fun(event) {
@@ -71,9 +73,9 @@
 
 
 </head>
-<body>
+<body style="background-color: plum">
 
-<a href="/login.jsp">返回登录页面</a>
+<a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController?method=commit">申卖商品</a>

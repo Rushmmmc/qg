@@ -22,14 +22,25 @@ public class AddMessageDaoImpl implements AddMessageDao {
         try {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnetction();
-            sql = "insert into message (indentId,buyerName,sellerName,buyerMessage)" +
-                    "values (?,?,?,?)";
+            if(message.getBuyerMessage() == null){
+                sql = "insert into message (indentId,buyerName,sellerName,sellerMessage)" +
+                        "values (?,?,?,?)";
+            }
+            else {
+                sql = "insert into message (indentId,buyerName,sellerName,buyerMessage)" +
+                        "values (?,?,?,?)";
+            }
             ptst = conn.prepareStatement(sql);
             //预编译 防注入
             ptst.setInt(1, message.getIndentId());
             ptst.setString(2, message.getBuyerName());
             ptst.setString(3, message.getSellerName());
-            ptst.setString(4, message.getBuyerMessage());
+            if(message.getBuyerMessage() == null){
+                ptst.setString(4, message.getSellerMessage());
+            }
+            else {
+                ptst.setString(4, message.getBuyerMessage());
+            }
             ifSuccess = ptst.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
