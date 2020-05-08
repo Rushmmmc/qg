@@ -76,8 +76,8 @@
 
 
 
-
-    <STRONG><p align="center">用户购物车</p></STRONG>
+    <br><br><br>
+    <h2><STRONG><p align="center"><font color="#00bfff">用户购物车</font></p></STRONG></h2>
 </div>
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">

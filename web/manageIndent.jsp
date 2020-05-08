@@ -175,7 +175,23 @@
         document.getElementById("amount").value = amount;
     }
 
+    function fun8(event,indentId,recommend) {
+        event.preventDefault();
 
+            $.ajax({
+                url: "/GoodsRecommendController",
+                type: "POST",
+                dataType: 'html',
+                data: "indentId=" + indentId+"&recommend="+recommend,
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageIndent&id="+indentId+"&ifSeller=1";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+    }
 
 
 
@@ -225,7 +241,8 @@
             <th>使用积分</th>
             <th>实际付款</th>
             <th>订单状态</th>
-            <th>评价</th>
+            <th>好/差评</th>
+            <th>详细评价</th>
             <th>操作</th>
         </tr>
         <!--通过循环 显示信息-->
@@ -247,10 +264,18 @@
             <td><%=indent.getActuallyPrice()%></td>
             <td><%=indent.getStatus()%></td>
             <td><%=indent.getReputation()%></td>
+            <td><%=indent.getEvaluate()%>
+                <c:if test='<%=!indent.getEvaluate().contains("暂无")%>'>
+                    <a  onclick="fun8(event,<%=indent.getId()%>,'<%=indent.getEvaluate()%>')" href="#" )>
+                        <font color="red">把该评价设为商品推荐信息</font></a>
+                </c:if>
+
+
+            </td>
             <td><a  onclick="fun3(event,<%=indent.getId()%>)" href="#">发货</a>
                 <c:if test='<%=!(indent.getBuyerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-                    <a href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>">用户给您留言啦,请打开留言板</a>
+                    <a href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>"><font color="#ff1493">用户给您留言啦,请打开留言板</font></a>
                 </c:if>
                 <a  href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>"><font color="#8a2be2">前往留言</font></a>
                 <a  href="#" onclick="appear(event,<%=indent.getId()%>,'<%=indent.getGoodsName()%>',

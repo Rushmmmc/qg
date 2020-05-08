@@ -6,7 +6,8 @@ package com.zhangmengcong.www.constant;
  * @date: 2020/4/30 10:50
  */
 public class GoodsConstant {
-    public static final String ADD_GOODS_SUCCESS = "上报商品成功！管理员正在审核中,马上就有结果啦";
+    public static final String ADD_GOODS_SUCCESS = "接下来请您添加商品图片！";
+    public static final String ADD_PHOTO_SUCCESS = "管理员正在火速审核中！";
     public static final String ADD_GOODS_FAIL = "添加商品失败！";
     public static final String  POSITIVE_SEQUENCE = "positiveSequence";
     public static final String  INVERTED_SEQUENCE = "invertedSequence";

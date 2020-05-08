@@ -95,25 +95,6 @@
 <h1 align="center" ><font color="#ff1493" >申诉信息将长期留底,消息按时间逆序显示</font></h1>
 
 
-<div id="1" style="display: none">
-<FORM align="center"   method="post" >
-
-
-    <select id="type" name="type" class="text"  >
-        <option value="投诉商家">投诉商家</option>
-        <option value="交易维权">交易维权</option>
-    </select>
-
-    <br>
-    <a style="display:none;margin-top: 0px" class="text">订单Id:</a><br>
-    <input type="text"  class="text" id="id" name="indentId" pattern="^\d{1,8}$" required  />
-    <br>
-    <a  class="text">申诉理由:</a><br>
-    <input type="text" class="text"name="reason" id="reason" required  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" />
-    <br>
-    <input type="submit" value="提交"  class="text"  onclick="fun(event)" >
-</FORM>
-</div>
 
 
 
@@ -136,7 +117,7 @@
             <th>内容</th>
             <th>申诉状态</th>
             <th>申诉时间</th>
-            <th>管理员留言</th>
+
         </tr>
         <!--通过循环 显示信息-->
 
@@ -154,7 +135,7 @@
             <td><%=appeal.getReason()%></td>
             <td><%=appeal.getStatus()%></td>
             <td><%=appeal.getAppealDate()%></td>
-            <td><%=appeal.getMessage()%></td>
+
 
         <tr>
 
@@ -164,6 +145,26 @@
     </table>
 </div>
 <br><br><br><br>
+
+<div id="1" style="display: none">
+    <FORM align="center"   method="post" >
+
+
+        <select id="type" name="type" class="text"  >
+            <option value="投诉商家">投诉商家</option>
+            <option value="交易维权">交易维权</option>
+        </select>
+
+        <br>
+        <a style="display:none;margin-top: 0px" class="text">订单Id:</a><br>
+        <input type="text"  class="text" id="id" name="indentId" pattern="^\d{1,8}$" required  />
+        <br>
+        <a  class="text">申诉理由:</a><br>
+        <input type="text" class="text"name="reason" id="reason" required  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" />
+        <br>
+        <input type="submit" value="提交"  class="text"  onclick="fun(event)" >
+    </FORM>
+</div>
 <h2 align="center"><font  color="#8a2be2">您的订单</font></h2>
     <div class="font">
         <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">

@@ -18,4 +18,11 @@ public interface IndentService {
      */
     String indentSelectMethod(String method,int id,Indent indent,String message,String username);
 
+    /**
+     *
+     * @param evaluate 评价
+     * @param indentId 订单id
+     * @return 提示信息
+     */
+    String userEvaluateIndent(String evaluate,int indentId);
 }

@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/SelectGoodsByInterestImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/indentdaoimpl/IndentDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/messageimpl/AddMessageDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/DeleteDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/DeleteOrChangeDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/QueryDaoImpl.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/UpdateDaoImpl.java" dialect="GenericSQL" />

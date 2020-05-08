@@ -86,8 +86,12 @@
 
 
     <div style="float: left;margin-left: 70px;margin-bottom: 50px;margin-top: 30px;" class="box">
-        <img src="./img/1.jpg">
-
+        <c:if test='<%=!goods.getPhotoPath().contains("暂无")%>'>
+            <img src="/photo/<%=goods.getPhotoPath()%>" height="400" width="200">
+        </c:if>
+        <c:if test='<%=goods.getPhotoPath().contains("暂无")%>'>
+            <img src="./img/1.jpg" height="400" width="200">
+        </c:if>
         <p class="review"><%=goods.getImformation()%> </p>
         <div class="appraise">来自用户<%=goods.getSeller()%>的二手商品
             信誉分:<font color="red"><%=goods.getSellerReputation()%></font></div>

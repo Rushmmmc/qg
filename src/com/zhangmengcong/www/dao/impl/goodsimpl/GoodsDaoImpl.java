@@ -42,6 +42,4 @@ public class GoodsDaoImpl implements GoodsDao {
         }
         return count == 1;
     }
-
-
 }

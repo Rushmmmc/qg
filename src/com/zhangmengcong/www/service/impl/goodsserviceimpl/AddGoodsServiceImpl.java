@@ -17,18 +17,39 @@ public class AddGoodsServiceImpl implements AddGoodsService {
     public String addGoodsService(Goods goods) {
         Factory factory = new Factory();
         boolean ifNameFormatError = factory.getFormatService().ifIncludeSymbol(goods.getGoodsName());
+        if(ifNameFormatError){
+            return "商品名不可为空或包含特殊符号";
+        }
+
         boolean ifTypeFormatError = factory.getFormatService().ifIncludeSymbol(goods.getType());
+        if(ifTypeFormatError){
+            return "商品类型不可为空或包含特殊符号";
+        }
+
         boolean ifPriceFormatError = factory.getFormatService().formatService(String.valueOf(goods.getPrice()));
+        if(ifPriceFormatError){
+            return "商品价格仅支持整数";
+        }
+
+
         boolean ifAmountFormatError = factory.getFormatService().formatService(String.valueOf(goods.getAmount()));
+        if(ifAmountFormatError){
+            return "商品数量仅支持整数";
+        }
+
         boolean ifMessageFormatError = factory.getFormatService().ifIncludeSymbol(goods.getImformation());
-        boolean ifFormatError = ifAmountFormatError || ifNameFormatError || ifPriceFormatError || ifMessageFormatError || ifTypeFormatError;
-        if (!ifFormatError) {
-            if (factory.getGoodsDao().addGoods(goods)) {
+        if(ifMessageFormatError){
+            return "商品信息不可包含特殊符号";
+        }
+        String checkGoodsNameIfExist = factory.getQueryDao().queryDao("goodsName","goods",
+                "goodsName","\""+goods.getGoodsName()+"\"");
+        if(!"".equals(checkGoodsNameIfExist)){
+            return "该商品名已存在！,请更换商品名";
+        }
+        if (factory.getGoodsDao().addGoods(goods)) {
                 return ADD_GOODS_SUCCESS;
             } else {
                 return ADD_GOODS_FAIL;
             }
-        }
-    return "信息格式错误┭┮﹏┭┮";
     }
 }

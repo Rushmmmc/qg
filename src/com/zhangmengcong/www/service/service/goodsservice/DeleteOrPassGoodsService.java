@@ -26,4 +26,10 @@ public interface DeleteOrPassGoodsService {
      * @return 提示信息
      */
     String deleteOrPassGoodsService(int id,int ifDelete);
+
+    /**
+     *
+     * @param goodsName 要删除的商品
+     */
+    void deleteGoodsService(String goodsName);
 }

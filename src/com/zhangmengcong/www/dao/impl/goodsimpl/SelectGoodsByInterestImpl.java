@@ -40,23 +40,25 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
             }
             //如果用户没有购买记录
             if(price == 0 || type == null){
-                String sql2 = "SELECT * FROM goods LIMIT 1,3 ";
+                String sql2 = "SELECT * FROM goods LIMIT 0,3 ";
                 pstmt = conn.prepareStatement(sql2);
                 rs = pstmt.executeQuery();
                 emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
             }else {
-                String sql3 = "SELECT * FROM goods WHERE price >= ? AND price <= ? AND TYPE = ? LIMIT 1,3 ";
+                String sql3 = "SELECT * FROM goods WHERE price >= ? AND price <= ? AND TYPE = ? and status != ? LIMIT 0,3 ";
                 pstmt = conn.prepareStatement(sql3);
                 pstmt.setInt(1,price);
                 pstmt.setInt(2,4*price);
                 pstmt.setString(3,type);
+                pstmt.setString(4,"未审核");
                 rs = pstmt.executeQuery();
                 emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
             }
             //上一次买的类型还是可能没有其他商品了 这时要检测
             if(emps.isEmpty()){
-                String sql4 = "select * from goods limit 1,3";
+                String sql4 = "select * from goods where status != ? limit 0,3";
                 pstmt  = conn.prepareStatement(sql4);
+                pstmt.setString(1,"未审核");
                 rs = pstmt.executeQuery();
                 emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
             }

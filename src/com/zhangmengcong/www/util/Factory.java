@@ -6,19 +6,13 @@ import com.zhangmengcong.www.dao.dao.goodsdao.GoodsDao;
 import com.zhangmengcong.www.dao.dao.goodsdao.SelectGoodsByInterest;
 import com.zhangmengcong.www.dao.dao.indentdao.IndentDao;
 import com.zhangmengcong.www.dao.dao.message.AddMessageDao;
-import com.zhangmengcong.www.dao.dao.packagingdao.DeleteOrChangeDao;
-import com.zhangmengcong.www.dao.dao.packagingdao.GetGoodsParametersDao;
-import com.zhangmengcong.www.dao.dao.packagingdao.QueryDao;
-import com.zhangmengcong.www.dao.dao.packagingdao.UpdateDao;
+import com.zhangmengcong.www.dao.dao.packagingdao.*;
 import com.zhangmengcong.www.dao.dao.printdao.*;
 import com.zhangmengcong.www.dao.impl.appealdao.GenerateAppealDaoImpl;
 import com.zhangmengcong.www.dao.impl.goodsimpl.SelectGoodsByInterestImpl;
 import com.zhangmengcong.www.dao.impl.indentdaoimpl.IndentDaoImpl;
 import com.zhangmengcong.www.dao.impl.messageimpl.AddMessageDaoImpl;
-import com.zhangmengcong.www.dao.impl.packagingdaoimpl.DeleteOrChangeDaoImpl;
-import com.zhangmengcong.www.dao.impl.packagingdaoimpl.GetGoodsParametersDaoImpl;
-import com.zhangmengcong.www.dao.impl.packagingdaoimpl.QueryDaoImpl;
-import com.zhangmengcong.www.dao.impl.packagingdaoimpl.UpdateDaoImpl;
+import com.zhangmengcong.www.dao.impl.packagingdaoimpl.*;
 import com.zhangmengcong.www.dao.impl.printdaoimpl.*;
 import com.zhangmengcong.www.dao.dao.userdao.UserDao;
 import com.zhangmengcong.www.dao.impl.admindaoimpl.AdminDaoImpl;
@@ -72,6 +66,7 @@ public class Factory {
     /**
      * 关于dao层封装方法
      */
+    public DeleteDao getDeleteDao(){return new DeleteDaoImpl();}
     public UpdateDao getUpdateDao(){return new UpdateDaoImpl();}
     public DeleteOrChangeDao getDeleteOrChangeDao(){return new DeleteOrChangeDaoImpl(); }
     public QueryDao getQueryDao(){return new QueryDaoImpl(); }
@@ -140,6 +135,8 @@ public class Factory {
     public GetGoodsParametersDao getGoodsParametersDao(){return new GetGoodsParametersDaoImpl(); }
     public SelectGoodsByInterest getSelectGoodsByInterest(){return new SelectGoodsByInterestImpl(); }
     public GetPriceAndGoodsNameService getGetPriceAndGoodsNameService() {return new GetPriceAndGoodsNameServiceImpl();}
+    public GoodsRecommendService getGoodsRecommendService(){return new GoodsRecommendServiceImpl();}
+    public UpdateGoodsPhotoService getUpdateGoodsPhotoService(){return new UpdateGoodsPhotoServiceImpl();}
     /**
      *  关于订单的服务
      */

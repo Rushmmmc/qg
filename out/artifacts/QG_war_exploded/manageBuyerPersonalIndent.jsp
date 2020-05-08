@@ -97,6 +97,7 @@
             alert("请注意id格式┭┮﹏┭┮");
             return;
         }
+
         if (flag_i  ) {
             $.ajax({
                 url: "ChangeIndentController?method=finishIndent",
@@ -193,6 +194,50 @@
             location.href = "/ChangePageController?method=manageBuyerPersonalIndent&id="+id+"&ifSeller=0";
         }
     }
+
+    function fun8(event) {
+        event.preventDefault();
+        var indentId = document.getElementById("indentId").value;
+        var evaluate = document.getElementById("evaluate").value;
+
+        var log_id = /^\d{1,8}$/;
+        var log_evaluate = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+
+
+        var flag_i = log_id.test(indentId);
+        var flag_l = log_evaluate.test(evaluate);
+
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+        if(!flag_l){
+            alert("评价不可为空或包含特殊符号┭┮﹏┭┮");
+            return;
+        }
+        if (flag_i &&flag_l ) {
+            $.ajax({
+                url: "/AddEvaluateMessage",
+                type: "POST",
+                dataType: 'html',
+                data: "indentId=" + indentId+"&evaluate="+evaluate,
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
+
+    function fun9(event,id) {
+        event.preventDefault();
+        document.getElementById("2").style.display = "block";
+        document.getElementById("indentId").value = id;
+    }
+
 </script>
 
 
@@ -229,6 +274,20 @@
     <h1 align="center"><font color="purple">用户购买订单</font></h1>
 <br><br><br>
 </div>
+
+<div id="2" style="display: none" align="center">
+    <h2><font color="#ff1493">您的评价很可能成为商品的介绍内容</font><br></h2>
+    评价订单id<br>
+    <input type="text" id="indentId"><br>
+    评价内容<br>
+    <input type="text" id="evaluate">
+    <br>
+    <input type="submit" onclick="fun8(event)">
+
+
+</div>
+
+
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
         <tr>
@@ -243,6 +302,7 @@
             <th>实际付款<a>&nbsp</a></th>
             <th>订单状态</th>
             <th>评价<a>&nbsp</a></th>
+            <th>商品详细评价</th>
             <th>管理</th>
         </tr>
         <!--通过循环 显示信息-->
@@ -264,21 +324,26 @@
             <td><%=indent.getActuallyPrice()%></td>
             <td><%=indent.getStatus()%></td>
             <td><%=indent.getReputation()%></td>
+            <td><%=indent.getEvaluate()%></td>
             <td>
                 <c:if test='<%=!(indent.getStatus().contains("完成"))%>'>
                     <a onclick="fun4(event,<%=indent.getId()%>)" href="#">确认收货</a>
                     <a>/</a>
                 </c:if>
                 <c:if test='<%=(indent.getStatus().contains("完成")) && indent.getReputation().contains("暂无")%>'>
+                    <a onclick="fun9(event,<%=indent.getId()%>)" href="#"><font color="red">给商品进行详细评价</font></a>
+                    <a>&nbsp&nbsp</a>
                     <a onclick="fun5(event,<%=indent.getId()%>)" href="#">给好评</a>
+                    <a>&nbsp&nbsp</a>
                     <a onclick="fun6(event,<%=indent.getId()%>)" href="#">给差评</a>
-                    <a>/</a>
+
+
                 </c:if>
 
             <a onclick="fun3(event,<%=indent.getId()%>)" href="#" >取消(删除)订单</a>
                 <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp</a>
-                    <a href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>">商家给您留言啦,请打开留言板<a>&nbsp&nbsp</a></a>
+                    <a href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>"><font color="#ff1493">商家给您留言啦,请打开留言板</font><a>&nbsp&nbsp</a></a>
                 </c:if>
 
                     <a>&nbsp&nbsp&nbsp&nbsp</a>

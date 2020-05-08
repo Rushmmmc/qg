@@ -107,4 +107,20 @@ public class IndentServiceImpl implements IndentService {
         }
     return "操作成功！";
     }
+
+    @Override
+    public String userEvaluateIndent(String evaluate, int indentId) {
+        Factory factory = new Factory();
+
+        boolean ifEvaluateFormatWrong = factory.getFormatService().ifIncludeSymbol(evaluate);
+        if(ifEvaluateFormatWrong){
+            return "评价文字不可包含特殊符号┭┮﹏┭┮";
+        }
+        boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(indentId));
+        if(ifIdFormatWrong){
+            return "id仅支持整数┭┮﹏┭┮";
+        }
+        factory.getUpdateDao().updateDao("indent","evaluate","\""+evaluate+"\"","id",String.valueOf(indentId));
+        return "评价成功( •̀ ω •́ )y";
+    }
 }

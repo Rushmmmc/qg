@@ -34,5 +34,11 @@ public class DeleteOrPassGoodsServiceImpl implements DeleteOrPassGoodsService {
        }
     }
 
+    @Override
+    public void deleteGoodsService(String goodsName) {
+        Factory factory = new Factory();
+        factory.getDeleteDao().deleteDao("goods","goodsName","\""+goodsName+"\"");
+    }
+
 
 }

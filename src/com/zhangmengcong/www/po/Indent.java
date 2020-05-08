@@ -20,6 +20,7 @@ public class Indent {
     private String sellerMessage;
     private int useIntegral;
     private int actuallyPrice;
+    private String evaluate;
     public int getId() {
         return id;
     }
@@ -132,6 +133,14 @@ public class Indent {
         this.goodsType = goodsType;
     }
 
+    public String getEvaluate() {
+        return evaluate;
+    }
+
+    public void setEvaluate(String evaluate) {
+        this.evaluate = evaluate;
+    }
+
     @Override
     public String toString() {
         return "Indent{" +
@@ -149,6 +158,7 @@ public class Indent {
                 ", sellerMessage='" + sellerMessage + '\'' +
                 ", useIntegral=" + useIntegral +
                 ", actuallyPrice=" + actuallyPrice +
+                ", evaluate='" + evaluate + '\'' +
                 '}';
     }
 }

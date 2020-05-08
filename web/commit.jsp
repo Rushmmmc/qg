@@ -15,8 +15,18 @@
     <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script>
-        function fun(event) {
 
+
+
+
+
+
+
+
+
+
+        function fun(event) {
+            event.preventDefault();
             var goodsName = document.getElementById("goodsName").value;
             var type = document.getElementById("type").value;
             var price = document.getElementById("price").value;
@@ -61,8 +71,14 @@
                     dataType: 'html',
                     data: "goodsName=" + goodsName+"&type="+type+"&price="+price+"&amount="+amount+"&imformation="+imformation,
                     success: function (result) {
-                        alert(result);
-                    },
+                        if(result === "该商品名已存在！,请更换商品名"){
+                            alert(result);
+
+                        }else {
+                            alert(result);
+                            location.href = "/commitPhoto.jsp";
+                        }
+                        },
                     error: function (msg) {
                         alert("出错啦")
                     }
@@ -94,6 +110,8 @@
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel},欢迎您成为卖家</font> </h1>
 
 <form   align="center"  method="post" >
+<%--    商品图片<br>--%>
+<%--    <input type="file" style="margin-left: 580px" id="file" accept="image/pjpeg"  >--%>
     商品名称:<input type="text" id="goodsName" name="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$"  required/>
     <br>
     商品类型:<input type="text" id="type" name="type" pattern="^[\u4e00-\u9fa5]+$" required/>

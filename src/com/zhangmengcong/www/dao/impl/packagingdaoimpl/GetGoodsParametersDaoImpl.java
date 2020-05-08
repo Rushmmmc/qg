@@ -2,7 +2,6 @@ package com.zhangmengcong.www.dao.impl.packagingdaoimpl;
 
 import com.zhangmengcong.www.dao.dao.packagingdao.GetGoodsParametersDao;
 import com.zhangmengcong.www.po.Goods;
-import com.zhangmengcong.www.util.Factory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +29,8 @@ public class GetGoodsParametersDaoImpl implements GetGoodsParametersDao {
            goods.setSeller(rs.getString("seller"));
            goods.setId(rs.getInt("id"));
            goods.setStatus(rs.getString("status"));
+           goods.setRecommend(rs.getString("recommend"));
+           goods.setPhotoPath(rs.getString("photoName"));
            emps.add(goods);
        }
        return emps;

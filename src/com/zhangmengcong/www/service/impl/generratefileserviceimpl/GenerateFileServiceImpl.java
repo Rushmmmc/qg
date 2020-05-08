@@ -38,7 +38,7 @@ public class GenerateFileServiceImpl implements GeneateFileService {
         //创建第一行
         //设置表头
         HSSFRow row = sheet.createRow(0);
-        String[] headers = {"订单id","商品名称","购买用户","单价","购买数量","总价","积分抵现","实际付款","商家","状态","评价","用户留言","商家回复"};
+        String[] headers = {"订单id","商品名称","购买用户","单价","购买数量","总价","积分抵现","实际付款","商家","状态","评价","详细评价","用户留言","商家回复"};
         // 设置列宽
         for(int i = 0; i < headers.length; i++){
             sheet.setColumnWidth(i, 5000);
@@ -64,8 +64,9 @@ public class GenerateFileServiceImpl implements GeneateFileService {
                 row.createCell(8).setCellValue(new HSSFRichTextString(indent.getSeller()));
                 row.createCell(9).setCellValue(new HSSFRichTextString(indent.getStatus()));
                 row.createCell(10).setCellValue(new HSSFRichTextString(indent.getReputation()));
-                row.createCell(11).setCellValue(new HSSFRichTextString(indent.getBuyerMessage()));
-                row.createCell(12).setCellValue(new HSSFRichTextString(indent.getSellerMessage()));
+                row.createCell(11).setCellValue(new HSSFRichTextString(indent.getEvaluate()));
+                row.createCell(12).setCellValue(new HSSFRichTextString(indent.getBuyerMessage()));
+                row.createCell(13).setCellValue(new HSSFRichTextString(indent.getSellerMessage()));
             }
         }
 
@@ -80,8 +81,5 @@ public class GenerateFileServiceImpl implements GeneateFileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }

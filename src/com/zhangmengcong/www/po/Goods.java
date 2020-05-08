@@ -7,6 +7,7 @@ package com.zhangmengcong.www.po;
  */
 public class Goods {
     private int id;
+    private String  photoPath;
     private String goodsName;
     private String type;
     private String seller;
@@ -16,6 +17,7 @@ public class Goods {
     private int boughtAmount;
     private int sellerReputation;
     private String status;
+    private String recommend;
 
     public int getId() {
         return id;
@@ -93,14 +95,31 @@ public class Goods {
         return status;
     }
 
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
     }
 
     @Override
     public String toString() {
         return "Goods{" +
                 "id=" + id +
+                ", photoPath='" + photoPath + '\'' +
                 ", goodsName='" + goodsName + '\'' +
                 ", type='" + type + '\'' +
                 ", seller='" + seller + '\'' +
@@ -110,6 +129,7 @@ public class Goods {
                 ", boughtAmount=" + boughtAmount +
                 ", sellerReputation=" + sellerReputation +
                 ", status='" + status + '\'' +
+                ", recommend='" + recommend + '\'' +
                 '}';
     }
 }
