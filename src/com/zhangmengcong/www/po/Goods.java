@@ -7,12 +7,12 @@ package com.zhangmengcong.www.po;
  */
 public class Goods {
     private int id;
-    private String  photoPath;
+    private String photoPath;
     private String goodsName;
     private String type;
     private String seller;
     private String imformation;
-    private int price;
+    private float price;
     private int amount;
     private int boughtAmount;
     private int sellerReputation;
@@ -25,6 +25,22 @@ public class Goods {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
     public String getType() {
@@ -51,11 +67,11 @@ public class Goods {
         this.imformation = imformation;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -75,14 +91,6 @@ public class Goods {
         this.boughtAmount = boughtAmount;
     }
 
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
-
     public int getSellerReputation() {
         return sellerReputation;
     }
@@ -93,14 +101,6 @@ public class Goods {
 
     public String getStatus() {
         return status;
-    }
-
-    public String getPhotoPath() {
-        return photoPath;
-    }
-
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
     }
 
     public void setStatus(String status) {

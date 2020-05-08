@@ -19,6 +19,7 @@ public class FormatServiceImpl implements FormatService {
         if(message == null || message.length() == 0){
             return true;
         }
+        message = replaceNormalSymbol(message);
         Matcher messageChineseMatcher = IF_INCLUDE_CHINESE_PATTERN.matcher(message);
         Matcher messageSymbolMatcher = IF_INCLUDE_SYMBOL.matcher(message);
         return messageChineseMatcher.matches() || !messageSymbolMatcher.matches();
@@ -29,6 +30,7 @@ public class FormatServiceImpl implements FormatService {
         if(message == null || message.length() == 0){
             return true;
         }
+        message = replaceNormalSymbol(message);
         Matcher messageChineseMatcher = IF_INCLUDE_CHINESE_PATTERN.matcher(message);
         Matcher messageSymbolMatcher = IF_MAIL_FORMAT_CORRECT.matcher(message);
         return messageChineseMatcher.matches() || !messageSymbolMatcher.matches() || !message.contains(".com")
@@ -40,8 +42,32 @@ public class FormatServiceImpl implements FormatService {
         if(message == null || message.length() == 0){
             return true;
         }
-
+        message = replaceNormalSymbol(message);
         Matcher messageSymbolMatcher = IF_INCLUDE_SYMBOL.matcher(message);
         return !messageSymbolMatcher.matches();
     }
+
+    @Override
+    public String replaceNormalSymbol(String message) {
+       message =  message.replace(".","");
+       message =  message.replace("。","");
+       message =  message.replace(",","");
+       message =  message.replace("，","");
+       message =  message.replace("!","");
+       message =  message.replace("！","");
+        message =  message.replace("？","");
+        message =  message.replace("?","");
+        return message;
+    }
+
+    @Override
+    public boolean ifRadixPointLessTwo(String message) {
+        if(message == null || message.length() == 0){
+            return true;
+        }
+        Matcher messageMathMatcher = IF_RADIX_POINT_LESS_TWO.matcher(message);
+        return !messageMathMatcher.matches();
+    }
+
+
 }

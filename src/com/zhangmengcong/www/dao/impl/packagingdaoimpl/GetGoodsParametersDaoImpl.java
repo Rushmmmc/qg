@@ -21,7 +21,7 @@ public class GetGoodsParametersDaoImpl implements GetGoodsParametersDao {
        while(rs.next()){
            goods = new Goods();
            goods.setAmount(rs.getInt("amount"));
-           goods.setPrice(rs.getInt("price"));
+           goods.setPrice(rs.getFloat("price"));
            goods.setImformation(rs.getString("imformation"));
            goods.setGoodsName(rs.getString("goodsName"));
            goods.setSellerReputation(rs.getInt("sellerReputation"));

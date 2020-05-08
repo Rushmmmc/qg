@@ -11,4 +11,5 @@ public class FormatConstant {
     public static Pattern IF_INCLUDE_CHINESE_PATTERN = Pattern.compile(".*[\\u4e00-\\u9fa5]{1,}.*");
     public static Pattern IF_INCLUDE_SYMBOL = Pattern.compile("[\\u4E00-\\u9FA5+a-zA-Z0-9_-]{1,50}$");
     public static Pattern IF_MAIL_FORMAT_CORRECT = Pattern.compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+    public static Pattern IF_RADIX_POINT_LESS_TWO = Pattern.compile("(^[0-9]{1,9}$)|(^[0-9]{1,9}[\\.]{1}[0-9]{1,2}$)");
 }

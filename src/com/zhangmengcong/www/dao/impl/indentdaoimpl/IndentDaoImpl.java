@@ -32,12 +32,12 @@ public class IndentDaoImpl implements IndentDao {
             ptst.setString(1, indent.getGoodsName());
             ptst.setString(2, indent.getBuyer());
             ptst.setString(3, indent.getSeller());
-            ptst.setInt(4,indent.getPrice());
+            ptst.setFloat(4,indent.getPrice());
             ptst.setInt(5,indent.getAmount());
-            ptst.setInt(6,indent.getTotalPrice());
+            ptst.setFloat(6,indent.getTotalPrice());
             ptst.setString(7,indent.getStatus());
             ptst.setInt(8,indent.getUseIntegral());
-            ptst.setInt(9,indent.getActuallyPrice());
+            ptst.setFloat(9,indent.getActuallyPrice());
             ptst.setString(10,indent.getGoodsType());
             ptst.executeUpdate();
         } catch (Exception e) {

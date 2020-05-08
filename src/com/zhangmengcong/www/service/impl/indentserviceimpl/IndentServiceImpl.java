@@ -85,7 +85,7 @@ public class IndentServiceImpl implements IndentService {
             boolean ifAmountFormatWrong = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
             boolean ifIntegralFormatWrong = factory.getFormatService().formatService(String.valueOf(indent.getUseIntegral()));
             if(!ifAmountFormatWrong && !ifIntegralFormatWrong) {
-                int totalPrice = indent.getAmount() * indent.getPrice();
+                float totalPrice = indent.getAmount() * indent.getPrice();
                 factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, "商家未接单", "status", false, null);
                 factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(indent.getAmount()), "amount", false, null);
                 factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(totalPrice), "totalPrice", false, null);

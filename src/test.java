@@ -10,11 +10,12 @@ import static com.zhangmengcong.www.constant.FormatConstant.IF_INCLUDE_CHINESE_P
  * @function:
  * @date: 2020/5/4 8:57
  */
-public class test {
-    public static Pattern IF_HAHAHA = Pattern.compile("[\\u4E00-\\u9FA5+a-zA-Z0-9_-]{4,50}$");
+public class    test {
+    public static Pattern IF_HAHAHA = Pattern.compile("(^[0-9]{1,8}$)|(^[0-9]{1,6}[\\.]{1}[0-9]{1,2}$)");
     public static void main(String[] args) {
         Factory factory = new Factory();
-        String phone = "admin";
-
+        String phone = "12.11";
+        Matcher matcher = IF_HAHAHA.matcher(phone);
+        System.out.println(factory.getFormatService().ifRadixPointLessTwo("111111111.111"));
     }
 }

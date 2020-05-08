@@ -32,7 +32,7 @@ public class GoodsDaoImpl implements GoodsDao {
             ptst.setString(3, goods.getSeller());
             ptst.setInt(4,goods.getSellerReputation());
             ptst.setString(5,goods.getImformation());
-            ptst.setInt(6,goods.getPrice());
+            ptst.setFloat(6,goods.getPrice());
             ptst.setInt(7,goods.getAmount());
             count = ptst.executeUpdate();
         } catch (Exception e) {

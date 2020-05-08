@@ -33,7 +33,7 @@
             var amount = document.getElementById("amount").value;
             var imformation = document.getElementById("imformation").value;
 
-            var log_price = /^\d{1,8}$/;
+            var log_price = /(^[0-9]{1,6}$)|(^[0-9]{1,6}[\.]{1}[0-9]{1,2}$)/;
             var log_amount = /^\d{1,8}$/;
             var log_goodsName = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
             var log_type = /^[\u4e00-\u9fa5]+$/;
@@ -53,7 +53,7 @@
                 return;
             }
             if (!flag_p) {
-                alert("商品价格不可为空,仅可包含整数┭┮﹏┭┮");
+                alert("商品价格不可为空或超过十亿元,仅可输入零到两位小数┭┮﹏┭┮");
                 return;
             }
             if (!flag_a) {
@@ -123,8 +123,7 @@
     <br>
     商品信息:<input type="text" id="imformation" name="imformation" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required>
     <br>
-    <input type="submit" onclick="fun(event)" value="提交至管理员审核"><br>
-    <h2 >不支持小数</h2>
+    <input type="submit" style="margin-left: 30px" onclick="fun(event)" value="提交至管理员审核"><br>
 </form>
 
 </body>

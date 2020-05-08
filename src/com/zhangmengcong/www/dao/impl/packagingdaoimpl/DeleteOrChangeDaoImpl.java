@@ -33,11 +33,11 @@ public class DeleteOrChangeDaoImpl implements DeleteOrChangeDao {
             if(ifUseComplexChange){
                 sql = "update indent set GoodsName = ?,price = ?,amount = ?,totalPrice = ? where id = ?";
                 ptst = conn.prepareStatement(sql);
-                int totalPrice = indent.getPrice() * indent.getAmount();
+                float totalPrice = indent.getPrice() * indent.getAmount();
                 ptst.setString(1,indent.getGoodsName());
-                ptst.setInt(2,indent.getPrice());
+                ptst.setFloat(2,indent.getPrice());
                 ptst.setInt(3,indent.getAmount());
-                ptst.setInt(4,totalPrice);
+                ptst.setFloat(4,totalPrice);
                 ptst.setInt(5,indent.getId());
             } else {
                 ptst = conn.prepareStatement(sql);

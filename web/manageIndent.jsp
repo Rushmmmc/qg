@@ -29,7 +29,7 @@
             var amount = document.getElementById("amount").value;
 
             var log_id = /^\d{1,8}$/;
-            var log_price = /^\d{1,8}$/;
+            var log_price = /(^[0-9]{1,6}$)|(^[0-9]{1,6}[\.]{1}[0-9]{1,2}$)/;
             var log_amount = /^\d{1,8}$/;
             var log_goodsName = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
 
@@ -44,7 +44,7 @@
             }
 
             if (!flag_p) {
-                alert("商品价格不可为空,仅可包含整数┭┮﹏┭┮");
+                alert("商品价格不可为空或超过十亿元,仅可输入零到两位小数┭┮﹏┭┮");
                 return;
             }
             if (!flag_a) {

@@ -10,17 +10,18 @@ public class Indent {
     private String buyer;
     private String goodsName;
     private String goodsType;
-    private int price;
+    private float price;
     private String seller;
     private String status;
     private int amount;
-    private int totalPrice;
+    private float totalPrice;
     private String reputation;
     private String buyerMessage;
     private String sellerMessage;
     private int useIntegral;
-    private int actuallyPrice;
+    private float actuallyPrice;
     private String evaluate;
+
     public int getId() {
         return id;
     }
@@ -37,11 +38,27 @@ public class Indent {
         this.buyer = buyer;
     }
 
-    public int getPrice() {
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
+    }
+
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -61,14 +78,6 @@ public class Indent {
         this.status = status;
     }
 
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
-
     public int getAmount() {
         return amount;
     }
@@ -77,12 +86,20 @@ public class Indent {
         this.amount = amount;
     }
 
-    public int getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(String reputation) {
+        this.reputation = reputation;
     }
 
     public String getBuyerMessage() {
@@ -101,14 +118,6 @@ public class Indent {
         this.sellerMessage = sellerMessage;
     }
 
-    public String getReputation() {
-        return reputation;
-    }
-
-    public void setReputation(String reputation) {
-        this.reputation = reputation;
-    }
-
     public int getUseIntegral() {
         return useIntegral;
     }
@@ -117,20 +126,12 @@ public class Indent {
         this.useIntegral = useIntegral;
     }
 
-    public int getActuallyPrice() {
+    public float getActuallyPrice() {
         return actuallyPrice;
     }
 
-    public void setActuallyPrice(int actuallyPrice) {
+    public void setActuallyPrice(float actuallyPrice) {
         this.actuallyPrice = actuallyPrice;
-    }
-
-    public String getGoodsType() {
-        return goodsType;
-    }
-
-    public void setGoodsType(String goodsType) {
-        this.goodsType = goodsType;
     }
 
     public String getEvaluate() {

@@ -38,7 +38,7 @@ public class GoodsCommitController extends HttpServlet {
         goods.setType(request.getParameter("type"));
         goods.setGoodsName(goodsName);
         goods.setImformation(request.getParameter("imformation"));
-        goods.setPrice(Integer.parseInt(request.getParameter("price")));
+        goods.setPrice(Float.parseFloat(request.getParameter("price")));
         goods.setAmount(Integer.parseInt(request.getParameter("amount")));
 
         String message = factory.getAddGoodsService().addGoodsService(goods);

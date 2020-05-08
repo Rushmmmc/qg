@@ -13,7 +13,7 @@ public class GetPriceAndGoodsNameServiceImpl implements GetPriceAndGoodsNameServ
     @Override
     public Goods getPriceAndGoodsNameService(int id) {
         Factory factory = new Factory();
-        int price = Integer.parseInt(factory.getQueryDao().queryDao("price","goods","id",String.valueOf(id)));
+        float price = Float.parseFloat((factory.getQueryDao().queryDao("price","goods","id",String.valueOf(id))));
         String goodsName = factory.getQueryDao().queryDao("goodsName","goods","id",String.valueOf(id));
         String seller = factory.getQueryDao().queryDao("seller","goods","id",String.valueOf(id));
         String type = factory.getQueryDao().queryDao("type","goods","id",String.valueOf(id));
