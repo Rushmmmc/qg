@@ -26,9 +26,10 @@ public class AddGoodsServiceImpl implements AddGoodsService {
             return "商品类型不可为空或包含特殊符号";
         }
 
-        boolean ifPriceFormatError = factory.getFormatService().formatService(String.valueOf(goods.getPrice()));
+        boolean ifPriceFormatError = factory.getFormatService().ifRadixPointLessTwo(String.valueOf(goods.getPrice()));
         if(ifPriceFormatError){
-            return "商品价格仅支持整数";
+            System.out.println(goods.getPrice());
+            return "商品价格仅支持数字";
         }
 
 

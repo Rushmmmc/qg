@@ -37,8 +37,8 @@
                 url:"/uploadPhoto?goodsName=",
                 type:"post",
                 data: formData,
-                contentType: false,
                 processData: false,
+                contentType: false,
                 success: function(data) {
                     if(data === "管理员正在火速审核中！") {
                         alert(data);
@@ -79,7 +79,7 @@
 <form   align="center"  method="post" enctype="multipart/form-data">
 
     <h2 align="center"><a href="javascript:void(0)" onclick="uploadPhoto()">选择图片</a></h2>
-    <input type="file" id="photoFile" style="display: none;" onchange="upload()">
+    <input type="file" accept="image/jpeg"  id="photoFile" style="display: none;" onchange="upload()">
 
     <%--        商品图片<br>--%>
 <%--        <input type="file" style="margin-left: 580px" id="file" accept="image/pjpeg"  >--%>

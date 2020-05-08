@@ -35,9 +35,9 @@ public class IndentServiceImpl implements IndentService {
             if(ifNameFormatError){
                 return "商品名不可包含特殊符号┭┮﹏┭┮";
             }
-            boolean ifPriceFormatError = factory.getFormatService().formatService(String.valueOf(indent.getPrice()));
+            boolean ifPriceFormatError = factory.getFormatService().ifRadixPointLessTwo(String.valueOf(indent.getPrice()));
             if(ifPriceFormatError){
-                return "价格仅支持整数";
+                return "价格仅支持数字";
             }
             boolean ifAmountFormatError = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
             if(ifAmountFormatError){

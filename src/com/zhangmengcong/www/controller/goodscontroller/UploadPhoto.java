@@ -1,4 +1,4 @@
-package com.zhangmengcong.www.dao.impl.goodsimpl;
+package com.zhangmengcong.www.controller.goodscontroller;
 
 import com.zhangmengcong.www.util.Factory;
 import org.apache.commons.fileupload.FileItem;
@@ -9,11 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.HashMap;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Map;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.ADD_PHOTO_SUCCESS;
 
@@ -23,7 +21,7 @@ import static com.zhangmengcong.www.constant.GoodsConstant.ADD_PHOTO_SUCCESS;
  * @date: 2020/5/8 11:11
  */
 @WebServlet("/uploadPhoto")
-public class uploadPhoto extends HttpServlet {
+public class UploadPhoto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("UTF-8");
@@ -49,14 +47,8 @@ public class uploadPhoto extends HttpServlet {
             //可以上传多个文件
             List<FileItem> list = upload.parseRequest(request);
             for (FileItem item : list) {
-                //获取表单的属性名字
-                String name = item.getFieldName();
-                //如果获取的 表单信息是普通的 文本 信息
-                if (item.isFormField()) {
-                    //获取用户具体输入的字符串 ，名字起得挺好，因为表单提交过来的是 字符串类型的
-                    String value = item.getString();
-                    request.setAttribute(name, value);
-                } else {//对传入的非 简单的字符串进行处理 ，比如说二进制的 图片，电影这些
+
+                    //对传入的非 简单的字符串进行处理 ，比如说二进制的 图片，电影这些
                     //获取路径名
                     String value = item.getName();
                     //索引到最后一个反斜杠
@@ -86,7 +78,6 @@ public class uploadPhoto extends HttpServlet {
                     }
                     response.getWriter().write(message);
                 }
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

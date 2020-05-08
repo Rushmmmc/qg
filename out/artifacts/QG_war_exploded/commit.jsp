@@ -71,12 +71,12 @@
                     dataType: 'html',
                     data: "goodsName=" + goodsName+"&type="+type+"&price="+price+"&amount="+amount+"&imformation="+imformation,
                     success: function (result) {
-                        if(result === "该商品名已存在！,请更换商品名"){
-                            alert(result);
-
-                        }else {
+                        if(result === "接下来请您添加商品图片！"){
                             alert(result);
                             location.href = "/commitPhoto.jsp";
+                        }else {
+                            alert(result);
+
                         }
                         },
                     error: function (msg) {

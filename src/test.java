@@ -14,8 +14,8 @@ public class    test {
     public static Pattern IF_HAHAHA = Pattern.compile("(^[0-9]{1,8}$)|(^[0-9]{1,6}[\\.]{1}[0-9]{1,2}$)");
     public static void main(String[] args) {
         Factory factory = new Factory();
-        String phone = "12.11";
+        String phone = "9999.11";
         Matcher matcher = IF_HAHAHA.matcher(phone);
-        System.out.println(factory.getFormatService().ifRadixPointLessTwo("111111111.111"));
+        System.out.println(factory.getFormatService().formatService(phone));
     }
 }
