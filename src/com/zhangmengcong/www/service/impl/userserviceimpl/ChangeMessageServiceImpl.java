@@ -20,10 +20,19 @@ public class ChangeMessageServiceImpl implements ChangeMessageService {
            String mailAddress = user.getMailAddress();
 
            //调用判空和是否包含中文、特殊符合方法 该方法检测包含即为true
-           boolean ifMessageFormatError = factory.getFormatService().formatService(username) || factory.getFormatService().mailFormatService(mailAddress)
-                   || factory.getFormatService().formatService(password);
-           if(ifMessageFormatError){
-               return "信息不能包含中文或特殊符号";
+           boolean ifUsernameFormatWrong = factory.getFormatService().formatService(user.getUsername());
+           if(ifUsernameFormatWrong){
+               return "新用户名不可为空、包含特殊符号";
+           }
+
+           boolean ifPasswordFormatWrong = factory.getFormatService().formatService(password);
+           if(ifPasswordFormatWrong){
+               return "新密码不可为空、包含特殊符号";
+           }
+
+           boolean ifMailAddressWrong = factory.getFormatService().mailFormatService(mailAddress);
+           if(ifMailAddressWrong){
+               return "新邮箱不可包含特殊符号！,不可包含多个@";
            }
            //数据判断长度、格式
            boolean ifMessageLengthError = username.length() < NAME_MIN_LENGTH || password.length() < PASSWORD_MIN_LENGTH || mailAddress.length() < MAIL_MIN_LENGTH
@@ -40,8 +49,18 @@ public class ChangeMessageServiceImpl implements ChangeMessageService {
            if(tempMail.length() != mailAddress.length() - MINUS_LENGTH){
                return "请不要出现多个@或多个com┭┮﹏┭┮";
            }
-
-
+           //检测用户名与邮箱是否存在
+           String tempUsername = factory.getQueryDao().queryDao("username","user","username","\""+user.getUsername()+"\"");
+           //如果用户想修改的用户名已存在并不为现用户名
+           if(!"".equals(tempUsername) && !tempUsername.equals(username)){
+                return "该用户名已存在,换一个吧┭┮﹏┭┮";
+            }
+           String nowMail =  factory.getQueryDao().queryDao("mailaddress","user","username","\""+username+"\"");
+           String tempMail2 = factory.getQueryDao().queryDao("mailaddress","user","mailaddress","\""+mailAddress+"\"");
+           //如果用户想修改的邮箱已存在并不为现用户名
+           if(!"".equals(tempMail2) && !nowMail.equals(tempMail2)){
+               return "该邮箱已存在,换一个吧┭┮﹏┭┮";
+           }
             //检测完再加密
             user.setPassword(factory.getEncode().shaEncode(password));
             if(factory.getUserDao().change(user,username)){

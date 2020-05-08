@@ -31,15 +31,17 @@ public class ChangeMessageController extends HttpServlet {
         user.setPassword(request.getParameter("newpassword"));
         user.setUsername(newUsername);
         user.setMailAddress(request.getParameter("newaddress"));
-
         //调用修改方法 检验数据格式 返回提示信息
         String message = factory.getChangeMessageService().getChangeMessageServiceImpl(user,username);
-            //修改cookie和session否则会出错
-            session.setAttribute("username",newUsername);
+        response.getWriter().write(message);
+
+        //修改成功之后 修改cookie和session否则会出错
+        if (CHANGE_SUCCESS.equals(message)) {
+            session.setAttribute("username", newUsername);
             Cookie cookie = new Cookie("username", newUsername);
             cookie.setMaxAge(60 * 60);
             response.addCookie(cookie);
-            response.getWriter().write(message);
+        }
         //实现修改个人信息功能
 
     }

@@ -30,15 +30,15 @@
             var flag_p = log_password.test(password);
             var flag_m = log_mailaddress.test(mailaddress);
             if(!flag_u){
-                alert("请正确填写用户名┭┮﹏┭┮");
+                alert("用户名不可包含中文与特殊符号┭┮﹏┭┮,长度为4-10");
                 return;
             }
             if(!flag_p){
-                alert("请正确填写密码┭┮﹏┭┮");
+                alert("密码不可包含特殊符号┭┮﹏┭┮,长度为6-10");
                 return;
             }
             if(!flag_m){
-                alert("请正确填写邮箱┭┮﹏┭┮");
+                alert("邮箱不可包含特殊符号┭┮﹏┭┮,长度为4-10");
                 return;
             }
             if (flag_u && flag_p  && flag_m) {

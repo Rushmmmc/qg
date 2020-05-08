@@ -19,7 +19,6 @@ public class FormatServiceImpl implements FormatService {
         if(message == null || message.length() == 0){
             return true;
         }
-        message = replaceNormalSymbol(message);
         Matcher messageChineseMatcher = IF_INCLUDE_CHINESE_PATTERN.matcher(message);
         Matcher messageSymbolMatcher = IF_INCLUDE_SYMBOL.matcher(message);
         return messageChineseMatcher.matches() || !messageSymbolMatcher.matches();
@@ -30,7 +29,6 @@ public class FormatServiceImpl implements FormatService {
         if(message == null || message.length() == 0){
             return true;
         }
-        message = replaceNormalSymbol(message);
         Matcher messageChineseMatcher = IF_INCLUDE_CHINESE_PATTERN.matcher(message);
         Matcher messageSymbolMatcher = IF_MAIL_FORMAT_CORRECT.matcher(message);
         return messageChineseMatcher.matches() || !messageSymbolMatcher.matches() || !message.contains(".com")
