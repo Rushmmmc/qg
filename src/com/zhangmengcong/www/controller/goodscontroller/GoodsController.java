@@ -10,7 +10,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,14 +33,14 @@ public class GoodsController extends BaseServlet {
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         int id = Integer.parseInt(request.getParameter("id"));
-
+        String username = (String) session.getAttribute("username");
         Indent indent = new Indent();
-        indent.setBuyer((String) session.getAttribute("username"));
+        indent.setBuyer(username);
         //将商品id暂存入订单id
         indent.setId(id);
 
         //验证信息并返回提示
-        String message = factory.getBuyGoodsService().buyGoodsService(indent, IF_SHOPPINGCAR);
+        String message = factory.getBuyGoodsService().buyGoodsService(indent, IF_SHOPPINGCAR,username);
         response.getWriter().write(message);
     }
 
@@ -74,7 +73,7 @@ public class GoodsController extends BaseServlet {
             indent.setSeller(goods.getSeller());
 
             //验证数据格式并返回提示信息
-            String message = factory.getBuyGoodsService().buyGoodsService(indent, 0);
+            String message = factory.getBuyGoodsService().buyGoodsService(indent, 0,null);
             response.getWriter().write(message);
         }
     }

@@ -30,7 +30,7 @@ public class UserApplySalesReturnServiceImpl implements UserApplySalesReturnServ
    public String userApplySalesReturnService(int indentId) {
       Factory factory = new Factory();
       String status = factory.getQueryDao().queryDao("status","indent",
-              "id","\""+indentId+"\"");
+              "id",String.valueOf(indentId));
       //如果还未发货
       if(status.contains(INDENT_HAVNOT_START)){
          return "只有发货后才能申请退货┭┮﹏┭┮";
@@ -42,7 +42,7 @@ public class UserApplySalesReturnServiceImpl implements UserApplySalesReturnServ
 
       //无误 进行修改订单状态 提交给商家处理退货
       factory.getUpdateDao().updateDao("indent","status",
-              "'用户申请退货'","id","\""+indentId+"\"");
+              "'用户申请退货'","id",String.valueOf(indentId));
    return  "处理成功";
    }
 
@@ -50,7 +50,7 @@ public class UserApplySalesReturnServiceImpl implements UserApplySalesReturnServ
    public String sellerManageReturnService(int indentId,String type) {
       Factory factory = new Factory();
       String status = factory.getQueryDao().queryDao("status","indent",
-              "id","\""+indentId+"\"");
+              "id",String.valueOf(indentId));
       //如果不是申请退货中
       if(!status.contains(USER_APPLYING_RETURN)){
          return "只有申请退货中才能处理退货┭┮﹏┭┮";
@@ -76,7 +76,7 @@ public class UserApplySalesReturnServiceImpl implements UserApplySalesReturnServ
       }
       if(REJECT_RETURN.equals(type)){
          factory.getUpdateDao().updateDao("indent","status",
-                 "'商家拒绝退货,闲鱼小二介入处理中'","id","\""+indentId+"\"");
+                 "'商家拒绝退货,闲鱼小二介入处理中'","id",String.valueOf(indentId));
         //生成申诉单 让小二处理
          String  sellerName = factory.getQueryDao().queryDao("seller","indent",
                  "id",String.valueOf(indentId));

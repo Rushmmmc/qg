@@ -6,6 +6,7 @@ import com.zhangmengcong.www.service.service.goodsservice.BuyGoodsService;
 import com.zhangmengcong.www.util.Factory;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.IF_SHOPPINGCAR;
+import static com.zhangmengcong.www.constant.IndentConstant.SHOPPING_CAR;
 
 
 /**
@@ -16,11 +17,12 @@ import static com.zhangmengcong.www.constant.GoodsConstant.IF_SHOPPINGCAR;
 public class BuyGoodsServiceImpl implements BuyGoodsService {
 
     @Override
-    public String buyGoodsService(Indent indent, int ifShoppingCar) {
+    public String buyGoodsService(Indent indent, int ifShoppingCar,String username) {
         Factory factory = new Factory();
         //选择购物车功能
         if(ifShoppingCar == IF_SHOPPINGCAR){
             //只传入id 仅需检测id
+            //该id其实是goods id
             boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(indent.getId()));
             if(!ifIdFormatWrong){
                 Goods goods = factory.getGetPriceAndGoodsNameService().getPriceAndGoodsNameService(indent.getId());
@@ -34,9 +36,9 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
                 indent.setStatus("购物车");
                 indent.setLastAmount(goods.getAmount());
                 //检查是否已存在在购物车
-                String goodsName = factory.getQueryDao().queryDao("goodsName","indent","goodsName",
-                        "\""+goods.getGoodsName()+"\"");
-                if(!goodsName.equals("")){
+                boolean ifGoodsInShoppingCar = factory.getIndentDao().
+                        checkIfGoodsInShoppingCar(username,goods.getGoodsName());
+                if(ifGoodsInShoppingCar){
                     return "该商品已在购物车,快去购物车下单吧";
                 }
                 factory.getIndentDao().buyGoods(indent);
@@ -47,6 +49,8 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
                 return "订单id格式不正确┭┮﹏┭┮,仅支持整数";
             }
         }
+
+        //普通购买功能
         //用户仅输入这两个 所以仅检验这两个
         boolean ifAmountWrong = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
         boolean ifIntegralWrong = factory.getFormatService().formatService(String.valueOf(indent.getUseIntegral()));

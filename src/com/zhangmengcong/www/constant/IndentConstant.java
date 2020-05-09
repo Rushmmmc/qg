@@ -11,4 +11,5 @@ public class IndentConstant {
     public static final String DONOT_NEED_SO_MUCH_INTEGRAL = "该商品不需要这么多积分┭┮﹏┭┮";
     public static final String AGREE_RETURN = "agreeReturn";
     public static final String REJECT_RETURN = "rejectReturn";
+    public static final String SHOPPING_CAR = "购物车";
 }

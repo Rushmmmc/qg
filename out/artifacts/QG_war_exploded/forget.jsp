@@ -13,9 +13,11 @@
 <head>
     <title>mc的救赎系统</title>
 </head>
-<body>
+<body style="background-color: mediumpurple">
 <a href="/login.jsp">返回登录页面</a>
-<form   action="/UserController/forgetPassword" method="post" align="center"  >
+<br>
+<br><br><br><br><br><br>
+<form   action="/UserController/forgetPassword"  method="post" align="center"  >
 
     邮箱地址 :<input type="text" name="address" pattern="^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(?:\.[0-9A-Za-z]+)+$" required/>
 

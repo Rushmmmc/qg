@@ -6,7 +6,6 @@ import com.zhangmengcong.www.util.Factory;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import javax.swing.plaf.basic.BasicEditorPaneUI;
 import java.io.IOException;
 import static com.zhangmengcong.www.constant.IndentConstant.IF_SELLER;
 import static com.zhangmengcong.www.constant.IndentConstant.SHOPPING_CAR_FUNCTION;
@@ -118,15 +117,17 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
-    public void changePageToShoppingCar (HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void changePageToShoppingCar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String username = (String)session.getAttribute("username");
         Factory factory = new Factory();
         //选择打印买家订单功能
-        request.setAttribute("emps",factory.getPrintIndentService().printIndentService(0,username,BUYER_FUNCTION,SHOPPING_CAR_FUNCTION));
-        try {
-            request.getRequestDispatcher("/shoppingCar.jsp").forward(request,response);
-        } catch (ServletException e) {
+        request.setAttribute("emps",factory.getPrintIndentService().printIndentService
+                (0,username,BUYER_FUNCTION,SHOPPING_CAR_FUNCTION));
+            try {
+                request.getRequestDispatcher("/shoppingCar.jsp").forward(request,response);
+            }
+        catch (ServletException e) {
             e.printStackTrace();
         }
     }

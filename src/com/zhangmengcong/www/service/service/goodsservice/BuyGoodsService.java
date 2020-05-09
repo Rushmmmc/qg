@@ -11,7 +11,8 @@ public interface BuyGoodsService {
     /** 用户购买商品 生成订单
      * @param indent 封装好的订单对象
      * @param ifShoppingCar  是否使用添加购物车功能
-     * @return
+     * @param username 买家名
+     * @return 提示信息
      */
-    String buyGoodsService(Indent indent, int ifShoppingCar);
+    String buyGoodsService(Indent indent, int ifShoppingCar,String username);
 }

@@ -21,12 +21,12 @@ public class DeleteMessageServiceImpl implements DeleteMessageService {
         }else {
             if(ifSeller == IF_SELLER) {
                 factory.getUpdateDao().updateDao("message","sellerDelete","\"1\"","id","\""+messageId+"\"");
-                factory.getUpdateDao().updateDao("indent","buyerMessage","\"暂无\"","id","\""+indentId+"\"");
+                factory.getUpdateDao().updateDao("indent","buyerMessage","\"暂无\"","id",String.valueOf(indentId));
                 return "删除成功！";
             }
             if(ifSeller == 0) {
                 factory.getUpdateDao().updateDao("message","buyerDelete","\"1\"","id","\""+messageId+"\"");
-                factory.getUpdateDao().updateDao("indent","sellerMessage","\"暂无\"","id","\""+indentId+"\"");
+                factory.getUpdateDao().updateDao("indent","sellerMessage","\"暂无\"","id",String.valueOf(indentId));
                 return "删除成功！";
             }
         }

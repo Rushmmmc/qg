@@ -18,7 +18,7 @@ public class SellerDeleteIndentServiceImpl implements SellerDeleteIndentService 
         }
         //在卖家方删除订单
         factory.getUpdateDao().updateDao("indent","ifSellerDelete",
-                "1","id","\""+indentId+"\"");
+                "1","id",String.valueOf(indentId));
         return "已删除订单！";
     }
 }

@@ -43,7 +43,7 @@
             }
             if (flag_u && flag_p  && flag_m) {
                 $.ajax({
-                    url: "/ChangeMessageController",
+                    url: "/UserController/changeMessageController",
                     type: "POST",
                     dataType: 'html',
                     data: "newusername=" + username + "&newpassword=" + password +  "&newaddress=" + mailaddress,

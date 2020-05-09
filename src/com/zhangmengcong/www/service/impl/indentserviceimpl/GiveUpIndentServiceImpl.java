@@ -19,27 +19,29 @@ public class GiveUpIndentServiceImpl implements GiveUpIndentService {
 
         //查询买家名
         String buyerName = factory.getQueryDao().queryDao("buyer","indent"
-                ,"id","\""+indentId+"\"");
+                ,"id",String.valueOf(indentId));
 
         //查询使用积分量
         int integral = Integer.parseInt(factory.getQueryDao().queryDao("useIntegral","indent"
-                ,"id","\""+indentId+"\""));
+                ,"id",String.valueOf(indentId)));
 
         //返回积分
         factory.getUpdateDao().updateDao("user","integral",
                 "integral+"+integral,"username","\""+buyerName+"\"");
         //商品存货回显
+        String goodsName = factory.getQueryDao().queryDao("goodsName","indent","id",
+                String.valueOf(indentId));
         int amount = Integer.parseInt(factory.getQueryDao().queryDao("amount","indent"
-                ,"id","\""+indentId+"\""));
+                ,"id",String.valueOf(indentId)));
         factory.getUpdateDao().updateDao("goods","amount",
-                "amount+"+amount,"id","\""+indentId+"\"");
+                "amount+"+amount,"goodsName","\""+goodsName+"\"");
 
         //在买家方删除订单
         factory.getUpdateDao().updateDao("indent","ifBuyerDelete",
-                "1","id","\""+indentId+"\"");
+                "1","id",String.valueOf(indentId));
         //在卖家方显示订单已被取消
         factory.getUpdateDao().updateDao("indent","status",
-               "'买家已取消'","id","\""+indentId+"\"");
+               "'买家已取消'","id",String.valueOf(indentId));
         return "订单已取消,返回积分"+integral;
 
     }

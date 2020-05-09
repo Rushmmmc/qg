@@ -7,6 +7,7 @@ import com.zhangmengcong.www.util.JdbcUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 /**
@@ -47,5 +48,32 @@ public class IndentDaoImpl implements IndentDao {
         } finally {
             JdbcUtil.close(null, ptst, conn);
         }
+    }
+
+    @Override
+    public boolean checkIfGoodsInShoppingCar(String username, String goodsName){
+        String sql;
+        Connection conn = null;
+        PreparedStatement ptst = null;
+        ResultSet rs = null;
+        int ifExist = 0;
+        try {
+            //数据库的常规操作~~
+            conn = JdbcUtil.getConnetction();
+            sql = "select * from indent where buyer = ? and goodsName = ? and status = ? ";
+            ptst = conn.prepareStatement(sql);
+            ptst.setString(1,username);
+            ptst.setString(2,goodsName);
+            ptst.setString(3,"购物车");
+            rs = ptst.executeQuery();
+            if(rs.next()){
+                ifExist = 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.close(rs, ptst, conn);
+        }
+    return ifExist == 1;
     }
 }
