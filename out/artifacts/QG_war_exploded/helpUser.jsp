@@ -8,8 +8,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <html>
 <head>
@@ -20,13 +20,13 @@
         function fun1(event,id,id2) {
             event.preventDefault();
                 $.ajax({
-                    url: "/AdminManageAppealController",
+                    url: "/AppealController/manageAppeal",
                     type: "POST",
                     dataType: 'html',
                     data:"id="+id+"&type=complaintSeller&appealId="+id2,
                     success: function (result) {
                         alert(result);
-                        location.href="/ChangePageToHelpUser";
+                        location.href="/ChangePageController/changePageToHelpUser";
                     },
                     error: function (msg) {
                         alert("该订单已被删除！")
@@ -43,7 +43,7 @@
                 data:"id="+id+"&type=defendLegalRight&appealId="+id2,
                 success: function (result) {
                     alert(result);
-                    location.href="/ChangePageToHelpUser";
+                    location.href="/ChangePageController/changePageToHelpUser";
                 },
                 error: function (msg) {
                     alert("该订单已被删除！")
@@ -72,11 +72,11 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>
+<a href="/ChangePageController/adminManageGoodsAndSellerSystem">管理用户、商品系统</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">管理申诉系统</a>
+<a href="/ChangePageController/changePageToHelpUser">管理申诉系统</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 <h1 align="center" ><font color="#ff1493" >申诉信息将长期留底,消息按时间逆序显示</font></h1>
 
 

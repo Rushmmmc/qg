@@ -9,8 +9,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 
 <html>
@@ -47,14 +47,14 @@
         }
         if (flag_o && flag_r && flag_u) {
             $.ajax({
-                url: "/AdminBanUserController",
+                url: "/admin/ban",
                 type: "POST",
                 dataType: 'html',
                 data: "operate=" +operate+"&username="+ username + "&reason="+reason,
                 success: function (result) {
                     if (result === "处理成功!") {
                         alert(result);
-                        location.href = "/ChangePageController?method=manageSystem";
+                        location.href = "/ChangePageController/adminManageGoodsAndSellerSystem";
                     } else {
                         alert(result);
                     }
@@ -79,13 +79,13 @@
         }
         if (flag_i) {
             $.ajax({
-                url: "/GoodsDeleteOrPassController",
+                url: "/GoodsController/goodsDeleteOrPassController",
                 type: "POST",
                 dataType: 'html',
                 data: "id=" + id+"&ifDelete=0",
                 success: function (result) {
                     alert(result);
-                    location.href ="/ChangePageController?method=manageSystem";
+                    location.href ="/ChangePageController/adminManageGoodsAndSellerSystem";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -104,13 +104,13 @@
         }
         if (flag_i) {
             $.ajax({
-                url: "/GoodsDeleteOrPassController",
+                url: "/GoodsController/goodsDeleteOrPassController",
                 type: "POST",
                 dataType: 'html',
                 data: "id=" + id+"&ifDelete=1",
                 success: function (result) {
                     alert(result);
-                    location.href ="/ChangePageController?method=manageSystem";
+                    location.href ="/ChangePageController/adminManageGoodsAndSellerSystem";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -138,11 +138,11 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageSystem">管理用户、商品系统</a>
+<a href="/ChangePageController/adminManageGoodsAndSellerSystem">管理用户、商品系统</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">管理申诉系统</a>
+<a href="/ChangePageController/changePageToHelpUser">管理申诉系统</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center" style="margin-bottom:0">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>

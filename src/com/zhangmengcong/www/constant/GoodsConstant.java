@@ -12,11 +12,7 @@ public class GoodsConstant {
     public static final String  POSITIVE_SEQUENCE = "positiveSequence";
     public static final String  INVERTED_SEQUENCE = "invertedSequence";
     public static final int IF_DELETE = 1;
-    public static final String BUY_GOODS_SUCCESS = "商家正在火速处理您的订单( •̀ ω •́ )y";
     public static final int IF_SHOPPINGCAR = 1;
-    public static final String GOOD_REPUTATION = "goodReputation";
-    public static final String BAD_REPUTATION = "badReputation";
-    public static final String GOOD_REPUTATION_MESSAGE = "您的好评让商家和QG闲鱼非常惊喜╰(*°▽°*)╯";
-    public static final String BAD_REPUTATION_MESSAGE = "您的差评已反馈到商家和闲鱼,我们会马上改进！";
     public static final String SELL = "sell";
+    public static final String INDENT_HAVE_SEND = "商品在路上";
 }

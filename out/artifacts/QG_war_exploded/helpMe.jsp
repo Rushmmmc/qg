@@ -9,8 +9,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <html>
 <head>
@@ -41,13 +41,13 @@
                         }
                         if (flag_i && flag_reason && flag_type) {
                             $.ajax({
-                                url: "/UserCommitAppealController",
+                                url: "/AppealController/commitAppeal",
                                 type: "POST",
                                 dataType: 'html',
                                 data: "indentId=" + id + "&reason="+reason+"&type="+type,
                                 success: function (result) {
                                     alert(result);
-                                    location.href = "/ChangePageToHelpUser";
+                                    location.href = "/ChangePageController/changePageToHelpUser";
                                 },
                                 error: function (msg) {
                                     alert("出错啦")
@@ -71,7 +71,24 @@
         }
 
 
-
+        function goToCommitGoods(event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/ChangePageController/sellerCommitGoods",
+                type: "POST",
+                dataType: 'html',
+                success: function (result) {
+                    if(result === ""){
+                        location.href = "/commit.jsp";
+                    }else {
+                        alert(result);
+                    }
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
     </script>
 
     <title>处理申诉</title>
@@ -81,17 +98,17 @@
 <a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=commit">申卖商品</a>
+<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageIndent&ifSeller=1">管理卖出订单</a>
+<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
+<a href="/ChangePageController/goCheckBuyIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToShoppingCarController">查看购物车</a>
+<a href="/ChangePageController/changePageToShoppingCar">查看购物车</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">进行申诉</a>
+<a href="/ChangePageController/changePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 <h1 align="center" ><font color="#ff1493" >申诉信息将长期留底,消息按时间逆序显示</font></h1>
 
 

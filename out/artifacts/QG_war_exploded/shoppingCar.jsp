@@ -7,19 +7,19 @@
   Time: 20:06
   To change this template use File | Settings | File Templates.
 --%>
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <html>
 <head>
     <title>用户订单中心</title>
     <script>
 
-        function fun(event,id) {
+        function fun(event,id,price) {
             event.preventDefault();
             var tempAmount = document.getElementById("amount").value;
             var integral = document.getElementById("integral").value;
@@ -37,17 +37,13 @@
             }
             if (flag_i && flag_a) {
                 $.ajax({
-                    url: "/BuyGoodsController",
+                    url: "/GoodsController/buyGoodsFromShoppingCar",
                     type: "POST",
                     dataType: 'html',
-                    data: "tempAmount="+tempAmount +"&integral="+integral,
+                    data: "amount="+tempAmount +"&integral="+integral+"&id="+id+"&price="+price,
                     success: function (result) {
-                        if(result === "商家正在火速处理您的订单( •̀ ω •́ )y"){
                             alert(result);
-                            location.href = "/ChangePageToShoppingCarController";
-                        }else {
-                            alert(result);
-                        }
+                            location.href = "/ChangePageController/changePageToShoppingCar";
                     },
                     error: function (msg) {
                         alert("出错啦")
@@ -55,6 +51,43 @@
                 });
             }
         }
+
+
+        function del(event,indentId)
+        {
+            $.ajax({
+                url: "/IndentController/deleteShoppingCarIndent",
+                type: "POST",
+                dataType: 'html',
+                data: "indentId="+indentId,
+                success: function (result) {
+                    alert(result);
+                        location.href = "/ChangePageController/changePageToShoppingCar";
+                    },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+        function goToCommitGoods(event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/ChangePageController/sellerCommitGoods",
+                type: "POST",
+                dataType: 'html',
+                success: function (result) {
+                    if(result === ""){
+                        location.href = "/commit.jsp";
+                    }else {
+                        alert(result);
+                    }
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+
     </script>
 </head>
 <body>
@@ -62,17 +95,17 @@
 <a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=commit">申卖商品</a>
+<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageIndent&ifSeller=1">管理卖出订单</a>
+<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
+<a href="/ChangePageController/goCheckBuyIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToShoppingCarController">查看购物车</a>
+<a href="/ChangePageController/changePageToShoppingCar">查看购物车</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">进行申诉</a>
+<a href="/ChangePageController/changePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 
 
 
@@ -104,17 +137,18 @@
         <tr>
             <td><%=indent.getId()%></td>
             <td><%=indent.getGoodsName()%></td>
-            <td><%=indent.getAmount()%></td>
+            <td><%=indent.getLastAmount()%></td>
             <td><%=indent.getBuyer()%></td>
             <td><%=indent.getSeller()%></td>
             <td><%=indent.getPrice()%></td>
-            <form method="post" action="/BuyGoodsFromShoppingCarController?method=buyGoodsFromShoppingCar&id=<%=indent.getId()%>&price=<%=indent.getPrice()%>">
+            <form method="post" action="/GoodsController/buyGoodsFromShoppingCar?method=buyGoodsFromShoppingCar&id=<%=indent.getId()%>&price=<%=indent.getPrice()%>">
             <td><input type="text" name="amount" id="amount" required value="1"></td>
                 <td><input type="text" name="integral" id="integral"  required value="0"></td>
             <td><%=indent.getTotalPrice()%></td>
             <td><%=indent.getStatus()%></td>
-            <td><a href="/ChangeIndentController?method=deleteShoppingCarIndent&id=<%=indent.getId()%>">从购物车删除</a>
-                <input type="submit" onclick="car(event,<%=indent.getId()%>)"  value="购买">
+            <td><a href="#" onclick="del(event,<%=indent.getId()%>
+            )">从购物车删除</a>
+                <input type="submit" onclick="fun(event,<%=indent.getId()%>,<%=indent.getPrice()%>)" value="购买">
             </form>
             </td>
         <tr>

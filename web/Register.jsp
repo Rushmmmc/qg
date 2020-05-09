@@ -10,13 +10,13 @@
 <html>
 <head>
     <title>欢迎使用QG闲鱼</title>
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="jquery-3.5.0.min.js"></script>
-    <script src="./bootstrap/js/bootstrap.js"></script>
+    <script src="/jquery-3.5.0.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
 
 
 
@@ -56,7 +56,7 @@
             }
             if (flag_u && flag_p && flag_c && flag_m) {
                 $.ajax({
-                    url: "/Register",
+                    url: "/UserController/register",
                     type: "POST",
                     dataType: 'html',
                     data: "username=" + username + "&password=" + password + "&captcha=" + captcha + "&mailaddress=" + mailaddress,

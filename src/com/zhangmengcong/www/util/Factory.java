@@ -88,7 +88,6 @@ public class Factory {
     }
     public  ForgetPasswordService getForgetPasswordService() {return new ForgetPasswordServiceImpl(); }
     public CheckIfUserBeBanedService getCheckIfUserBeBanedService() {return new CheckIfUserBeBanedServiceImpl();}
-    public IntegralService getIntegralService() {return new IntegralServiceImpl();}
     public UserApplySalesReturnService getUserApplySalesReturnService(){return new UserApplySalesReturnServiceImpl();}
     /**
      * 关于打印表格的服务

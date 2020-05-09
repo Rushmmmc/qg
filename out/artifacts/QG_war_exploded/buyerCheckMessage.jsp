@@ -9,8 +9,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <html>
 <head>
@@ -44,7 +44,7 @@
     data: "id=" + id+"&ifSeller=0&message="+message+"&ifReply="+operate,
     success: function (result) {
     alert(result);
-    location.href ="/ChangePageController?method=messageBoard&ifSeller=0&id="+id2;
+    location.href ="/ChangePageController/goToMessageBoard?ifSeller=0&id="+id2;
     },
     error: function (msg) {
     alert("出错啦")
@@ -66,6 +66,24 @@
 
     }
 
+    function goToCommitGoods(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "/ChangePageController/sellerCommitGoods",
+            type: "POST",
+            dataType: 'html',
+            success: function (result) {
+                if(result === ""){
+                    location.href = "/commit.jsp";
+                }else {
+                    alert(result);
+                }
+            },
+            error: function (msg) {
+                alert("出错啦")
+            }
+        });
+    }
 
 
 
@@ -84,17 +102,17 @@
 <a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=commit">申卖商品</a>
+<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageIndent&ifSeller=1">管理卖出订单</a>
+<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
+<a href="/ChangePageController/goCheckBuyIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToShoppingCarController">查看购物车</a>
+<a href="/ChangePageController/changePageToShoppingCar">查看购物车</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">进行申诉</a>
+<a href="/ChangePageController/changePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 
 
 <br><br>
@@ -140,7 +158,7 @@
             <td><%=indent.getUseIntegral()%></td>
             <td><%=indent.getActuallyPrice()%></td>
             <td><%=indent.getReputation()%></td>
-            <td><a href="/ChangePageController?method=manageBuyerPersonalIndent">返回总订单</a></td>
+            <td><a href="/ChangePageController/goCheckBuyIndent">返回总订单</a></td>
          <tr>
                 <%
         }
@@ -184,7 +202,7 @@
                 <font color="#8a2be2"><a href="#" onclick="fun2(event,<%=message.getId()%>)">回复</a></font>
                 <a>&nbsp&nbsp&nbsp</a><a>&nbsp&nbsp&nbsp</a>
 
-                <a href="/DeleteMessageController?id=<%=message.getId()%>&ifSeller=0">清除留言</a></td>
+                <a href="/IndentController/deleteMessage?id=<%=message.getId()%>&ifSeller=0">清除留言</a></td>
         <tr>
                 <%
         }

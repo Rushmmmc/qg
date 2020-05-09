@@ -10,9 +10,9 @@
   Time: 11:54
   To change this template use File | Settings | File Templates.
 --%>
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
-<link rel="stylesheet" href="./beautiful.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/beautiful.css">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
@@ -32,13 +32,13 @@
             }
             if (flag_i) {
                 $.ajax({
-                    url: "/AddGoodsToShoppingCarController",
+                    url: "/GoodsController/addGoodsToShoppingCar",
                     type: "POST",
                     dataType: 'html',
                     data: "id=" + id,
                     success: function (result) {
                         alert(result);
-                        location.href = "/SeleteGoodsByInterestController";
+                        location.href = "/GoodsController/seleteGoodsByInterest";
                     },
                     error: function (msg) {
                         alert("出错啦")
@@ -55,10 +55,10 @@
                 return;
             }
             $.ajax({
-                url: "/ChangePageController",
+                url: "/ChangePageController/buyerSetBuyAmount",
                 type: "POST",
                 dataType: 'html',
-                data: "id=" + id + "&method=setAmount",
+                data: "id=" + id,
                 success: function (result) {
                     location.href = "/setAmount.jsp";
                 },
@@ -89,7 +89,7 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>
 <h1 align="center"><a href="/DividePageController">点击进入主页</a></h1>

@@ -9,9 +9,9 @@
   Time: 11:54
   To change this template use File | Settings | File Templates.
 --%>
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
-<link rel="stylesheet" href="./beautiful.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/beautiful.css">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
@@ -30,7 +30,7 @@
 <a href="/Register.jsp">注册</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>
-<form action="/Quit" method="post" align="center"  >
+<form action="/ChangePageController/quit" method="post" align="center"  >
     <h1 align="center"><font color="aqua">在QG闲鱼尽情享受高质量购物的快乐吧</font></h1>
 
 </form>

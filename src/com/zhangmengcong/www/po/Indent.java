@@ -23,6 +23,7 @@ public class Indent {
     private String evaluate;
     private int ifBuyerDelete;
     private int ifSellerDelete;
+    private int lastAmount;
 
     public int getId() {
         return id;
@@ -74,6 +75,14 @@ public class Indent {
 
     public float getPrice() {
         return price;
+    }
+
+    public int getLastAmount() {
+        return lastAmount;
+    }
+
+    public void setLastAmount(int lastAmount) {
+        this.lastAmount = lastAmount;
     }
 
     public void setPrice(float price) {
@@ -180,6 +189,7 @@ public class Indent {
                 ", evaluate='" + evaluate + '\'' +
                 ", ifBuyerDelete=" + ifBuyerDelete +
                 ", ifSellerDelete=" + ifSellerDelete +
+                ", lastAmount=" + lastAmount +
                 '}';
     }
 }

@@ -40,7 +40,6 @@ public class ManageAppealServiceImpl implements ManageAppealService {
         }
         //处理交易维权
         if(DEFEND_LEGAL_RIGHT.equals(type)){
-            System.out.println(id+""+appealId);
             int actuallyPrice = Integer.parseInt(factory.getQueryDao().queryDao("actuallyPrice","indent","id",String.valueOf(id)));
             int integral = 2 * Integer.parseInt(factory.getQueryDao().queryDao("useIntegral","indent","id",String.valueOf(id)));
             factory.getUpdateDao().updateDao("appeal","status","\"退款、返还双倍积分并且扣除商家信誉分\"","id","\""+appealId+"\"");

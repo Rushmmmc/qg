@@ -6,8 +6,8 @@
   Time: 23:54
   To change this template use File | Settings | File Templates.
 --%>
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,7 +15,7 @@
 </head>
 <body>
 <a href="/login.jsp">返回登录页面</a>
-<form   action="/ForgetPasswordController" method="post" align="center"  >
+<form   action="/UserController/forgetPassword" method="post" align="center"  >
 
     邮箱地址 :<input type="text" name="address" pattern="^[0-9A-Za-z][\.-_0-9A-Za-z]*@[0-9A-Za-z]+(?:\.[0-9A-Za-z]+)+$" required/>
 

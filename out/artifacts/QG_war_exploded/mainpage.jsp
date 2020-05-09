@@ -9,9 +9,9 @@
   Time: 11:54
   To change this template use File | Settings | File Templates.
 --%>
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
-<link rel="stylesheet" href="./beautiful.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/beautiful.css">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
@@ -31,7 +31,7 @@
             }
             if (flag_i) {
                 $.ajax({
-                    url: "/AddGoodsToShoppingCarController",
+                    url: "/GoodsController/addGoodsToShoppingCar",
                     type: "POST",
                     dataType: 'html',
                     data: "id=" + id,
@@ -55,10 +55,10 @@
             if (flag_i) {
             }
             $.ajax({
-                url: "/ChangePageController",
+                url: "/ChangePageController/buyerSetBuyAmount",
                 type: "POST",
                 dataType: 'html',
-                data: "id=" + id + "&method=setAmount",
+                data: "id=" + id,
                 success: function (result) {
                     location.href = "/setAmount.jsp";
                 },
@@ -67,6 +67,27 @@
                 }
             });
         }
+
+        function goToCommitGoods(event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/ChangePageController/sellerCommitGoods",
+                type: "POST",
+                dataType: 'html',
+                success: function (result) {
+                   if(result === ""){
+                       location.href = "/commit.jsp";
+                   }else {
+                       alert(result);
+                   }
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+
+
     </script>
 
 
@@ -81,25 +102,25 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=commit">申卖商品</a>
+<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageIndent&ifSeller=1">管理卖出订单</a>
+<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
+<a href="/ChangePageController/goCheckBuyIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToShoppingCarController">查看购物车</a>
+<a href="/ChangePageController/changePageToShoppingCar">查看购物车</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">进行申诉</a>
+<a href="/ChangePageController/changePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>
-<form action="/Quit" method="post" align="center"  >
-<a href="/ChangePageController?method=changeMessage">个人中心(查询及修改个人信息)</a>
+<form action="/ChangePageController/quit" method="post" align="center"  >
+<a href="/ChangePageController/changeMessagePage">个人中心(查询及修改个人信息)</a>
     <a>&nbsp&nbsp&nbsp</a>
-    <a href="/AdminController?level=3">一键成为管理员(用于测试)</a>
+    <a href="/admin/changeLevel?level=3">一键成为管理员(用于测试)</a>
     <a>&nbsp&nbsp&nbsp</a>
-    <a href="/AdminController?level=2">一键变回用户(用于测试)</a>
+    <a href="/admin/changeLevel?level=2">一键变回用户(用于测试)</a>
     <h1 align="center"><font color="aqua">在QG闲鱼尽情享受高质量购物的快乐吧</font></h1>
 </form>
 

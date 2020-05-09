@@ -12,12 +12,12 @@
     <title>欢迎使用QG闲鱼</title>
     <br>
 
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="jquery-3.5.0.min.js"></script>
-    <script src="./bootstrap/js/bootstrap.js"></script>
+    <script src="/jquery-3.5.0.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
 
 
 
@@ -63,13 +63,13 @@
 
         if (flag_u && flag_p && flag_c) {
             $.ajax({
-                url: "login",
+                url: "/UserController/login",
                 type: "POST",
                 dataType: 'html',
                 data: "username=" + username + "&password=" + password + "&captcha=" + captcha + "&way=normal",
                 success: function (result) {
                     if(result === "登录成功"){
-                        location.href ="/SeleteGoodsByInterestController";
+                        location.href ="/GoodsController/seleteGoodsByInterest";
                     } else {
                         alert(result);
                     }
@@ -84,13 +84,13 @@
     function fun2(event) {
         event.preventDefault();
             $.ajax({
-                url: "login",
+                url: "/UserController/login",
                 type: "POST",
                 dataType: 'html',
-                data: "username=" + username + "&way=cookie",
+                data: "way=cookie",
                 success: function (result) {
                     if(result === "登录成功"){
-                        location.href ="/SeleteGoodsByInterestController";
+                        location.href ="/GoodsController/seleteGoodsByInterest";
                     } else {
                         alert(result);
                     }
@@ -106,13 +106,13 @@
         event.preventDefault();
 
             $.ajax({
-                url: "login",
+                url: "/UserController/login",
                 type: "POST",
                 dataType: 'html',
                 data: "username=visitor"  + "&password=visitor"+ "&captcha=qqqq"+ "&way=normal",
                 success: function (result) {
                     if(result === "登录成功"){
-                        location.href ="/SeleteGoodsByInterestController";
+                        location.href ="/GoodsController/seleteGoodsByInterest";
                     }
                     else {
                         alert(result);

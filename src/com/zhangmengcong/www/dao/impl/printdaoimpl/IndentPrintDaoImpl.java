@@ -67,6 +67,7 @@ public class IndentPrintDaoImpl implements IndentPrintDao {
                 indent.setEvaluate(rs.getString("evaluate"));
                 indent.setIfBuyerDelete(rs.getInt("ifBuyerDelete"));
                 indent.setIfSellerDelete(rs.getInt("ifSellerDelete"));
+                indent.setLastAmount(rs.getInt("lastAmount"));
                 emps.add(indent);
             }
         }catch(Exception e){

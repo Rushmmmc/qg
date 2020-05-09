@@ -9,8 +9,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 <html>
 <script>
@@ -38,13 +38,13 @@
     }
     if (flag_i && flag_m ) {
     $.ajax({
-    url: "/IndentSendMessageController?method=buyerSendMessage",
+    url: "/IndentController/indentSendMessage?method=buyerSendMessage",
     type: "POST",
     dataType: 'html',
     data: "id=" + id+"&message="+message,
     success: function (result) {
     alert(result);
-    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+    location.href = "/ChangePageController/goCheckBuyIndent";
     },
     error: function (msg) {
     alert("出错啦")
@@ -68,13 +68,13 @@
         }
         if (flag_i  ) {
             $.ajax({
-                url: "/ChangeIndentController?method=deleteIndent",
+                url: "/IndentController/deleteIndent",
                 type: "POST",
                 dataType: 'html',
-                data: "id=" + id,
+                data: "indentId=" + id +"&ifseller=0",
                 success: function (result) {
                     alert(result);
-                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                    location.href = "/ChangePageController/goCheckBuyIndent";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -100,13 +100,13 @@
 
         if (flag_i  ) {
             $.ajax({
-                url: "ChangeIndentController?method=finishIndent",
+                url: "/IndentController/finishIndent",
                 type: "POST",
                 dataType: 'html',
-                data: "id=" + id,
+                data: "indentId=" + id,
                 success: function (result) {
                     alert(result);
-                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                    location.href = "/ChangePageController/goCheckBuyIndent";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -134,13 +134,13 @@
         }
         if (flag_i  ) {
             $.ajax({
-                url: "/GiveReputationController?method=goodReputation",
+                url: "/IndentController/giveGoodReputation",
                 type: "POST",
                 dataType: 'html',
                 data: "id=" + id,
                 success: function (result) {
                     alert(result);
-                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                    location.href = "/ChangePageController/goCheckBuyIndent";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -163,13 +163,13 @@
         }
         if (flag_i  ) {
             $.ajax({
-                url: "/GiveReputationController?method=badReputation",
+                url: "/IndentController/giveBadReputation",
                 type: "POST",
                 dataType: 'html',
                 data: "id=" + id,
                 success: function (result) {
                     alert(result);
-                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                    location.href = "/ChangePageController/goCheckBuyIndent";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -191,7 +191,7 @@
             return;
         }
         if (flag_i  ) {
-            location.href = "/ChangePageController?method=manageBuyerPersonalIndent&id="+id+"&ifSeller=0";
+            location.href = "/ChangePageController/goCheckBuyIndent&id="+id+"&ifSeller=0";
         }
     }
 
@@ -217,13 +217,13 @@
         }
         if (flag_i &&flag_l ) {
             $.ajax({
-                url: "/AddEvaluateMessage",
+                url: "/IndentController/addEvaluate",
                 type: "POST",
                 dataType: 'html',
                 data: "indentId=" + indentId+"&evaluate="+evaluate,
                 success: function (result) {
                     alert(result);
-                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                    location.href = "/ChangePageController/goCheckBuyIndent";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -253,13 +253,13 @@
 
         if (flag_i ) {
             $.ajax({
-                url: "/ReturnGoodsController",
+                url: "/GoodsController/returnGoods",
                 type: "POST",
                 dataType: 'html',
                 data: "ifSeller=0&indentId="+indentId,
                 success: function (result) {
                     alert(result);
-                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                    location.href = "/ChangePageController/goCheckBuyIndent";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -281,13 +281,13 @@
 
         if (flag_i ) {
             $.ajax({
-                url: "/GiveUpIndentController",
+                url: "/IndentController/giveUpIndent",
                 type: "POST",
                 dataType: 'html',
                 data: "indentId="+indentId,
                 success: function (result) {
                     alert(result);
-                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                    location.href = "/ChangePageController/goCheckBuyIndent";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -295,7 +295,24 @@
             });
         }
     }
-
+    function goToCommitGoods(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "/ChangePageController/sellerCommitGoods",
+            type: "POST",
+            dataType: 'html',
+            success: function (result) {
+                if(result === ""){
+                    location.href = "/commit.jsp";
+                }else {
+                    alert(result);
+                }
+            },
+            error: function (msg) {
+                alert("出错啦")
+            }
+        });
+    }
 </script>
 
 
@@ -316,17 +333,17 @@
 <a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=commit">申卖商品</a>
+<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageIndent&ifSeller=1">管理卖出订单</a>
+<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
+<a href="/ChangePageController/goCheckBuyIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToShoppingCarController">查看购物车</a>
+<a href="/ChangePageController/changePageToShoppingCar">查看购物车</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">进行申诉</a>
+<a href="/ChangePageController/changePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 
 <br><br><br>
     <h1 align="center"><font color="purple">用户购买订单</font></h1>
@@ -396,14 +413,18 @@
                 <c:if test='<%=(indent.getStatus().contains("在路上"))%>'>
                     <a>&nbsp&nbsp</a>  <a onclick="fun4(event,<%=indent.getId()%>)" href="#">确认收货</a>
                 </c:if>
+                <c:if test='<%=indent.getStatus().contains("订单已完成")%>'>
+                    <a>&nbsp&nbsp</a>
+                    <a onclick="fun9(event,<%=indent.getId()%>)" href="#"><font color="red">给商品进行详细评价</font></a>
+                </c:if>
                 <c:if test='<%=(indent.getStatus().contains("完成")) && indent.getReputation().contains("暂无")%>'>
 
-                    <a onclick="fun9(event,<%=indent.getId()%>)" href="#"><font color="red">给商品进行详细评价</font></a>
+            <font color="red">
                     <a>&nbsp&nbsp</a>
                     <a onclick="fun5(event,<%=indent.getId()%>)" href="#">给好评</a>
                     <a>&nbsp&nbsp</a>
                     <a onclick="fun6(event,<%=indent.getId()%>)" href="#">给差评</a>
-
+            </font>
 
                 </c:if>
             <c:if test='<%=indent.getStatus().contains("完成") || indent.getStatus().contains("已退款") %>'>
@@ -415,17 +436,15 @@
                     <a onclick="fun10(event,<%=indent.getId()%>)" href="#" >申请退货</a>
                 </c:if>
 
-                <c:if test='<%=(indent.getStatus().contains("介入"))%>'>
-                    <font color="blue">商家拒绝退货,闲鱼小二已介入,请关注申诉中心！</font>
-                </c:if>
+
 
                 <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp</a>
-                    <a href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>"><font color="#ff1493">商家给您留言啦,请打开留言板</font><a>&nbsp&nbsp</a></a>
+                    <a href="/ChangePageController/goToMessageBoard?ifSeller=0&id=<%=indent.getId()%>"><font color="#ff1493">商家给您留言啦,请打开留言板</font><a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a></a>
                 </c:if>
 
                     <a>&nbsp&nbsp</a>
-                    <a  href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>">前往留言</a>
+                    <a  href="/ChangePageController/goToMessageBoard?ifSeller=0&id=<%=indent.getId()%>">前往留言</a>
 
 
             </td>

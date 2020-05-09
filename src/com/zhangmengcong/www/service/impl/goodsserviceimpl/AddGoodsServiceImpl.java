@@ -28,7 +28,6 @@ public class AddGoodsServiceImpl implements AddGoodsService {
 
         boolean ifPriceFormatError = factory.getFormatService().ifRadixPointLessTwo(String.valueOf(goods.getPrice()));
         if(ifPriceFormatError){
-            System.out.println(goods.getPrice());
             return "商品价格仅支持数字";
         }
 

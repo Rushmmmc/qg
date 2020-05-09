@@ -17,11 +17,14 @@ public class GetPriceAndGoodsNameServiceImpl implements GetPriceAndGoodsNameServ
         String goodsName = factory.getQueryDao().queryDao("goodsName","goods","id",String.valueOf(id));
         String seller = factory.getQueryDao().queryDao("seller","goods","id",String.valueOf(id));
         String type = factory.getQueryDao().queryDao("type","goods","id",String.valueOf(id));
+        int amout = Integer.parseInt(factory.getQueryDao().queryDao("amount","goods"
+                ,"id",String.valueOf(id)));
         Goods goods = new Goods();
         goods.setPrice(price);
         goods.setGoodsName(goodsName);
         goods.setSeller(seller);
         goods.setType(type);
+        goods.setAmount(amout);
         return goods;
     }
 }

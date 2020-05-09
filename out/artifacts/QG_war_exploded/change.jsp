@@ -9,14 +9,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="./bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <html>
 <head>
     <title>个人中心</title>
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="jquery-3.5.0.min.js"></script>
-    <script src="./bootstrap/js/bootstrap.js"></script>
+    <script src="/jquery-3.5.0.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
     <script>
         function fun(event) {
             event.preventDefault();
@@ -49,7 +49,7 @@
                     data: "newusername=" + username + "&newpassword=" + password +  "&newaddress=" + mailaddress,
                     success: function (result) {
                             alert(result);
-                            location.href ="/ChangePageController?method=changeMessage";
+                            location.href ="/ChangePageController/changeMessagePage";
                     },
                     error: function (msg) {
                         alert("出错啦")
@@ -57,6 +57,26 @@
                 });
             }
         }
+
+        function goToCommitGoods(event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/ChangePageController/sellerCommitGoods",
+                type: "POST",
+                dataType: 'html',
+                success: function (result) {
+                    if(result === ""){
+                        location.href = "/commit.jsp";
+                    }else {
+                        alert(result);
+                    }
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+
     </script>
 
 
@@ -68,17 +88,17 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=commit">申卖商品</a>
+<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageIndent&ifSeller=1">管理卖出订单</a>
+<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController?method=manageBuyerPersonalIndent">管理买入订单</a>
+<a href="/ChangePageController/goCheckBuyIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToShoppingCarController">查看购物车</a>
+<a href="/ChangePageController/changePageToShoppingCar">查看购物车</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageToHelpUser">进行申诉</a>
+<a href="/ChangePageController/changePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/Quit">注销</a>
+<a href="/ChangePageController/quit">注销</a>
 
 
 

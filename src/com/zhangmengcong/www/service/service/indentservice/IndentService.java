@@ -8,17 +8,20 @@ import com.zhangmengcong.www.po.Indent;
  * @date: 2020/5/2 12:20
  */
 public interface IndentService {
-
-    /** 根据method选择调用的方法 简化Controller 内含修改 删 完成订单
+    /** 检查订单id
      *
-     * @param method 选择的方法
-     * @param id 订单的id
-     * @param indent 订单对象 修改完整订单时使用
-     * @param message 商家用户互相留言时传入
-     * @return 返回提示信息
+     * @param indentId 订单id
+     * @return 订单id格式是否有误
      */
-    String indentSelectMethod(String method,int id,Indent indent,String message,String username);
+    boolean ifIndentIdFormatWrong(int indentId);
 
+    /** 删除订单
+     *
+     * @param ifSeller 是否商家
+     * @param indentId 订单id
+     * @return 提示信息
+     */
+    String deleteIndent(int ifSeller,int indentId);
     /**
      *
      * @param evaluate 评价
@@ -26,4 +29,74 @@ public interface IndentService {
      * @return 提示信息
      */
     String userEvaluateIndent(String evaluate,int indentId);
+
+    /** 用户删除订单
+     *
+     * @param indentId 订单id
+     * @return 提示信息
+     */
+    String buyerDeleteIndent(int indentId);
+
+    /** 商家删除订单
+     *
+     * @param indentId 订单id
+     * @return 提示信息
+     */
+    String sellerDeleteIndent(int indentId);
+
+    /**
+     *
+     * @param indent 订单对象
+     * @return 提示信息
+     */
+    String sellerChangeIndent(Indent indent);
+
+    /** 完成订单
+     *
+     * @param indentId 订单id
+     * @param username 用户
+     * @return 提示信息
+     */
+    String finishIndent(int indentId, String username);
+
+    /** 商家删除订单
+     *
+     * @param indentId 订单id
+     * @return 提示信息
+     */
+    String sellerSendGoods(int indentId);
+
+
+    /**
+     *
+     * @param indentId 订单id
+     * @return 提示信息
+     */
+    String deleteShoppingCarIndent(int indentId);
+
+    /**
+     *
+     * @param indent 订单对象
+     * @return 提示信息
+     */
+    String buyGoodsFromShoppingCar(Indent indent);
+
+    /**
+     *
+     * @param indentId 订单id
+     * @return 提示信息
+     */
+    String giveGoodsReputation(int indentId);
+
+    /**
+     *
+     * @param indentId 订单id
+     * @return 提示信息
+     */
+    String giveBadReputation(int indentId);
+
+
 }
+
+
+

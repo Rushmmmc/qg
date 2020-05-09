@@ -32,6 +32,13 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
                 indent.setActuallyPrice(goods.getPrice());
                 indent.setTotalPrice(goods.getPrice());
                 indent.setStatus("购物车");
+                indent.setLastAmount(goods.getAmount());
+                //检查是否已存在在购物车
+                String goodsName = factory.getQueryDao().queryDao("goodsName","indent","goodsName",
+                        "\""+goods.getGoodsName()+"\"");
+                if(!goodsName.equals("")){
+                    return "该商品已在购物车,快去购物车下单吧";
+                }
                 factory.getIndentDao().buyGoods(indent);
 
 
@@ -48,6 +55,17 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
         }
         if(ifIntegralWrong){
             return "积分格式不正确┭┮﹏┭┮,仅支持整数";
+        }
+        //检查积分是否足够
+        int nowIntegral = Integer.parseInt(factory.getQueryDao().queryDao("integral","user"
+                ,"username","\""+indent.getBuyer()+"\""));
+        if(nowIntegral < indent.getUseIntegral()){
+            return "您的积分不足";
+        }
+        int lastAmount = Integer.parseInt(factory.getQueryDao().queryDao("amount","goods"
+                ,"goodsName","\""+indent.getGoodsName()+"\""));
+        if(lastAmount < indent.getAmount()){
+            return "商家存货不足,客官买少一点吧┭┮﹏┭┮";
         }
             indent.setTotalPrice(indent.getPrice()*indent.getAmount());
             indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());

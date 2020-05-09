@@ -22,8 +22,6 @@ public class UserConstant {
         public static final String COOKIE = "cookie";
         public static final String USER_NAME = "username";
         public static final String LOGIN_SUCCESS = "登录成功";
-        public static final String HAVENOT_COOKIE = "您暂时不存在Cookie";
-        public static final String REGISTER_SUCCESS = "注册成功";
          public static final String NORMAL = "normal";
          public static final int BIG_ENOUTH_NUMBER = 300;
          public static final int MESSAGE_LENGTH = 30;
