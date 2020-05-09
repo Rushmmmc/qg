@@ -238,6 +238,64 @@
         document.getElementById("indentId").value = id;
     }
 
+
+
+    function fun10(event,indentId) {
+        event.preventDefault();
+        var log_id = /^\d{1,8}$/;
+
+        var flag_i = log_id.test(indentId);
+
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+
+        if (flag_i ) {
+            $.ajax({
+                url: "/ReturnGoodsController",
+                type: "POST",
+                dataType: 'html',
+                data: "ifSeller=0&indentId="+indentId,
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
+
+    function giveUp(event,indentId) {
+        event.preventDefault();
+        var log_id = /^\d{1,8}$/;
+
+        var flag_i = log_id.test(indentId);
+
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+
+        if (flag_i ) {
+            $.ajax({
+                url: "/GiveUpIndentController",
+                type: "POST",
+                dataType: 'html',
+                data: "indentId="+indentId,
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageBuyerPersonalIndent";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
+
 </script>
 
 
@@ -302,8 +360,9 @@
             <th>实际付款<a>&nbsp</a></th>
             <th>订单状态</th>
             <th>评价<a>&nbsp</a></th>
-            <th>商品详细评价</th>
-            <th>管理</th>
+            <th>详细评价</th>
+            <th>  <a>&nbsp&nbsp</a> <a>&nbsp&nbsp</a>
+                管理</th>
         </tr>
         <!--通过循环 显示信息-->
 
@@ -311,26 +370,34 @@
         <%
             List<Indent> emps = (List<Indent>)request.getAttribute("emps");
             for(Indent indent : emps){
+                    if(indent.getIfBuyerDelete() == 1){
+                        continue;
+                    }
         %>
         <tr>
             <td><%=indent.getId()%></td>
             <td><%=indent.getGoodsName()%></td>
             <td><%=indent.getBuyer()%></td>
             <td><%=indent.getSeller()%></td>
-            <td><%=indent.getPrice()%></td>
+            <td><font color="#00ced1"><%=indent.getPrice()%>元</font></td>
             <td><%=indent.getAmount()%></td>
-            <td><%=indent.getTotalPrice()%></td>
+            <td><font color="#00ced1"><%=indent.getTotalPrice()%>元</font></td>
             <td><%=indent.getUseIntegral()%></td>
-            <td><%=indent.getActuallyPrice()%></td>
+            <td><font color="#00ced1"><%=indent.getActuallyPrice()%>元</font></td>
             <td><%=indent.getStatus()%></td>
             <td><%=indent.getReputation()%></td>
             <td><%=indent.getEvaluate()%></td>
             <td>
-                <c:if test='<%=!(indent.getStatus().contains("完成"))%>'>
-                    <a onclick="fun4(event,<%=indent.getId()%>)" href="#">确认收货</a>
-                    <a>/</a>
+                <c:if test='<%=(indent.getStatus().contains("未接单"))%>'>
+                    <a>&nbsp&nbsp</a>  <a onclick="giveUp(event,<%=indent.getId()%>)" href="#">放弃订单</a>
+                </c:if>
+
+
+                <c:if test='<%=(indent.getStatus().contains("在路上"))%>'>
+                    <a>&nbsp&nbsp</a>  <a onclick="fun4(event,<%=indent.getId()%>)" href="#">确认收货</a>
                 </c:if>
                 <c:if test='<%=(indent.getStatus().contains("完成")) && indent.getReputation().contains("暂无")%>'>
+
                     <a onclick="fun9(event,<%=indent.getId()%>)" href="#"><font color="red">给商品进行详细评价</font></a>
                     <a>&nbsp&nbsp</a>
                     <a onclick="fun5(event,<%=indent.getId()%>)" href="#">给好评</a>
@@ -339,14 +406,25 @@
 
 
                 </c:if>
+            <c:if test='<%=indent.getStatus().contains("完成") || indent.getStatus().contains("已退款") %>'>
+                <a>&nbsp&nbsp</a>
+            <a onclick="fun3(event,<%=indent.getId()%>)" href="#" >删除订单</a>
+            </c:if>
+                <c:if test='<%=indent.getStatus().contains("在路上")%>'>
+                    <a>&nbsp&nbsp</a>
+                    <a onclick="fun10(event,<%=indent.getId()%>)" href="#" >申请退货</a>
+                </c:if>
 
-            <a onclick="fun3(event,<%=indent.getId()%>)" href="#" >取消(删除)订单</a>
+                <c:if test='<%=(indent.getStatus().contains("介入"))%>'>
+                    <font color="blue">商家拒绝退货,闲鱼小二已介入,请关注申诉中心！</font>
+                </c:if>
+
                 <c:if test='<%=!(indent.getSellerMessage().contains("暂无"))%>'>
-                    <a>&nbsp&nbsp&nbsp&nbsp</a>
+                    <a>&nbsp&nbsp</a>
                     <a href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>"><font color="#ff1493">商家给您留言啦,请打开留言板</font><a>&nbsp&nbsp</a></a>
                 </c:if>
 
-                    <a>&nbsp&nbsp&nbsp&nbsp</a>
+                    <a>&nbsp&nbsp</a>
                     <a  href="/ChangePageController?method=messageBoard&ifSeller=0&id=<%=indent.getId()%>">前往留言</a>
 
 

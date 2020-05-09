@@ -51,8 +51,15 @@ public class GenerateFileServiceImpl implements GeneateFileService {
             Indent indent;
             //第一行已被表头占用 从第二行开始
             for(int i = 1; i <= list.size(); i++){
+
                 row = sheet.createRow(i);
                 indent = list.get(i-1);
+
+                //跳过商家删除的订单
+                if(indent.getIfSellerDelete() == 1){
+                    continue;
+                }
+
                 row.createCell(0).setCellValue(new HSSFRichTextString(String.valueOf(indent.getId())));
                 row.createCell(1).setCellValue(new HSSFRichTextString(indent.getGoodsName()));
                 row.createCell(2).setCellValue(new HSSFRichTextString(indent.getBuyer()));

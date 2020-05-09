@@ -8,6 +8,7 @@ import com.zhangmengcong.www.po.Indent;
  * @date: 2020/5/2 12:20
  */
 public interface IndentService {
+
     /** 根据method选择调用的方法 简化Controller 内含修改 删 完成订单
      *
      * @param method 选择的方法

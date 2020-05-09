@@ -84,6 +84,7 @@
         <tr>
             <th>Id</th>
             <th>商品名称</th>
+            <th>存货数量</th>
             <th>购买者</th>
             <th>出售者</th>
             <th>单价</th>
@@ -103,6 +104,7 @@
         <tr>
             <td><%=indent.getId()%></td>
             <td><%=indent.getGoodsName()%></td>
+            <td><%=indent.getAmount()%></td>
             <td><%=indent.getBuyer()%></td>
             <td><%=indent.getSeller()%></td>
             <td><%=indent.getPrice()%></td>

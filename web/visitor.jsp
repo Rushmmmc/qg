@@ -98,6 +98,8 @@
         <div class="info">
             <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
+            <a>&nbsp&nbsp&nbsp</a>
+            <span>存货:<%=goods.getAmount()%></span>
         </div>
 
 

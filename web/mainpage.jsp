@@ -172,11 +172,19 @@
         <div class="info">
             <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
+            <a>&nbsp&nbsp&nbsp</a>
+            <span>存货:<%=goods.getAmount()%></span>
         </div>
+        <c:if test='<%=goods.getAmount()!=0%>'>
             <a align="center" href="#" style="margin-left: 30px" onclick="fun2(event,<%=goods.getId()%>)">购买</a>
             <a>&nbsp&nbsp&nbsp</a>
             <a href="#" onclick="fun1(event,<%=goods.getId()%>)">加入购物车</a>
-        </div>
+        </c:if>
+        <c:if test='<%=goods.getAmount()==0%>'>
+        <font style="margin-left: 27px" color="red">暂无存货</font>
+            <a href="#" onclick="fun1(event,<%=goods.getId()%>)">先加入购物车</a>
+        </c:if>
+    </div>
         <div style="margin-top:50px ">
             <p> </p>
         </div>

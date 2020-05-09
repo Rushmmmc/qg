@@ -51,7 +51,7 @@
                 return;
             }
             if(!flag_m){
-                alert("邮箱不可包含特殊符号┭┮﹏┭┮,长度为4-10");
+                alert("邮箱不可包含特殊符号┭┮﹏┭┮,长度为8-20");
                 return;
             }
             if (flag_u && flag_p && flag_c && flag_m) {

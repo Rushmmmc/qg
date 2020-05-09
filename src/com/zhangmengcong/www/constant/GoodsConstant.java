@@ -18,4 +18,5 @@ public class GoodsConstant {
     public static final String BAD_REPUTATION = "badReputation";
     public static final String GOOD_REPUTATION_MESSAGE = "您的好评让商家和QG闲鱼非常惊喜╰(*°▽°*)╯";
     public static final String BAD_REPUTATION_MESSAGE = "您的差评已反馈到商家和闲鱼,我们会马上改进！";
+    public static final String SELL = "sell";
 }

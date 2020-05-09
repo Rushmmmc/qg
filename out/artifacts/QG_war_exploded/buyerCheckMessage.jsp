@@ -33,7 +33,9 @@
     alert("回复时必须选择信息id进行回复");
     return;
     }
-
+    if(!flag_m){
+        alert("消息不可包含特殊符号！");
+    }
     if (flag_o && flag_m) {
     $.ajax({
     url: "/MessageController",

@@ -18,8 +18,8 @@ import com.zhangmengcong.www.dao.dao.userdao.UserDao;
 import com.zhangmengcong.www.dao.impl.admindaoimpl.AdminDaoImpl;
 import com.zhangmengcong.www.dao.impl.goodsimpl.GoodsDaoImpl;
 import com.zhangmengcong.www.dao.impl.userdaoimpl.UserDaoImpl;
-import com.zhangmengcong.www.po.Message;
 import com.zhangmengcong.www.service.impl.formatserviceimpl.FormatServiceImpl;
+import com.zhangmengcong.www.service.impl.indentserviceimpl.*;
 import com.zhangmengcong.www.service.impl.messageserviceimpl.AddMessageServiceImpl;
 import com.zhangmengcong.www.service.impl.messageserviceimpl.DeleteMessageServiceImpl;
 import com.zhangmengcong.www.service.impl.messageserviceimpl.ReplyMessageServicImpl;
@@ -29,8 +29,6 @@ import com.zhangmengcong.www.service.impl.changepageserviceimpl.GoToMainpageServ
 import com.zhangmengcong.www.service.impl.adminimpl.AdminBanOrUnbanUserServiceImpl;
 import com.zhangmengcong.www.service.impl.generratefileserviceimpl.GenerateFileServiceImpl;
 import com.zhangmengcong.www.service.impl.goodsserviceimpl.*;
-import com.zhangmengcong.www.service.impl.indentserviceimpl.IndentServiceImpl;
-import com.zhangmengcong.www.service.impl.indentserviceimpl.IntegralServiceImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintIndentServiceImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintMessageServiceImpl;
 import com.zhangmengcong.www.service.impl.userserviceimpl.*;
@@ -38,8 +36,7 @@ import com.zhangmengcong.www.service.service.adminservice.ManageAppealService;
 import com.zhangmengcong.www.service.service.formatservice.FormatService;
 import com.zhangmengcong.www.service.service.generatefileservice.GeneateFileService;
 import com.zhangmengcong.www.service.service.goodsservice.*;
-import com.zhangmengcong.www.service.service.indentservice.IndentService;
-import com.zhangmengcong.www.service.service.indentservice.IntegralService;
+import com.zhangmengcong.www.service.service.indentservice.*;
 import com.zhangmengcong.www.service.service.messageservice.AddMessageService;
 import com.zhangmengcong.www.service.service.messageservice.DeleteMessageService;
 import com.zhangmengcong.www.service.service.messageservice.ReplyMessageService;
@@ -53,8 +50,6 @@ import com.zhangmengcong.www.service.service.printtableservice.PrintTableService
 import com.zhangmengcong.www.service.impl.adminimpl.BecomeAdminServiceImpl;
 import com.zhangmengcong.www.service.impl.printtableserviceimpl.PrintTableServiceImpl;
 import com.zhangmengcong.www.service.service.userservice.*;
-
-import java.util.Objects;
 
 
 /**
@@ -94,6 +89,7 @@ public class Factory {
     public  ForgetPasswordService getForgetPasswordService() {return new ForgetPasswordServiceImpl(); }
     public CheckIfUserBeBanedService getCheckIfUserBeBanedService() {return new CheckIfUserBeBanedServiceImpl();}
     public IntegralService getIntegralService() {return new IntegralServiceImpl();}
+    public UserApplySalesReturnService getUserApplySalesReturnService(){return new UserApplySalesReturnServiceImpl();}
     /**
      * 关于打印表格的服务
      */
@@ -142,8 +138,9 @@ public class Factory {
      */
     public IndentDao getIndentDao(){return new IndentDaoImpl();}
     public IndentService getIndentService(){return new IndentServiceImpl();}
-    public GeneateFileService getGeneateFileService(){return new GenerateFileServiceImpl();
-    }
+    public GeneateFileService getGeneateFileService(){return new GenerateFileServiceImpl();}
+    public GiveUpIndentService getGiveUpIndentService(){return new GiveUpIndentServiceImpl(); }
+    public SellerDeleteIndentService getSellerDeleteIndentService(){return new SellerDeleteIndentServiceImpl();}
     /**
      *  关于跳转页面的服务
      */

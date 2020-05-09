@@ -36,4 +36,6 @@ public class UserConstant {
          public static final String COMMIT_APPEAl_SUCCESS = "申诉已提交,管理员正在火速为您处理┭┮﹏┭┮";
          public static final String LEVEL = "level";
          public static final String CHANGE_SUCCESS = "修改成功( •̀ ω •́ )y";
+         public static final String INDENT_HAVNOT_START = "商家未接单";
+         public static final String USER_APPLYING_RETURN = "用户申请退货";
 }

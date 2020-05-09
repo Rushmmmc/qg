@@ -21,6 +21,8 @@ public class Indent {
     private int useIntegral;
     private float actuallyPrice;
     private String evaluate;
+    private int ifBuyerDelete;
+    private int ifSellerDelete;
 
     public int getId() {
         return id;
@@ -44,6 +46,22 @@ public class Indent {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
+    }
+
+    public int getIfBuyerDelete() {
+        return ifBuyerDelete;
+    }
+
+    public void setIfBuyerDelete(int ifBuyerDelete) {
+        this.ifBuyerDelete = ifBuyerDelete;
+    }
+
+    public int getIfSellerDelete() {
+        return ifSellerDelete;
+    }
+
+    public void setIfSellerDelete(int ifSellerDelete) {
+        this.ifSellerDelete = ifSellerDelete;
     }
 
     public String getGoodsType() {
@@ -160,6 +178,8 @@ public class Indent {
                 ", useIntegral=" + useIntegral +
                 ", actuallyPrice=" + actuallyPrice +
                 ", evaluate='" + evaluate + '\'' +
+                ", ifBuyerDelete=" + ifBuyerDelete +
+                ", ifSellerDelete=" + ifSellerDelete +
                 '}';
     }
 }

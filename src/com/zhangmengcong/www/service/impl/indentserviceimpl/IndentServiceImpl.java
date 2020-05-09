@@ -18,12 +18,18 @@ import static com.zhangmengcong.www.constant.PageConstant.SELL;
  */
 public class IndentServiceImpl implements IndentService {
 
+
+
     @Override
     public String indentSelectMethod(String method,int id,Indent indent,String message,String username) {
         Factory factory = new Factory();
-        //删除订单
         if(DELETE_INDENT.equals(method)){
-            factory.getDeleteOrChangeDao().deleteOrChange("indent", IF_DELETE, id, null, null, false, null);
+            //删除订单
+
+            factory.getUpdateDao().updateDao("indent","ifBuyerDelete",
+                    "1","id","\""+id+"\"");
+            return "订单已删除！";
+
         }
         //改变订单商品个数 金额等信息
         if(CHANGE_INDENT.equals(method)){
@@ -45,7 +51,8 @@ public class IndentServiceImpl implements IndentService {
             }
 
                 factory.getDeleteOrChangeDao().deleteOrChange(null, 0, 0, null, null, true, indent);
-            }
+                return "修改完成！";
+        }
         //完成订单
         if(FINISH_INDENT.equals(method)){
             factory.getDeleteOrChangeDao().deleteOrChange("indent",0,id,"订单已完成","status"
@@ -86,11 +93,24 @@ public class IndentServiceImpl implements IndentService {
             boolean ifIntegralFormatWrong = factory.getFormatService().formatService(String.valueOf(indent.getUseIntegral()));
             if(!ifAmountFormatWrong && !ifIntegralFormatWrong) {
                 float totalPrice = indent.getAmount() * indent.getPrice();
-                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, "商家未接单", "status", false, null);
-                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(indent.getAmount()), "amount", false, null);
-                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(totalPrice), "totalPrice", false, null);
-                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(indent.getUseIntegral()), "useIntegral", false, null);
-                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id, String.valueOf(totalPrice - indent.getUseIntegral()), "actuallyPrice", false, null);
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id,
+                        "商家未接单", "status", false, null);
+
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id,
+                        String.valueOf(indent.getAmount()), "amount", false, null);
+
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id,
+                        String.valueOf(totalPrice), "totalPrice", false, null);
+
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id,
+                        String.valueOf(indent.getUseIntegral()), "useIntegral", false, null);
+
+                factory.getDeleteOrChangeDao().deleteOrChange("indent", 0, id,
+                        String.valueOf(totalPrice - indent.getUseIntegral()), "actuallyPrice", false, null);
+
+                //商品存量减少
+                factory.getUpdateDao().updateDao("goods","amount","amount - "
+                        +indent.getAmount(),"goodsName","\""+indent.getGoodsName()+"\"");
             }
             }
         //用户给好评

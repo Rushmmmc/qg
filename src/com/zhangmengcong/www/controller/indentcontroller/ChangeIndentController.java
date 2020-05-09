@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static com.zhangmengcong.www.constant.GoodsConstant.SELL;
 import static com.zhangmengcong.www.constant.IndentConstant.CHANGE_INDENT;
 
 /**
@@ -33,12 +34,15 @@ public class ChangeIndentController extends HttpServlet {
         Indent indent = new Indent();
         //要改订单才获取 防止NPE
         if(CHANGE_INDENT.equals(method)) {
-            //
             indent.setId(id);
             indent.setAmount(Integer.parseInt(request.getParameter("amount")));
             indent.setPrice(Integer.parseInt(request.getParameter("price")));
-            indent.setGoodsName(request.getParameter("goodsName"));
         }
+        if(SELL.equals(method)){
+            indent.setAmount(Integer.parseInt(request.getParameter("amount")));
+        }
+        indent.setGoodsName(request.getParameter("goodsName"));
+
         //自动选择 完成订单/取消订单/修改订单 方法 非常智能
         String message = factory.getIndentService().indentSelectMethod(method,id,indent,null,username);
         response.getWriter().write(message);

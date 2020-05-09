@@ -6,7 +6,6 @@ import com.zhangmengcong.www.service.service.goodsservice.BuyGoodsService;
 import com.zhangmengcong.www.util.Factory;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.IF_SHOPPINGCAR;
-import static com.zhangmengcong.www.constant.IndentConstant.SHOPPING_CAR_FUNCTION;
 
 
 /**
@@ -34,6 +33,8 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
                 indent.setTotalPrice(goods.getPrice());
                 indent.setStatus("购物车");
                 factory.getIndentDao().buyGoods(indent);
+
+
                 return "商品已添加入购物车( •̀ ω •́ )y";
             }else {
                 return "订单id格式不正确┭┮﹏┭┮,仅支持整数";
@@ -48,14 +49,15 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
         if(ifIntegralWrong){
             return "积分格式不正确┭┮﹏┭┮,仅支持整数";
         }
-        if(!ifAmountWrong && !ifIntegralWrong){
             indent.setTotalPrice(indent.getPrice()*indent.getAmount());
             indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());
             indent.setStatus("商家未接单");
             factory.getIndentDao().buyGoods(indent);
+
+            //减少存货数
+            factory.getUpdateDao().updateDao("goods","amount","amount - "
+                +indent.getAmount(),"goodsName","\""+indent.getGoodsName()+"\"");
                 return "商家正在火速处理您的订单( •̀ ω •́ )y";
 
-        }
-        return "数据格式不正确┭┮﹏┭┮";
     }
 }

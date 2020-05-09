@@ -33,7 +33,7 @@ public class BuyGoodsFromShoppingCarController extends HttpServlet {
         Indent indent = new Indent();
 
         int id = Integer.parseInt(request.getParameter("id"));
-        int price = Integer.parseInt(request.getParameter("price"));
+        float price = Float.parseFloat(request.getParameter("price"));
         int integral = Integer.parseInt(request.getParameter("integral"));
         //若用户使用积分大于价格 提示用户
         if(integral > price){

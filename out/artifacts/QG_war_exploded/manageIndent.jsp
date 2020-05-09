@@ -113,7 +113,7 @@
             }
         }
 
-        function fun3(event,id) {
+        function fun3(event,id,amount,goodsName) {
             event.preventDefault();
 
 
@@ -131,7 +131,7 @@
                     url: "/ChangeIndentController",
                     type: "POST",
                     dataType: 'html',
-                    data: "id=" + id+"&method=sell",
+                    data: "id=" + id+"&method=sell&amount="+amount+"&goodsName="+goodsName,
                     success: function (result) {
                         alert(result);
                         location.href = "/ChangePageController?method=manageIndent";
@@ -194,8 +194,62 @@
     }
 
 
+            function fun11(event,indentId) {
+                event.preventDefault();
+                var log_id = /^\d{1,8}$/;
+
+                var flag_i = log_id.test(indentId);
+
+                if (!flag_i) {
+                    alert("请注意id格式┭┮﹏┭┮");
+                    return;
+                }
+
+                if (flag_i ) {
+                    $.ajax({
+                        url: "/ReturnGoodsController",
+                        type: "POST",
+                        dataType: 'html',
+                        data: "ifSeller=1&indentId="+indentId+"&type=agreeReturn",
+                        success: function (result) {
+                            alert(result);
+                            location.href = "/ChangePageController?method=manageIndent";
+                        },
+                        error: function (msg) {
+                            alert("出错啦")
+                        }
+                    });
+                }
+            }
 
 
+    function fun12(event,indentId) {
+        event.preventDefault();
+        var log_id = /^\d{1,8}$/;
+
+        var flag_i = log_id.test(indentId);
+
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+
+        if (flag_i ) {
+            $.ajax({
+                url: "/ReturnGoodsController",
+                type: "POST",
+                dataType: 'html',
+                data: "ifSeller=1&indentId="+indentId+"&type=rejectReturn",
+                success: function (result) {
+                    alert(result);
+                    location.href = "/ChangePageController?method=manageIndent";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
 
 
 
@@ -251,17 +305,20 @@
         <%
             List<Indent> emps = (List<Indent>)request.getAttribute("emps");
             for(Indent indent : emps){
+                if(indent.getIfSellerDelete() == 1){
+                    continue;
+                }
         %>
         <tr>
             <td><%=indent.getId()%></td>
             <td><%=indent.getGoodsName()%></td>
             <td><%=indent.getBuyer()%></td>
             <td><%=indent.getSeller()%></td>
-            <td><%=indent.getPrice()%></td>
+            <td><font color="#00ced1"><%=indent.getPrice()%>元</font></td>
             <td><%=indent.getAmount()%></td>
-            <td><%=indent.getTotalPrice()%></td>
+            <td><font color="#00ced1"><%=indent.getTotalPrice()%>元</font></td>
             <td><%=indent.getUseIntegral()%></td>
-            <td><%=indent.getActuallyPrice()%></td>
+            <td><font color="#00ced1"><%=indent.getActuallyPrice()%>元</font></td>
             <td><%=indent.getStatus()%></td>
             <td><%=indent.getReputation()%></td>
             <td><%=indent.getEvaluate()%>
@@ -272,8 +329,16 @@
 
 
             </td>
-            <td><a  onclick="fun3(event,<%=indent.getId()%>)" href="#">发货</a>
-                <c:if test='<%=!(indent.getBuyerMessage().contains("暂无"))%>'>
+            <td>
+                <c:if test='<%=indent.getStatus().contains("用户申请退货")%>'>
+                    <a onclick="fun11(event,<%=indent.getId()%>)" href="#" >同意退货</a>
+                    <a onclick="fun12(event,<%=indent.getId()%>)" href="#" >拒绝退货并让小二介入</a>
+                </c:if>
+
+                <c:if test='<%=!(indent.getStatus().contains("取消"))%>'>
+                <a  onclick="fun3(event,<%=indent.getId()%>,<%=indent.getAmount()%>,'<%=indent.getGoodsName()%>')" href="#">发货</a>
+                </c:if>
+                    <c:if test='<%=!(indent.getBuyerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     <a href="/ChangePageController?method=messageBoard&ifSeller=1&id=<%=indent.getId()%>"><font color="#ff1493">用户给您留言啦,请打开留言板</font></a>
                 </c:if>

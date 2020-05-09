@@ -65,6 +65,8 @@ public class IndentPrintDaoImpl implements IndentPrintDao {
                 indent.setActuallyPrice(rs.getFloat("actuallyPrice"));
                 indent.setGoodsType(rs.getString("goodsType"));
                 indent.setEvaluate(rs.getString("evaluate"));
+                indent.setIfBuyerDelete(rs.getInt("ifBuyerDelete"));
+                indent.setIfSellerDelete(rs.getInt("ifSellerDelete"));
                 emps.add(indent);
             }
         }catch(Exception e){

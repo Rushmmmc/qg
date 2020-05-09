@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.ADD_PHOTO_SUCCESS;
@@ -56,7 +55,10 @@ public class UploadPhoto extends HttpServlet {
                     //截取 上传文件的 字符串名字，加1是 去掉反斜杠，
                     String filename = value.substring(start + 1);
                     //文件名加上用户名 防止图片名重复导致出错
-
+                    if(!filename.contains(".jpg") && !filename.contains(".bmp") && !filename.contains(".png")){
+                        response.getWriter().write("图片格式仅支持jpg、bmp、png！");
+                        continue;
+                    }
                     String goodsName = (String)request.getSession().getAttribute("goodsName");
                     filename =  goodsName+ filename;
                     OutputStream out = new FileOutputStream(new File(path, filename));
