@@ -31,7 +31,7 @@ public class FilterController implements javax.servlet.Filter {
         if ( uri.contains(REGISTER_CONTROLLER) || uri.contains(CAPTCHA)
     || uri.contains("/style.css") || uri.contains("register.jsp") || uri.contains("Register") || uri.contains("/3.jpg") || uri.contains("/LoginController.jsp")
         || uri.contains("/page") || uri.contains("/login.jsp") || uri.contains("/login") ||uri.contains("/forget.jsp") ||
-        uri.contains("/UserController/forgetPassword")){
+        uri.contains("/UserController/forgetPassword") || uri.contains("/UserController/register")){
             chain.doFilter(req, resp);
         }else {
             Object userName = request.getSession().getAttribute("username");

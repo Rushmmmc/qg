@@ -1,21 +1,18 @@
 <%--
   Created by IntelliJ IDEA.
   User: Rush
-  Date: 2020/4/14
-  Time: 11:34
+  Date: 2020/5/11
+  Time: 0:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
 <html>
 <head>
     <title>欢迎使用QG闲鱼</title>
-    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="/jquery-3.5.0.min.js"></script>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
-    <script src="/bootstrap/js/bootstrap.js"></script>
-
 
 
 
@@ -53,17 +50,18 @@
                 alert("邮箱不可包含特殊符号┭┮﹏┭┮,长度为4-10");
                 return;
             }
-            if (flag_u && flag_p && flag_c && flag_m) {
+            if (flag_u && flag_m && flag_p && flag_c) {
                 $.ajax({
                     url: "/UserController/register",
                     type: "POST",
                     dataType: 'html',
-                    data: "username=" + username + "&password=" + password + "&captcha=" + captcha + "&mailaddress=" + mailaddress,
+                    data: "username=" + username+"&password="+password+"&captcha="
+                    +captcha+"&mailaddress="+mailaddress,
                     success: function (result) {
-                        if(result === "true"){
-                            alert("注册成功O(∩_∩)O");
-                            location.href ="/login.jsp";
-                        } else {
+                        if(result === "true") {
+                            alert("注册成功");
+                            location.href = "/login.jsp";
+                        }else {
                             alert(result);
                         }
                     },
@@ -107,9 +105,8 @@
 
     <!--        //点击看不清,换一张-->
 
-
 </head>
-<body style="background-color: plum">
+<<body style="background-color: plum">
 
 <a href="/login.jsp">返回登录页面</a>
 
@@ -146,4 +143,3 @@
 
 </body>
 </html>
-
