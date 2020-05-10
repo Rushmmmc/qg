@@ -13,10 +13,7 @@
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="/jquery-3.5.0.min.js"></script>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
-
     <script src="/bootstrap/js/bootstrap.js"></script>
 
 
@@ -145,12 +142,8 @@
 </form>
 
 
-<c:if test="${not empty requestScope.message}">
-<Script Language="JavaScript">
-    alert("${requestScope.message}");
-</Script>
 
-</c:if>
+
 </body>
 </html>
 

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html lang="en" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+
 <head>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <title>欢迎使用QG闲鱼</title>

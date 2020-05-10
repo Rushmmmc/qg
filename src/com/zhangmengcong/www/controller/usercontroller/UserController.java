@@ -156,7 +156,7 @@ public class UserController extends BaseServlet {
         String captcha = request.getParameter("captcha");
         HttpSession session = request.getSession();
         String captchar = (String) session.getAttribute("captcha");
-
+        System.out.println("1"+mailAddress+password+username);
         //实现注册功能
         //获得注册服务返回的信息 service层进行数据判空 判断是否包含中文与特殊符号
         String message = factory.getRegisterAndLogin().register(username,password,mailAddress,captchar,captcha);

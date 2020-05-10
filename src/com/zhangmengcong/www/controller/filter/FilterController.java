@@ -23,6 +23,11 @@ public class FilterController implements javax.servlet.Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         String uri = request.getRequestURI();
+        String url=request.getRequestURI();
+        if(url.indexOf(".css")>0||url.indexOf(".js")>0||url.indexOf(".png")>0) {
+            chain.doFilter(request, resp);
+            return;
+        }
         if ( uri.contains(REGISTER_CONTROLLER) || uri.contains(CAPTCHA)
     || uri.contains("/style.css") || uri.contains("register.jsp") || uri.contains("Register") || uri.contains("/3.jpg") || uri.contains("/LoginController.jsp")
         || uri.contains("/page") || uri.contains("/login.jsp") || uri.contains("/login") ||uri.contains("/forget.jsp") ||
