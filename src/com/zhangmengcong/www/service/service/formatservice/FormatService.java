@@ -40,4 +40,11 @@ public interface FormatService {
      * @return 超过两位则返回true
      */
     boolean ifRadixPointLessTwo(String message);
+
+    /** 检查订单id
+     *
+     * @param indentId 订单id
+     * @return 订单id格式是否有误
+     */
+    boolean ifIndentIdFormatWrong(int indentId);
 }

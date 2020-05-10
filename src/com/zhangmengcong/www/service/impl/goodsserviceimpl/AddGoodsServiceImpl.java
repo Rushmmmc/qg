@@ -34,7 +34,7 @@ public class AddGoodsServiceImpl implements AddGoodsService {
 
         boolean ifAmountFormatError = factory.getFormatService().formatService(String.valueOf(goods.getAmount()));
         if(ifAmountFormatError){
-            return "商品数量仅支持整数";
+            return "商品数量仅支持整数且不能超过10亿┭┮﹏┭┮";
         }
 
         boolean ifMessageFormatError = factory.getFormatService().ifIncludeSymbol(goods.getImformation());
@@ -46,7 +46,7 @@ public class AddGoodsServiceImpl implements AddGoodsService {
         if(!"".equals(checkGoodsNameIfExist)){
             return "该商品名已存在！,请更换商品名";
         }
-        if (factory.getGoodsDao().addGoods(goods)) {
+        if (factory.getAddGoodsDao().addGoods(goods)) {
                 return ADD_GOODS_SUCCESS;
             } else {
                 return ADD_GOODS_FAIL;

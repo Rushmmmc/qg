@@ -25,11 +25,11 @@
             var flag_a = log_Amount.test(tempAmount);
             var flag_i = log_integral.test(integral);
             if (!flag_a) {
-                alert("商品数量有误┭┮﹏┭┮ 仅支持整数");
+                alert("商品数量有误┭┮﹏┭┮ 仅支持整数且不能超过10亿┭┮﹏┭┮");
                 return;
             }
             if (!flag_i) {
-                alert("积分数量有误┭┮﹏┭┮ 仅支持整数");
+                alert("积分数量有误┭┮﹏┭┮ 仅支持整数且不能超过10亿┭┮﹏┭┮");
                 return;
             }
             if (flag_i && flag_a) {

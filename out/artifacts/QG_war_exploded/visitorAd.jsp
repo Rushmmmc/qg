@@ -84,12 +84,11 @@
 
 
 <body>
-
+<a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
 <a href="/login.jsp">登录</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController/quit">注销</a>
 <h1 align="center">欢迎<font color="#8a2be2" >   ${sessionScope.username}</font> </h1>
 <h1 align="center">亲爱的<font color="#1e90ff" >   ${sessionScope.sendLevel}</font> </h1>
 <h1 align="center"><a href="/DividePageController">点击进入主页</a></h1>
@@ -109,34 +108,44 @@
         <c:if test='<%=goods.getPhotoPath().contains("暂无")%>'>
             <img src="./img/1.jpg" height="400" width="200">
         </c:if>
-        <p class="review"><%=goods.getImformation()%> </p>
+
+        <br><br>
+        <a>&nbsp&nbsp&nbsp</a><a>&nbsp&nbsp&nbsp</a><a>&nbsp&nbsp&nbsp</a><font color="#00bfff" style="margin-top: 100px">商品信息:<%=goods.getImformation()%></font>
         <c:if test='<%=!goods.getRecommend().contains("暂无")%>'>
-            <h4 style="margin-left: 24px"><font color="#9acd32">用户推荐理由:<%=goods.getRecommend()%></font></h4>
+
+            <br><br><h4 style="margin-left: 24px"><font color="#9acd32">用户推荐理由:<%=goods.getRecommend()%></font></h4>
         </c:if>
-        <div class="appraise">来自用户<font color="#ff1493"><%=goods.getSeller()%></font>的二手商品
-            信誉分:<font color="red"><%=goods.getSellerReputation()%></font></div>
+        <c:if test='<%=goods.getRecommend().contains("暂无")%>'>
+
+            <br><br><br>
+        </c:if>
+
+        <div class="appraise"><font color="blue">来自用户</font><font color="#ff1493"><%=goods.getSeller()%></font><font color="blue">的二手商品</font>
+            <a>&nbsp&nbsp&nbsp</a><font color="#9370db">商品类型:<%=goods.getType()%></font>
+            <br><font color="red">信誉分:<%=goods.getSellerReputation()%></font>
+            <font color="red">今日销量:<%=goods.getBoughtAmount()%></font></div>
         <div class="info">
-            <h4><font color="green"><%=goods.getGoodsName()%></font></h4>
+            <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
             <a>&nbsp&nbsp&nbsp</a>
             <span>存货:<%=goods.getAmount()%></span>
-            <a align="center" href="/login.jsp" >登录后购买</a>
+
+            <br><a align="center" href="/login.jsp" >登录后购买</a>
             <a>&nbsp&nbsp&nbsp</a>
             <a href="/login.jsp">登录后加入购物车</a>
-        </div>
-        <div style="margin-top:50px ">
-            <p> </p>
-        </div>
 
+
+        </div>
+    <div style="margin-top:50px ">
+        <p> </p>
     </div>
+
+</div>
 
 </div>
 <%
     }
 %>
-
-
-
 
 
 

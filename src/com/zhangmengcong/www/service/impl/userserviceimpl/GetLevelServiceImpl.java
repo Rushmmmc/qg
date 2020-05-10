@@ -12,6 +12,7 @@ public class GetLevelServiceImpl implements GetLevelService {
         @Override
         public  int getLevelService(String username){
             Factory factory = new Factory();
-            return factory.getUserDao().getLevel(username);
+            return Integer.parseInt(factory.getQueryDao().queryDao("level","user",
+                    "username","\""+username+"\""));
         }
 }

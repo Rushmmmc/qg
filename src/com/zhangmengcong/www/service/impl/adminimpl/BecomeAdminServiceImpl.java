@@ -22,9 +22,9 @@ public class BecomeAdminServiceImpl implements BecomeAdminService {
             //等级只能为2或3
             if(level == USER_LEVEL || level == ADMIN_LEVEL) {
                 //修改成功
-                if(factory.getAdminDao().becomeAdmin(level, username)){
-                    return "";
-                }
+                factory.getUpdateDao().updateDao("user","level",String.valueOf(level),
+                        "username","\""+username+"\"");
+                return "修改成功";
             }
         }
     return "该等级不存在";

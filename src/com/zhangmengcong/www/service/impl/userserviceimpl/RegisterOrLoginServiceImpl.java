@@ -30,13 +30,19 @@ public class RegisterOrLoginServiceImpl implements RegisterOrLoginService {
         if(mailAddress.length() != tempMail.length() + COM_LENGTH){
             return "邮箱不可包含多个@或多个com┭┮﹏┭┮";
         }
+        //检测用户名是否被占用
+        String tempUsername = factory.getQueryDao().queryDao("username","user"
+        ,"username","\""+username+"\"");
+        if(!"".equals(tempUsername)){
+            return "用户名已被占用！";
+        }
         //判断数据长度 返回true即长度无误
         String lengthMessage = checkMessageLengthAndCheckCaptcha(username,password,captcha,captchar,mailAddress);
         if(lengthMessage.contains(TRUE)) {
-            if (factory.getUserDao().register(username, factory.getEncode().shaEncode(password), mailAddress)) {
+            if (factory.getRegisterDao().register(username, factory.getEncode().shaEncode(password), mailAddress)) {
                 return "true";
             } else {
-                return "用户名或邮箱已被占用┭┮﹏┭┮";
+                return "邮箱已被占用┭┮﹏┭┮";
             }
         }else {
             return lengthMessage;
@@ -59,7 +65,7 @@ public class RegisterOrLoginServiceImpl implements RegisterOrLoginService {
         }
         //数据判断长度、格式
         //检查完其他才检测数据库
-            if(factory.getUserDao().check(username,factory.getEncode().shaEncode(password))){
+            if(factory.getCheckNameAndPasswordDao().check(username,factory.getEncode().shaEncode(password))){
                 return "登录成功";
             }else {
                 return "用户名和密码不匹配┭┮﹏┭┮";

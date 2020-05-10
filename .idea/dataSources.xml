@@ -19,5 +19,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8 [4]" uuid="a79206f9-522a-4b1a-bf36-14272337d018">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost/qg?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8</jdbc-url>
+    </data-source>
   </component>
 </project>

@@ -29,6 +29,7 @@ public class GetGoodsParametersDaoImpl implements GetGoodsParametersDao {
            goods.setSeller(rs.getString("seller"));
            goods.setId(rs.getInt("id"));
            goods.setStatus(rs.getString("status"));
+           goods.setBoughtAmount(rs.getInt("boughtAmount"));
            goods.setRecommend(rs.getString("recommend"));
            goods.setPhotoPath(rs.getString("photoName"));
            emps.add(goods);

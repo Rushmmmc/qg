@@ -1,6 +1,7 @@
 package com.zhangmengcong.www.service.impl.formatserviceimpl;
 
 import com.zhangmengcong.www.service.service.formatservice.FormatService;
+import com.zhangmengcong.www.util.Factory;
 
 import java.util.regex.Matcher;
 
@@ -67,5 +68,8 @@ public class FormatServiceImpl implements FormatService {
         return !messageMathMatcher.matches();
     }
 
-
+    @Override
+    public boolean ifIndentIdFormatWrong(int indentId) {
+        return formatService(String.valueOf(indentId));
+    }
 }

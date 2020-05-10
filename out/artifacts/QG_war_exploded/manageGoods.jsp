@@ -37,8 +37,8 @@
             alert("请正确填写用户名┭┮﹏┭┮");
             return;
         }
-        if (!flag_r && operate == 1) {
-            alert("原因请不要包含特殊符号┭┮﹏┭┮");
+        if (!flag_r ) {
+            alert("原因不能为空且不要包含特殊符号┭┮﹏┭┮");
             return;
         }
         if (!flag_o) {

@@ -4,7 +4,7 @@ import com.zhangmengcong.www.po.Appeal;
 import com.zhangmengcong.www.service.service.userservice.GenerateAppealService;
 import com.zhangmengcong.www.util.Factory;
 
-import static com.zhangmengcong.www.constant.UserConstant.COMMIT_APPEAl_SUCCESS;
+
 import static com.zhangmengcong.www.constant.UserConstant.MESSAGE_LENGTH;
 
 /**
@@ -18,13 +18,18 @@ public class GenerateAppealServiceImpl implements GenerateAppealService {
         Factory factory = new Factory();
         boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(appeal.getId()));
         boolean ifReasonFormatWrong = factory.getFormatService().ifIncludeSymbol(appeal.getReason());
-
-        if(ifIdFormatWrong || ifReasonFormatWrong || appeal.getReason().length() > MESSAGE_LENGTH){
-            return "信息格式不正确,请不要超过15个汉字┭┮﹏┭┮";
+        if(ifIdFormatWrong){
+            return "申诉id格式有误┭┮﹏┭┮";
+        }
+        if(ifReasonFormatWrong){
+            return "申诉原因格式有误┭┮﹏┭┮";
+        }
+        if(appeal.getReason().length() > MESSAGE_LENGTH){
+            return "申诉原因请不要超过15个汉字┭┮﹏┭┮";
         }else {
             appeal.setSeller(factory.getQueryDao().queryDao("seller","indent","id",String.valueOf(appeal.getIdentId())));
             factory.getGenerateAppealDao().generateAppealDao(appeal);
-            return COMMIT_APPEAl_SUCCESS;
+            return "提交申诉成功( •̀ ω •́ )y";
         }
 
     }

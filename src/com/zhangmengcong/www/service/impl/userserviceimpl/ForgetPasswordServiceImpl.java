@@ -30,7 +30,7 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService {
         //实现发送密码至注册邮箱功能
         Factory factory = new Factory();
         int tempword;
-        if (factory.getUserDao().checkMail(mailAddress)) {
+        if (factory.getIfMailExistService().ifMailExistService(mailAddress)) {
             //根据用户输入的邮箱,调用查邮箱方法查询是否存在该用户
             try {
 
@@ -44,12 +44,13 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService {
                     }
                 }
                 //根据邮箱地址查询是否存在该用户,因用户还未登陆,不可用session查询用户名
-                String username = factory.getUserDao().getusername(mailAddress);
+                String username = factory.getQueryDao().queryDao("username",
+                        "user","mailaddress","\""+mailAddress+"\"");
                 User user = new User();
                 user.setMailAddress(mailAddress);
                 user.setUsername(username);
                 user.setPassword(factory.getEncode().shaEncode(flag));
-                factory.getUserDao().change(user, username);
+                factory.getUserChangeMessageDao().change(user, username);
                 //给用户换成临时密码
                 Properties props = new Properties();
                 //创建配置文件

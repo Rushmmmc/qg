@@ -140,21 +140,37 @@
         <c:if test='<%=goods.getPhotoPath().contains("暂无")%>'>
             <img src="./img/1.jpg" height="400" width="200">
         </c:if>
-        <p class="review"><font color="#00bfff"><%=goods.getImformation()%></font> </p>
+
+        <br><br>
+        <a>&nbsp&nbsp&nbsp</a><a>&nbsp&nbsp&nbsp</a><a>&nbsp&nbsp&nbsp</a><font color="#00bfff" style="margin-top: 100px">商品信息:<%=goods.getImformation()%></font>
         <c:if test='<%=!goods.getRecommend().contains("暂无")%>'>
-            <h4 style="margin-left: 24px"><font color="#9acd32">用户推荐理由:<%=goods.getRecommend()%></font></h4>
+
+            <br><br><h4 style="margin-left: 24px"><font color="#9acd32">用户推荐理由:<%=goods.getRecommend()%></font></h4>
         </c:if>
+        <c:if test='<%=goods.getRecommend().contains("暂无")%>'>
+
+            <br><br><br>
+        </c:if>
+
         <div class="appraise"><font color="blue">来自用户</font><font color="#ff1493"><%=goods.getSeller()%></font><font color="blue">的二手商品</font>
-            <font color="red">信誉分:<%=goods.getSellerReputation()%></font></div>
+            <a>&nbsp&nbsp&nbsp</a><font color="#9370db">商品类型:<%=goods.getType()%></font>
+            <br><font color="red">信誉分:<%=goods.getSellerReputation()%></font>
+            <font color="red">今日销量:<%=goods.getBoughtAmount()%></font></div>
         <div class="info">
             <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
             <a>&nbsp&nbsp&nbsp</a>
             <span>存货:<%=goods.getAmount()%></span>
         </div>
-        <a align="center" href="#" style="margin-left: 30px" onclick="fun2(event,<%=goods.getId()%>)">购买</a>
-        <a>&nbsp&nbsp&nbsp</a>
-        <a href="#" onclick="fun1(event,<%=goods.getId()%>)">加入购物车</a>
+        <c:if test='<%=goods.getAmount()!=0%>'>
+            <a align="center" href="#" style="margin-left: 30px" onclick="fun2(event,<%=goods.getId()%>)">购买</a>
+            <a>&nbsp&nbsp&nbsp</a>
+            <a href="#" onclick="fun1(event,<%=goods.getId()%>)">加入购物车</a>
+        </c:if>
+        <c:if test='<%=goods.getAmount()==0%>'>
+            <font style="margin-left: 27px" color="red">暂无存货</font>
+            <a href="#" onclick="fun1(event,<%=goods.getId()%>)">先加入购物车</a>
+        </c:if>
     </div>
     <div style="margin-top:50px ">
         <p> </p>

@@ -5,7 +5,7 @@ import com.zhangmengcong.www.util.Factory;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 商家还未接单 用户放弃购买
  * @date: 2020/5/9 0:34
  */
 public class GiveUpIndentServiceImpl implements GiveUpIndentService {

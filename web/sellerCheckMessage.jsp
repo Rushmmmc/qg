@@ -28,7 +28,7 @@
             var flag_i = log_imformation.test(id);
 
             if(!flag_i){
-                alert("id仅支持整数┭┮﹏┭┮");
+                alert("id仅支持整数┭┮﹏┭┮且不能超过10亿┭┮﹏┭┮");
                 return;
             }
             if (flag_i && flag_a && flag_p && flag_g && flag_t) {
@@ -64,7 +64,7 @@
                 flag_o = true;
             }
             if (!flag_m && operate ===0) {
-                alert("回复时必须选择信息id进行回复");
+                alert("回复时必须选择信息id进行回复,id只能为整数,不能为空");
                 return;
             }
 

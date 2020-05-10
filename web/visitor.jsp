@@ -24,7 +24,7 @@
 
 
 <body>
-<a>&nbsp&nbsp&nbsp</a>
+<a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
 <a href="/login.jsp">登录</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/Register.jsp">注册</a>
@@ -94,18 +94,17 @@
         </c:if>
         <p class="review"><%=goods.getImformation()%> </p>
         <div class="appraise">来自用户<%=goods.getSeller()%>的二手商品
+            <a>&nbsp&nbsp&nbsp</a><font color="#9370db">商品类型:<%=goods.getType()%></font>
             信誉分:<font color="red"><%=goods.getSellerReputation()%></font></div>
         <div class="info">
             <h4><%=goods.getGoodsName()%></h4>
             <span><%=goods.getPrice()%>元</span>
             <a>&nbsp&nbsp&nbsp</a>
             <span>存货:<%=goods.getAmount()%></span>
+            <br><a align="center" href="/login.jsp" >登录后购买</a>
+            <a>&nbsp&nbsp&nbsp</a>
+            <a href="/login.jsp">登录后加入购物车</a>
         </div>
-
-
-
-            <p><font color="red">亲爱的游客~~~~(>_<)~~~~请先<a href="/login.jsp">登录</a></font> </p>
-
 
     </div>
 

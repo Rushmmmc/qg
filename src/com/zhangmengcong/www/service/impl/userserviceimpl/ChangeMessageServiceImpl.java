@@ -63,7 +63,7 @@ public class ChangeMessageServiceImpl implements ChangeMessageService {
            }
             //检测完再加密
             user.setPassword(factory.getEncode().shaEncode(password));
-            if(factory.getUserDao().change(user,username)){
+            if(factory.getUserChangeMessageDao().change(user,username)){
                 return "修改成功( •̀ ω •́ )y";
             }else {
                 return "用户名或邮箱已被占用┭┮﹏┭┮";

@@ -6,7 +6,6 @@ import com.zhangmengcong.www.service.service.goodsservice.BuyGoodsService;
 import com.zhangmengcong.www.util.Factory;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.IF_SHOPPINGCAR;
-import static com.zhangmengcong.www.constant.IndentConstant.SHOPPING_CAR;
 
 
 /**
@@ -36,12 +35,12 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
                 indent.setStatus("购物车");
                 indent.setLastAmount(goods.getAmount());
                 //检查是否已存在在购物车
-                boolean ifGoodsInShoppingCar = factory.getIndentDao().
+                boolean ifGoodsInShoppingCar = factory.getCheckIfGoodsInShoppingCarDao().
                         checkIfGoodsInShoppingCar(username,goods.getGoodsName());
                 if(ifGoodsInShoppingCar){
                     return "该商品已在购物车,快去购物车下单吧";
                 }
-                factory.getIndentDao().buyGoods(indent);
+                factory.getGenerateIndentDao().generateIndent(indent);
 
 
                 return "商品已添加入购物车( •̀ ω •́ )y";
@@ -74,9 +73,12 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
             indent.setTotalPrice(indent.getPrice()*indent.getAmount());
             indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());
             indent.setStatus("商家未接单");
-            factory.getIndentDao().buyGoods(indent);
+            factory.getGenerateIndentDao().generateIndent(indent);
+            //减少用户的积分
+            factory.getUpdateDao().updateDao("user","integral","integral - "
+                +indent.getUseIntegral(),"username","\""+indent.getBuyer()+"\"");
 
-            //减少存货数
+        //减少存货数
             factory.getUpdateDao().updateDao("goods","amount","amount - "
                 +indent.getAmount(),"goodsName","\""+indent.getGoodsName()+"\"");
                 return "商家正在火速处理您的订单( •̀ ω •́ )y";

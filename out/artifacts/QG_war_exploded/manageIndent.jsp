@@ -269,10 +269,10 @@
                     url: "/IndentController/deleteIndent",
                     type: "POST",
                     dataType: 'html',
-                    data: "indentId=" + id +"&ifseller=1",
+                    data: "indentId=" + id +"&ifSeller=1",
                     success: function (result) {
                         alert(result);
-                        location.href = "/ChangePageController/goCheckBuyIndent";
+                        location.href = "/ChangePageController/goCheckSalesIndent";
                     },
                     error: function (msg) {
                         alert("出错啦")
@@ -298,6 +298,26 @@
             }
         });
     }
+
+    function rejectIndent(event,indentId) {
+        event.preventDefault();
+        $.ajax({
+            url: "/IndentController/rejectIndent",
+            type: "POST",
+            dataType: 'html',
+            data: "indentId=" + indentId,
+            success: function (result) {
+                alert(result);
+                location.href = "/ChangePageController/goCheckSalesIndent";
+            },
+            error: function (msg) {
+                alert("出错啦")
+            }
+        });
+    }
+
+
+
     </script>
 
 
@@ -327,6 +347,27 @@
 
     <h1 align="center"><font color="purple">商家管理商品订单</font></h1>
     </div>
+<div id="1" style="display: none" >
+
+    <FORM align="center"  method="post"  >
+        <%--    <input type="button" value="修改订单" class="check" style="margin-bottom: 0"/>--%>
+        <%--    <br>--%>
+        <a  class="text">需要修改的订单id :</a><br>
+        <input type="text"  pattern="^\d{1,10}$" id="id" class="text" name="id" required  />
+        <br>
+        <a  class="text">需要修改的订单商品名 :</a><br>
+        <input type="text"   class="text" name="goodsName" id="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required  />
+        <br>
+        <a  class="text">需要修改的订单单价:</a><br>
+        <input type="text" class="text" pattern="^\d{1,10}$" name="price" id="price" pattern="^\d{1,8}$"required  />
+        <br>
+        <a  class="text">修改的订单商品数量:</a><br>
+        <input type="text" class="text" pattern="^\d{1,10}$" name="amount" id="amount" pattern="^\d{1,8}$" required  />
+        <br>
+        <input type="submit" value="提交" onclick="fun(event)"  class="text" >
+    </FORM>
+</div>
+
 <div class="font">
     <table  border="0px" width="70%" align="center" cellspacing="0px" class="table">
         <tr>
@@ -367,6 +408,8 @@
             <td><%=indent.getStatus()%></td>
             <td><%=indent.getReputation()%></td>
             <td><%=indent.getEvaluate()%>
+
+
                 <c:if test='<%=!indent.getEvaluate().contains("暂无")%>'>
                     <a  onclick="fun8(event,<%=indent.getId()%>,'<%=indent.getEvaluate()%>')" href="#" )>
                         <font color="red">把该评价设为商品推荐信息</font></a>
@@ -375,6 +418,14 @@
 
             </td>
             <td>
+                <c:if test='<%=!(indent.getStatus().contains("取消")) && !(indent.getStatus().contains("退货")) &&
+                !(indent.getStatus().contains("在路上")) && !(indent.getStatus().contains("拒绝"))%>'>
+                    <a  onclick="fun3(event,<%=indent.getId()%>)" href="#">发货</a>
+                </c:if>
+                <c:if test='<%=indent.getStatus().contains("未接单")%>'>
+                    <a  onclick="rejectIndent(event,<%=indent.getId()%>)" href="#">
+                        <font color="red">拒绝售卖</font></a>
+                </c:if>
                 <c:if test='<%=indent.getStatus().contains("用户申请退货")%>'>
                     <a onclick="fun11(event,<%=indent.getId()%>)" href="#" >同意退货</a>
                     <a>/</a><a onclick="fun12(event,<%=indent.getId()%>)" href="#" >拒绝退货并让小二介入</a>
@@ -382,10 +433,7 @@
                 <c:if test='<%=(indent.getStatus().contains("订单已完成") || indent.getStatus().contains("已退货"))%>'>
                     <a  onclick="deleteIndent(event,<%=indent.getId()%>)" href="#">删除订单</a>
                 </c:if>
-                <c:if test='<%=!(indent.getStatus().contains("取消")) && !(indent.getStatus().contains("退货")) &&
-                !(indent.getStatus().contains("在路上"))%>'>
-                <a  onclick="fun3(event,<%=indent.getId()%>)" href="#">发货</a>
-                </c:if>
+
                     <c:if test='<%=!(indent.getBuyerMessage().contains("暂无"))%>'>
                     <a>&nbsp&nbsp&nbsp&nbsp&nbsp</a>
                     <a href="/ChangePageController/goToMessageBoard?ifSeller=1&id=<%=indent.getId()%>"><font color="#ff1493">用户给您留言啦,请打开留言板</font></a>
@@ -393,7 +441,7 @@
                 <a  href="/ChangePageController/goToMessageBoard?ifSeller=1&id=<%=indent.getId()%>"><font color="#8a2be2">前往留言</font></a>
                 <a  href="#" onclick="appear(event,<%=indent.getId()%>,'<%=indent.getGoodsName()%>',
                     <%=indent.getPrice()%>,<%=indent.getAmount()%>)">
-                    <c:if test='<%=!(indent.getStatus().contains("退货"))%>'>
+                    <c:if test='<%=(indent.getStatus().contains("在路上"))%>'>
                     <font color="#00bfff">修改订单</font></a>
                 </c:if>
             </td>
@@ -408,26 +456,6 @@
     </table>
 </div>
 
-<div id="1" style="display: none" >
-    <br><br><br><br><br>
-    <FORM align="center"  method="post"  >
-        <%--    <input type="button" value="修改订单" class="check" style="margin-bottom: 0"/>--%>
-        <%--    <br>--%>
-        <a  class="text">需要修改的订单id :</a><br>
-        <input type="text"  pattern="^\d{1,10}$" id="id" class="text" name="id" required  />
-        <br>
-        <a  class="text">需要修改的订单商品名 :</a><br>
-        <input type="text"   class="text" name="goodsName" id="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required  />
-        <br>
-        <a  class="text">需要修改的订单单价:</a><br>
-        <input type="text" class="text" pattern="^\d{1,10}$" name="price" id="price" pattern="^\d{1,8}$"required  />
-        <br>
-        <a  class="text">修改的订单商品数量:</a><br>
-        <input type="text" class="text" pattern="^\d{1,10}$" name="amount" id="amount" pattern="^\d{1,8}$" required  />
-        <br>
-        <input type="submit" value="提交" onclick="fun(event)"  class="text" >
-    </FORM>
-</div>
 
 </body>
 </html>

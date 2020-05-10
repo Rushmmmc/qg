@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static com.zhangmengcong.www.constant.UserConstant.VISITOR_LEVEL;
 
 
 /**

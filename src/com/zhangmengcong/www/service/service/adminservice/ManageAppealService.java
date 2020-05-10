@@ -7,14 +7,16 @@ package com.zhangmengcong.www.service.service.adminservice;
  */
 public interface ManageAppealService {
     /** 扣除被投诉商家的信誉分
-     * @param id 订单id
+     *
      * @param username 可怜的商家
      */
-    void minusSellerReputationService(String username,int id);
+    void minusSellerReputationService(String username);
 
     /** 处理申诉的方法
+     * @param type 处理类型
      * @param id 订单id
      * @param appealId 申诉号id
+     * @return 提示信息
      */
     String manageAppealService(String type,int id,int appealId);
 }

@@ -7,7 +7,6 @@ import com.zhangmengcong.www.util.Factory;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-import static com.zhangmengcong.www.constant.GoodsConstant.SELL;
 import static com.zhangmengcong.www.constant.IndentConstant.*;
 
 /**
@@ -35,7 +33,7 @@ public class IndentController extends BaseServlet {
 
         int indentId = Integer.parseInt(request.getParameter("indentId"));
         String evaluate = request.getParameter("evaluate");
-        String message = factory.getIndentService().userEvaluateIndent(evaluate,indentId);
+        String message = factory.getUserEvaluateIndentService().userEvaluateIndent(evaluate,indentId);
         response.getWriter().write(message);
     }
     public void deleteIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -43,7 +41,7 @@ public class IndentController extends BaseServlet {
         response.setCharacterEncoding("UTF-8");
         int ifSeller = Integer.parseInt(request.getParameter("ifSeller"));
         int indentId = Integer.parseInt(request.getParameter("indentId"));
-        String message = factory.getIndentService().deleteIndent(ifSeller,indentId);
+        String message = factory.getDeleteIndentService().deleteIndent(ifSeller,indentId);
         response.getWriter().write(message);
     }
 
@@ -51,7 +49,7 @@ public class IndentController extends BaseServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         int indentId = Integer.parseInt(request.getParameter("indentId"));
-        String message = factory.getIndentService().deleteShoppingCarIndent(indentId);
+        String message = factory.getDeleteShoppingCarIndentService().deleteShoppingCarIndent(indentId);
         response.getWriter().write(message);
     }
 
@@ -80,7 +78,7 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         //获取路径
         String path = this.getServletContext().getRealPath("./");
         String username = (String)session.getAttribute("username");
-        factory.getGeneateFileService().geneateFileService(username,path);
+        factory.getGenerateFileService().geneateFileService(username,path);
         path = path + "data\\";
         File file = new File(path);
         if (!file.exists()) {
@@ -122,7 +120,7 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         response.setCharacterEncoding("UTF-8");
 
         int indentId = Integer.parseInt(request.getParameter("indentId"));
-        String message = factory.getIndentService().sellerSendGoods(indentId);
+        String message = factory.getSellerSendGoodsService().sellerSendGoods(indentId);
         response.getWriter().write(message);
     }
     public void changeIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -134,7 +132,7 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         indent.setAmount(Integer.parseInt(request.getParameter("amount")));
         indent.setGoodsName(request.getParameter("goodsName"));
         indent.setPrice(Float.parseFloat(request.getParameter("price")));
-        String message = factory.getIndentService().sellerChangeIndent(indent);
+        String message = factory.getSellerChangeIndentService().sellerChangeIndent(indent);
         response.getWriter().write(message);
     }
     public void finishIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -143,7 +141,7 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         String username = (String)request.getSession().getAttribute("username");
 
         int indentId = Integer.parseInt(request.getParameter("indentId"));
-        String message = factory.getIndentService().finishIndent(indentId,username);
+        String message = factory.getFinishIndentService().finishIndent(indentId,username);
         response.getWriter().write(message);
     }
 
@@ -151,14 +149,22 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
-        String message = factory.getIndentService().giveGoodsReputation(id);
+        String message = factory.getGiveGoodsReputationService().giveGoodsReputation(id);
         response.getWriter().write(message);
     }
     public void giveBadReputation (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
-        String message = factory.getIndentService().giveBadReputation(id);
+        String message = factory.getGiveGoodsReputationService().giveBadReputation(id);
+        response.getWriter().write(message);
+    }
+
+    public void rejectIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        int indentId = Integer.parseInt(request.getParameter("indentId"));
+        String message = factory.getRejectSellGoodsService().rejectSellGoods(indentId);
         response.getWriter().write(message);
     }
 

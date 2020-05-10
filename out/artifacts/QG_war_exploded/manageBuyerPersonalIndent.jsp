@@ -427,7 +427,9 @@
             </font>
 
                 </c:if>
-            <c:if test='<%=indent.getStatus().contains("完成") || indent.getStatus().contains("已退款") %>'>
+            <c:if test='<%=indent.getStatus().contains("完成") || indent.getStatus().contains("已退款")
+             || indent.getStatus().contains("已退货")
+             || indent.getStatus().contains("拒绝售卖")%>'>
                 <a>&nbsp&nbsp</a>
             <a onclick="fun3(event,<%=indent.getId()%>)" href="#" >删除订单</a>
             </c:if>

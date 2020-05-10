@@ -26,7 +26,7 @@ public class ChangePageController extends BaseServlet {
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        request.setAttribute("emps", factory.getPrintTableService().selectPersonalMessage(username));
+        request.setAttribute("emps", factory.getSelectPersonalMessageService().selectPersonalMessage(username));
         try {
             request.getRequestDispatcher("/change.jsp").forward(request, response);
         } catch (ServletException e) {
@@ -117,7 +117,7 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
-    public void changePageToShoppingCar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void changePageToShoppingCar (HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         String username = (String)session.getAttribute("username");
         Factory factory = new Factory();
@@ -131,7 +131,7 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
-    public void quit (HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void quit (HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         //实现注销功能
         if (session.getAttribute(USER_NAME) != null) {

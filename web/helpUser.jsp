@@ -37,7 +37,7 @@
         function fun2(event,id,id2) {
             event.preventDefault();
             $.ajax({
-                url: "/AdminManageAppealController",
+                url: "/AppealController/manageAppeal",
                 type: "POST",
                 dataType: 'html',
                 data:"id="+id+"&type=defendLegalRight&appealId="+id2,
@@ -114,12 +114,15 @@
             <td><%=appeal.getAppealDate()%></td>
 
             <td>
-                <c:if test='<%=appeal.getType().contains("投诉商家")%>'>
+                <c:if test='<%=appeal.getType().contains("投诉商家") && appeal.getStatus().contains("待处理")%>'>
                     <a onclick="fun1(event,<%=appeal.getIdentId()%>,<%=appeal.getId()%>)" href="#"><font color="green">扣商家分</font></a>
                 </c:if>
-                <c:if test='<%=appeal.getType().contains("交易维权")%>'>
+                <c:if test='<%=appeal.getType().contains("交易维权") && appeal.getStatus().contains("待处理")%>'>
                     <a onclick="fun2(event,<%=appeal.getIdentId()%>,<%=appeal.getId()%>)" href="#"><font color="green">退款并返还积分</font></a>
                 </c:if>
+                <c:if test='<%=!appeal.getStatus().contains("待处理")%>'>
+                    您已处理
+                 </c:if>
             </td>
         <tr>
 

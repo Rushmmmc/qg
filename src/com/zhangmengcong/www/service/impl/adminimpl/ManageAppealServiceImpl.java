@@ -12,10 +12,10 @@ import static com.zhangmengcong.www.constant.AdminConstant.*;
  */
 public class ManageAppealServiceImpl implements ManageAppealService {
     @Override
-    public void minusSellerReputationService(String username,int id) {
+    public void minusSellerReputationService(String username) {
         Factory factory = new Factory();
         factory.getUpdateDao().updateDao("user","reputationPoint","reputationPoint - 1",
-                null,null,"username","\"" + username + "\"");
+                "username","\""+username+"\"");
     }
 
     @Override
@@ -25,8 +25,11 @@ public class ManageAppealServiceImpl implements ManageAppealService {
         boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(id));
         boolean ifTypeFormatWrong = factory.getFormatService().formatService(type);
 
-        if(ifIdFormatWrong || ifTypeFormatWrong){
-            return "信息格式不正确!┭┮﹏┭┮";
+        if(ifIdFormatWrong){
+            return "订单id格式不正确!┭┮﹏┭┮";
+        }
+        if(ifTypeFormatWrong){
+            return "处理类型格式不正确~~~~(>_<)~~~~";
         }
 
         String message = "信息格式不正确!┭┮﹏┭┮";
@@ -34,17 +37,35 @@ public class ManageAppealServiceImpl implements ManageAppealService {
         String buyerName = factory.getQueryDao().queryDao("buyer","indent","id",String.valueOf(id));
         //处理投诉商家
         if(COMPLAINT_SELLER.equals(type)){
-            minusSellerReputationService(sellerName,id);
-            factory.getUpdateDao().updateDao("appeal","status","\"扣除商家信誉分\"","id","\""+appealId+"\"");
-            message =   MINUS_SUCCESS_MESSAGE;
+            //查询商品名
+            String goodsName = factory.getQueryDao().queryDao("goodsName",
+                    "indent","id",String.valueOf(id));
+            //扣除商家所有商品中的信誉分
+            boolean ifSuccess = factory.getChangeSellerAllGoodsReputationDao().changeSellerAllGoodsReputation(sellerName);
+            if(ifSuccess) {
+                minusSellerReputationService(sellerName);
+                factory.getUpdateDao().updateDao("appeal","status","\"扣除商家信誉分\"","id","\""+appealId+"\"");
+                message = "该商家的所有商品的信誉分已扣除";
+            }else {
+                return "修改失败,可能是订单已被删除";
+            }
         }
         //处理交易维权
         if(DEFEND_LEGAL_RIGHT.equals(type)){
-            int actuallyPrice = Integer.parseInt(factory.getQueryDao().queryDao("actuallyPrice","indent","id",String.valueOf(id)));
+            float actuallyPrice = Float.parseFloat(factory.getQueryDao().queryDao("actuallyPrice","indent","id",String.valueOf(id)));
             int integral = 2 * Integer.parseInt(factory.getQueryDao().queryDao("useIntegral","indent","id",String.valueOf(id)));
-            factory.getUpdateDao().updateDao("appeal","status","\"退款、返还双倍积分并且扣除商家信誉分\"","id","\""+appealId+"\"");
-            factory.getUpdateDao().updateDao("user","integral","integral + "+ integral,null,null,"username","\""+buyerName+"\"");
-            message =  "已退款"+actuallyPrice+"元 返还使用的双倍积分共 "+integral +"分";
+            boolean ifSuccess = factory.getChangeSellerAllGoodsReputationDao().changeSellerAllGoodsReputation(sellerName);
+            if(ifSuccess) {
+                //扣除卖家信誉分
+                minusSellerReputationService(sellerName);
+                factory.getUpdateDao().updateDao("appeal","status",
+                        "\"退款、返还双倍积分并且扣除商家信誉分\"","id","\""+appealId+"\"");
+                factory.getUpdateDao().updateDao("user","integral","integral + "+ integral,
+                        null,null,"username","\""+buyerName+"\"");
+                message = "该商家的所有商品的信誉分已扣除、退款"+actuallyPrice+"元 返还使用的双倍积分共 "+integral +"分";
+            }else {
+                return "修改失败,可能是订单已被删除";
+            }
         }
     return message;
     }

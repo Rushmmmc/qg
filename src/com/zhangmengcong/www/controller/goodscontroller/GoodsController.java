@@ -102,7 +102,7 @@ public class GoodsController extends BaseServlet {
             indent.setBuyer(username);
             indent.setAmount(Integer.parseInt(request.getParameter("amount")));
             indent.setUseIntegral(Integer.parseInt(request.getParameter("integral")));
-            message = factory.getIndentService().buyGoodsFromShoppingCar(indent);
+            message = factory.getBuyGoodsFromShoppingCarService().buyGoodsFromShoppingCar(indent);
             response.getWriter().write(message);
         }
 
@@ -117,7 +117,7 @@ public class GoodsController extends BaseServlet {
         String username = (String) session.getAttribute("username");
         goods.setSeller(username);
         //获取用户信誉分
-        int sellerReputation = factory.getPrintTableService().selectPersonalMessage(username).get(0).getReputationPoint();
+        int sellerReputation = factory.getSelectPersonalMessageService().selectPersonalMessage(username).get(0).getReputationPoint();
         String goodsName = request.getParameter("goodsName");
         goods.setSellerReputation(sellerReputation);
         goods.setType(request.getParameter("type"));

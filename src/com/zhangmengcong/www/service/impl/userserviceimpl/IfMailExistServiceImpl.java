@@ -12,6 +12,8 @@ public class IfMailExistServiceImpl implements IfMailExistService {
     @Override
     public boolean ifMailExistService(String mailAddress){
         Factory factory = new Factory();
-        return factory.getUserDao().checkMail(mailAddress);
+        String tempMail = factory.getQueryDao().queryDao("mailaddress","user"
+        ,"mailaddress","\""+mailAddress+"\"");
+        return !"".equals(tempMail);
     }
 }

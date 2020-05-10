@@ -58,7 +58,7 @@ public class UserController extends BaseServlet {
         }
     }
 
-    public void login (HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException{
         //设置编码防止乱码
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("UTF-8");
@@ -132,10 +132,10 @@ public class UserController extends BaseServlet {
             }
         }
     }
-    public void register (HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void register(HttpServletRequest request, HttpServletResponse response) throws IOException{
         //设置编码防止乱码
-        request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         //设置编码防止乱码
         //获取区域 从前端获取各种信息
         String mailAddress = request.getParameter("mailaddress");
@@ -144,11 +144,6 @@ public class UserController extends BaseServlet {
         String captcha = request.getParameter("captcha");
         HttpSession session = request.getSession();
         String captchar = (String) session.getAttribute("captcha");
-
-        //创建工厂对象
-        Factory factory = new Factory();
-
-
         //实现注册功能
         //获得注册服务返回的信息 service层进行数据判空 判断是否包含中文与特殊符号
         String message = factory.getRegisterAndLogin().register(username,password,mailAddress,captchar,captcha);

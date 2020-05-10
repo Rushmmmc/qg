@@ -11,12 +11,8 @@
 <head>
     <title>欢迎使用QG闲鱼</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="/jquery-3.5.0.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.js"></script>
 
 
 
@@ -62,11 +58,10 @@
                     data: "username=" + username + "&password=" + password + "&captcha=" + captcha + "&mailaddress=" + mailaddress,
                     success: function (result) {
                         if(result === "true"){
-                            alert("注册成功O(∩_∩)O");
-                            location.href ="/login.jsp";
-                        } else {
-                            alert(result);
+                            alert("注册成功");
+
                         }
+                        alert(result);
                     },
                     error: function (msg) {
                         alert("出错啦")
@@ -143,12 +138,8 @@
 </form>
 
 
-<c:if test="${not empty requestScope.message}">
-<Script Language="JavaScript">
-    alert("${requestScope.message}");
-</Script>
 
-</c:if>
+
 </body>
 </html>
 

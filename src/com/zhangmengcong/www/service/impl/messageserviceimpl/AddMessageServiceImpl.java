@@ -51,13 +51,13 @@ public class AddMessageServiceImpl implements AddMessageService {
             }
         }
         if(message.getBuyerMessage() != null ) {
-            if (factory.getAddMessageDao().addNewMessageDao(message)) {
+            if (factory.getAddNewMessageDao().addNewMessageDao(message)) {
                 factory.getUpdateDao().updateDao("indent", "buyerMessage", "\"已留言\"", null, null, "id", String.valueOf(indent.getId()));
                 return "留言成功！";
             }
         }
         if(message.getSellerMessage() != null){
-            if (factory.getAddMessageDao().addNewMessageDao(message)) {
+            if (factory.getAddNewMessageDao().addNewMessageDao(message)) {
                 factory.getUpdateDao().updateDao("indent", "sellerMessage", "\"已留言\"", null, null, "id", String.valueOf(indent.getId()));
                 return "留言成功！";
             }

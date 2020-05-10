@@ -34,7 +34,7 @@
     return;
     }
     if(!flag_m){
-        alert("消息不可包含特殊符号！");
+        alert("消息不可为空或包含特殊符号！");
     }
     if (flag_o && flag_m) {
     $.ajax({

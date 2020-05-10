@@ -1,7 +1,6 @@
 package com.zhangmengcong.www.controller;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,13 +10,13 @@ import java.lang.reflect.Method;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 用于反射
  * @date: 2020/5/9 10:05
  */
 
 public class BaseServlet extends HttpServlet {
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=utf-8");
