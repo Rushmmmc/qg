@@ -27,8 +27,12 @@ import static com.zhangmengcong.www.constant.UserConstant.*;
  */
 @WebServlet("/GoodsController/*")
 public class GoodsController extends BaseServlet {
+    /**
+     * 把商品添加到购物车
+     */
     public void addGoodsToShoppingCar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
+        //设置编码
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
@@ -43,7 +47,9 @@ public class GoodsController extends BaseServlet {
         String message = factory.getBuyGoodsService().buyGoodsService(indent, IF_SHOPPINGCAR,username);
         response.getWriter().write(message);
     }
-
+    /**
+     * 直接购买商品
+     */
     public void buyGoods(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -58,11 +64,8 @@ public class GoodsController extends BaseServlet {
         //获取用户希望使用的积分量
         int integral = Integer.parseInt(request.getParameter("integral"));
         //如果用户输入积分量大于价格 提示信息
-        if (integral > goods.getPrice()) {
-            response.getWriter().write(DONOT_NEED_SO_MUCH_INTEGRAL);
-        }
+
         //查询已有积分 若足够 扣除 不够则提示用户并不生成订单
-        else  {
             indent.setAmount(Integer.parseInt(request.getParameter("tempAmount")));
             //设置订单信息
             indent.setGoodsType(goods.getType());
@@ -75,9 +78,11 @@ public class GoodsController extends BaseServlet {
             //验证数据格式并返回提示信息
             String message = factory.getBuyGoodsService().buyGoodsService(indent, 0,null);
             response.getWriter().write(message);
-        }
     }
 
+    /**
+     * 购买购物车的商品
+     */
     public void buyGoodsFromShoppingCar(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
@@ -90,36 +95,34 @@ public class GoodsController extends BaseServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         float price = Float.parseFloat(request.getParameter("price"));
         int integral = Integer.parseInt(request.getParameter("integral"));
-        //若用户使用积分大于价格 提示用户
-        if (integral > price) {
-            response.getWriter().write("使用的积分不可大于价格┭┮﹏┭┮");
-        }
-        //查询已有积分 若足够 扣除 不够则提示用户并不生成订单
-        else  {
+
             //设置订单信息
             indent.setId(id);
             indent.setPrice(price);
             indent.setBuyer(username);
             indent.setAmount(Integer.parseInt(request.getParameter("amount")));
-            indent.setUseIntegral(Integer.parseInt(request.getParameter("integral")));
+            indent.setUseIntegral(integral);
+            //检验数据 返回提示信息
             message = factory.getBuyGoodsFromShoppingCarService().buyGoodsFromShoppingCar(indent);
             response.getWriter().write(message);
-        }
-
     }
 
+    /**
+     * 商家申报新商品
+     */
     public void commitGoods(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         Factory factory = new Factory();
+
         Goods goods = new Goods();
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        goods.setSeller(username);
-        //获取用户信誉分
-        int sellerReputation = factory.getSelectPersonalMessageService().selectPersonalMessage(username).get(0).getReputationPoint();
+
+
         String goodsName = request.getParameter("goodsName");
-        goods.setSellerReputation(sellerReputation);
+
+        goods.setSeller(username);
         goods.setType(request.getParameter("type"));
         goods.setGoodsName(goodsName);
         goods.setImformation(request.getParameter("imformation"));
@@ -134,6 +137,9 @@ public class GoodsController extends BaseServlet {
         response.getWriter().write(message);
     }
 
+    /**
+     * 管理员通过或删除商品
+     */
     public void goodsDeleteOrPassController(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("UTF-8");
         //检测管理员希望审核还是删除商品
@@ -144,11 +150,15 @@ public class GoodsController extends BaseServlet {
         response.getWriter().write(message);
     }
 
+    /**
+     * 商家自主设置在首页用户推荐内容
+     */
     public void recommend(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
+        //获取推荐内容
         String recommend = request.getParameter("recommend");
         int indentId = Integer.parseInt(request.getParameter("indentId"));
 
@@ -156,6 +166,9 @@ public class GoodsController extends BaseServlet {
         response.getWriter().write(message);
     }
 
+    /**
+     * 用户申请退货
+     */
     public void returnGoods(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
@@ -175,30 +188,42 @@ public class GoodsController extends BaseServlet {
                 .returnGoodsService(ifSeller, indentId, type);
         response.getWriter().write(message);
     }
-
+    /**
+     * 在广告页智能推送商品信息
+     */
     public void seleteGoodsByInterest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         List<Goods> list = factory.getSelectGoodsByInterest().selectGoodsByInterest(username);
+
         request.setAttribute("goodsList", list);
         try {
             //如果是游客
             if ((int) (session.getAttribute(LEVEL)) == VISITOR_LEVEL) {
                 request.getRequestDispatcher("/visitorAd.jsp").forward(request, response);
-            } else if ((int) (session.getAttribute(LEVEL)) == ADMIN_LEVEL) {
+            }
+            //如果是管理员
+            else if ((int) (session.getAttribute(LEVEL)) == ADMIN_LEVEL) {
                 request.getRequestDispatcher("/DividePageController").forward(request, response);
-            } else {
+            }
+            //否则是普通用户
+            else {
                 request.getRequestDispatcher("/ad.jsp").forward(request, response);
             }
         } catch (ServletException e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 商户上传商品图片
+     */
     public void uploadPhoto (HttpServletRequest request, HttpServletResponse response) throws IOException{
+        Factory factory = new Factory();
         response.setCharacterEncoding("UTF-8");
-        //商户上传商品简介图片
+
         //获得磁盘文件条目工厂
         DiskFileItemFactory factory2 = new DiskFileItemFactory();
         //获取文件需要上传到的路径
@@ -209,19 +234,13 @@ public class GoodsController extends BaseServlet {
             //不存在则创建目录
             file.mkdirs();
         }
-
-
         factory2.setRepository(new File(path));
-        //设置 缓存的大小，当上传文件的容量超过该缓存时，直接放到 暂时存储室
+        //设置缓存的大小当上传文件的容量超过该缓存时直接放到暂时存储室
         factory2.setSizeThreshold(1024 * 1024);
-        //高水平的API文件上传处理
         try {
             ServletFileUpload upload = new ServletFileUpload(factory2);
-            //可以上传多个文件
             List<FileItem> list = upload.parseRequest(request);
             for (FileItem item : list) {
-
-                //对传入的非 简单的字符串进行处理 ，比如说二进制的 图片，电影这些
                 //获取路径名
                 String value = item.getName();
                 //索引到最后一个反斜杠
@@ -229,12 +248,14 @@ public class GoodsController extends BaseServlet {
                 //截取 上传文件的 字符串名字，加1是 去掉反斜杠，
                 String filename = value.substring(start + 1);
                 //文件名加上用户名 防止图片名重复导致出错
-                if(!filename.contains(".jpg") && !filename.contains(".bmp") && !filename.contains(".png")){
-                    response.getWriter().write("图片格式仅支持jpg、bmp、png！");
-                    continue;
-                }
+
                 String goodsName = (String)request.getSession().getAttribute("goodsName");
                 filename =  goodsName+ filename;
+                if(!filename.contains(".jpg") && !filename.contains(".bmp") && !filename.contains(".png")){
+                    response.getWriter().write("图片格式仅支持jpg、bmp、png！");
+                    factory.getDeleteOrPassGoodsService().deleteGoodsService(goodsName);
+                    continue;
+                }
                 OutputStream out = new FileOutputStream(new File(path, filename));
                 InputStream in = item.getInputStream();
                 int length;
@@ -246,7 +267,7 @@ public class GoodsController extends BaseServlet {
                 }
                 in.close();
                 out.close();
-                Factory factory = new Factory();
+
                 String message = factory.getUpdateGoodsPhotoService().updateGoodsPhotoService(filename,goodsName);
                 //如果上传图片失败 删除预商品
                 if(!ADD_PHOTO_SUCCESS.equals(message)){

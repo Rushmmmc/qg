@@ -32,7 +32,7 @@ public class ChangeMessageServiceImpl implements ChangeMessageService {
 
            boolean ifMailAddressWrong = factory.getFormatService().mailFormatService(mailAddress);
            if(ifMailAddressWrong){
-               return "新邮箱不可包含特殊符号！,不可包含多个@";
+               return "新邮箱不可包含中文和特殊符号！,不可包含多个@";
            }
            //数据判断长度、格式
            boolean ifMessageLengthError = username.length() < NAME_MIN_LENGTH || password.length() < PASSWORD_MIN_LENGTH || mailAddress.length() < MAIL_MIN_LENGTH

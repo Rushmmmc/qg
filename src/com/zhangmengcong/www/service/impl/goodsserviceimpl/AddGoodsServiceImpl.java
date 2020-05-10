@@ -46,6 +46,11 @@ public class AddGoodsServiceImpl implements AddGoodsService {
         if(!"".equals(checkGoodsNameIfExist)){
             return "该商品名已存在！,请更换商品名";
         }
+
+        //检验完毕 插库
+        //获取用户信誉分
+        int sellerReputation = factory.getSelectPersonalMessageService().selectPersonalMessage(goods.getSeller()).get(0).getReputationPoint();
+        goods.setSellerReputation(sellerReputation);
         if (factory.getAddGoodsDao().addGoods(goods)) {
                 return ADD_GOODS_SUCCESS;
             } else {

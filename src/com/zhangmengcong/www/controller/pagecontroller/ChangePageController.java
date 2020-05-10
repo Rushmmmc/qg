@@ -21,6 +21,9 @@ import static com.zhangmengcong.www.constant.UserConstant.*;
 public class ChangePageController extends BaseServlet {
     Factory factory = new Factory();
 
+    /**
+     * 用户修改信息页面
+     */
     public void changeMessagePage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -34,6 +37,9 @@ public class ChangePageController extends BaseServlet {
         }
     }
 
+    /**
+     * 管理员审核、删除商品 封禁/解封商品
+     */
     public void adminManageGoodsAndSellerSystem(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             request.setAttribute("goodsList", factory.getGoodsPrintService().goodsPrintService());
@@ -43,6 +49,9 @@ public class ChangePageController extends BaseServlet {
         }
     }
 
+    /**
+     * 卖家申报商品
+     */
     public void sellerCommitGoods(HttpServletRequest request, HttpServletResponse response) throws IOException {
             response.setCharacterEncoding("UTF-8");
             String username = (String) request.getSession().getAttribute("username");
@@ -51,6 +60,9 @@ public class ChangePageController extends BaseServlet {
             }
     }
 
+    /**
+     *  去往卖家管理商品页面
+     */
     public void goCheckSalesIndent(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //选择打印卖家订单功能
         String username = (String) request.getSession().getAttribute("username");
@@ -61,7 +73,9 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
-
+    /**
+     * 去往用户(买家)管理个人商品页面
+     */
     public void goCheckBuyIndent(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = (String) request.getSession().getAttribute("username");
         //选择打印买家订单功能
@@ -72,13 +86,17 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
-
+    /**
+     * 买家去往商品购买页面
+     */
     public void buyerSetBuyAmount(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //传递参数 否则完蛋
         int id = Integer.parseInt(request.getParameter("id"));
         request.getSession().setAttribute("goods", factory.getGetPriceAndGoodsNameService().getPriceAndGoodsNameService(id));
     }
-
+    /**
+     * 商家或用户去往对应订单的留言板
+     */
     public void goToMessageBoard(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = (String) request.getSession().getAttribute("username");
         int ifSeller = Integer.parseInt(request.getParameter("ifSeller"));
@@ -96,6 +114,9 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
+    /**
+     * 管理员去往审核申诉页面
+     */
     public void changePageToHelpUser (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
@@ -117,6 +138,9 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
+    /**
+     * 去往购物车
+     */
     public void changePageToShoppingCar (HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         String username = (String)session.getAttribute("username");
@@ -131,6 +155,9 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
+    /**
+     * 注销
+     */
     public void quit (HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         //实现注销功能
@@ -153,5 +180,4 @@ public class ChangePageController extends BaseServlet {
         }
         //实现注销功能
     }
-
 }

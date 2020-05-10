@@ -20,31 +20,44 @@ import static com.zhangmengcong.www.constant.IndentConstant.*;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 订单相关controller
  * @date: 2020/5/7 22:42
  */
 @WebServlet("/IndentController/*")
 public class IndentController extends BaseServlet {
     Factory factory = new Factory();
-    public void addEvaluate(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+    /**
+     * 用户给订单留下详细评价
+     */
+    public void addEvaluate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //设置编码
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         int indentId = Integer.parseInt(request.getParameter("indentId"));
         String evaluate = request.getParameter("evaluate");
+        //调用方法 检验数据 并返回提示信息
         String message = factory.getUserEvaluateIndentService().userEvaluateIndent(evaluate,indentId);
         response.getWriter().write(message);
     }
+
+    /**
+     * 用户或商家删除订单
+     */
     public void deleteIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        //判断是用户还是商家
         int ifSeller = Integer.parseInt(request.getParameter("ifSeller"));
         int indentId = Integer.parseInt(request.getParameter("indentId"));
+        //调用方法 检验数据 并返回提示信息
         String message = factory.getDeleteIndentService().deleteIndent(ifSeller,indentId);
         response.getWriter().write(message);
     }
-
+    /**
+     * 删除购物车的订单
+     */
     public void deleteShoppingCarIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -53,8 +66,10 @@ public class IndentController extends BaseServlet {
         response.getWriter().write(message);
     }
 
-
-public void deleteMessage (HttpServletRequest request, HttpServletResponse response) throws IOException{
+    /**
+     * 删除留言板的消息
+     */
+    public void deleteMessage (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
 
@@ -72,6 +87,10 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
             e.printStackTrace();
         }
     }
+
+    /**
+     * 商家生成订单xls文件
+     */
     public void generateXlsIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
@@ -106,6 +125,9 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         sos.close();
         fis.close();
     }
+    /**
+     * 商家未发货 用户放弃订单
+     */
     public void giveUpIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -115,6 +137,9 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
                 Integer.parseInt(request.getParameter("indentId")));
         response.getWriter().write(message);
     }
+    /**
+     * 卖家发货
+     */
     public void sellerSendGoods (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -123,6 +148,9 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         String message = factory.getSellerSendGoodsService().sellerSendGoods(indentId);
         response.getWriter().write(message);
     }
+    /**
+     * 卖家修改订单信息
+     */
     public void changeIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -135,6 +163,9 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         String message = factory.getSellerChangeIndentService().sellerChangeIndent(indent);
         response.getWriter().write(message);
     }
+    /**
+     * 用户确认收货
+     */
     public void finishIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -144,7 +175,9 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         String message = factory.getFinishIndentService().finishIndent(indentId,username);
         response.getWriter().write(message);
     }
-
+    /**
+     * 用户给好评
+     */
     public void giveGoodReputation (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -152,6 +185,9 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         String message = factory.getGiveGoodsReputationService().giveGoodsReputation(id);
         response.getWriter().write(message);
     }
+    /**
+     * 用户给差评
+     */
     public void giveBadReputation (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -159,7 +195,9 @@ public void deleteMessage (HttpServletRequest request, HttpServletResponse respo
         String message = factory.getGiveGoodsReputationService().giveBadReputation(id);
         response.getWriter().write(message);
     }
-
+    /**
+     * 商家拒绝售卖
+     */
     public void rejectIndent (HttpServletRequest request, HttpServletResponse response) throws IOException{
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");

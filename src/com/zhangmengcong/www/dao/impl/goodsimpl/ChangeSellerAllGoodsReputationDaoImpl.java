@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
  */
 public class ChangeSellerAllGoodsReputationDaoImpl implements ChangeSellerAllGoodsReputationDao {
     @Override
-    public boolean changeSellerAllGoodsReputation(String sellerName) {
+    public boolean changeSellerAllGoodsReputation(String sellerName,boolean ifAdd) {
         String sql;
         Connection conn = null;
         PreparedStatement ptst = null;
@@ -21,7 +21,11 @@ public class ChangeSellerAllGoodsReputationDaoImpl implements ChangeSellerAllGoo
         try {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnetction();
-            sql = "update goods set sellerReputation = sellerReputation - 1 where seller = ?";
+            if(ifAdd){
+                sql = "update goods set sellerReputation = sellerReputation + 1 where seller = ?";
+            }else {
+                sql = "update goods set sellerReputation = sellerReputation - 1 where seller = ?";
+            }
             ptst = conn.prepareStatement(sql);
             ptst.setString(1,sellerName);
             ifSuccess = ptst.executeUpdate();

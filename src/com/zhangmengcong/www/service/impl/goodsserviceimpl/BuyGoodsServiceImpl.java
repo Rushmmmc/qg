@@ -50,7 +50,7 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
         }
 
         //普通购买功能
-        //用户仅输入这两个 所以仅检验这两个
+        //检验数据
         boolean ifAmountWrong = factory.getFormatService().formatService(String.valueOf(indent.getAmount()));
         boolean ifIntegralWrong = factory.getFormatService().formatService(String.valueOf(indent.getUseIntegral()));
         if(ifAmountWrong){
@@ -58,6 +58,12 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
         }
         if(ifIntegralWrong){
             return "积分格式不正确┭┮﹏┭┮,仅支持整数";
+        }
+
+
+        //检测积分是否超过了总价
+        if (indent.getUseIntegral() > indent.getPrice() * indent.getAmount()) {
+            return "此商品不需要这么多积分┭┮﹏┭┮";
         }
         //检查积分是否足够
         int nowIntegral = Integer.parseInt(factory.getQueryDao().queryDao("integral","user"
@@ -70,6 +76,8 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
         if(lastAmount < indent.getAmount()){
             return "商家存货不足,客官买少一点吧┭┮﹏┭┮";
         }
+
+            //无误 插库
             indent.setTotalPrice(indent.getPrice()*indent.getAmount());
             indent.setActuallyPrice(indent.getTotalPrice()-indent.getUseIntegral());
             indent.setStatus("商家未接单");

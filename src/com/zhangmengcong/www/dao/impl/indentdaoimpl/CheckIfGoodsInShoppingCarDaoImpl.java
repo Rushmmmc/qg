@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 检测该商品是否已在用户的购物车里
  * @date: 2020/5/10 15:19
  */
 public class CheckIfGoodsInShoppingCarDaoImpl implements CheckIfGoodsInShoppingCarDao {

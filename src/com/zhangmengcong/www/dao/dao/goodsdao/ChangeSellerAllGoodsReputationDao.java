@@ -8,8 +8,9 @@ package com.zhangmengcong.www.dao.dao.goodsdao;
 public interface ChangeSellerAllGoodsReputationDao {
     /** 修改商家所有商品的信誉分
      *
-     * @param sellerName 卖家名
+     * @param sellerName 商户名
+     * @param ifAdd 是否增加信誉分 否则减少
      * @return  是否成功
      */
-    boolean changeSellerAllGoodsReputation(String sellerName);
+    boolean changeSellerAllGoodsReputation(String sellerName,boolean ifAdd);
 }

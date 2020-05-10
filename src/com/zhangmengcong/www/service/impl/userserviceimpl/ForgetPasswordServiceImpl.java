@@ -61,9 +61,6 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService {
                 props.setProperty("mail.smtp.auth", "true");
                 // 设置邮件服务器主机名
                 props.setProperty("mail.host", "smtp.qq.com");
-                // props.setProperty("mail.port", "465");
-
-                // 发送邮件协议名称
 
                 props.setProperty("mail.transport.protocol", "smtp");
 

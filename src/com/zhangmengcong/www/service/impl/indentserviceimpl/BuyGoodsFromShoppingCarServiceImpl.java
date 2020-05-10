@@ -14,6 +14,8 @@ public class BuyGoodsFromShoppingCarServiceImpl implements BuyGoodsFromShoppingC
     public String buyGoodsFromShoppingCar(Indent indent) {
         int indentId = indent.getId();
         Factory factory = new Factory();
+
+        //检验数据
         if (factory.getFormatService().ifIndentIdFormatWrong(indentId)) {
             return "订单id格式错误";
         }
@@ -38,18 +40,33 @@ public class BuyGoodsFromShoppingCarServiceImpl implements BuyGoodsFromShoppingC
         if (lastAmount < indent.getAmount()) {
             return "商家存货不足啦┭┮﹏┭┮,请买少一点吧";
         }
+        //检测积分是否超过了总价
         float totalPrice = indent.getAmount() * indent.getPrice();
+        if(indent.getUseIntegral() > indent.getTotalPrice()){
+            return "该商品不需要这么多积分┭┮﹏┭┮";
+        }
+        //检验数据完毕
+
+        //数据没问题 插库
+        //更新订单状态
         factory.getUpdateDao().updateDao("indent", "status",
                 "'商家未接单'", "id", String.valueOf(indentId));
+        //更新订单数量
         factory.getUpdateDao().updateDao("indent", "amount",
                 String.valueOf(indent.getAmount()), "id", String.valueOf(indentId));
+        //更新订单总价
         factory.getUpdateDao().updateDao("indent", "totalPrice", String.valueOf(totalPrice),
                 "id", String.valueOf(indentId));
+        //更新订单使用积分
         factory.getUpdateDao().updateDao("indent", "useIntegral",
                 String.valueOf(indent.getUseIntegral()), "id", String.valueOf(indentId));
+        //更新实际付款
         factory.getUpdateDao().updateDao("indent", "actuallyPrice",
                 String.valueOf(totalPrice - indent.getUseIntegral()), "id",
                 String.valueOf(indentId));
+        //减少用户的积分
+        factory.getUpdateDao().updateDao("user","integral","integral - "+indent.getUseIntegral(),
+                "username","\""+indent.getBuyer()+"\"");
         //商品存量减少
         factory.getUpdateDao().updateDao("goods", "amount", "amount - "
                         + indent.getAmount(), "goodsName",

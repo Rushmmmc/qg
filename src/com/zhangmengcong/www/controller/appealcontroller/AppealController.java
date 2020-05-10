@@ -17,9 +17,8 @@ import java.io.IOException;
  * @date: 2020/5/3 19:19
  */
 
-    @WebServlet("/AppealController/*")
-public class AppealController extends BaseServlet {
-    public void manageAppeal(HttpServletRequest request, HttpServletResponse response) throws IOException {
+@WebServlet("/AppealController/*")
+    public class AppealController extends BaseServlet {public void manageAppeal(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -31,6 +30,9 @@ public class AppealController extends BaseServlet {
         response.getWriter().write(message);
     }
 
+    /**
+     * 用户提交申诉
+     */
     public void commitAppeal(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");

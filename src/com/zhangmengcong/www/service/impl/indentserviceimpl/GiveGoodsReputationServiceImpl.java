@@ -5,7 +5,7 @@ import com.zhangmengcong.www.util.Factory;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 用户给评价
  * @date: 2020/5/10 13:45
  */
 public class GiveGoodsReputationServiceImpl implements GiveGoodsReputationService {
@@ -21,6 +21,8 @@ public class GiveGoodsReputationServiceImpl implements GiveGoodsReputationServic
                 ,null,null,"username","\""+sellerName+"\"");
         factory.getDeleteOrChangeDao().deleteOrChange("indent",0,indentId,"好评"
                 ,"reputation",false,null);
+        //给用户所有的商品增加信誉分
+        factory.getChangeSellerAllGoodsReputationDao().changeSellerAllGoodsReputation(sellerName,true);
         return "感谢您的好评( •̀ ω •́ )y";
     }
     @Override
@@ -34,6 +36,8 @@ public class GiveGoodsReputationServiceImpl implements GiveGoodsReputationServic
                 ,null,null,"username","\""+sellerName+"\"");
         factory.getDeleteOrChangeDao().deleteOrChange("indent",0,indentId,"差评",
                 "reputation",false,null);
+        //给用户所有的商品减少信誉分
+        factory.getChangeSellerAllGoodsReputationDao().changeSellerAllGoodsReputation(sellerName,false);
         return "感谢您的差评┭┮﹏┭┮";
     }
 }

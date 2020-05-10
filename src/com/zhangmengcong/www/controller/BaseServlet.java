@@ -21,12 +21,14 @@ public class BaseServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=utf-8");
         String uri = req.getRequestURI();
+        //获取最后的斜杠后面的method名
         String methodName = uri.substring(uri.lastIndexOf('/') + 1);
         try {
             Method method = this.getClass().getMethod(methodName, HttpServletRequest.class,
                     HttpServletResponse.class);
             try {
                 try {
+                    //反射method
                     method.invoke(this,req,resp);
                 } catch (InvocationTargetException e) {
                     e.printStackTrace();

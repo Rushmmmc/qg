@@ -20,6 +20,9 @@ import static com.zhangmengcong.www.constant.UserConstant.CHANGE_LEVEL_FAIL;
  */
 @WebServlet("/admin/*")
 public class AdminController extends BaseServlet {
+    /**
+     * 管理员封禁或解封用户
+     */
     public void ban(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -36,6 +39,9 @@ public class AdminController extends BaseServlet {
         response.getWriter().write(message);
     }
 
+    /**
+     * 更改用户的等级 用于测试
+     */
     public void changeLevel(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");

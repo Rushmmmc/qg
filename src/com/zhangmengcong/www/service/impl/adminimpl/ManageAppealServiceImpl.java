@@ -38,10 +38,8 @@ public class ManageAppealServiceImpl implements ManageAppealService {
         //处理投诉商家
         if(COMPLAINT_SELLER.equals(type)){
             //查询商品名
-            String goodsName = factory.getQueryDao().queryDao("goodsName",
-                    "indent","id",String.valueOf(id));
             //扣除商家所有商品中的信誉分
-            boolean ifSuccess = factory.getChangeSellerAllGoodsReputationDao().changeSellerAllGoodsReputation(sellerName);
+            boolean ifSuccess = factory.getChangeSellerAllGoodsReputationDao().changeSellerAllGoodsReputation(sellerName,false);
             if(ifSuccess) {
                 minusSellerReputationService(sellerName);
                 factory.getUpdateDao().updateDao("appeal","status","\"扣除商家信誉分\"","id","\""+appealId+"\"");
@@ -54,7 +52,7 @@ public class ManageAppealServiceImpl implements ManageAppealService {
         if(DEFEND_LEGAL_RIGHT.equals(type)){
             float actuallyPrice = Float.parseFloat(factory.getQueryDao().queryDao("actuallyPrice","indent","id",String.valueOf(id)));
             int integral = 2 * Integer.parseInt(factory.getQueryDao().queryDao("useIntegral","indent","id",String.valueOf(id)));
-            boolean ifSuccess = factory.getChangeSellerAllGoodsReputationDao().changeSellerAllGoodsReputation(sellerName);
+            boolean ifSuccess = factory.getChangeSellerAllGoodsReputationDao().changeSellerAllGoodsReputation(sellerName,false);
             if(ifSuccess) {
                 //扣除卖家信誉分
                 minusSellerReputationService(sellerName);
