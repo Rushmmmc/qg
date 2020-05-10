@@ -352,12 +352,15 @@
     <FORM align="center"  method="post"  >
         <%--    <input type="button" value="修改订单" class="check" style="margin-bottom: 0"/>--%>
         <%--    <br>--%>
+            <div style="display: none">
+                <a  class="text">需要修改的订单商品名 :</a><br>
+                <input type="text"   class="text" name="goodsName" id="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required  />
+            </div>
         <a  class="text">需要修改的订单id :</a><br>
         <input type="text"  pattern="^\d{1,10}$" id="id" class="text" name="id" required  />
         <br>
-        <a  class="text">需要修改的订单商品名 :</a><br>
-        <input type="text"   class="text" name="goodsName" id="goodsName" pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" required  />
-        <br>
+
+                <br>
         <a  class="text">需要修改的订单单价:</a><br>
         <input type="text" class="text" pattern="^\d{1,10}$" name="price" id="price" pattern="^\d{1,8}$"required  />
         <br>

@@ -11,8 +11,12 @@
 <head>
     <title>欢迎使用QG闲鱼</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.css">
     <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/jquery-3.5.0.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
 
 
 
@@ -34,6 +38,7 @@
             var flag_p = log_password.test(password);
             var flag_c = log_captcha.test(captcha);
             var flag_m = log_mailaddress.test(mailaddress);
+
             if(!flag_u){
                 alert("用户名不可包含中文与特殊符号┭┮﹏┭┮,长度为4-10");
                 return;
@@ -47,7 +52,7 @@
                 return;
             }
             if(!flag_m){
-                alert("邮箱不可包含中文和特殊符号┭┮﹏┭┮,长度为8-20");
+                alert("邮箱不可包含特殊符号┭┮﹏┭┮,长度为4-10");
                 return;
             }
             if (flag_u && flag_p && flag_c && flag_m) {
@@ -58,10 +63,11 @@
                     data: "username=" + username + "&password=" + password + "&captcha=" + captcha + "&mailaddress=" + mailaddress,
                     success: function (result) {
                         if(result === "true"){
-                            alert("注册成功");
-
+                            alert("注册成功O(∩_∩)O");
+                            location.href ="/login.jsp";
+                        } else {
+                            alert(result);
                         }
-                        alert(result);
                     },
                     error: function (msg) {
                         alert("出错啦")
@@ -138,8 +144,12 @@
 </form>
 
 
+<c:if test="${not empty requestScope.message}">
+<Script Language="JavaScript">
+    alert("${requestScope.message}");
+</Script>
 
-
+</c:if>
 </body>
 </html>
 
