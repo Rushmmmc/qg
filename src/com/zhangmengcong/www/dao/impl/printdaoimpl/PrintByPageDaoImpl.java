@@ -30,7 +30,7 @@ public class PrintByPageDaoImpl implements PrintByPageDao {
         int totalCount = 0;
         int amount = 0;
         try {
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "select count(*) from goods where 1 = 1 and status = \"已审核 \" ";
             StringBuilder sb = finallyAppendSql(goods,sql);
             List<Object> parametersList = finallyGetList(goods);
@@ -142,7 +142,7 @@ public class PrintByPageDaoImpl implements PrintByPageDao {
         List<Object> parametersList = finallyGetList(goods);
         int amount = 0;
         try {
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "select * from goods where 1 = 1 and status = \"已审核 \" ";
             StringBuilder sb = finallyAppendSql(goods,sql);
             if(rangeMin != 0 && rangeMax != 0){

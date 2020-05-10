@@ -21,7 +21,7 @@ public class AddNewMessageDaoImpl implements AddNewMessageDao {
         int ifSuccess = 0;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             if(message.getBuyerMessage() == null){
                 sql = "insert into message (indentId,buyerName,sellerName,sellerMessage)" +
                         "values (?,?,?,?)";

@@ -20,7 +20,7 @@ public class ChangeSellerAllGoodsReputationDaoImpl implements ChangeSellerAllGoo
         int ifSuccess = 0;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             if(ifAdd){
                 sql = "update goods set sellerReputation = sellerReputation + 1 where seller = ?";
             }else {

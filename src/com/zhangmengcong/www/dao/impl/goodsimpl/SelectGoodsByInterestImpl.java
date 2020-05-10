@@ -28,7 +28,7 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
         String type = "";
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             //根据用户上一次的购买记录进行推荐
             String sql = "select price,goodsType from indent where buyer = ? order by id desc";
             pstmt = conn.prepareStatement(sql);

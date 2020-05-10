@@ -23,7 +23,7 @@ public class DeleteOrChangeDaoImpl implements DeleteOrChangeDao {
         PreparedStatement ptst = null;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             if (ifDelete == IF_DELETE){
                 sql = "delete from " + table + " where id = ?";
             }else {

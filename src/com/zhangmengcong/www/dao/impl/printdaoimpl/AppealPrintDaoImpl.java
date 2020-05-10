@@ -25,7 +25,7 @@ public class AppealPrintDaoImpl implements AppealPrintDao {
         Appeal appeal;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "select * from appeal where username = ? order by id desc";
             if(ifAll){
                 sql = "select * from appeal order by id desc";

@@ -22,7 +22,7 @@ public class CheckIfGoodsInShoppingCarDaoImpl implements CheckIfGoodsInShoppingC
         int ifExist = 0;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             sql = "select * from indent where buyer = ? and goodsName = ? and status = ? ";
             ptst = conn.prepareStatement(sql);
             ptst.setString(1,username);

@@ -7,8 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author:zmc
@@ -24,7 +22,7 @@ public class QueryDaoImpl implements QueryDao {
         ResultSet rs = null;
         String result = "";
         try {
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "select "+ column +" from "+ table +" where "+condition+" = "+actualCondition+"";
             ptst = conn.prepareStatement(sql);
             rs = ptst.executeQuery();

@@ -21,7 +21,7 @@ public class GenerateAppealDaoImpl implements GenerateAppealDao {
         PreparedStatement ptst = null;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             sql = "insert into appeal (indentId,type,seller,username,reason) " +
                     "values (?,?,?,?,?)";
             ptst = conn.prepareStatement(sql);

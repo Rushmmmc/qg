@@ -2,7 +2,6 @@ package com.zhangmengcong.www.dao.impl.indentdaoimpl;
 
 import com.zhangmengcong.www.dao.dao.indentdao.GenerateIndentDao;
 import com.zhangmengcong.www.po.Indent;
-
 import com.zhangmengcong.www.util.JdbcUtil;
 
 import java.sql.Connection;
@@ -24,7 +23,7 @@ public class GenerateIndentDaoImpl implements GenerateIndentDao {
         PreparedStatement ptst = null;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             sql = "insert into indent (goodsName,buyer,seller,price,amount,totalprice," +
                     "status,useIntegral,actuallyPrice,goodsType,lastAmount)" +
                     "values (?,?,?,?,?,?,?,?,?,?,?)";

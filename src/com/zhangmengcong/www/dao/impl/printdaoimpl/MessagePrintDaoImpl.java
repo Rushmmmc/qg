@@ -26,7 +26,7 @@ public class MessagePrintDaoImpl implements MessagePrintDao {
         List<Message> emps = new ArrayList<>();
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "select * from message where indentId = ? order by id desc ";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1,indentId);

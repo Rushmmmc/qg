@@ -27,7 +27,7 @@ public class CheckNameAndPasswordDaoImpl implements CheckNameAndPasswordDao {
         boolean ifMessageCorrect = false;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "SELECT * FROM USER WHERE username = ? AND PASSWORD = ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1, username);

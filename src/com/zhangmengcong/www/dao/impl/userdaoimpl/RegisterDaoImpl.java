@@ -26,7 +26,7 @@ public class RegisterDaoImpl implements RegisterDao {
         PreparedStatement ptst = null;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             sql2 = "insert into user (username,password,mailaddress) values (?,?,?)";
             ptst = conn.prepareStatement(sql2);
             //预编译 防注入

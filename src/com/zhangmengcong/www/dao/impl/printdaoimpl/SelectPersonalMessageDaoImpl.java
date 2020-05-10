@@ -25,7 +25,7 @@ public class SelectPersonalMessageDaoImpl implements SelectPersonalMessageDao {
         User user = new User();
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "select * from user where username = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,username);

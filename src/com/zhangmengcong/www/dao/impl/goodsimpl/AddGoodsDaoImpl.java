@@ -22,7 +22,7 @@ public class AddGoodsDaoImpl implements AddGoodsDao {
         PreparedStatement ptst = null;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             sql = "insert into goods (goodsName,type,seller,sellerReputation,imformation,price,amount) " +
                     "values (?,?,?,?,?,?,?)";
             ptst = conn.prepareStatement(sql);

@@ -24,7 +24,7 @@ public class CheckIfReplyIdExistDaoImpl implements CheckIfReplyIdExistDao {
         int ifExist = 0;
         try {
             //数据库的常规操作~~
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             sql = "select * from message where id = ? and indentId = ?";
             ptst = conn.prepareStatement(sql);
             //预编译 防注入

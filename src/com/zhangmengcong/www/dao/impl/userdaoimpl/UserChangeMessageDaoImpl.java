@@ -26,7 +26,7 @@ public class UserChangeMessageDaoImpl implements UserChangeMessageDao {
         int ifSuccess = 0;
         try {
             //数据库的常规操作
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "UPDATE USER SET PASSWORD =?,username =?,mailAddress =? WHERE username = ?";
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, user.getPassword());

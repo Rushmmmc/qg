@@ -19,7 +19,7 @@ public class DeleteDaoImpl implements DeleteDao {
         PreparedStatement ptst = null;
         int ifSuccess = 0;
         try {
-            conn = JdbcUtil.getConnetction();
+            conn = JdbcUtil.getConnection();
             String sql = "delete from " + table + " where " + condition +" = " + realCondition ;
             ptst = conn.prepareStatement(sql);
             ifSuccess = ptst.executeUpdate();
