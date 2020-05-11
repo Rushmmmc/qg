@@ -10,7 +10,7 @@ import static com.zhangmengcong.www.constant.GoodsConstant.IF_SHOPPINGCAR;
 
 /**
  * @author:zmc
- * @function: 卖商品
+ * @function: 买商品
  * @date: 2020/5/1 21:19
  */
 public class BuyGoodsServiceImpl implements BuyGoodsService {
@@ -23,8 +23,22 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
             //只传入id 仅需检测id
             //该id其实是goods id
             boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(indent.getId()));
-            if(!ifIdFormatWrong){
-                Goods goods = factory.getGetPriceAndGoodsNameService().getPriceAndGoodsNameService(indent.getId());
+            if(ifIdFormatWrong){
+                    return "订单id格式不正确┭┮﹏┭┮,仅支持整数";
+                }
+            Goods goods = factory.getGetPriceAndGoodsNameService().getPriceAndGoodsNameService(indent.getId());
+            //检测该商品是否用户自己的商品 若是 拦截
+            String sellerName = factory.getQueryDao().queryDao("seller","goods","goodsName",
+                    "\""+goods.getGoodsName()+"\"");
+            if(sellerName.equals(username)){
+                return "您不可以把自己的商品加入购物车┭┮﹏┭┮";
+            }
+            //检查是否已存在在购物车
+            boolean ifGoodsInShoppingCar = factory.getCheckIfGoodsInShoppingCarDao().
+                    checkIfGoodsInShoppingCar(username,goods.getGoodsName());
+            if(ifGoodsInShoppingCar){
+                return "该商品已在购物车,快去购物车下单吧";
+            }
                 indent.setGoodsName(goods.getGoodsName());
                 indent.setSeller(goods.getSeller());
                 indent.setPrice(goods.getPrice());
@@ -34,19 +48,10 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
                 indent.setTotalPrice(goods.getPrice());
                 indent.setStatus("购物车");
                 indent.setLastAmount(goods.getAmount());
-                //检查是否已存在在购物车
-                boolean ifGoodsInShoppingCar = factory.getCheckIfGoodsInShoppingCarDao().
-                        checkIfGoodsInShoppingCar(username,goods.getGoodsName());
-                if(ifGoodsInShoppingCar){
-                    return "该商品已在购物车,快去购物车下单吧";
-                }
+
                 factory.getGenerateIndentDao().generateIndent(indent);
 
-
                 return "商品已添加入购物车( •̀ ω •́ )y";
-            }else {
-                return "订单id格式不正确┭┮﹏┭┮,仅支持整数";
-            }
         }
 
         //普通购买功能

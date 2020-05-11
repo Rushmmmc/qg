@@ -6,7 +6,7 @@ import com.zhangmengcong.www.util.Factory;
 
 /**
  * @author:zmc
- * @function:
+ * @function: 从购物车购买商品
  * @date: 2020/5/10 13:51
  */
 public class BuyGoodsFromShoppingCarServiceImpl implements BuyGoodsFromShoppingCarService {
