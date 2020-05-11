@@ -1,10 +1,7 @@
 package com.zhangmengcong.www.util;
 
 import com.zhangmengcong.www.dao.dao.appealdao.GenerateAppealDao;
-import com.zhangmengcong.www.dao.dao.goodsdao.ChangeSellerAllGoodsReputationDao;
-import com.zhangmengcong.www.dao.dao.goodsdao.AddGoodsDao;
-import com.zhangmengcong.www.dao.dao.goodsdao.SelectGoodsByInterest;
-import com.zhangmengcong.www.dao.dao.indentdao.CheckIfGoodsInShoppingCarDao;
+import com.zhangmengcong.www.dao.dao.goodsdao.*;
 import com.zhangmengcong.www.dao.dao.indentdao.GenerateIndentDao;
 import com.zhangmengcong.www.dao.dao.message.AddNewMessageDao;
 import com.zhangmengcong.www.dao.dao.message.CheckIfReplyIdExistDao;
@@ -12,15 +9,12 @@ import com.zhangmengcong.www.dao.dao.packagingdao.*;
 import com.zhangmengcong.www.dao.dao.printdao.*;
 import com.zhangmengcong.www.dao.dao.userdao.*;
 import com.zhangmengcong.www.dao.impl.appealdao.GenerateAppealDaoImpl;
-import com.zhangmengcong.www.dao.impl.goodsimpl.ChangeSellerAllGoodsReputationDaoImpl;
-import com.zhangmengcong.www.dao.impl.goodsimpl.SelectGoodsByInterestImpl;
-import com.zhangmengcong.www.dao.impl.indentdaoimpl.CheckIfGoodsInShoppingCarDaoImpl;
+import com.zhangmengcong.www.dao.impl.goodsimpl.*;
 import com.zhangmengcong.www.dao.impl.indentdaoimpl.GenerateIndentDaoImpl;
 import com.zhangmengcong.www.dao.impl.messageimpl.AddNewMessageDaoImpl;
 import com.zhangmengcong.www.dao.impl.messageimpl.CheckIfReplyIdExistDaoImpl;
 import com.zhangmengcong.www.dao.impl.packagingdaoimpl.*;
 import com.zhangmengcong.www.dao.impl.printdaoimpl.*;
-import com.zhangmengcong.www.dao.impl.goodsimpl.AddGoodsDaoImpl;
 import com.zhangmengcong.www.dao.impl.userdaoimpl.*;
 import com.zhangmengcong.www.service.impl.formatserviceimpl.FormatServiceImpl;
 import com.zhangmengcong.www.service.impl.indentserviceimpl.*;
@@ -130,6 +124,10 @@ public class Factory {
     public GoodsRecommendService getGoodsRecommendService(){return new GoodsRecommendServiceImpl();}
     public ChangeSellerAllGoodsReputationDao getChangeSellerAllGoodsReputationDao(){return new ChangeSellerAllGoodsReputationDaoImpl(); }
     public CheckIfGoodsInShoppingCarDao getCheckIfGoodsInShoppingCarDao(){return new CheckIfGoodsInShoppingCarDaoImpl(); }
+    public CheckUserIfTheGoodsSellerService getCheckUserIfTheGoodsSellerService(){return new CheckUserIfTheGoodsSellerServiceImpl();}
+    public CheckIfUserExistGoodsDao getCheckIfUserExistGoodsDao(){return new CheckIfUserExistGoodsDaoImpl();}
+    public CheckIfUserExistGoodsService getCheckIfUserExistGoodsService(){return new CheckIfUserExistGoodsServiceImpl();}
+    public ChangeGoodsMessageService getChangeGoodsMessageService(){return new ChangeGoodsMessageServiceImpl();}
     /**
      *  关于订单的服务
      */

@@ -1,4 +1,4 @@
-package com.zhangmengcong.www.dao.dao.indentdao;
+package com.zhangmengcong.www.dao.dao.goodsdao;
 
 /**
  * @author:zmc

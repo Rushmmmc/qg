@@ -27,9 +27,17 @@ public interface DeleteOrPassGoodsService {
      */
     String deleteOrPassGoodsService(int id,int ifDelete);
 
-    /**
+    /** 管理员删除商品
      *
      * @param goodsName 要删除的商品
      */
     void deleteGoodsService(String goodsName);
+
+    /** 商家删除商品
+     *
+     * @param goodsId 商品id
+     * @param sellerName 卖家名
+     * @return 返回提示信息
+     */
+    String sellerDeleteGoods(int goodsId,String sellerName);
 }

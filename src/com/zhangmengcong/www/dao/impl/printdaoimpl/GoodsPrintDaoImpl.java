@@ -18,16 +18,21 @@ import java.util.List;
  */
 public class GoodsPrintDaoImpl implements GoodsPrintDao {
     @Override
-    public List<Goods> selectAllGoods(){
+    public List<Goods> selectAllGoods(boolean ifPersonalGoods,String seller){
         Factory factory = new Factory();
         List<Goods> emps =new ArrayList<>();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        String sql;
         try {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnection();
-            String sql = "select * from goods order by id desc ";
+            if(ifPersonalGoods){
+                sql = "select * from goods where seller = \""+seller+"\" order by id desc ";
+            }else {
+                sql = "select * from goods order by id desc ";
+            }
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
             emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);

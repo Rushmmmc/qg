@@ -30,7 +30,8 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
             //检测该商品是否用户自己的商品 若是 拦截
             String sellerName = factory.getQueryDao().queryDao("seller","goods","goodsName",
                     "\""+goods.getGoodsName()+"\"");
-            if(sellerName.equals(username)){
+            //必须都转化成小写或大写才能拦截全部情况
+            if(sellerName.toLowerCase().equals(username.toLowerCase())){
                 return "您不可以把自己的商品加入购物车┭┮﹏┭┮";
             }
             //检查是否已存在在购物车

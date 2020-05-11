@@ -3,6 +3,7 @@ package com.zhangmengcong.www.controller.goodscontroller;
 import com.zhangmengcong.www.controller.BaseServlet;
 import com.zhangmengcong.www.po.Goods;
 import com.zhangmengcong.www.po.Indent;
+import com.zhangmengcong.www.util.Encode;
 import com.zhangmengcong.www.util.Factory;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -14,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.*;
@@ -27,6 +32,7 @@ import static com.zhangmengcong.www.constant.UserConstant.*;
  */
 @WebServlet("/GoodsController/*")
 public class GoodsController extends BaseServlet {
+    Factory factory = new Factory();
     /**
      * 把商品添加到购物车
      */
@@ -278,5 +284,34 @@ public class GoodsController extends BaseServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void checkUserIfExistGoods (HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.setCharacterEncoding("UTF-8");
+        String username = (String)request.getSession().getAttribute("username");
+        boolean ifGoodsExist = factory.getCheckIfUserExistGoodsService().checkIfUserExistGoodsService(username);
+        if(!ifGoodsExist){
+            response.getWriter().write("您暂无商品，快去申请卖出您的宝贝吧( •̀ ω •́ )y");
+        }
+    }
+    public void SellerDeleteGoods (HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+        String username = (String)request.getSession().getAttribute("username");
+        String message = factory.getDeleteOrPassGoodsService().sellerDeleteGoods(goodsId,username);
+        response.getWriter().write(message);
+    }
+    public void changeGoodsMessage (HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        Goods goods = new Goods();
+        goods.setId(Integer.parseInt(request.getParameter("goodsId")));
+        goods.setAmount(Integer.parseInt(request.getParameter("amount")));
+        goods.setPrice(Float.parseFloat(request.getParameter("price")));
+        goods.setGoodsName(request.getParameter("goodsName"));
+
+        String message = factory.getChangeGoodsMessageService().changeGoodsMessageService(goods);
+        response.getWriter().write(message);
     }
 }

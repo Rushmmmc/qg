@@ -316,24 +316,43 @@
         });
     }
 
-
+    function changePageToManagePersonalGoods(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "/GoodsController/checkUserIfExistGoods",
+            type: "POST",
+            dataType: 'html',
+            success: function (result) {
+                if(result === "您暂无商品，快去申请卖出您的宝贝吧( •̀ ω •́ )y"){
+                    alert(result);
+                }else {
+                    location.href = "/ChangePageController/changePageToSellerManageGoodsPage";
+                }
+            },
+            error: function (msg) {
+                alert("出错啦")
+            }
+        });
+    }
 
     </script>
 
 
 </head>
 <body>
-
-<a href="/login.jsp">返回登录页面</a><a>&nbsp&nbsp&nbsp</a>
+<a href="/login.jsp">返回登录页面</a>
+<a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
-<a>&nbsp&nbsp&nbsp</a>
-<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
-<a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController/goCheckBuyIndent">管理买入订单</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController/changePageToShoppingCar">查看购物车</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="#" onclick="changePageToManagePersonalGoods(event)">管理商品</a>
+<a>&nbsp&nbsp&nbsp</a>
+<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController/changePageToHelpUser">进行申诉</a>
 <a>&nbsp&nbsp&nbsp</a>
@@ -422,7 +441,8 @@
             </td>
             <td>
                 <c:if test='<%=!(indent.getStatus().contains("取消")) && !(indent.getStatus().contains("退货")) &&
-                !(indent.getStatus().contains("在路上")) && !(indent.getStatus().contains("拒绝"))%>'>
+                !(indent.getStatus().contains("在路上")) && !(indent.getStatus().contains("拒绝") ||
+                indent.getStatus().contains("订单已完成"))%>'>
                     <a  onclick="fun3(event,<%=indent.getId()%>)" href="#">发货</a>
                 </c:if>
                 <c:if test='<%=indent.getStatus().contains("未接单")%>'>

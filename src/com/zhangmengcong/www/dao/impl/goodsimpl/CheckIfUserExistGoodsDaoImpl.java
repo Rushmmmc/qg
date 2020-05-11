@@ -1,6 +1,6 @@
-package com.zhangmengcong.www.dao.impl.indentdaoimpl;
+package com.zhangmengcong.www.dao.impl.goodsimpl;
 
-import com.zhangmengcong.www.dao.dao.indentdao.CheckIfGoodsInShoppingCarDao;
+import com.zhangmengcong.www.dao.dao.goodsdao.CheckIfUserExistGoodsDao;
 import com.zhangmengcong.www.util.JdbcUtil;
 
 import java.sql.Connection;
@@ -9,12 +9,12 @@ import java.sql.ResultSet;
 
 /**
  * @author:zmc
- * @function: 检测该商品是否已在用户的购物车里
- * @date: 2020/5/10 15:19
+ * @function:
+ * @date: 2020/5/11 11:10
  */
-public class CheckIfGoodsInShoppingCarDaoImpl implements CheckIfGoodsInShoppingCarDao {
+public class CheckIfUserExistGoodsDaoImpl implements CheckIfUserExistGoodsDao {
     @Override
-    public boolean checkIfGoodsInShoppingCar(String username, String goodsName){
+    public boolean checkIfUserExistGoods(String username){
         String sql;
         Connection conn = null;
         PreparedStatement ptst = null;
@@ -23,11 +23,9 @@ public class CheckIfGoodsInShoppingCarDaoImpl implements CheckIfGoodsInShoppingC
         try {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnection();
-            sql = "select * from indent where buyer = ? and goodsName = ? and status = ? ";
+            sql = "select * from goods where seller = ?";
             ptst = conn.prepareStatement(sql);
             ptst.setString(1,username);
-            ptst.setString(2,goodsName);
-            ptst.setString(3,"购物车");
             rs = ptst.executeQuery();
             if(rs.next()){
                 ifExist = 1;

@@ -1,4 +1,4 @@
-package com.zhangmengcong.www.service.service.goodsservice;
+package com.zhangmengcong.www.service.service.printtableservice;
 
 import com.zhangmengcong.www.po.Goods;
 
@@ -12,7 +12,14 @@ import java.util.List;
 public interface GoodsPrintService {
     /** 打印全部商品信息
      *
-     * @return goods对象
+     * @return goods的list信息
      */
     List<Goods> goodsPrintService();
+
+    /**
+     *
+     * @param sellerName 商家名
+     * @return goods的list信息
+     */
+    List<Goods> sellerPersonalGoodsPrintService(String sellerName);
 }

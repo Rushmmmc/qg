@@ -17,13 +17,25 @@ public class QueryDaoImpl implements QueryDao {
 
     @Override
     public String queryDao(String column,String table,String condition,String  actualCondition) {
+    return    queryDao2(column,table,condition,actualCondition,null,null);
+
+    }
+
+    @Override
+    public String queryDao2(String column, String table, String condition1, String actualCondition1, String condition2, String actualCondition2) {
         Connection conn = null;
         PreparedStatement ptst = null;
         ResultSet rs = null;
         String result = "";
+        String sql;
         try {
             conn = JdbcUtil.getConnection();
-            String sql = "select "+ column +" from "+ table +" where "+condition+" = "+actualCondition+"";
+            if(condition2 != null) {
+                sql = "select " + column + " from " + table + " where " + condition1 + " = " + actualCondition1 + " and " +
+                        condition2 + " = " + actualCondition2;
+            }else {
+                sql = "select " + column + " from " + table + " where " + condition1 + " = " + actualCondition1;
+            }
             ptst = conn.prepareStatement(sql);
             rs = ptst.executeQuery();
             if(rs.next()){
@@ -34,6 +46,6 @@ public class QueryDaoImpl implements QueryDao {
         } finally {
             JdbcUtil.close(rs, ptst, conn);
         }
-    return result;
+        return result;
     }
 }

@@ -106,14 +106,14 @@
     <!--        //点击看不清,换一张-->
 
 </head>
-<<body style="background-color: plum">
+<body style="background-color: plum">
 
 <a href="/login.jsp">返回登录页面</a>
 
 
 
 
-<form     method="post" align="center"  >
+<form     method="post" align="center">
     <h1 >感谢使用QG闲鱼</h1>
     用户名:<input type="text" id="username" name="username" pattern="[\w]{4,10}" required/>
     <br>

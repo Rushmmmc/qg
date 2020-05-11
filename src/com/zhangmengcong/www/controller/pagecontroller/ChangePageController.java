@@ -1,12 +1,15 @@
 package com.zhangmengcong.www.controller.pagecontroller;
 
 import com.zhangmengcong.www.controller.BaseServlet;
+import com.zhangmengcong.www.po.Goods;
 import com.zhangmengcong.www.util.Factory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.List;
+
 import static com.zhangmengcong.www.constant.IndentConstant.IF_SELLER;
 import static com.zhangmengcong.www.constant.IndentConstant.SHOPPING_CAR_FUNCTION;
 import static com.zhangmengcong.www.constant.PageConstant.*;
@@ -90,8 +93,14 @@ public class ChangePageController extends BaseServlet {
      * 买家去往商品购买页面
      */
     public void buyerSetBuyAmount(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         //传递参数 否则完蛋
+        //检测是否该用户自己的商品
         int id = Integer.parseInt(request.getParameter("id"));
+        String username = (String)request.getSession().getAttribute("username");
+        String message = factory.getCheckUserIfTheGoodsSellerService().checkUserIfTheGoodsSellerService(username,id);
+        response.getWriter().write(message);
         request.getSession().setAttribute("goods", factory.getGetPriceAndGoodsNameService().getPriceAndGoodsNameService(id));
     }
     /**
@@ -179,5 +188,15 @@ public class ChangePageController extends BaseServlet {
             }
         }
         //实现注销功能
+    }
+    public void changePageToSellerManageGoodsPage (HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String sellerName = (String)request.getSession().getAttribute("username");
+        List<Goods>goodsList =  factory.getGoodsPrintService().sellerPersonalGoodsPrintService(sellerName);
+        request.setAttribute("goodsList",goodsList);
+        try {
+            request.getRequestDispatcher("/manageSellerPersonalGoods.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
     }
 }
