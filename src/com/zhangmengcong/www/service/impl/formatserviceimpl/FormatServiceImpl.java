@@ -41,7 +41,6 @@ public class FormatServiceImpl implements FormatService {
         if(message == null || message.length() == 0){
             return true;
         }
-        message = replaceNormalSymbol(message);
         Matcher messageSymbolMatcher = IF_INCLUDE_SYMBOL.matcher(message);
         return !messageSymbolMatcher.matches();
     }

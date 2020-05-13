@@ -30,7 +30,7 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnection();
             //根据用户上一次的购买记录进行推荐
-            String sql = "select price,goodsType from indent where buyer = ? order by id desc";
+            String sql = "select price,goodsType from indent where buyer = ? and seller != \""+username+"\" order by id desc";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,username);
             rs = pstmt.executeQuery();
@@ -45,7 +45,8 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
                 rs = pstmt.executeQuery();
                 emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
             }else {
-                String sql3 = "SELECT * FROM goods WHERE price >= ? AND price <= ? AND TYPE = ? and status != ? LIMIT 0,3 ";
+                String sql3 = "SELECT * FROM goods WHERE price >= ? AND price <= ? AND TYPE = ? and status != ? " +
+                        " and seller != \""+username+"\" LIMIT 0,3 ";
                 pstmt = conn.prepareStatement(sql3);
                 pstmt.setInt(1,price);
                 pstmt.setInt(2,4*price);
@@ -56,7 +57,7 @@ public class SelectGoodsByInterestImpl implements SelectGoodsByInterest {
             }
             //上一次买的类型还是可能没有其他商品了 这时要检测
             if(emps.isEmpty()){
-                String sql4 = "select * from goods where status != ? limit 0,3";
+                String sql4 = "select * from goods where status != ? and seller != \"" +username+ "\" limit 0,3";
                 pstmt  = conn.prepareStatement(sql4);
                 pstmt.setString(1,"未审核");
                 rs = pstmt.executeQuery();

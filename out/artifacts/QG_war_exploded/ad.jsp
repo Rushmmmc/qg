@@ -42,7 +42,6 @@
                                 return;
                             }
                             alert(result);
-                            location.href = "/GoodsController/seleteGoodsByInterest";
                         },
                         error: function (msg) {
                             alert("出错啦")

@@ -68,9 +68,11 @@ public class BuyGoodsFromShoppingCarServiceImpl implements BuyGoodsFromShoppingC
         factory.getUpdateDao().updateDao("user","integral","integral - "+indent.getUseIntegral(),
                 "username","\""+indent.getBuyer()+"\"");
         //商品存量减少
+        String goodsName = factory.getQueryDao().queryDao("goodsName","indent","id",
+                String.valueOf(indentId));
         factory.getUpdateDao().updateDao("goods", "amount", "amount - "
                         + indent.getAmount(), "goodsName",
-                "\"" + indent.getGoodsName() + "\"");
+                "\"" + goodsName + "\"");
         return "购买成功！";
     }
 }

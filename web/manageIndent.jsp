@@ -403,7 +403,7 @@
             <th>使用积分</th>
             <th>实际付款</th>
             <th>订单状态</th>
-            <th>好/差评</th>
+            <th>好/差评<a>&nbsp&nbsp&nbsp</a></th>
             <th>详细评价</th>
             <th>操作</th>
         </tr>

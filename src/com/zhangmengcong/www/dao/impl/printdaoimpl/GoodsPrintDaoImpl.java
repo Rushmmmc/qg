@@ -29,11 +29,12 @@ public class GoodsPrintDaoImpl implements GoodsPrintDao {
             //数据库的常规操作~~
             conn = JdbcUtil.getConnection();
             if(ifPersonalGoods){
-                sql = "select * from goods where seller = \""+seller+"\" order by id desc ";
+                sql = "select * from goods where seller = \""+seller+"\" and photoName != ? order by id desc ";
             }else {
-                sql = "select * from goods order by id desc ";
+                sql = "select * from goods where photoName != ? order by id desc ";
             }
             pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,"暂无");
             rs = pstmt.executeQuery();
             emps = factory.getGoodsParametersDao().getGoodsParametersDao(rs);
         }catch(Exception e){

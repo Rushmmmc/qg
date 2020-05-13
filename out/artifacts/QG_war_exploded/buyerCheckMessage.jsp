@@ -22,7 +22,7 @@
     var message = document.getElementById("message").value;
     var operate = document.getElementById("operate").value;
     var log_id = /^\d{1,8}$/;
-    var log_message = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+    var log_message = /^[\u4E00-\u9FA5+a-zA-Z0-9_\?\.,!\-，。？！]{1,50}$/;
     var flag_o = false;
     var flag_i = log_id.test(id);
     var flag_m = log_message.test(message);
@@ -47,7 +47,7 @@
     location.href ="/ChangePageController/goToMessageBoard?ifSeller=0&id="+id2;
     },
     error: function (msg) {
-    alert("出错啦")
+        alert("请点上面的回复键再回复！")
     }
     });
     }
@@ -244,10 +244,12 @@
         <option value="0">留言</option>
         <option value="1">回复</option>
     </select>
-    <br>
+
+    <div style="display: none">
     回复信息id(新增留言则可不填)
     <br>
     <input type="text" id="id">
+    </div>
     <br>
     文本信息
     <br>

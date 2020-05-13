@@ -37,7 +37,7 @@
             var log_amount = /^\d{1,8}$/;
             var log_goodsName = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
             var log_type = /^[\u4e00-\u9fa5]+$/;
-            var log_imformation = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+            var log_imformation = /^[\u4E00-\u9FA5+a-zA-Z0-9_\?\.,!\-，。？！]{1,50}$/;
 
             var flag_g = log_goodsName.test(goodsName);
             var flag_t = log_type.test(type);

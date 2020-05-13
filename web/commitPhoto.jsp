@@ -43,10 +43,12 @@
                     if(data === "管理员正在火速审核中！") {
                         alert(data);
                         location.href = "/DividePageController";
-                    }else if (data === "图片格式仅支持jpg、bmp、png！"){
-                        alert(data);
-                        location.href = "/commit.jsp";
-                    }else {
+                    }
+                    // else if (data === "图片格式仅支持jpg、bmp、png！"){
+                    //     alert(data);
+                    //     location.href = "/commit.jsp";
+                    // }
+                    else {
                         alert(data);
                     }
                 },
