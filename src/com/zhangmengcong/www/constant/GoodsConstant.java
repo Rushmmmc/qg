@@ -15,4 +15,5 @@ public class GoodsConstant {
     public static final int IF_SHOPPINGCAR = 1;
     public static final String SELL = "sell";
     public static final String INDENT_HAVE_SEND = "商品在路上";
+    public static final int IF_BAN = 1;
 }

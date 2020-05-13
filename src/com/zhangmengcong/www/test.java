@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 public class test {
     public static void main(String[] args) {
         Factory factory = new Factory();
-        Pattern abc = Pattern.compile("[\\u4E00-\\u9FA5+a-zA-Z0-9_\\?\\.,!\\-，。？！]{1,50}$");
-        Matcher matcher = abc.matcher(">");
-        System.out.println(factory.getFormatService().ifIncludeSymbol(".,?？，。！!<>"));
+        Pattern abc = Pattern.compile("^[0-9]*[1-9][0-9]*$");
+        Matcher matcher = abc.matcher("123.");
+        System.out.println(factory.getFormatService().ifIdFormatWrong("123中"));
     }
 }

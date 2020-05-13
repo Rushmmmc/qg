@@ -50,6 +50,31 @@
                 }
             });
         }
+        function confirmCommitManage1 (indentId,id){
+            var msg=confirm("亲爱的管理员，确定无误?");
+            if(msg==true)
+            {
+                fun1(event,indentId,id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        function confirmCommitManage2 (indentId,id){
+            var msg=confirm("亲爱的管理员，确定无误?");
+            if(msg==true)
+            {
+                fun2(event,indentId,id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
     </script>
@@ -115,10 +140,10 @@
 
             <td>
                 <c:if test='<%=appeal.getType().contains("投诉商家") && appeal.getStatus().contains("待处理")%>'>
-                    <a onclick="fun1(event,<%=appeal.getIdentId()%>,<%=appeal.getId()%>)" href="#"><font color="green">扣商家分</font></a>
+                    <a onclick="confirmCommitManage1(<%=appeal.getIdentId()%>,<%=appeal.getId()%>)" href="#"><font color="green">扣商家分</font></a>
                 </c:if>
                 <c:if test='<%=appeal.getType().contains("交易维权") && appeal.getStatus().contains("待处理")%>'>
-                    <a onclick="fun2(event,<%=appeal.getIdentId()%>,<%=appeal.getId()%>)" href="#"><font color="green">退款并返还积分</font></a>
+                    <a onclick="confirmCommitManage2(<%=appeal.getIdentId()%>,<%=appeal.getId()%>)" href="#"><font color="green">退款并返还积分</font></a>
                 </c:if>
                 <c:if test='<%=!appeal.getStatus().contains("待处理")%>'>
                     您已处理

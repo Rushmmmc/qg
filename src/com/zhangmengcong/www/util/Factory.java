@@ -1,47 +1,23 @@
 package com.zhangmengcong.www.util;
 
-import com.zhangmengcong.www.dao.dao.appealdao.GenerateAppealDao;
-import com.zhangmengcong.www.dao.dao.goodsdao.*;
-import com.zhangmengcong.www.dao.dao.indentdao.GenerateIndentDao;
-import com.zhangmengcong.www.dao.dao.message.AddNewMessageDao;
-import com.zhangmengcong.www.dao.dao.message.CheckIfReplyIdExistDao;
-import com.zhangmengcong.www.dao.dao.packagingdao.*;
-import com.zhangmengcong.www.dao.dao.printdao.*;
-import com.zhangmengcong.www.dao.dao.userdao.*;
-import com.zhangmengcong.www.dao.impl.appealdao.GenerateAppealDaoImpl;
-import com.zhangmengcong.www.dao.impl.goodsimpl.*;
-import com.zhangmengcong.www.dao.impl.indentdaoimpl.GenerateIndentDaoImpl;
-import com.zhangmengcong.www.dao.impl.messageimpl.AddNewMessageDaoImpl;
-import com.zhangmengcong.www.dao.impl.messageimpl.CheckIfReplyIdExistDaoImpl;
-import com.zhangmengcong.www.dao.impl.packagingdaoimpl.*;
-import com.zhangmengcong.www.dao.impl.printdaoimpl.*;
-import com.zhangmengcong.www.dao.impl.userdaoimpl.*;
-import com.zhangmengcong.www.service.impl.formatserviceimpl.FormatServiceImpl;
-import com.zhangmengcong.www.service.impl.indentserviceimpl.*;
-import com.zhangmengcong.www.service.impl.messageserviceimpl.AddMessageServiceImpl;
-import com.zhangmengcong.www.service.impl.messageserviceimpl.DeleteMessageServiceImpl;
-import com.zhangmengcong.www.service.impl.messageserviceimpl.ReplyMessageServicImpl;
-import com.zhangmengcong.www.service.impl.printtableserviceimpl.*;
-import com.zhangmengcong.www.service.impl.adminimpl.ManageAppealServiceImpl;
-import com.zhangmengcong.www.service.impl.changepageserviceimpl.GoToMainpageServiceImpl;
-import com.zhangmengcong.www.service.impl.adminimpl.AdminBanOrUnbanUserServiceImpl;
-import com.zhangmengcong.www.service.impl.generratefileserviceimpl.GenerateFileServiceImpl;
-import com.zhangmengcong.www.service.impl.goodsserviceimpl.*;
-import com.zhangmengcong.www.service.impl.userserviceimpl.*;
-import com.zhangmengcong.www.service.service.adminservice.ManageAppealService;
-import com.zhangmengcong.www.service.service.formatservice.FormatService;
-import com.zhangmengcong.www.service.service.generatefileservice.GeneateFileService;
-import com.zhangmengcong.www.service.service.goodsservice.*;
-import com.zhangmengcong.www.service.service.indentservice.*;
-import com.zhangmengcong.www.service.service.messageservice.AddMessageService;
-import com.zhangmengcong.www.service.service.messageservice.DeleteMessageService;
-import com.zhangmengcong.www.service.service.messageservice.ReplyMessageService;
-import com.zhangmengcong.www.service.service.pageservice.GoToMainpageService;
-import com.zhangmengcong.www.service.service.adminservice.AdminBanOrUnbanUserService;
-import com.zhangmengcong.www.service.service.adminservice.BecomeAdminService;
-import com.zhangmengcong.www.service.service.printtableservice.*;
-import com.zhangmengcong.www.service.impl.adminimpl.BecomeAdminServiceImpl;
-import com.zhangmengcong.www.service.service.userservice.*;
+import com.zhangmengcong.www.dao.dao.GenerateAppealDao;
+import com.zhangmengcong.www.dao.dao.*;
+import com.zhangmengcong.www.dao.dao.GenerateIndentDao;
+import com.zhangmengcong.www.dao.dao.AddNewMessageDao;
+import com.zhangmengcong.www.dao.dao.CheckIfReplyIdExistDao;
+import com.zhangmengcong.www.dao.impl.*;
+import com.zhangmengcong.www.dao.impl.GenerateIndentDaoImpl;
+import com.zhangmengcong.www.dao.impl.AddNewMessageDaoImpl;
+import com.zhangmengcong.www.dao.impl.CheckIfReplyIdExistDaoImpl;
+import com.zhangmengcong.www.service.impl.*;
+import com.zhangmengcong.www.service.impl.AddMessageServiceImpl;
+import com.zhangmengcong.www.service.impl.DeleteMessageServiceImpl;
+import com.zhangmengcong.www.service.impl.ReplyMessageServicImpl;
+import com.zhangmengcong.www.service.service.*;
+import com.zhangmengcong.www.service.service.AddMessageService;
+import com.zhangmengcong.www.service.service.DeleteMessageService;
+import com.zhangmengcong.www.service.service.ReplyMessageService;
+import com.zhangmengcong.www.service.service.GoToMainpageService;
 
 
 /**
@@ -113,7 +89,7 @@ public class Factory {
     public AddGoodsDao getAddGoodsDao(){
         return new AddGoodsDaoImpl();
     }
-    public  AddGoodsService getAddGoodsService(){
+    public AddGoodsService getAddGoodsService(){
         return new AddGoodsServiceImpl();
     }
     public DeleteOrPassGoodsService getDeleteOrPassGoodsService(){return new DeleteOrPassGoodsServiceImpl();}
@@ -128,6 +104,7 @@ public class Factory {
     public CheckIfUserExistGoodsDao getCheckIfUserExistGoodsDao(){return new CheckIfUserExistGoodsDaoImpl();}
     public CheckIfUserExistGoodsService getCheckIfUserExistGoodsService(){return new CheckIfUserExistGoodsServiceImpl();}
     public ChangeGoodsMessageService getChangeGoodsMessageService(){return new ChangeGoodsMessageServiceImpl();}
+    public BanOrUnbanGoodsService getBanOrUnbanGoodsService(){return new BanOrUnbanGoodsServiceImpl();}
     /**
      *  关于订单的服务
      */

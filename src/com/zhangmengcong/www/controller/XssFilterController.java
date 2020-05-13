@@ -1,6 +1,6 @@
 package com.zhangmengcong.www.controller;
 
-import com.zhangmengcong.www.service.service.xssservice.XssHttpServletRequestWrapperService;
+import com.zhangmengcong.www.service.service.XssHttpServletRequestWrapperService;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

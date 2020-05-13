@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/dao/goodsdao/CheckIfUserExistGoodsDao.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/dao/userdao/CheckNameAndPasswordDao.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/appealdao/GenerateAppealDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/AddGoodsDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/ChangeSellerAllGoodsReputationDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/CheckIfGoodsInShoppingCarDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/CheckIfUserExistGoodsDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/goodsimpl/SelectGoodsByInterestImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/indentdaoimpl/GenerateIndentDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/messageimpl/AddNewMessageDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/messageimpl/CheckIfReplyIdExistDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/DeleteDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/DeleteOrChangeDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/QueryDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/packagingdaoimpl/UpdateDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/AppealPrintDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/GoodsPrintDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/IndentPrintDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/MessagePrintDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/PrintByPageDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/printdaoimpl/SelectPersonalMessageDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/userdaoimpl/CheckNameAndPasswordDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/userdaoimpl/RegisterDaoImpl.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/userdaoimpl/UserChangeMessageDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/dao/CheckIfUserExistGoodsDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/dao/CheckNameAndPasswordDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/AddGoodsDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/AddNewMessageDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/AppealPrintDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/ChangeSellerAllGoodsReputationDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/CheckIfGoodsInShoppingCarDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/CheckIfReplyIdExistDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/CheckIfUserExistGoodsDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/CheckNameAndPasswordDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/DeleteDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/DeleteOrChangeDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/GenerateAppealDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/GenerateIndentDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/GoodsPrintDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/IndentPrintDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/MessagePrintDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/PrintByPageDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/QueryDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/RegisterDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/SelectGoodsByInterestImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/SelectPersonalMessageDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/UpdateDaoImpl.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/com/zhangmengcong/www/dao/impl/UserChangeMessageDaoImpl.java" dialect="GenericSQL" />
   </component>
 </project>

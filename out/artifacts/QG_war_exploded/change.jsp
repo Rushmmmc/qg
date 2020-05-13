@@ -105,18 +105,6 @@
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/DividePageController">返回主页面</a>
 <a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController/goCheckBuyIndent">管理买入订单</a>
-<a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController/changePageToShoppingCar">查看购物车</a>
-<a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController/goCheckSalesIndent">管理卖出订单</a>
-<a>&nbsp&nbsp&nbsp</a>
-<a href="#" onclick="changePageToManagePersonalGoods(event)">管理商品</a>
-<a>&nbsp&nbsp&nbsp</a>
-<a href="#" onclick="goToCommitGoods(event)">申卖商品</a>
-<a>&nbsp&nbsp&nbsp</a>
-<a href="/ChangePageController/changePageToHelpUser">进行申诉</a>
-<a>&nbsp&nbsp&nbsp</a>
 <a href="/ChangePageController/quit">注销</a>
 
 

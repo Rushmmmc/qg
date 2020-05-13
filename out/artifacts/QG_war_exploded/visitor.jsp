@@ -18,13 +18,42 @@
 <head>
     <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <title>QG闲鱼</title>
+
+    <script>
+        function checkPriceIfInput() {
+            var min = document.getElementById("min").value;
+            var max = document.getElementById("max").value;
+
+            var log_min = /^\d{1,8}$/;
+            var flag_i  = log_min.test(min);
+            var flag_x  = log_min.test(max);
+
+            if((min==="" && max==="") || (flag_x && flag_i)){
+                if(min > max){
+                    alert("价格最小值不可大于价格最大值！");
+                    return false;
+                }
+                return true;
+            } else {
+                alert("若使用价格筛选功能，请同时输入价格最大值与价格最小值");
+            }
+            return false;
+        }
+
+        window.onload = function () {
+            document.getElementById("form").onsubmit = function () {
+                return checkPriceIfInput();
+            }
+        }
+    </script>
+
 </head>
 
 
 
 
 <body>
-<a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+
 <a href="/login.jsp">登录</a>
 <a>&nbsp&nbsp&nbsp</a>
 <a href="/Register.jsp">注册</a>
@@ -41,7 +70,7 @@
 
 <br>
 
-<form class="form-inline" align="center" action="/DividePageController" method="post">
+<form class="form-inline" align="center" action="/DividePageController" id="form" method="post">
     <div class="form-group">
         <label>商品名:</label>
         <input type="text" value="${requestScope.dp.goods.goodsName}" class="form-control" name="goodsName">
@@ -57,12 +86,12 @@
     <br>
     <div class="form-group">
         <label>价格最小值:</label>
-        <input type="text" value="${requestScope.dp.minPrice}" class="form-control" name="rangemin">
+        <input type="text" value="${requestScope.dp.minPrice}" id="min" class="form-control" name="rangemin">
     </div>
 
     <div class="form-group">
         <label>价格最大值:</label>
-        <input type="text" value="${requestScope.dp.maxPrice}" class="form-control" name="rangemax">
+        <input type="text" value="${requestScope.dp.maxPrice}" id="max" class="form-control" name="rangemax">
     </div>
     <br>
     <strong>价格排序系统:</strong>

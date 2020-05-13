@@ -117,16 +117,21 @@
         function checkPriceIfInput() {
             var min = document.getElementById("min").value;
             var max = document.getElementById("max").value;
+
             var log_min = /^\d{1,8}$/;
             var flag_i  = log_min.test(min);
             var flag_x  = log_min.test(max);
-            alert(max+min);
-            if(!(flag_i && flag_x) || (flag_x && flag_i)){
+
+            if((min==="" && max==="") || (flag_x && flag_i)){
+                if(min > max){
+                    alert("价格最小值不可大于价格最大值！");
+                    return false;
+                }
                 return true;
-            }else {
-                alert("若使用价格筛选功能，请同时输入价格最大值与价格最小值");
+            } else {
+                    alert("若使用价格筛选功能，请同时输入价格最大值与价格最小值");
+                }
                 return false;
-            }
         }
 
         window.onload = function () {

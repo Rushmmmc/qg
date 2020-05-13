@@ -335,6 +335,52 @@
         });
     }
 
+    function confirmSendGoods (event,indentId){
+        event.preventDefault();
+        var msg=confirm("亲爱的商家，确定无误?");
+        if(msg==true)
+        {
+            fun3(event,indentId);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+
+    function confirmRejectSell (event,indentId){
+        event.preventDefault();
+        var msg=confirm("亲爱的商家，确定无误?");
+        if(msg==true)
+        {
+            rejectIndent(event,indentId);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    function confirmChangeIndent (event){
+        event.preventDefault();
+        var msg=confirm("亲爱的商家，确定无误?");
+        if(msg==true)
+        {
+            fun(event);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     </script>
 
 
@@ -386,7 +432,7 @@
         <a  class="text">修改的订单商品数量:</a><br>
         <input type="text" class="text" pattern="^\d{1,10}$" name="amount" id="amount" pattern="^\d{1,8}$" required  />
         <br>
-        <input type="submit" value="提交" onclick="fun(event)"  class="text" >
+        <input type="submit" value="提交" onclick="return confirmChangeIndent(event)"  class="text" >
     </FORM>
 </div>
 
@@ -443,17 +489,18 @@
                 <c:if test='<%=!(indent.getStatus().contains("取消")) && !(indent.getStatus().contains("退货")) &&
                 !(indent.getStatus().contains("在路上")) && !(indent.getStatus().contains("拒绝") ||
                 indent.getStatus().contains("订单已完成"))%>'>
-                    <a  onclick="fun3(event,<%=indent.getId()%>)" href="#">发货</a>
+                    <a  onclick="return confirmSendGoods(event,<%=indent.getId()%>)" href="#">发货</a>
                 </c:if>
                 <c:if test='<%=indent.getStatus().contains("未接单")%>'>
-                    <a  onclick="rejectIndent(event,<%=indent.getId()%>)" href="#">
+                    <a  onclick="return confirmRejectSell(event,<%=indent.getId()%>)" href="#">
                         <font color="red">拒绝售卖</font></a>
                 </c:if>
                 <c:if test='<%=indent.getStatus().contains("用户申请退货")%>'>
                     <a onclick="fun11(event,<%=indent.getId()%>)" href="#" >同意退货</a>
                     <a>/</a><a onclick="fun12(event,<%=indent.getId()%>)" href="#" >拒绝退货并让小二介入</a>
                 </c:if>
-                <c:if test='<%=(indent.getStatus().contains("订单已完成") || indent.getStatus().contains("已退货"))%>'>
+                <c:if test='<%=(indent.getStatus().contains("订单已完成") || indent.getStatus().contains("已退货")
+                || indent.getStatus().contains("拒绝售卖"))%>'>
                     <a  onclick="deleteIndent(event,<%=indent.getId()%>)" href="#">删除订单</a>
                 </c:if>
 

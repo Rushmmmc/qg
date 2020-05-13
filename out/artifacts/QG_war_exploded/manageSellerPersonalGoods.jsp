@@ -120,6 +120,35 @@
                 }
             });
         }
+
+        function confirmChangeGoods(event){
+            event.preventDefault();
+            var msg=confirm("亲爱的商家，确定无误?");
+            if(msg==true)
+            {
+                changeGoodsMessage(event);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        function confirmDeleteGoods(event,indentId){
+            event.preventDefault();
+            var msg=confirm("亲爱的商家，确定无误?");
+            if(msg==true)
+            {
+                deleteGoods(event,indentId);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     </script>
 </head>
 <body>
@@ -165,7 +194,7 @@
         <a  class="text">修改的商品数量:</a><br>
         <input type="text" class="text" pattern="^\d{1,10}$" name="amount" id="amount" pattern="^\d{1,8}$" required  />
         <br>
-        <input type="submit" value="提交" onclick="changeGoodsMessage(event)"  class="text" >
+        <input type="submit" value="提交" onclick="return confirmChangeGoods(event)"  class="text" >
     </FORM>
 </div>
 
@@ -208,7 +237,7 @@
                 <c:if test='<%=(goods.getStatus().contains("已审核"))%>'>
                     <a href="#" onclick="appear(event,<%=goods.getId()%>,'<%=goods.getGoodsName()%>',
                             <%=goods.getPrice()%>,<%=goods.getAmount()%>)"><font color="#00bfff">修改商品</font></a>
-                    <a href="#" onclick="deleteGoods(event,<%=goods.getId()%>)">
+                    <a href="#" onclick="confirmDeleteGoods(event,<%=goods.getId()%>)">
                         <font color="#00bfff">删除商品
                     </font></a>
 

@@ -1,6 +1,5 @@
 package com.zhangmengcong.www.controller;
 
-import com.zhangmengcong.www.controller.BaseServlet;
 import com.zhangmengcong.www.util.Factory;
 
 import javax.servlet.ServletException;
@@ -20,13 +19,13 @@ import static com.zhangmengcong.www.constant.UserConstant.CHANGE_LEVEL_FAIL;
  */
 @WebServlet("/admin/*")
 public class AdminController extends BaseServlet {
+    Factory factory = new Factory();
     /**
      * 管理员封禁或解封用户
      */
     public void ban(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Factory factory = new Factory();
 
         //检测是封禁还是解封
         int ifBan = Integer.parseInt(request.getParameter("operate"));
@@ -43,7 +42,6 @@ public class AdminController extends BaseServlet {
      * 更改用户的等级 用于测试
      */
     public void changeLevel(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Factory factory = new Factory();
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         int level = Integer.parseInt(request.getParameter("level"));
@@ -63,5 +61,17 @@ public class AdminController extends BaseServlet {
         } catch (ServletException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 管理员封禁或解封商品
+     */
+    public void banOrUnbanGoods (HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.setCharacterEncoding("UTF-8");
+        int ifBan = Integer.parseInt(request.getParameter("ifBan"));
+        int goodsId = Integer.parseInt(request.getParameter("goodsId"));
+        String message = factory.getBanOrUnbanGoodsService().banOrUnbanGoodsService(ifBan,goodsId);
+        System.out.println(ifBan+goodsId+message);
+        response.getWriter().write(message);
     }
 }

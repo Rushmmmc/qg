@@ -126,7 +126,82 @@
         document.getElementById("name123").value = name;
     }
 
+    function confirmDel (id){
+        var msg=confirm("确定删除?");
+        if(msg==true)
+        {
+            fun4(event,id);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
+    function confirmCommitManage (event){
+        event.preventDefault();
+        var msg=confirm("亲爱的管理员，确定无误?");
+        if(msg==true)
+        {
+            fun2(event);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+        function banGoods(event,goodsId) {
+            event.preventDefault();
+            var log_id = /^\d{1,8}$/;
+            var flag_i = log_id.test(goodsId);
+            if (!flag_i) {
+                alert("请注意id格式┭┮﹏┭┮");
+                return;
+            }
+            if (flag_i) {
+                $.ajax({
+                    url: "/admin/banOrUnbanGoods",
+                    type: "POST",
+                    dataType: 'html',
+                    data: "goodsId=" + goodsId+"&ifBan=1",
+                    success: function (result) {
+                        alert(result);
+                        location.href ="/ChangePageController/adminManageGoodsAndSellerSystem";
+                    },
+                    error: function (msg) {
+                        alert("出错啦")
+                    }
+                });
+            }
+        }
+
+    function unBanGoods(event,goodsId) {
+        event.preventDefault();
+        var log_id = /^\d{1,8}$/;
+        var flag_i = log_id.test(goodsId);
+        if (!flag_i) {
+            alert("请注意id格式┭┮﹏┭┮");
+            return;
+        }
+        if (flag_i) {
+            $.ajax({
+                url: "/admin/banOrUnbanGoods",
+                type: "POST",
+                dataType: 'html',
+                data: "goodsId=" + goodsId+"&ifBan=0",
+                success: function (result) {
+                    alert(result);
+                    location.href ="/ChangePageController/adminManageGoodsAndSellerSystem";
+                },
+                error: function (msg) {
+                    alert("出错啦")
+                }
+            });
+        }
+    }
     </script>
 
 
@@ -168,7 +243,7 @@
     <a style="margin-top: 0px"   class="text" id="5">封禁/解封理由:</a><br>
     <input type="text" class="text"  pattern="^[a-zA-Z0-9\u4e00-\u9fa5]+$" name="reason" id="reason" required />
     <br>
-    <input type="submit" value="提交"  onclick="fun2(event)" class="text" >
+    <input type="submit" value="提交"  onclick="return confirmCommitManage(event)" class="text" >
 </FORM>
 </div>
 
@@ -211,11 +286,34 @@
         <td><%=goods.getImformation()%></td>
         <td><%=goods.getPrice()%></td>
         <td><%=goods.getAmount()%></td>
-        <td><%=goods.getStatus()%></td>
-        <td><a href="#" onclick="fun3(event,<%=goods.getId()%>)">通过</a>
-            <a>/</a>
-            <a href="#" onclick="fun4(event,<%=goods.getId()%>)">删除商品</a>
-            <a href="#" onclick="fun10(event,'<%=goods.getSeller()%>')">封禁/解封</a>
+        <td>
+            <%=goods.getStatus()%>
+        </td>
+
+        <td>
+            <c:if test='<%=!goods.getStatus().contains("封禁")%>'>
+                <font color="red">
+                    <a href="#" onclick="banGoods(event,<%=goods.getId()%>)">封禁商品</a>
+                </font>
+            </c:if>
+
+            <c:if test='<%=goods.getStatus().contains("封禁")%>'>
+                <font color="#8a2be2">
+                    <a href="#" onclick="unBanGoods(event,<%=goods.getId()%>)">解封商品</a>
+                </font>
+            </c:if>
+
+
+            <c:if test='<%=goods.getStatus().contains("未审核")%>'>
+                <a href="#" onclick="fun3(event,<%=goods.getId()%>)">通过</a>
+                <a>/</a>
+            </c:if>
+        <a>/</a>
+            <a href="#" onclick="return confirmDel(<%=goods.getId()%>)">删除商品</a>
+            <a href="#" onclick="fun10(event,'<%=goods.getSeller()%>')">封禁商户/解封商户</a>
+
+
+        </td>
     <tr>
             <%
         }

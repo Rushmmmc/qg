@@ -87,6 +87,8 @@
                 }
             });
         }
+
+
     </script>
 
 
@@ -125,6 +127,7 @@
     <br>
     <input type="submit"  value="立刻下单" onclick="fun(event)" style="width:140px; height:30px;"/>
     <br>
+    <h3><font color="#ff1493"><a href="/DividePageController">下次再买</a></font></h3>
 </form>
 
 </body>

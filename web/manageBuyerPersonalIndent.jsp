@@ -331,6 +331,36 @@
             }
         });
     }
+
+
+
+    function confirmCancelIndent (event,id){
+        event.preventDefault();
+        var msg=confirm("亲爱的用户，确定无误?");
+        if(msg==true)
+        {
+            giveUp(event,id);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function confirmReceiveGoods(event,id) {
+        event.preventDefault();
+        var msg=confirm("亲爱的用户，确定无误?");
+        if(msg==true)
+        {
+            fun4(event,id);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 </script>
 
 
@@ -427,12 +457,12 @@
             <td><%=indent.getEvaluate()%></td>
             <td>
                 <c:if test='<%=(indent.getStatus().contains("未接单"))%>'>
-                    <a>&nbsp&nbsp</a>  <a onclick="giveUp(event,<%=indent.getId()%>)" href="#">放弃订单</a>
+                    <a>&nbsp&nbsp</a>  <a onclick="confirmCancelIndent(event,<%=indent.getId()%>)" href="#">放弃订单</a>
                 </c:if>
 
 
                 <c:if test='<%=(indent.getStatus().contains("在路上"))%>'>
-                    <a>&nbsp&nbsp</a>  <a onclick="fun4(event,<%=indent.getId()%>)" href="#">确认收货</a>
+                    <a>&nbsp&nbsp</a>  <a onclick="confirmReceiveGoods(event,<%=indent.getId()%>)" href="#">确认收货</a>
                 </c:if>
                 <c:if test='<%=indent.getStatus().contains("订单已完成")%>'>
                     <a>&nbsp&nbsp</a>
