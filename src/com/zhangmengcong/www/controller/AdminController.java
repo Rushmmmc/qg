@@ -71,7 +71,6 @@ public class AdminController extends BaseServlet {
         int ifBan = Integer.parseInt(request.getParameter("ifBan"));
         int goodsId = Integer.parseInt(request.getParameter("goodsId"));
         String message = factory.getBanOrUnbanGoodsService().banOrUnbanGoodsService(ifBan,goodsId);
-        System.out.println(ifBan+goodsId+message);
         response.getWriter().write(message);
     }
 }

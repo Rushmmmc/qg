@@ -67,6 +67,10 @@
                 alert("回复时必须选择信息id进行回复,id只能为整数,不能为空");
                 return;
             }
+            if(!flag_m){
+                alert("信息不能为空或包含特殊符号！");
+                return;
+            }
 
             if (flag_o && flag_m) {
                 $.ajax({
@@ -242,7 +246,7 @@
             <td><%=message.getBuyerMessage()%></td>
 
             <td>
-                <font color="#8a2be2"><a href="#" onclick="fun3(event,<%=message.getId()%>)">回复</a></font>
+                <font color="#8a2be2"><a href="#" onclick="fun3(event,<%=message.getId()%>)">回复/修改留言</a></font>
                 <a>&nbsp&nbsp&nbsp</a><a>&nbsp&nbsp&nbsp</a>
                 <a href="/IndentController/deleteMessage?method=sellerDeleteMessage&id=<%=message.getId()%>&ifSeller=1">清除留言</a></td>
         <tr>

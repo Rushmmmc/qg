@@ -13,10 +13,11 @@ public interface ManageAppealService {
     void minusSellerReputationService(String username);
 
     /** 处理申诉的方法
+     * @param username 管理员用户名
      * @param type 处理类型
      * @param id 订单id
      * @param appealId 申诉号id
      * @return 提示信息
      */
-    String manageAppealService(String type,int id,int appealId);
+    String manageAppealService(String type,int id,int appealId,String username);
 }

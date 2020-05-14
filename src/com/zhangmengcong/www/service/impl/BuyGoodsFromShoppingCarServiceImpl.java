@@ -4,6 +4,8 @@ import com.zhangmengcong.www.po.Indent;
 import com.zhangmengcong.www.service.service.BuyGoodsFromShoppingCarService;
 import com.zhangmengcong.www.util.Factory;
 
+import static com.zhangmengcong.www.constant.UserConstant.USER_LEVEL;
+
 /**
  * @author:zmc
  * @function: 从购物车购买商品
@@ -14,6 +16,16 @@ public class BuyGoodsFromShoppingCarServiceImpl implements BuyGoodsFromShoppingC
     public String buyGoodsFromShoppingCar(Indent indent) {
         int indentId = indent.getId();
         Factory factory = new Factory();
+
+        //获取用户名
+        String username = factory.getQueryDao().queryDao("buyer","indent","id",
+                String.valueOf(indentId));
+        //检测是否普通用户 拦截游客和管理员
+        int level = Integer.parseInt(factory.getQueryDao().queryDao("level","user","username",
+                "\""+username+"\""));
+        if(level != USER_LEVEL){
+            return "只有用户可以进行此操作";
+        }
 
         //检验数据
         if (factory.getFormatService().ifIdFormatWrong(String.valueOf(indentId))) {

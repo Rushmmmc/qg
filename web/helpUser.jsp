@@ -55,6 +55,7 @@
             if(msg==true)
             {
                 fun1(event,indentId,id);
+                location.href="/ChangePageController/changePageToHelpUser";
                 return true;
             }
             else
@@ -68,6 +69,7 @@
             if(msg==true)
             {
                 fun2(event,indentId,id);
+
                 return true;
             }
             else

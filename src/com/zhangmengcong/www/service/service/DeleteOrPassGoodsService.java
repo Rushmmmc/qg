@@ -21,17 +21,13 @@ public interface DeleteOrPassGoodsService {
 
     /**
      * 选择调用哪个方法
+     * @param username 用于检测用户权限是否足够
      * @param id 商品id
      * @param ifDelete 是否选择删除 否则商品审核通过
      * @return 提示信息
      */
-    String deleteOrPassGoodsService(int id,int ifDelete);
+    String deleteOrPassGoodsService(int id,int ifDelete,String username);
 
-    /** 管理员删除商品
-     *
-     * @param goodsName 要删除的商品
-     */
-    void deleteGoodsService(String goodsName);
 
     /** 商家删除商品
      *

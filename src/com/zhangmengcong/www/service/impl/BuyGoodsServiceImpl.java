@@ -6,6 +6,8 @@ import com.zhangmengcong.www.service.service.BuyGoodsService;
 import com.zhangmengcong.www.util.Factory;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.IF_SHOPPINGCAR;
+import static com.zhangmengcong.www.constant.UserConstant.ADMIN_LEVEL;
+import static com.zhangmengcong.www.constant.UserConstant.USER_LEVEL;
 
 
 /**
@@ -18,6 +20,12 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
     @Override
     public String buyGoodsService(Indent indent, int ifShoppingCar,String username) {
         Factory factory = new Factory();
+        //检测是否普通用户 拦截游客和管理员
+        int level = Integer.parseInt(factory.getQueryDao().queryDao("level","user","username",
+                "\""+username+"\""));
+        if(level != USER_LEVEL){
+            return "只有用户可以进行此操作";
+        }
         //选择购物车功能
         if(ifShoppingCar == IF_SHOPPINGCAR){
             //只传入id 仅需检测id

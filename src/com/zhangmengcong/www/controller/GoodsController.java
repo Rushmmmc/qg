@@ -82,7 +82,7 @@ public class GoodsController extends BaseServlet {
             indent.setSeller(goods.getSeller());
 
             //验证数据格式并返回提示信息
-            String message = factory.getBuyGoodsService().buyGoodsService(indent, 0,null);
+            String message = factory.getBuyGoodsService().buyGoodsService(indent, 0,username);
             response.getWriter().write(message);
     }
 
@@ -152,7 +152,8 @@ public class GoodsController extends BaseServlet {
         int ifDelete = Integer.parseInt(request.getParameter("ifDelete"));
         int id = Integer.parseInt(request.getParameter("id"));
         Factory factory = new Factory();
-        String message = factory.getDeleteOrPassGoodsService().deleteOrPassGoodsService(id, ifDelete);
+        String username = (String) request.getSession().getAttribute("username");
+        String message = factory.getDeleteOrPassGoodsService().deleteOrPassGoodsService(id, ifDelete,username);
         response.getWriter().write(message);
     }
 

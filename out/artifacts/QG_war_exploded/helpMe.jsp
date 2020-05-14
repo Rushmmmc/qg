@@ -20,7 +20,7 @@
                         var id = document.getElementById("id").value;
                         var reason = document.getElementById("reason").value;
                         var type = document.getElementById("type").value;
-                        var log_reason = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+                        var log_reason = /^[\u4E00-\u9FA5+a-zA-Z0-9_\?\.,!\-，。？！]{1,50}$/;
                         var log_id = /^\d{1,8}$/;
                         var flag_i = log_id.test(id);
                         var flag_reason = log_reason.test(reason);

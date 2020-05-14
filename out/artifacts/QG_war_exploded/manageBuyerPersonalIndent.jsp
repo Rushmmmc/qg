@@ -71,7 +71,7 @@
                 url: "/IndentController/deleteIndent",
                 type: "POST",
                 dataType: 'html',
-                data: "indentId=" + id +"&ifseller=0",
+                data: "indentId=" + id +"&ifSeller=0",
                 success: function (result) {
                     alert(result);
                     location.href = "/ChangePageController/goCheckBuyIndent";
@@ -201,7 +201,7 @@
         var evaluate = document.getElementById("evaluate").value;
 
         var log_id = /^\d{1,8}$/;
-        var log_evaluate = /^[a-zA-Z0-9\u4e00-\u9fa5]+$/;
+        var log_evaluate = /^[\u4E00-\u9FA5+a-zA-Z0-9_\?\.,!\-，。？！]{1,50}$/;
 
 
         var flag_i = log_id.test(indentId);

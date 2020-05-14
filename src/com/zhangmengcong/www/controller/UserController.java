@@ -1,6 +1,6 @@
 package com.zhangmengcong.www.controller;
 
-import com.zhangmengcong.www.controller.BaseServlet;
+
 import com.zhangmengcong.www.po.User;
 import com.zhangmengcong.www.util.Factory;
 

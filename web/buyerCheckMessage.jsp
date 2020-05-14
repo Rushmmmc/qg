@@ -35,6 +35,7 @@
     }
     if(!flag_m){
         alert("消息不可为空或包含特殊符号！");
+        return;
     }
     if (flag_o && flag_m) {
     $.ajax({
@@ -219,7 +220,7 @@
             <td><%=message.getBuyerMessage()%></td>
 
             <td>
-                <font color="#8a2be2"><a href="#" onclick="fun2(event,<%=message.getId()%>)">回复</a></font>
+                <font color="#8a2be2"><a href="#" onclick="fun2(event,<%=message.getId()%>)">回复/修改留言</a></font>
                 <a>&nbsp&nbsp&nbsp</a><a>&nbsp&nbsp&nbsp</a>
 
                 <a href="/IndentController/deleteMessage?id=<%=message.getId()%>&ifSeller=0">清除留言</a></td>

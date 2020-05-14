@@ -6,6 +6,7 @@ import com.zhangmengcong.www.util.Factory;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.ADD_GOODS_FAIL;
 import static com.zhangmengcong.www.constant.GoodsConstant.ADD_GOODS_SUCCESS;
+import static com.zhangmengcong.www.constant.UserConstant.USER_LEVEL;
 
 /**
  * @author:zmc
@@ -16,6 +17,15 @@ public class AddGoodsServiceImpl implements AddGoodsService {
     @Override
     public String addGoodsService(Goods goods) {
         Factory factory = new Factory();
+        //获取用户名
+        String username = goods.getSeller();
+        //检测是否普通用户 拦截游客和管理员
+        int level = Integer.parseInt(factory.getQueryDao().queryDao("level","user","username",
+                "\""+username+"\""));
+        if(level != USER_LEVEL){
+            return "只有用户可以进行此操作";
+        }
+
         boolean ifNameFormatError = factory.getFormatService().ifIncludeSymbol(goods.getGoodsName());
         if(ifNameFormatError){
             return "商品名不可为空或包含特殊符号";

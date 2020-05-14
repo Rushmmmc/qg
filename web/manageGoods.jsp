@@ -54,10 +54,11 @@
                 success: function (result) {
                     if (result === "处理成功!") {
                         alert(result);
-                        location.href = "/ChangePageController/adminManageGoodsAndSellerSystem";
                     } else {
                         alert(result);
                     }
+
+                    location.href = "/ChangePageController/adminManageGoodsAndSellerSystem";
                 },
                 error: function (msg) {
                     alert("出错啦")
@@ -305,11 +306,11 @@
 
 
             <c:if test='<%=goods.getStatus().contains("未审核")%>'>
-                <a href="#" onclick="fun3(event,<%=goods.getId()%>)">通过</a>
-                <a>/</a>
+                <a href="#" onclick="fun3(event,<%=goods.getId()%>)"><font color="#00ff7f
+">通过</font></a>
             </c:if>
         <a>/</a>
-            <a href="#" onclick="return confirmDel(<%=goods.getId()%>)">删除商品</a>
+            <a href="#" onclick="return confirmDel(<%=goods.getId()%>)"><font color="red">删除商品</font></a>
             <a href="#" onclick="fun10(event,'<%=goods.getSeller()%>')">封禁商户/解封商户</a>
 
 

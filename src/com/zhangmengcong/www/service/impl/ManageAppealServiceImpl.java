@@ -4,6 +4,7 @@ import com.zhangmengcong.www.service.service.ManageAppealService;
 import com.zhangmengcong.www.util.Factory;
 
 import static com.zhangmengcong.www.constant.AdminConstant.*;
+import static com.zhangmengcong.www.constant.UserConstant.ADMIN_LEVEL;
 
 /**
  * @author:zmc
@@ -19,8 +20,14 @@ public class ManageAppealServiceImpl implements ManageAppealService {
     }
 
     @Override
-    public String manageAppealService(String type,int id,int appealId) {
+    public String manageAppealService(String type,int id,int appealId,String username) {
         Factory factory = new Factory();
+        //检测是否管理员
+        int level = Integer.parseInt(factory.getQueryDao().queryDao("level","user","username",
+                "\""+username+"\""));
+        if(level != ADMIN_LEVEL){
+            return "您的权限不足，只有管理员可以处理申诉";
+        }
         //判空 判断格式
         boolean ifIdFormatWrong = factory.getFormatService().formatService(String.valueOf(id));
         boolean ifTypeFormatWrong = factory.getFormatService().formatService(type);

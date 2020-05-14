@@ -191,7 +191,7 @@
         <a  class="text">需要修改的单价:</a><br>
         <input type="text" class="text" pattern="^\d{1,10}$" name="price" id="price" pattern="^\d{1,8}$"required  />
         <br>
-        <a  class="text">修改的商品数量:</a><br>
+        <a  class="text">修改的商品存货数量:</a><br>
         <input type="text" class="text" pattern="^\d{1,10}$" name="amount" id="amount" pattern="^\d{1,8}$" required  />
         <br>
         <input type="submit" value="提交" onclick="return confirmChangeGoods(event)"  class="text" >

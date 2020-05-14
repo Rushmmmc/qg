@@ -25,8 +25,10 @@ import java.io.IOException;
         String type = request.getParameter("type");
         int id = Integer.parseInt(request.getParameter("id"));
         int appealId = Integer.parseInt(request.getParameter("appealId"));
+        //获取用户名 检测是否管理员
+        String username = (String)request.getSession().getAttribute("username");
         //处理申诉 判断数据格式 并返回提示信息
-        String message = factory.getManageAppealService().manageAppealService(type,id,appealId);
+        String message = factory.getManageAppealService().manageAppealService(type,id,appealId,username);
         response.getWriter().write(message);
     }
 

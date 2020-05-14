@@ -4,6 +4,8 @@ import com.zhangmengcong.www.service.service.DeleteOrPassGoodsService;
 import com.zhangmengcong.www.util.Factory;
 
 import static com.zhangmengcong.www.constant.GoodsConstant.IF_DELETE;
+import static com.zhangmengcong.www.constant.UserConstant.ADMIN_LEVEL;
+import static com.zhangmengcong.www.constant.UserConstant.USER_LEVEL;
 
 /**
  * @author:zmc
@@ -23,21 +25,21 @@ public class DeleteOrPassGoodsServiceImpl implements DeleteOrPassGoodsService {
     }
 
     @Override
-    public String deleteOrPassGoodsService(int id, int ifDelete){
-       if(ifDelete == IF_DELETE){
-           deleteGoodsService(id);
-           return "删除成功！";
-       }else {
-           passGoodsService(id);
-           return "商品已通过!";
-       }
+    public String deleteOrPassGoodsService(int id, int ifDelete,String username) {
+        //检测是否管理员 拦截游客和用户
+        int level = Integer.parseInt(factory.getQueryDao().queryDao("level", "user", "username",
+                "\"" + username + "\""));
+        if (level != ADMIN_LEVEL) {
+            return "只有用户可以进行此操作";
+        }
+        if (ifDelete == IF_DELETE) {
+            deleteGoodsService(id);
+            return "删除成功！";
+        } else {
+            passGoodsService(id);
+            return "商品已通过!";
+        }
     }
-
-    @Override
-    public void deleteGoodsService(String goodsName) {
-        factory.getDeleteDao().deleteDao("goods","goodsName","\""+goodsName+"\"");
-    }
-
 
     @Override
     public String sellerDeleteGoods(int goodsId,String sellerName) {
