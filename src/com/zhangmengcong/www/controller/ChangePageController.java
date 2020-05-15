@@ -199,4 +199,15 @@ public class ChangePageController extends BaseServlet {
             e.printStackTrace();
         }
     }
+    public void changePageToUserService (HttpServletRequest request, HttpServletResponse response) throws IOException{
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        String goodsName = request.getParameter("goodsName");
+        request.setAttribute("goodsName",goodsName);
+        try {
+            request.getRequestDispatcher("/userService.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -35,7 +35,7 @@
                 }
                 return true;
             } else {
-                alert("若使用价格筛选功能，请同时输入价格最大值与价格最小值");
+                alert("若使用价格筛选功能，请同时输入整数的价格最大值与价格最小值");
             }
             return false;
         }
@@ -116,7 +116,7 @@
 
     <div style="float: left;margin-left: 70px;margin-bottom: 50px;margin-top: 30px;" class="box">
         <c:if test='<%=!goods.getPhotoPath().contains("暂无")%>'>
-            <img src="/photo/<%=goods.getPhotoPath()%>" height="400" width="200">
+            <img src="./photo/<%=goods.getPhotoPath()%>" height="400" width="200">
         </c:if>
         <c:if test='<%=goods.getPhotoPath().contains("暂无")%>'>
             <img src="./img/1.jpg" height="400" width="200">

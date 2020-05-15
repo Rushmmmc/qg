@@ -17,6 +17,9 @@ public class BuyGoodsFromShoppingCarServiceImpl implements BuyGoodsFromShoppingC
         int indentId = indent.getId();
         Factory factory = new Factory();
 
+        //存入订单总价
+        indent.setTotalPrice(indent.getPrice()*indent.getAmount());
+
         //获取用户名
         String username = factory.getQueryDao().queryDao("buyer","indent","id",
                 String.valueOf(indentId));
@@ -57,6 +60,7 @@ public class BuyGoodsFromShoppingCarServiceImpl implements BuyGoodsFromShoppingC
         if(indent.getUseIntegral() > indent.getTotalPrice()){
             return "该商品不需要这么多积分┭┮﹏┭┮";
         }
+
         //检验数据完毕
 
         //数据没问题 插库

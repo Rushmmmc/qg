@@ -43,7 +43,10 @@
                     data: "amount="+tempAmount +"&integral="+integral+"&id="+id+"&price="+price,
                     success: function (result) {
                             alert(result);
-                            location.href = "/ChangePageController/changePageToShoppingCar";
+                            if(result==="购买成功！")
+                            {
+                                location.href = "/ChangePageController/changePageToShoppingCar";
+                            }
                     },
                     error: function (msg) {
                         alert("出错啦")

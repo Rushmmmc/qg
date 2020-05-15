@@ -184,7 +184,7 @@
 
     <div style="float: left;margin-left: 70px;margin-bottom: 50px;margin-top: 30px;" class="box">
         <c:if test='<%=!goods.getPhotoPath().contains("暂无")%>'>
-            <img src="/photo/<%=goods.getPhotoPath()%>" height="400" width="200">
+            <img src="/photo/广工小水盆timg.jpg" height="400" width="200">
         </c:if>
         <c:if test='<%=goods.getPhotoPath().contains("暂无")%>'>
             <img src="./img/1.jpg" height="400" width="200">
